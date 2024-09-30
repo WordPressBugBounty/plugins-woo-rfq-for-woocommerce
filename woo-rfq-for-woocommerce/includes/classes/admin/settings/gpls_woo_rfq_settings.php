@@ -439,11 +439,35 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
         }
 
 
+
+        public  function np_checkout_page()
+        {
+            $block_checkout = WC_Blocks_Utils::has_block_in_page(wc_get_page_id('checkout'), 'woocommerce/checkout');
+            $cart_checkout = WC_Blocks_Utils::has_block_in_page(wc_get_page_id('cart'), 'woocommerce/cart');
+
+            if ($block_checkout || $cart_checkout) {
+                return "cart and checkout blocks";
+
+            } else {
+                return "classic shortcode checkout";
+            }
+        }
+
+
+
         public function get_settings($section = null)
         {
 
+            $shortcode_or_block=$this->np_checkout_page();
+            
+            $shortcode_or_block_message=".";
+
+            if($shortcode_or_block=='classic shortcode checkout'){
+                $shortcode_or_block_message = " and fully compatible with this plugin's features.";
+            }
+
             $str_classic_begin = '
-                            <div class="gplshover"><div class="gpls_trig gpls_permissions"  ><span class="sconly">'.__('Classic Checkout Only','rfqtk').'</span>:&nbsp;&nbsp;';
+                            <div class="gplshover"><div class="gpls_trig gpls_permissions"  ><span class="sconly">'.__('Classic Checkout Only','woo-rfq-for-woocommerce').'</span>:&nbsp;&nbsp;';
 
 
             $str_classic_end = '';
@@ -486,11 +510,13 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                             ),
 
                             'settings_gpls_woo_rfq_revert_to_classic' => array(
-                                'name' => '1-0 ' . __('Revert to classic(short codes) cart and checkout pages', 'woo-rfq-for-woocommerce'),
+                                'name' => '1-0 ' . __('Revert to classic(short codes) cart and checkout pages', 'rfqtk'),
                                 'type' => 'checkbox',
-                                'desc' =>'<b>'. __('Applicable to RFQ checkout option only:</b>&nbsp;<a target="_blank" href="https://woocommerce.com/document/cart-checkout-blocks-status/">Cart and Checkout Blocks</a><br />   
-                                 <div class="settings_gpls_woo_rfq_revert_to_classic">
-                                 Features that are only compatible with classic checkout are marked with: '.__('<span class="sconly_noborder">Classic Checkout Only </span>.', 'woo-rfq-for-woocommerce').'</div>', 'rfqtk'),
+                                'desc' =>'<div class="settings_gpls_woo_rfq_revert_to_classic"><b>'. __('Applicable to RFQ checkout option only:</b>&nbsp;<a target="_blank" href="https://woocommerce.com/document/cart-checkout-blocks-status/">Cart and Checkout Blocks</a><br />   
+                                Features that are only compatible with classic checkout are marked in description with: <span class="sconly_noborder">
+                                Classic Checkout Only </span>&nbsp;&nbsp;<br />
+                                Currently your site is using: '.$shortcode_or_block.$shortcode_or_block_message.' 
+                                </div>', 'woo-rfq-for-woocommerce'),
                                 'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_revert_to_classic'
                             ),

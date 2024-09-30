@@ -33,6 +33,9 @@ let rfq_mode=false;
 let bid_form='';
 let allow_bid='no';
 
+let cart_url='';
+let checkout_url='';
+
 jQuery.ajax({
 	async: false,
 	type: "post",
@@ -44,12 +47,16 @@ jQuery.ajax({
 	},
 	success: function (resp) {
 
+		console.log(resp);
+
 		submit_label = resp['rfq_cart_wordings_submit_your_rfq_text'];
 		proceed_to_checkout_label = resp['rfq_cart_wordings_proceed_to_rfq'];
 		quote_link=resp['rfq_cart_link_quote'];
 		rfq_mode=resp['rfq_checkout_mode'];
 		bid_form=resp['rfq_cart_bid'];
 		allow_bid = resp['allow_bid'];
+		cart_url = resp['cart_url'];
+		checkout_url = resp['checkout_url'];
 	}
 });
 
@@ -64,38 +71,37 @@ export function GPLS_Custom_Cart_Checkout_Labels() {
 	const { registerPlugin } = window.wp.plugins;
 	const { ExperimentalOrderMeta } = window.wc.blocksCheckout;
 
-	const modifyProceedToCheckoutButtonLabel = (
-		defaultValue,
-		extensions,
-		args
-	) => {
-		if (!args?.cart.items) {
-			return defaultValue;
-		}
-
-		return proceed_to_checkout_label;
-	};
+	console.log(document.URL);
 
 
 	if (rfq_mode ==="rfq") {
 
-		registerCheckoutFilters('woo-rfq-for-woocommerce', {
-			proceedToCheckoutButtonLabel: modifyProceedToCheckoutButtonLabel,
-		});
 
-		registerCheckoutFilters("woo-rfq-for-woocommerce", {
-			placeOrderButtonLabel: (e, t) => submit_label,
 
-		});
+		if (document.URL.indexOf(cart_url) === 0)
+		{
 
+			registerCheckoutFilters('woo-rfq-for-woocommerce', {
+				proceedToCheckoutButtonLabel: (e, t) => proceed_to_checkout_label,
+			});
+		}
+
+
+		if (document.URL.indexOf(checkout_url) === 0)
+		{
+
+			registerCheckoutFilters('woo-rfq-for-woocommerce', {
+				placeOrderButtonLabel: (e, t) => submit_label,
+			});
+		}
 	}
 
 
-	if (allow_bid=="yes") {
-		$(window).on("load", function () {
+	if (allow_bid==="yes") {
+		jQuery(window).on("load", function () {
 			//$('.wc-block-checkout__form').append(bid_form);
 			//wp-block-woocommerce-checkout-contact-information-block
-			$(bid_form).insertAfter(".wp-block-woocommerce-checkout-payment-block");
+			jQuery(bid_form).insertAfter(".wp-block-woocommerce-checkout-payment-block");
 			if (! jQuery('.wc-block-components-checkout-place-order-button').val()) {
 				jQuery('.wc-block-components-checkout-place-order-button').prop("disabled", true);
 				jQuery(".gpls_woo_rfq_plus_customer_bid_text").show();
@@ -115,43 +121,6 @@ GPLS_Custom_Cart_Checkout_Labels();
 
 
 //=====================================================================
-/*export function Gpls_cart_checkout_bid() {
-	const {registerCheckoutFilters} = window.wc.blocksCheckout;
-	const { __ } = window.wp.i18n;
-	const { registerPlugin } = window.wp.plugins;
-	const { ExperimentalOrderMeta } = window.wc.blocksCheckout;
-
-	const NPQuoteLinkBidComponent = ({checkout, extensions}) => {
-
-		const sanitizedData = () => ({
-			__html: DOMPurify.sanitize(bid_form)
-		})
-
-		return (
-			<div
-				dangerouslySetInnerHTML={sanitizedData()}
-			/>
-		);
-	};
-
-
-	const render = () => {
-		return (
-			<ExperimentalOrderMeta>
-				<NPQuoteLinkBidComponent/>
-			</ExperimentalOrderMeta>
-		);
-	};
-
-	registerPlugin('woo-rfq-for-woocommerce', {
-		render,
-		scope: 'woocommerce-checkout',
-	});
-
-
-
-}*/
-//Gpls_cart_checkout_bid();
 
 
 

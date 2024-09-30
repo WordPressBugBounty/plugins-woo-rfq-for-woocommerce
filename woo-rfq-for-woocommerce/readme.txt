@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
 WC tested up to: 9.3.2
-Stable tag: 1.9.163
+Stable tag: 1.9.165
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -207,13 +207,13 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.163 9/20/2024 =
-fix the issue payment text
+= 1.9.165 9/26/2024 =
+fix proceed to checkout label for block checkout
 
 == Upgrade Notice ==
 
-= 1.9.163 9/20/2024 =
-fix the issue payment text
+= 1.9.165 9/26/2024 =
+fix proceed to checkout label for block checkout
 
 
 

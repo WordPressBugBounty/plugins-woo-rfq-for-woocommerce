@@ -1617,8 +1617,6 @@ function gplswoo_get_submit_order_label()
         $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
         $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 
-
-
         $ajax_array['rfq_cart_wordings_submit_your_rfq_text']=$order_button_text;
 
         require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
@@ -1629,16 +1627,18 @@ function gplswoo_get_submit_order_label()
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
         $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
+        $ajax_array['rfq_cart_wordings_proceed_to_rfq']= $proceed_to_rfq;
 
         if (class_exists('GPLS_WOO_RFQ_PLUS')){
             $plus_data = gpls_woo_rfq_plus_get_plus_data();
-            $ajax_array['rfq_cart_wordings_proceed_to_rfq']=$plus_data['proceed_to_rfq'];
 
             //$plus_data['bid_form_array']
             $ajax_array['rfq_cart_bid'] = $plus_data['bid_form_array']['rfq_cart_bid'];
             $ajax_array['allow_bid'] = $plus_data['bid_form_array']['allow_bid'];
         }
 
+        $ajax_array['cart_url'] =  wc_get_cart_url();
+        $ajax_array['checkout_url'] = wc_get_checkout_url();
 
 
         echo wp_json_encode($ajax_array);

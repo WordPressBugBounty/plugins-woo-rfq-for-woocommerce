@@ -1,4 +1,11 @@
 == Changelog ==
+
+= 1.9.165 9/26/2024 =
+fix proceed to checkout label for block checkout
+
+= 1.9.164 9/25/2024 =
+WooCommerce 9.3.2
+
 = 1.9.163 9/20/2024 =
 fix the issue payment text
 
