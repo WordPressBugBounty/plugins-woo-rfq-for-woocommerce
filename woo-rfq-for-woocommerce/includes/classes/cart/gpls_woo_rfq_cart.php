@@ -485,17 +485,21 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
-            $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+           // $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+
+            global $wp;
+            $actual_link = home_url( add_query_arg( array(), $wp->request ) );
 
 
-            if ((strtolower(parse_url(trim($rfq_page))['path'])) ===
-                (strtolower(parse_url(trim($actual_link))['path']))) {
-                return ;
+
+            if ((strtolower(wp_parse_url(trim($rfq_page))['path'])) ===
+                (strtolower(wp_parse_url(trim($actual_link))['path']))) {
+                return false;
             }
 
-            if ('yes' !== get_option('woocommerce_enable_ajax_add_to_cart')) return ;
+            if ('yes' !== get_option('woocommerce_enable_ajax_add_to_cart')) return false;
 
-               if (is_product() || is_admin()) return ;
+               if (is_product() || is_admin()) return false;
 
 
 

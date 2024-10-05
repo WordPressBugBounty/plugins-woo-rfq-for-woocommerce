@@ -48,7 +48,7 @@ if (!class_exists('gpls_woo_rfq_admin_functions')) {
 
 
 
-function gpls_woo_rfq_get_pages(){
+/*function gpls_woo_rfq_get_pages(){
 
 
     $args = array(
@@ -80,7 +80,14 @@ function gpls_woo_rfq_get_pages(){
 
     $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
-    $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+
+
+
+    if(isset($_SERVER['REQUEST_URI'])){
+        $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+    }else{
+        $actual_link = get_site_url() ;
+    }
 
     $home = preg_replace("/^http:/i", "https:", $actual_link);
 
@@ -99,5 +106,5 @@ function gpls_woo_rfq_get_pages(){
 
     return $option;
 
-}
+}*/
 

@@ -42,7 +42,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
             $custom_css = ".bundle_price { visibility: collapse !important; }";
             wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
         }
@@ -54,7 +54,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
 
         }
@@ -66,7 +66,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         /* if (!is_admin()) {
              $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
              $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-             wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10,100000), true);
+             wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10,100000), true);
 
              $update_rfq_cart_button = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button', __('Update Cart', 'woo-rfq-for-woocommerce'));
              $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
@@ -88,7 +88,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_dummy.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_dummy.js';
-            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $update_rfq_cart_button = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button', '');
             $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
@@ -132,7 +132,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_dummy.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_dummy.js';
-            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $update_rfq_cart_button =
                 get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button'
@@ -156,7 +156,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
             $custom_css = ".site-header .widget_shopping_cart p.total,.cart-subtotal,.tax-rate,.tax-total,.order-total,.product-price,.product-subtotal { visibility: collapse }";
             wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
         }
@@ -169,7 +169,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $checkout_page_title_option = get_option('settings_gpls_woo_rfq_rfq_checkout_page_title_option');
             $custom_js = "jQuery(window).on('load',function(){jQuery('.rfq_checkout_form').hide();});";
@@ -200,7 +200,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View cart', 'woo-rfq-for-woocommerce'));
             $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
@@ -1329,8 +1329,8 @@ eod;
                         do_action('gpls_woo_rfq_woocommerce_new_order_item', $item_id, $cart_item, $order->get_id());
                     }
 
-                    do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $item_id, $cart_item);
-
+                    //do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $item_id, $cart_item);
+                    do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $gpls_woo_rfq_cart[$cart_item_key], $item_id, $cart_item);
 
                 }
 
@@ -1762,9 +1762,9 @@ eod;
                         do_action('gpls_woo_rfq_woocommerce_new_order_item', $item_id, $cart_item, $order->get_id());
                     }
 
-                    do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $item_id, $cart_item);
+                  //  do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $item_id, $cart_item);
 
-
+                    do_action('rfqtk_woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $gpls_woo_rfq_cart[$cart_item_key], $item_id, $cart_item);
                 }
 
 
@@ -2281,11 +2281,11 @@ eod;
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
 
 
             $is_product_page = false;
@@ -2527,11 +2527,11 @@ eod;
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
 
 
             $is_product_page = false;
@@ -2716,7 +2716,7 @@ eod;
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
 
             $custom_js =

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request WooCommerce
  * Description: NP Quote Request WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.165
+ * Version: 1.9.166
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -504,7 +504,7 @@ class GPLS_WOO_RFQ
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_admin.css';
 
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_admin.css';
-            wp_enqueue_style('gpls_woo_rfq_plus_css_admin', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_plus_css_admin', $url_css, array(), wp_rand(10, 100000));
 
         }
 
@@ -515,7 +515,7 @@ class GPLS_WOO_RFQ
             //  $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_admin_free.css';
 
             //  $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_admin_free.css';
-            //  wp_enqueue_style('gpls_woo_rfq_plus_css_admin_free', $url_css, array(), rand(10, 100000));
+            //  wp_enqueue_style('gpls_woo_rfq_plus_css_admin_free', $url_css, array(), wp_rand(10, 100000));
 
         }
 
@@ -848,7 +848,7 @@ class GPLS_WOO_RFQ
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
 
 
 
@@ -877,7 +877,7 @@ class GPLS_WOO_RFQ
             {
                 $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
                 $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-                wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), rand(10, 100000), true);
+                wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             }
 
@@ -907,11 +907,11 @@ class GPLS_WOO_RFQ
                 if (!is_admin()) {
                     $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh_visitor.css';
                     $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh_visitor.css';
-                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                     $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                     $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                     if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                         $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -934,7 +934,7 @@ class GPLS_WOO_RFQ
 
                     $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                     $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                    wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                    wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
                 }
             }
 
@@ -1021,7 +1021,7 @@ class GPLS_WOO_RFQ
 ///////////////////////////////////////////  END GPLS_WOO_RFQ_PLUS
 
                     if (isset($wp_query)) {
-                        if (gpls_woo_rfq_is_account_page()) {
+                        if (function_exists('gpls_woo_rfq_is_account_page') && gpls_woo_rfq_is_account_page()) {
                             $hide = false;
                         }
 
@@ -1053,7 +1053,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1073,7 +1073,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
                         }
                     }
 
@@ -1096,7 +1096,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1105,7 +1105,7 @@ class GPLS_WOO_RFQ
                                 }
                                 $gpls_woo_rfq_url_wh = plugin_dir_url(WP_PLUGIN_DIR . '/rfqtk/rfqtk.php');
                                 $gpls_woo_rfq_url_wh_css = $gpls_woo_rfq_url_wh . 'assets/css/gpls_wh_rfqtk.css';
-                                wp_enqueue_style('url_gpls_wh_css2', $gpls_woo_rfq_url_wh_css, array(), rand(10, 10000));
+                                wp_enqueue_style('url_gpls_wh_css2', $gpls_woo_rfq_url_wh_css, array(), wp_rand(10, 10000));
 
                                 if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                                     function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
@@ -1119,7 +1119,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
 
 
@@ -1246,7 +1246,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1266,7 +1266,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
                         }
                     }
 
@@ -1281,7 +1281,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1300,7 +1300,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
                         }
                     }
                 }
@@ -1352,11 +1352,11 @@ class GPLS_WOO_RFQ
 
                                                 $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh_visitor.css';
                                                 $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh_visitor.css';
-                                                wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), rand(10, 100000));
+                                                wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
 
                                                 $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                                                 $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                                                wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), rand(10, 100000), true);
+                                                wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
                                                 break;
                                             }
 

@@ -1,4 +1,6 @@
 == Changelog ==
+= 1.9.166 10/4/2024 =
+fix the problem with duplicate attributes showing in normal
 
 = 1.9.165 9/26/2024 =
 fix proceed to checkout label for block checkout

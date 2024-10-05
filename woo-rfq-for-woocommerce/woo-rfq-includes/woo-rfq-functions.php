@@ -1388,7 +1388,7 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
         ) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_misc.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_misc.js';
-            wp_enqueue_script('rfq_admin_misc', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('rfq_admin_misc', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
         }
         if(is_admin()
@@ -1396,7 +1396,7 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'){
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_basic.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_basic.js';
-            wp_enqueue_script('rfq_admin_basic', $url_js, array('jquery'), rand(10, 100000), true);
+            wp_enqueue_script('rfq_admin_basic', $url_js, array('jquery'), wp_rand(10, 100000), true);
         }
 
     }
