@@ -20,6 +20,33 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
     }
 
+    if(!function_exists('np_sanitize_text_or_array_field')) {
+        function np_sanitize_text_or_array_field($array_or_string, $unslahit = false)
+        {
+
+            if (is_string($array_or_string)) {
+
+                if ($unslahit) {
+                    $array_or_string = wp_unslash($array_or_string);
+                }
+                $array_or_string = sanitize_text_field($array_or_string);
+            } elseif (is_array($array_or_string)) {
+                foreach ($array_or_string as $key => &$value) {
+                    if (is_array($value)) {
+                        $value = sanitize_text_or_array_field($value);
+                    } else {
+                        if ($unslahit) {
+                            $value = wp_unslash($value);
+                        }
+                        $value = sanitize_text_field($value);
+                    }
+                }
+            }
+
+            return $array_or_string;
+        }
+    }
+
     function is_hpos() {
         $is_hpos= OrderUtil::custom_orders_table_usage_is_enabled();
 
@@ -871,13 +898,20 @@ eod;
             ob_start();
 
             $order_factory = new WC_Order_Factory();
-            $order = $order_factory->get_order($_REQUEST['order_id']);
+           // $order = $order_factory->get_order($_REQUEST['order_id']);
+
+            $order = $order_factory->get_order(sanitize_text_field(wp_unslash($_REQUEST['order_id'])));
 
             do_action('gpls_woo_rfq_before_thankyou');
 
             $default_temp = 'checkout/thankyou.php';
+
             $normal_template = apply_filters('gpls_woo_rfq_normal_thankyou_template', $default_temp, $order);
+
             wc_get_template($normal_template, array('order' => $order));
+
+            // wc_get_template('woo-rfq/customer-respond.php',
+            // array('order' => $order), '', gpls_woo_rfq_plus_DIR . 'woocommerce/');
 
             return ob_get_clean();
         }
@@ -1011,6 +1045,8 @@ eod;
     }
 
 
+
+
     function gpls_rfq_update_rfq_cart()
     {
         // d($_REQUEST);
@@ -1025,8 +1061,18 @@ eod;
 
             if ($gpls_woo_rfq_cart == false) return;
 
-            $cart_totals = isset($_POST['cart']) ? $_POST['cart'] : '';
 
+
+            //np_write_log( $post_cart,__FILE__,__LINE__);
+
+
+           // $cart_totals = isset($_POST['cart']) ? (array)$_POST['cart'] : '';
+
+          //  $cart_totals = isset($_POST['cart']) ? sanitize_text_field(wp_unslash($_POST['cart'])) : '';
+
+
+
+            //np_write_log($cart_totals ,__FILE__,__LINE__);
 
             if (($gpls_woo_rfq_cart != false)) {
 
@@ -1035,7 +1081,16 @@ eod;
                     $_product = $values['data'];
 
                     // Skip product if no updated quantity was posted
-                    if (!isset($cart_totals[$cart_item_key]) || !isset($cart_totals[$cart_item_key]['qty'])) {
+                 //   if (!isset($cart_totals[$cart_item_key]) || !isset($cart_totals[$cart_item_key]['qty'])) {
+                  //      continue;
+                 //   }
+
+                   // np_write_log($_POST['cart'][$cart_item_key] ,__FILE__,__LINE__);
+
+                    if (!isset($_POST['cart'][$cart_item_key]) || !isset($_POST['cart'][$cart_item_key]['qty'])) {
+
+                      //  np_write_log('no go' ,__FILE__,__LINE__);
+
                         continue;
                     }
 
@@ -1043,12 +1098,17 @@ eod;
 
                     $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
 
-                    $quantity = $cart_totals[$cart_item_key]['qty'];
+                   // $quantity = $cart_totals[$cart_item_key]['qty'];
+                   // np_write_log($quantity ,__FILE__,__LINE__);
+
+                    $quantity = sanitize_text_field(wp_unslash($_POST['cart'][$cart_item_key]['qty']));
+                  //  np_write_log($quantity ,__FILE__,__LINE__);
+
 
                     $quantity = apply_filters('gpls_rfq_stock_amount_cart_item', $quantity, $product_id, $cart_item_key, $values);
                     //$quantity = apply_filters( 'gpls_rfq_stock_amount_cart_item', $quantity, $cart_item_key,$values );
 
-                    if ($quantity != $cart_totals[$cart_item_key]['qty']) {
+                    if ($quantity != $_POST['cart'][$cart_item_key]['qty']) {
 
                         $qty_message = apply_filters('gpls_rfq_stock_amount_cart_item_message', '', $product_id);
 
@@ -1064,6 +1124,7 @@ eod;
                     if ($quantity == 0 || $quantity < 0) {
 
                         unset($gpls_woo_rfq_cart[$cart_item_key]);
+
                     } else {
                         $old_quantity = $gpls_woo_rfq_cart[$cart_item_key]['quantity'];
                         $gpls_woo_rfq_cart[$cart_item_key]['quantity'] = $quantity;
@@ -1200,17 +1261,18 @@ eod;
                     return;
                 }
 
-                $cart_totals = isset($_POST['cart']) ? $_POST['cart'] : '';
+              //  $cart_totals = isset($_POST['cart']) ? $_POST['cart'] : '';
 
                 foreach ($gpls_woo_rfq_cart as $cart_item_key => $values) {
 
                     $_product = $values['data'];
 
-                    if (!isset($cart_totals[$cart_item_key]) || !isset($cart_totals[$cart_item_key]['qty'])) {
+                    if (!isset($_POST['cart'][$cart_item_key]) || !isset($_POST['cart'][$cart_item_key]['qty'])) {
                         continue;
                     }
-
-                    $quantity = $cart_totals[$cart_item_key]['qty'];
+                    $quantity = sanitize_text_field(wp_unslash($_POST['cart'][$cart_item_key]['qty']));
+                  //  $quantity = $cart_totals[$cart_item_key]['qty'];
+                 //     np_write_log($quantity ,__FILE__,__LINE__);
 
                     if ('' === $quantity || $quantity == $values['quantity'])
                         continue;
@@ -1381,7 +1443,7 @@ eod;
                 $order->set_payment_method("gpls-rfq");
 
                 if (isset($_POST['rfq_message'])) {
-                    $message = trim(sanitize_text_field($_POST['rfq_message']));
+                    $message = trim(sanitize_text_field(wp_unslash($_POST['rfq_message'])));
                 } else {
                     $message = "";
                 }
@@ -1418,13 +1480,13 @@ eod;
 
                 }
 
-                if ($customer_id) {
+               /* if ($customer_id) {
                     if (apply_filters('woocommerce_checkout_update_customer_data', true, $order)) {
 
                     }
                     // do_action('woocommerce_checkout_update_user_meta', $customer_id,$_POST);
 
-                }
+                }*/
 
                //update_post_meta($order->get_id(), '_payment_method', "gpls-rfq");
 
@@ -1452,16 +1514,16 @@ eod;
                 $order->save();
 
                 if (isset($_REQUEST['global_product_id'])
-                    && isset($_REQUEST['rfqform_location']) && $_REQUEST['rfqform_location'] === "product") {
+                    && isset($_REQUEST['rfqform_location'])
+                    && sanitize_text_field( wp_unslash($_REQUEST['rfqform_location'])) === "product") {
 
-                    $global_product = wc_get_product($_REQUEST['global_product_id']);
+                    $global_product = wc_get_product(sanitize_text_field( wp_unslash($_REQUEST['global_product_id'])));
                     $return_url = $global_product->get_permalink();
 
                 } else {
 
                     $return_url = pls_woo_rfq_get_link_to_rfq();
                 }
-
 
                 do_action('gpls_woo_rfq_after_normal_checkout', $order_id);
 
@@ -1499,10 +1561,10 @@ eod;
                 $billing_state = "";
 
                 if (isset($_POST['rfq_state_select'])) {
-                    if ($_POST['rfq_state_select'] == "") {
-                        $billing_state = sanitize_text_field($_POST['rfq_state_text']);
+                    if ($_POST['rfq_state_select'] == "" && isset($_POST['rfq_state_text'])) {
+                        $billing_state = sanitize_text_field(wp_unslash($_POST['rfq_state_text']));
                     } else {
-                        $billing_state = sanitize_text_field($_POST['rfq_state_select']);
+                        $billing_state = sanitize_text_field(wp_unslash($_POST['rfq_state_select']));
                     }
                 } else {
                     $billing_state = '';
@@ -1520,7 +1582,7 @@ eod;
                 if (isset($_POST['rfq_email_customer'])) {
 
 
-                    if (!is_email(sanitize_text_field($_POST['rfq_email_customer']))) {
+                    if (!is_email(sanitize_text_field(wp_unslash(($_POST['rfq_email_customer']))))) {
 
                         gpls_woo_rfq_add_notice(__('Invalid email address.', 'woo-rfq-for-woocommerce'), 'error');
 
@@ -1530,7 +1592,7 @@ eod;
 
                 if (isset($_POST['rfq_phone'])) {
 
-                    if (!WC_Validation::is_phone($_POST['rfq_phone'])) {
+                    if (!WC_Validation::is_phone(sanitize_text_field(wp_unslash($_POST['rfq_phone'])))) {
 
                         gpls_woo_rfq_add_notice(__('Invalid phone number.', 'woo-rfq-for-woocommerce'), 'error');
 
@@ -1544,17 +1606,17 @@ eod;
 
 
                 $address_billing = array(
-                    'first_name' => sanitize_text_field($_POST['rfq_fname']),
-                    'last_name' => sanitize_text_field($_POST['rfq_lname']),
-                    'company' => sanitize_text_field(isset($_POST['rfq_company']) ? $_POST['rfq_company'] : ""),
-                    'email' => sanitize_text_field(isset($_POST['rfq_email_customer']) ? $_POST['rfq_email_customer'] : ""),
-                    'phone' => sanitize_text_field(isset($_POST['rfq_phone']) ? $_POST['rfq_phone'] : ""),
-                    'address_1' => sanitize_text_field(isset($_POST['rfq_address']) ? $_POST['rfq_address'] : ""),
-                    'address_2' => sanitize_text_field(isset($_POST['rfq_address2']) ? $_POST['rfq_address2'] : ""),
-                    'city' => sanitize_text_field(isset($_POST['rfq_city']) ? $_POST['rfq_city'] : ""),
-                    'state' => sanitize_text_field($billing_state),
-                    'postcode' => sanitize_text_field(isset($_POST['rfq_zip']) ? $_POST['rfq_zip'] : ""),
-                    'country' => sanitize_text_field(isset($_POST['rfq_billing_country']) ? $_POST['rfq_billing_country'] : "")
+                    'first_name' => sanitize_text_field(wp_unslash($_POST['rfq_fname'])),
+                    'last_name' => sanitize_text_field(wp_unslash($_POST['rfq_lname'])),
+                    'company' => sanitize_text_field(isset($_POST['rfq_company']) ? sanitize_text_field(wp_unslash($_POST['rfq_company'])) : ""),
+                    'email' => sanitize_text_field(isset($_POST['rfq_email_customer']) ? sanitize_text_field(wp_unslash($_POST['rfq_email_customer'])) : ""),
+                    'phone' => sanitize_text_field(isset($_POST['rfq_phone']) ? sanitize_text_field(wp_unslash($_POST['rfq_phone'])) : ""),
+                    'address_1' => sanitize_text_field(isset($_POST['rfq_address']) ? sanitize_text_field(wp_unslash($_POST['rfq_address'])) : ""),
+                    'address_2' => sanitize_text_field(isset($_POST['rfq_address2']) ? sanitize_text_field(wp_unslash($_POST['rfq_address2'])) : ""),
+                    'city' => sanitize_text_field(isset($_POST['rfq_city']) ? sanitize_text_field(wp_unslash($_POST['rfq_city'])) : ""),
+                    'state' => sanitize_text_field(wp_unslash($billing_state)),
+                    'postcode' => sanitize_text_field(isset($_POST['rfq_zip']) ? sanitize_text_field(wp_unslash($_POST['rfq_zip'])) : ""),
+                    'country' => sanitize_text_field(isset($_POST['rfq_billing_country']) ? sanitize_text_field(wp_unslash($_POST['rfq_billing_country'])) : "")
                 );
 
                 if (count($gpls_woo_rfq_cart) == 0) {
@@ -1563,7 +1625,7 @@ eod;
                 }
 
 
-                $cart_totals = isset($_POST['cart']) ? $_POST['cart'] : '';
+               // $cart_totals = isset($_POST['cart']) ? $_POST['cart'] : '';
 
                 foreach ($gpls_woo_rfq_cart as $cart_item_key => $values) {
 
@@ -1573,8 +1635,10 @@ eod;
                         continue;
                     }
 
-                    $quantity = $cart_totals[$cart_item_key]['qty'];
-
+                  //  $quantity = $cart_totals[$cart_item_key]['qty'];
+                    if (isset($_POST['cart'][$cart_item_key]['qty'])) {
+                        $quantity = sanitize_text_field(wp_unslash($_POST['cart'][$cart_item_key]['qty']));
+                    }
 
                     if ('' === $quantity || $quantity == $values['quantity'])
                         continue;
@@ -1603,19 +1667,22 @@ eod;
                 if (!is_user_logged_in() && (isset($_POST['rfq_createaccount']) ||
                         get_option('rfq_cart_sc_section_rfq_page_create_accounts', "yes") != "no")) {
 
-                    $rfq_email_customer = sanitize_text_field($_POST['rfq_email_customer']);
+                    $rfq_email_customer = sanitize_text_field(wp_unslash($_POST['rfq_email_customer']));
                     if (isset($rfq_email_customer)) {
-                        $parts = explode("@", sanitize_text_field($_POST['rfq_email_customer']));
+                        $parts = explode("@", sanitize_text_field(wp_unslash($_POST['rfq_email_customer'])));
                         $username = $parts[0];
                     } else {
-                        $username = sanitize_text_field($_POST['rfq_fname'] . '_' . sanitize_text_field($_POST['rfq_lname']));
+                        $username = sanitize_text_field(wp_unslash($_POST['rfq_fname'])
+                            . '_' . sanitize_text_field(wp_unslash($_POST['rfq_lname'])));
                     }
 
+                    if (isset($_POST['account_password'])) {
+                        $password = sanitize_text_field(wp_unslash($_POST['account_password'])) ;
+                    }else{
+                        $password =  wp_generate_password();
+                    }
 
-                    $password = isset($_POST['account_password']) ?
-                        $_POST['account_password'] : wp_generate_password();
-
-                    $new_customer = wc_create_new_customer(sanitize_text_field($_POST['rfq_email_customer']), $username, $password);
+                    $new_customer = wc_create_new_customer(sanitize_text_field(wp_unslash($_POST['rfq_email_customer'])), $username, $password);
 
                     if (is_wp_error($new_customer)) {
 
@@ -1670,7 +1737,7 @@ eod;
                 $order = wc_create_order(array(
                     'status' => 'pending',
                     'customer_id' => $customer_id,
-                    'billing_email' => $_POST['rfq_email_customer']
+                    'billing_email' => sanitize_text_field( wp_unslash($_POST['rfq_email_customer']?? ''))
                 ));
 
 
@@ -1774,9 +1841,9 @@ eod;
                 $order->set_address($address_billing, 'shipping');
 
 
-                $order->set_billing_email(sanitize_text_field($_POST['rfq_email_customer']));
-                $order->set_billing_first_name(sanitize_text_field($_POST['rfq_fname']));
-                $order->set_billing_last_name(sanitize_text_field($_POST['rfq_lname']));
+                $order->set_billing_email(sanitize_text_field(wp_unslash($_POST['rfq_email_customer'] ?? '')));
+                $order->set_billing_first_name(sanitize_text_field(wp_unslash($_POST['rfq_fname']?? '')));
+                $order->set_billing_last_name(sanitize_text_field(wp_unslash($_POST['rfq_lname']?? '')));
 
 
                 $order->set_date_created(current_time('mysql', 0));
@@ -1789,7 +1856,7 @@ eod;
                 $order->set_payment_method("gpls-rfq");
 
                 if (isset($_POST['rfq_message'])) {
-                    $message = trim($_POST['rfq_message']);
+                    $message = sanitize_text_field(wp_unslash($_POST['rfq_message']));
                 } else {
                     $message = "";
                 }
@@ -1803,7 +1870,7 @@ eod;
 
 
                     $comment_author = $username;
-                    $comment_author_email = sanitize_text_field($_POST['rfq_email_customer']);
+                    $comment_author_email =sanitize_text_field(wp_unslash($_POST['rfq_email_customer'] ?? ''));
 
                     $comment_post_ID = $order->get_id();
                     $comment_author_url = '';
@@ -1812,7 +1879,10 @@ eod;
                     $comment_type = 'order_note';
                     $comment_parent = 0;
                     $comment_approved = 1;
-                    $commentdata = apply_filters('woocommerce_new_order_note_data', compact('comment_post_ID', 'comment_author', 'comment_author_email', 'comment_author_url', 'comment_content', 'comment_agent', 'comment_type', 'comment_parent', 'comment_approved'), array('order_id' => $order->get_id(), 'is_customer_note' => 1));
+                    $commentdata = apply_filters('woocommerce_new_order_note_data', compact('comment_post_ID',
+                        'comment_author', 'comment_author_email', 'comment_author_url',
+                        'comment_content', 'comment_agent', 'comment_type', 'comment_parent',
+                        'comment_approved'), array('order_id' => $order->get_id(), 'is_customer_note' => 1));
 
                     $comment_id = wp_insert_comment($commentdata);
 
@@ -1833,7 +1903,8 @@ eod;
 
                 gpls_woo_rfq_cart_delete('gpls_woo_rfq_cart');
 
-                $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', __('You RFQ has been successfully submitted!', 'woo-rfq-for-woocommerce'));
+                $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message',
+                    __('You RFQ has been successfully submitted!', 'woo-rfq-for-woocommerce'));
 
                 gpls_woo_rfq_add_notice($confirmation_message, 'success');
                 wc_add_notice($confirmation_message, 'success');
@@ -1848,9 +1919,9 @@ eod;
                 $order->save();
 
                 if (isset($_REQUEST['global_product_id'])
-                    && isset($_REQUEST['rfqform_location']) && $_REQUEST['rfqform_location'] === "product") {
+                    && isset($_REQUEST['rfqform_location']) && sanitize_text_field(wp_unslash($_REQUEST['rfqform_location'])) === "product") {
 
-                    $global_product = wc_get_product($_REQUEST['global_product_id']);
+                    $global_product = wc_get_product(sanitize_text_field(wp_unslash($_REQUEST['global_product_id'])));
                     $return_url = $global_product->get_permalink();
 
                 } else {
@@ -1904,12 +1975,14 @@ eod;
 
     function gpls_woo_rfq_woocommerce_RFQ_only_add_to_cart()
     {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'woocommerce-process_checkout')) {
+        if (!isset($_POST['_wpnonce'])
+            || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'] ?? '')), 'woocommerce-process_checkout')) {
             return;
         }
 
 
-        if (isset( $GLOBALS["gpls_woo_rfq_checkout_option"]) &&  $GLOBALS["gpls_woo_rfq_checkout_option"] == 'rfq') {
+        if (isset( $GLOBALS["gpls_woo_rfq_checkout_option"]) &&
+            sanitize_text_field(wp_unslash($GLOBALS["gpls_woo_rfq_checkout_option"] ??'')) == 'rfq') {
 
             gpls_woo_rfq_remove_filters();
 
@@ -1942,10 +2015,10 @@ eod;
         remove_filter('woocommerce_get_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
         remove_filter('woocommerce_sale_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
 
-        remove_filter('woocommerce_get_price_excluding_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);//remove at checkout
-        remove_filter('woocommerce_get_price_including_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);//remove at checkout
+        remove_filter('woocommerce_get_price_excluding_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);
+        remove_filter('woocommerce_get_price_including_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);
 
-        remove_filter('woocommerce_product_get_price', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);//remove at checkout
+        remove_filter('woocommerce_product_get_price', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
         remove_filter('woocommerce_product_is_on_sale', 'gpls_woo_rfq_product_is_on_sale', 1000, 2);
         remove_filter('woocommerce_bundle_is_on_sale', 'gpls_woo_rfq_product_is_on_sale', 1000, 2);
         remove_filter('woocommerce_bundle_sale_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
@@ -1957,7 +2030,7 @@ eod;
         remove_filter('woocommerce_free_sale_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
         remove_filter('woocommerce_free_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);            //
         remove_filter('woocommerce_get_variation_price_html', 'gpls_woo_rfq_individual_price_hidden_html', 1000, 2);
-        remove_filter('woocommerce_get_price_html_from_to', 'gpls_woo_rfq_individual_price_html_from_to', 1000, 4);//remove at checkout
+        remove_filter('woocommerce_get_price_html_from_to', 'gpls_woo_rfq_individual_price_html_from_to', 1000, 4);
         remove_filter('woocommerce_get_variation_price', 'gpls_woo_rfq_individual_price_hidden_variation_html', 1000, 4);
         remove_filter('woocommerce_get_variation_sale_price', 'gpls_woo_rfq_individual_price_hidden_variation_html', 1000, 4);
         remove_filter('woocommerce_get_variation_regular_price', 'gpls_woo_rfq_individual_price_hidden_variation_html', 1000, 4);
@@ -2291,8 +2364,12 @@ eod;
             $is_product_page = false;
 
 
-            $url = get_site_url() . $_SERVER['REQUEST_URI'];
-            $path = parse_url($url, PHP_URL_PATH);
+           // $url = get_site_url() . $_SERVER['REQUEST_URI'];
+            global $wp;
+            $url = home_url( add_query_arg( array(), $wp->request ) );
+
+
+            $path = wp_parse_url($url, PHP_URL_PATH);
             $path_array = explode("/", trim($path, "/"));
 
 

@@ -1,22 +1,22 @@
-=== NP Quote Request WooCommerce ===
+=== NP Quote Request for WooCommerce ===
 Contributors: GPLSAVER
 Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
-WC tested up to: 9.3.2
-Stable tag: 1.9.166
+WC tested up to: 9.3.3
+Stable tag: 1.9.167
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NP Quote Request WooCommerce enables your customers to easily submit quote requests to your WooCommerce store. Flexible WooCommerce Quote Request!
+NP Quote Request for WooCommerce enables your customers to easily submit quote requests to your WooCommerce store. Flexible WooCommerce Quote Request!
 
 == Description ==
 
-NP Quote Request WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request WooCommerce enables you to generate leads and engage with your customers!
+NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
 
-**You can configure NP Quote Request WooCommerce basic version in different ways:**
+**You can configure NP Quote Request for WooCommerce basic version in different ways:**
 
 **1- Allow quote request on selected products.Simple and varaiable product types**
 
@@ -46,7 +46,7 @@ NP Quote Request WooCommerce enables your customers to easily submit a quote req
 
 
 
-**[NP Quote Request WooCommerce Premium Extension](https://www.neahplugins.com/)**
+**[NP Quote Request for WooCommerce Premium Extension](https://www.neahplugins.com/)**
 
 * Compatible with WooCommerce Product Add-ons (from WooCommerce). This is the one we recommend to use with our plugin and support in normal or RFQ mode.*
 * Most other product option builder can integrate in RFQ mode. Please test in the free version for compatibility.*
@@ -102,7 +102,7 @@ NP Quote Request WooCommerce enables your customers to easily submit a quote req
 * Beta: Integration with WooCommerce Product Add-on Ultimate Plugin basic version.
 * And many more features..
 
-= NP Quote Request WooCommerce Premium Only Features =
+= NP Quote Request for WooCommerce Premium Only Features =
 [youtube https://youtu.be/b1Q93LPjEp4?rel=0]
 
 [Email, Content Marketing & Dashboard Video](https://youtu.be/sq6Dt0kRnzw?rel=0)
@@ -121,7 +121,7 @@ NP Quote Request WooCommerce enables your customers to easily submit a quote req
 
 = General Options =
 
-NP Quote Request WooCommerce enables you to operate in your choice of 2 different modes: Normal Checkout mode or RFQ mode.
+NP Quote Request for WooCommerce enables you to operate in your choice of 2 different modes: Normal Checkout mode or RFQ mode.
 
 = Normal Checkout Mode =
 Normal Checkout mode shows prices by default except on products that are RFQ enabled in the product setup page(Advanced Tab) in admin.  You can choose specific products in the product setup that you want customers to request a quote. The prices for these products will be hidden by default unless you choose the option "Show Prices With Normal Checkout"; then all prices will show regardless of RFQ status.  So you could select some products to be available for the customer to purchase through the regular checkout proceedure, OR allow the customer to request a quote on that product. All quote requests are added to the RFQ cart and when submitted, and saved as an order with an RFQ status. All other product purchases can check out normally.
@@ -170,7 +170,7 @@ Emails are added to the WooCommerce email settings section and can be enabled/di
 
 = Templates =
 
-NP Quote Request WooCommerce templates located in the "woo-rfq-for-commerce/woocommerce".
+NP Quote Request for WooCommerce templates located in the "woo-rfq-for-commerce/woocommerce".
 You can override the templates by copying them to "your_theme_directory/woocommerce".
 
 
@@ -180,7 +180,7 @@ Automatic installation through your WordPress dashboard.
 
 = Manual installation =
 
-Download NP Quote Request WooCommerce Request plugin and upload it to your webserver via FTP. The WordPress codex contains [instructions on how to do this here](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
+Download NP Quote Request for WooCommerce Request plugin and upload it to your webserver via FTP. The WordPress codex contains [instructions on how to do this here](http://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
 
 = Updating =
 
@@ -207,13 +207,13 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.166 10/4/2024 =
-fix the problem with duplicate attributes showing in normal
+= 1.9.167 10/11/2024 =
+fix the problem with the warning ['cart'] and test WC 9.3.3
 
 == Upgrade Notice ==
 
-= 1.9.166 10/4/2024 =
-fix the problem with duplicate attributes showing in normal
+= 1.9.167 10/11/2024 =
+fix the problem with the warning ['cart'] and test WC 9.3.3
 
 
 

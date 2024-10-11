@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: NP Quote Request WooCommerce
- * Description: NP Quote Request WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.166
+ * Plugin Name: NP Quote Request for WooCommerce
+ * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
+ * Version: 1.9.167
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -158,7 +158,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <div id="message" class="error notice notice-success is-dismissible"
                      style="font-size: medium;font-weight: 500;color: black">
 
-                    <p>Please upgrade NP Quote Request WooCommerce Plus to version: <?php echo $rfqtk_version; ?>.</p>
+                    <p>Please upgrade NP Quote Request for WooCommerce Plus to version: <?php echo $rfqtk_version; ?>.</p>
                 </div>
             <?php endif; ?>
                 <?php
@@ -178,7 +178,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <div id="message" class="error notice notice-success is-dismissible"
                      style="font-size: medium;font-weight: 500;color: black">
 
-                    <p>Please upgrade NP Quote Request WooCommerce – PDF to version: <?php echo $pdf_version; ?>.</p>
+                    <p>Please upgrade NP Quote Request for WooCommerce – PDF to version: <?php echo $pdf_version; ?>.</p>
                 </div>
             <?php endif; ?>
                 <?php
@@ -199,7 +199,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <div id="message" class="error notice notice-success is-dismissible"
                      style="font-size: medium;font-weight: 500;color: black">
 
-                    <p>Please upgrade NP Quote Request WooCommerce – File Upload to
+                    <p>Please upgrade NP Quote Request for WooCommerce – File Upload to
                         version <?php echo $upload_version; ?>.</p>
                 </div>
             <?php endif; ?>
@@ -218,7 +218,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <p> Check <a href="<?php echo $checkagain_url ?>" class="btn btn-primary">here</a> and click on "check
                     again" in the update page for automatic update
                     or download from <a target="_blank" href="https://neahplugins.com/my-account/api-downloads//">downloads</a><br/>
-                    <span style="color:black">to ensure correct functionality and compatibility with the NP Quote Request WooCommerce</span>.
+                    <span style="color:black">to ensure correct functionality and compatibility with the NP Quote Request for WooCommerce</span>.
                 </p>
             </form>
         </div>
@@ -274,6 +274,7 @@ add_action('plugins_loaded', 'GPLS_WOO_RFQ_Main', 400);
 
 function GPLS_WOO_RFQ_Main()
 {
+    //
 
     return $GLOBALS['GPLS_WOO_RFQ'] = GPLS_WOO_RFQ::instance();
     // return  GPLS_WOO_RFQ::instance();
@@ -1717,3 +1718,7 @@ if ($table_fixed == 'no')
     update_option('settings_gpls_woo_fix21487m23', 'yes');
 
 }
+
+
+//$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
+//$order = $order_factory->get_order(sanitize_text_field(($_REQUEST['order_id'])));

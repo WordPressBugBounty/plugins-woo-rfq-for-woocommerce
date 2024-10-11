@@ -48,8 +48,6 @@ if (!class_exists('WC_Gateway_GPLS_Request_Quote') && class_exists('WC_Payment_G
             // Actions
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
 
-            //TODO fixed the payment method filter
-
 
               add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
 
@@ -100,8 +98,14 @@ if (!class_exists('WC_Gateway_GPLS_Request_Quote') && class_exists('WC_Payment_G
          */
         public function thankyou_page()
         {
+            $order=false;
+
             if (isset($_GET['key'])) {
-                $order_key = $_GET['key'];
+               // $order_key = $_GET['key'];
+                //$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
+                $order_key = sanitize_text_field( wp_unslash( $_GET['key'] ?? '' ) );
+
+
                 $order_id = wc_get_order_id_by_order_key($order_key);
                 $order = wc_get_order($order_id);
 

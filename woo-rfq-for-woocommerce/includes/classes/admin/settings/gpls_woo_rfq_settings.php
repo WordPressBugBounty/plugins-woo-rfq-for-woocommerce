@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * Author:   @Neah Plugins
- * Date: 1/27/2016
- * Time: 4:07 PM
- */
+
 
 
 if (!class_exists('GPLS_Woo_RFQ_Settings')) {
@@ -86,8 +81,8 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
             <div class="notice error my-acf-notice is-dismissible">
 
 
-              <?php printf(__('%s <br /> Cart and Checkout pages have been reverted to classic cart and checkout using shortcodes.<br /><br />
-              ', 'rfqtk'), '<span style="color: green; font-weight: bold">', '</span>'); ?>
+              <?php printf(__('<br />Cart and Checkout pages have been reverted to classic cart and checkout using shortcodes.<br /><br />
+              ', 'woo-rfq-for-woocommerce'), '<span style="color: green; font-weight: bold">', '</span>'); ?>
 
 
 
@@ -123,7 +118,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
             if (!class_exists('GPLS_WOO_RFQ_FIELD') && !class_exists('GPLS_WOO_RFQ_PLUS')
                 && !class_exists('GPLS_WOO_PDF') && !class_exists('GPLS_WOO_RFQ_UPLOAD')
             ) {
-                $sections['npoptions'] = __('More Options', 'rfqtk');
+                $sections['npoptions'] = __('More Options', 'woo-rfq-for-woocommerce');
             }
             return apply_filters('woocommerce_get_sections_' . $this->id, $sections);
         }
@@ -458,16 +453,13 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
         public function get_settings($section = null)
         {
 
-            $shortcode_or_block=$this->np_checkout_page();
+            $shortcode_or_block='';
             
-            $shortcode_or_block_message=".";
+            $shortcode_or_block_message="";
 
-            if($shortcode_or_block=='classic shortcode checkout'){
-                $shortcode_or_block_message = " and fully compatible with this plugin's features.";
-            }
 
-            $str_classic_begin = '
-                            <div class="gplshover"><div class="gpls_trig gpls_permissions"  ><span class="sconly">'.__('Classic Checkout Only','woo-rfq-for-woocommerce').'</span>:&nbsp;&nbsp;';
+
+            $str_classic_begin = '';
 
 
             $str_classic_end = '';
@@ -504,22 +496,12 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
  Customers can only inquire about the products that you specify in product setup in the advanced tab or in the products list in admin. 
 <br><br>RFQ Checkout: In RFQ mode the plugin is integrated with the WooCommerce cart and<br />
  the entire cart is submitted as a quote request. All the prices are hidden and at checkout the option is to submit a quote request. <br /><br /> 
-  ', 'rfqtk'),
+  ', 'woo-rfq-for-woocommerce'),
                                 'default' => 'normal_checkout',
                                 'id' => 'settings_gpls_woo_rfq_checkout_option'
                             ),
 
-                            'settings_gpls_woo_rfq_revert_to_classic' => array(
-                                'name' => '1-0 ' . __('Revert to classic(short codes) cart and checkout pages', 'rfqtk'),
-                                'type' => 'checkbox',
-                                'desc' =>'<div class="settings_gpls_woo_rfq_revert_to_classic"><b>'. __('Applicable to RFQ checkout option only:</b>&nbsp;<a target="_blank" href="https://woocommerce.com/document/cart-checkout-blocks-status/">Cart and Checkout Blocks</a><br />   
-                                Features that are only compatible with classic checkout are marked in description with: <span class="sconly_noborder">
-                                Classic Checkout Only </span>&nbsp;&nbsp;<br />
-                                Currently your site is using: '.$shortcode_or_block.$shortcode_or_block_message.' 
-                                </div>', 'woo-rfq-for-woocommerce'),
-                                'default' => 'no',
-                                'id' => 'settings_gpls_woo_rfq_revert_to_classic'
-                            ),
+
 
                             'settings_gpls_woo_rfq_show_prices' => array(
                                 'name' => '2- ' . __('Always Show Product Prices With RFQ Checkout', 'woo-rfq-for-woocommerce'),
@@ -978,9 +960,9 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
 
                         'settings_gpls_woo_rfq_admin_email_reply_to' => array(
-                            'name' =>  __('Change "reply to" in admin email to customer email', 'rfqtk'),
+                            'name' =>  __('Change "reply to" in admin email to customer email', 'woo-rfq-for-woocommerce'),
                             'type' => 'checkbox',
-                            'desc' => __('Change "reply to" to the customer billing email in emails sent to admin for convenience.', 'rfqtk'),
+                            'desc' => __('Change "reply to" to the customer billing email in emails sent to admin for convenience.', 'woo-rfq-for-woocommerce'),
                             'default' => 'yes',
                             'id' => 'settings_gpls_woo_rfq_admin_email_reply_to',
                             'css' => 'width:400px;'

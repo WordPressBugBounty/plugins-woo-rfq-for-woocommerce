@@ -48,6 +48,9 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             }
 
 
+
+
+
             if ($checkout_option === "normal_checkout" || isset($_POST["rfq_product_id"])) {
 
                 $is_checkout_cart_routine = true;
@@ -487,13 +490,25 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
            // $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
 
-            global $wp;
-            $actual_link = home_url( add_query_arg( array(), $wp->request ) );
 
-
-
-            if ((strtolower(wp_parse_url(trim($rfq_page))['path'])) ===
+           /* if ((strtolower(wp_parse_url(trim($rfq_page))['path'])) ===
                 (strtolower(wp_parse_url(trim($actual_link))['path']))) {
+                return false;
+            }*/
+
+
+            global $wp;
+            $actual_link = trailingslashit(home_url( add_query_arg( array(), $wp->request )));
+
+            $rfq_page_path= isset(wp_parse_url(trim($rfq_page))['path'])?(strtolower(wp_parse_url(trim($rfq_page))['path'])):'';
+            $actual_link_path= isset(wp_parse_url(trim($actual_link))['path'])?(strtolower(wp_parse_url(trim($actual_link))['path'])):'';
+
+          //  np_write_log( $rfq_page_path,__FILE__,__LINE__);
+           // np_write_log( $actual_link_path,__FILE__,__LINE__);
+
+
+            if ($rfq_page_path ===$actual_link_path) {
+               // np_write_log('same' ,__FILE__,__LINE__);
                 return false;
             }
 
@@ -642,12 +657,15 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 /*    */
 
                 // gpls_woo_rfq_remove_filters_normal_checkout();
-                if (!is_admin()) {
+                //if (!is_admin())
+                {
                     //    add_action('init', 'gpls_woo_rfq_print_script_init', 1000);
                 }
 
              //   add_filter('woocommerce_add_cart_item_data', array($this, 'gpls_woo_rfq_add_cart_item_data'), 1000, 3);
+
                 add_action("gpls_woo_rfq_before_cart", array($this, "gpls_woo_rfq_cart_before_cart"), 1000);
+
                 add_filter('woocommerce_widget_cart_is_hidden', array($this, 'filter_woocommerce_widget_cart_is_hidden'), 1000, 1);
 
 
@@ -662,7 +680,12 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             $link_to_rfq_page = (trim(preg_replace('{/$}', '', $link_to_rfq_page)));
 
-            $current_page = (trim(preg_replace('{/$}', '', (get_site_url()) . $_SERVER['REQUEST_URI'])));
+            global $wp;
+
+
+            // $current_page = (trim(preg_replace('{/$}', '', (get_site_url()) . $_SERVER['REQUEST_URI'])));
+            $current_page = (trim(preg_replace('{/$}', '',  home_url( add_query_arg( array(), $wp->request ) ))));
+
 
             if (trim($link_to_rfq_page) == trim($current_page) || isset($_REQUEST['removed_item'])) {
 
@@ -671,7 +694,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             return $is_cart;
 
-
+//
         }
 
         public function gpls_woo_rfq_cart_before_cart()

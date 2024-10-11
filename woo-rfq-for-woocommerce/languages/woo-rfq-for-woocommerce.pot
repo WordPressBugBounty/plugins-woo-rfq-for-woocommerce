@@ -30,7 +30,7 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:32
-msgid "NP Quote Request WooCommerce"
+msgid "NP Quote Request for WooCommerce"
 msgstr ""
 
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:42
@@ -934,12 +934,12 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"NP Quote Request WooCommerce enables your customers to easily submit a quote "
+"NP Quote Request for WooCommerce enables your customers to easily submit a quote "
 "request to your WooCommerce store. It is very flexible and can be used in a "
 "variety of store settings. You can turn the WooCommerce cart into a quote "
 "request only or designate select items into quote items. Customers can then "
 "request quotes only for those select items and check out normally with other "
-"items. NP Quote Request WooCommerce enables you to generate leads and engage "
+"items. NP Quote Request for WooCommerce enables you to generate leads and engage "
 "with your customers!"
 msgstr ""
 

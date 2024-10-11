@@ -1,4 +1,8 @@
 == Changelog ==
+
+= 1.9.167 10/11/2024 =
+fix the problem with the warning ['cart'] and test WC 9.3.3
+
 = 1.9.166 10/4/2024 =
 fix the problem with duplicate attributes showing in normal
 
