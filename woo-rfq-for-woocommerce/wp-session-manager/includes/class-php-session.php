@@ -88,9 +88,12 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
 
             $this->session_id = session_id();
 
-            $this->expires = $_SESSION['expires'];
-            $this->exp_variant = $_SESSION['expires'];
+            if(isset($_SESSION['expires'])) {
 
+
+                $this->expires = sanitize_key( wp_unslash($_SESSION['expires']));
+                $this->exp_variant = sanitize_url( wp_unslash($_SESSION['expires']));
+            }
             // Update the session expiration if we're past the variant time
             if (time() > $this->exp_variant) {
                 $this->np_update_expiration($this->session_id);
@@ -106,14 +109,15 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
 
         } else {
 
-            ini_set('session.use_cookies', 'true');
-            //  ini_set('session.hash_function', 'sha256');
-            //   ini_set('session.entropy_length', '32');
 
-            ini_set('session.gc_maxlifetime', $this->expires);
+            if(!headers_sent()) {
+                // phpcs:disable
 
-            session_start();
-
+                ini_set('session.use_cookies', 'true');
+                ini_set('session.gc_maxlifetime', $this->expires);
+                session_start();
+                // phpcs:enable
+            }
             /* session_set_save_handler(
                array($this, "open"),
                array($this, "close"),
@@ -123,9 +127,6 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
                array($this, "gc")
            );*/
             register_shutdown_function('session_write_close');
-
-
-
             $this->session_id=session_id();
         }
 
@@ -186,7 +187,7 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
      */
     public function json_out()
     {
-        return json_encode($this->container);
+        return wp_json_encode($this->container);
     }
 
     /**
@@ -275,7 +276,21 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
 
         $serialized_value = maybe_serialize($value);
 
-        $result = $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions (`option_name`, `option_value`,`expiration`,`misc_value`) VALUES (%s, %s,%s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`),`expiration` = {$this->expires},`misc_value` = 'phpsid' ", $option, $serialized_value, $this->expires, 'phpsid'));
+       /* $result = $wpdb->query($wpdb->prepare("INSERT INTO
+        {$wpdb->base_prefix}npxyz2021_sessions (`option_name`, `option_value`,`expiration`,`misc_value`)
+         VALUES (%s, %s,%s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), 
+         `option_value` = VALUES(`option_value`),
+         `expiration` = {$this->expires},`misc_value` = 'phpsid' ", $option, $serialized_value, $this->expires, 'phpsid'));*/
+
+        //custom table no wrappers or caching avaialable or needed
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $result = $wpdb->query($wpdb->prepare("INSERT INTO 
+        {$wpdb->base_prefix}npxyz2021_sessions (`option_name`, `option_value`,`expiration`,`misc_value`) VALUES (%s, %s,%s,%s)
+         ON DUPLICATE KEY UPDATE `option_name` = 
+        VALUES(`option_name`), `option_value` = VALUES(`option_value`),`expiration` = VALUES(`expiration`),
+        `misc_value`=VALUES(`misc_value`) ", $option, $serialized_value, $this->expires, 'phpsid')); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+
 
         if (!$result) {
             return false;
@@ -293,7 +308,11 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
 
         $_SESSION['timeout_idle'] = time() + $this->expires;
 
-        $result = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}npxyz2021_sessions set `expiration`= %s,`updated`= now() where `option_name` = %s ",$this->expires,$option));
+        //custom table no wrappers or caching avaialable or needed
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $result = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}npxyz2021_sessions set `expiration`= %s,`updated`= now() where
+         `option_name` = %s ",$this->expires,$option)); //db call ok
 
         if (!$result) {
             return false;
@@ -309,9 +328,20 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
         if (empty($option)) {
             return false;
         }
-        $session_value = ($wpdb->get_var("SELECT option_value FROM {$wpdb->base_prefix}npxyz2021_sessions WHERE option_name = '{$option}' LIMIT 1"));
+      /*  $session_value =
+            $wpdb->get_var("SELECT option_value
+             FROM {$wpdb->base_prefix}npxyz2021_sessions
+              WHERE option_name = '{$option}' LIMIT 1");*/
 
-        if (!gpls_empty($session_value)) {
+        //custom table no wrappers or caching avaialable or needed
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $session_value = $wpdb->get_var($wpdb->prepare("SELECT option_value
+        FROM {$wpdb->base_prefix}npxyz2021_sessions 
+        WHERE option_name = %s  LIMIT %d",$option,1)); //db call ok
+
+
+        if (!empty($session_value)) {
             $value = $session_value;
 
         } else {
@@ -326,9 +356,14 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
     {
         global $wpdb;
 
-        $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions WHERE  option_name= '{$option}' ";
+       // $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions WHERE  option_name= '{$option}' ";
 
-        $result = $wpdb->query($sql);
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $result = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions where `option_name` = %s ",$option)); //db call ok
+
+
+        // $result = $wpdb->query($sql);
 
         return $result;
 
@@ -373,12 +408,15 @@ class RFQTK_PHP_Session extends RFQTK_Recursive_ArrayAccess
         $limit = apply_filters('delete_old_sessions_filter',$limit);
 
         {
-            $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
-          WHERE misc_value='phpsid' and option_value = 'a:0:{}' or  expiration <= ". time() ." LIMIT " . $limit . " ";
+           // $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+         // WHERE misc_value='phpsid' and option_value = 'a:0:{}' or  expiration <= ". time() ." LIMIT " . $limit . " ";
 
-            $result = $wpdb->query($sql);
+            //db call ok; no-cache ok
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $result = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+          WHERE  misc_value = %s and  option_value = %s or  expiration <= %s LIMIT %d  ",'phpsid','a:0:{}',time(),$limit)); //db call ok
 
-            return true;
+            return $result;
         }
 
     }

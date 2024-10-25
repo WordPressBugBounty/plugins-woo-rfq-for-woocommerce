@@ -227,7 +227,8 @@ class NP_Html2Text
 
     private function legacyConstruct($html = '', $fromFile = false, array $options = array())
     {
-        $this->set_html($html, $fromFile);
+       // $this->set_html($html, $fromFile);
+        $this->setHtml($html);
         $this->options = array_merge($this->options, $options);
     }
 
@@ -279,7 +280,7 @@ class NP_Html2Text
             throw new \InvalidArgumentException("Argument from_file no longer supported");
         }
 
-        return $this->setHtml($html);
+         $this->setHtml($html);
     }
 
     /**
@@ -309,7 +310,7 @@ class NP_Html2Text
      */
     public function print_text()
     {
-        print $this->getText();
+        print esc_js($this->getText());
     }
 
     /**
@@ -317,7 +318,8 @@ class NP_Html2Text
      */
     public function p()
     {
-        return $this->print_text();
+      // $this->print_text();
+      return $this->getText();
     }
 
     /**
@@ -335,7 +337,7 @@ class NP_Html2Text
      */
     public function set_base_url($baseurl)
     {
-        return $this->setBaseUrl($baseurl);
+         $this->setBaseUrl($baseurl);
     }
 
     protected function convert()
@@ -379,7 +381,7 @@ class NP_Html2Text
         $text = preg_replace($this->entSearch, $this->entReplace, $text);
         $text = html_entity_decode($text, $this->htmlFuncFlags, self::ENCODING);
 
-        // Remove unknown/unhandled entities (this cannot be done in search-and-replace block)
+
         $text = preg_replace('/&([a-zA-Z0-9]{2,6}|#[0-9]{2,4});/', '', $text);
 
         // Convert "|+|amp|+|" into "&", need to be done after handling of unknown entities
@@ -390,7 +392,7 @@ class NP_Html2Text
         $text = preg_replace("/\n\s+\n/", "\n\n", $text);
         $text = preg_replace("/[\n]{3,}/", "\n\n", $text);
 
-        // remove leading empty lines (can be produced by eg. P tag on the beginning)
+
         $text = ltrim($text, "\n");
 
         if ($this->options['width'] > 0) {
@@ -585,7 +587,7 @@ class NP_Html2Text
                 if (preg_match('/_html2text_link_(\w+)/', $matches[4], $linkOverrideMatch)) {
                     $linkOverride = $linkOverrideMatch[1];
                 }
-                // Remove spaces in URL (#1487805)
+
                 $url = str_replace(' ', '', $matches[3]);
 
                 return $this->buildlinkList($url, $matches[5], $linkOverride);

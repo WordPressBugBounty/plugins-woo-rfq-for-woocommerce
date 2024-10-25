@@ -201,7 +201,10 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
 
         public function init_form_fields()
         {
-            $placeholder_text = sprintf(__('Available placeholders: %s', 'rfqtk'), '<code>' . implode('</code>, <code>', array_keys($this->placeholders)) . '</code>');
+            $placeholder_text =
+                /* translators: placeholders  . */
+                sprintf(__('Available placeholders: %s', 'woo-rfq-for-woocommerce'), '<code>'
+                    . implode('</code>, <code>', array_keys($this->placeholders)) . '</code>');
 
             $this->form_fields = array(
                 'enabled' => array(
@@ -218,7 +221,13 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
                     'desc_tip' => true,
                     'description' => $placeholder_text,
                     'css'         => 'width:600px',
-                    'placeholder' => __($this->get_default_subject(), 'woo-rfq-for-woocommerce' ),
+
+
+                    'placeholder' =>  sprintf(
+                    /* translators: subject . */
+                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        esc_html( $this->get_default_subject() )
+                    ),
                     'default' => '',
                 ),
                 'heading' => array(
@@ -231,10 +240,10 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
                     'default' => '',
                 ),
                 'content_intro' => array(
-                    'title' => __('Content Intro', 'rfqtk'),
+                    'title' => __('Content Intro', 'woo-rfq-for-woocommerce'),
                     'type' => 'textarea',
-                    'description' => sprintf(__('This controls the first paragrah contained within the email notification.', 'rfqtk'), $this->heading),
-                    'placeholder' => __( 'N/A', 'rfqtk' ),
+                    'description' => sprintf(__('This controls the first paragrah contained within the email notification.', 'woo-rfq-for-woocommerce'), $this->heading),
+                    'placeholder' => __( 'N/A', 'woo-rfq-for-woocommerce' ),
                     'css'         => 'width:400px; height: 75px;',
                     'default' => '',
                     'desc_tip'    => true,

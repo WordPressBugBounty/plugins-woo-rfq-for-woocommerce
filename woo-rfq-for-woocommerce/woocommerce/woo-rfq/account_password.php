@@ -20,14 +20,15 @@ echo '<tr class="info_tr"><td class="info_td"
                               style="text-align: left !important;overflow: hidden; width: 280px; text-align: left; valign: top; whitespace: nowrap;">
         <div class="create-account">
             <input class="input-checkbox" id="rfq_createaccount" name="rfq_createaccount" value="1" type="checkbox"
-                   style="-webkit-appearance: checkbox !important;" />&nbsp;' . $create_account . '</div>';
+                   style="-webkit-appearance: checkbox !important;" />&nbsp;' . wp_kses($create_account,wp_kses_allowed_html( 'post' )) . '</div>';
         echo '<div class="password_input_div">
 <span class="woocommerce-input-wrapper password-input">
-               <input type="password"  class="input-text " name="account_password" id="account_password" placeholder="'.$password_placeholder.'" style="width: 100%" value="" autocomplete="new-password">
+               <input type="password"  class="input-text " name="account_password" id="account_password" placeholder="'
+            .wp_kses($password_placeholder,wp_kses_allowed_html( 'post' )).'" style="width: 100%" value="" autocomplete="new-password">
               <div class="woocommerce-password-strength" id="password-length" aria-live="polite" style=""></div>
               
  </span>
-            <small class="woocommerce-password-hint">'.$hint.'</small></div>
+            <small class="woocommerce-password-hint">'.wp_kses($hint,wp_kses_allowed_html( 'post' )).'</small></div>
 
     </td></tr>
 ';

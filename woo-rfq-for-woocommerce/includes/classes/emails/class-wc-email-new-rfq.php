@@ -24,6 +24,7 @@ class WC_Email_New_RFQ extends WC_Email {
 
 		$this->id               = 'new_rfq';
 		$this->title            = __( 'RFQ-ToolKit New RFQ Admin', 'woo-rfq-for-woocommerce' );
+        /* translators: description . */
 		$this->description      = __( 'New quote request emails are sent to the recipient list when an order is received.', 'woo-rfq-for-woocommerce' );
 
 		//$this->heading          = __( 'New customer quote request', 'woo-rfq-for-woocommerce' );
@@ -33,7 +34,7 @@ class WC_Email_New_RFQ extends WC_Email {
 		$this->template_plain   = 'emails/plain/admin-new-rfq.php';
 
 		$this->_templates = array($this->template_html,$this->template_plain);
-
+        /* translators: placeholders date and number . */
         $this->placeholders   = array(
             '{order_date}'   => '',
             '{order_number}' => '',
@@ -61,6 +62,7 @@ class WC_Email_New_RFQ extends WC_Email {
 
     public function get_default_subject()
     {
+        /* translators: placeholders site_title and number . */
         return __('{site_title} New customer quote request #({order_number}) on {order_date}', 'woo-rfq-for-woocommerce');
     }
 
@@ -189,8 +191,8 @@ ob_start();
 	 * Initialise settings form fields
 	 */
 	public function init_form_fields() {
-
-        $placeholder_text  = sprintf( __( 'Available placeholders: %s', 'rfqtk' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' );
+        /* translators: Available placeholders . */
+        $placeholder_text  = sprintf( __( 'Available placeholders: %s', 'woo-rfq-for-woocommerce' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' );
 
         $this->form_fields = array(
 			'enabled' => array(
@@ -202,6 +204,7 @@ ob_start();
 			'recipient' => array(
 				'title'         => __( 'Recipient(s)', 'woo-rfq-for-woocommerce' ),
 				'type'          => 'text',
+                /* translators: recipients . */
 				'description'   => sprintf( __( 'Enter recipients (comma separated) for this email. Defaults to <code>%s</code>.', 'woo-rfq-for-woocommerce' ), esc_attr( get_option('admin_email') ) ),
 				'placeholder'   => '',
 				'default'       => get_option('admin_email')
@@ -209,7 +212,11 @@ ob_start();
 			'subject' => array(
 				'title'         => __( 'Subject', 'woo-rfq-for-woocommerce' ),
                 'description' => $placeholder_text,
-                'placeholder' => __($this->get_default_subject(), 'woo-rfq-for-woocommerce' ),
+                'placeholder' =>  sprintf(
+                /* translators: subject . */
+                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    esc_html( $this->get_default_subject() )
+                ),
                 'css'         => 'width:600px',
 				'default'       => ''
 			),

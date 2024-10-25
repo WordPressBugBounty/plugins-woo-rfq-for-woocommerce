@@ -165,8 +165,20 @@ function RFQTK_php_session_reset()
         global $wpdb;
         $limit = RFQTK_WP_SESSION_CLEAN_LIMIT;
 
-        $count = $wpdb->query( "DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
-WHERE misc_value='phpsid' LIMIT " . $limit . " " );
+        $limit = absint($limit);
+
+        $limit = apply_filters('delete_old_sessions_filter', $limit);
+
+
+       // $count = $wpdb->query( "DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions
+//WHERE misc_value='phpsid' LIMIT " . $limit . " " );
+
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $count = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+          WHERE  misc_value = %s and  option_value = %s or  expiration <= %s LIMIT %d ",'phpsid','a:0:{}',time(),$limit)); //db call ok
+
+
 
         return (int) ( $count );
     }
@@ -179,7 +191,7 @@ WHERE misc_value='phpsid' LIMIT " . $limit . " " );
 function RFQTK_php_session_cleanup_all()
 {
     if (defined('WP_SETUP_CONFIG')) {
-        return;
+        return 0;
     }
 
     if (!defined('WP_INSTALLING')) {
@@ -195,7 +207,7 @@ function RFQTK_php_session_cleanup_all()
         }
 
         if (defined('WP_SETUP_CONFIG')) {
-            return;
+            return 0;
         }
 
         if (defined('WP_INSTALLING')) {
@@ -212,14 +224,21 @@ function RFQTK_php_session_cleanup_all()
 
         {
 
-            $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
-          WHERE misc_value='phpsid' and option_value = 'a:0:{}' or  expiration <= ". time() ." LIMIT " . $limit . " ";
+          //  $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+        //  WHERE misc_value='phpsid' and option_value = 'a:0:{}' or  expiration <= ". time() ." LIMIT " . $limit . " ";
 
-            $wpdb->query($sql);
+            //db call ok; no-cache ok
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $count = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+          WHERE  misc_value = %s and  option_value = %s or  expiration <= %s LIMIT %d ",'phpsid','a:0:{}',time(),$limit)); //db call ok
+
+
+
+            //  $wpdb->query($sql);
 
             //  $this->slide_expiration=true;
 
-            return 0;
+            return $count;
         }
 
     }

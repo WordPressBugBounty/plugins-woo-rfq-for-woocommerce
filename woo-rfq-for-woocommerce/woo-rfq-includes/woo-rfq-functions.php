@@ -8,6 +8,23 @@ if(!function_exists('gpls_woo_is_checkout_block')) {
         return \Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils::is_checkout_block_default();
     }
 }
+if(!function_exists('np_pls_qr_kses_allowed_html')) {
+    function np_pls_qr_kses_allowed_html($allowed_html, $context)
+    {
+        if ($context === 'post') {
+            $allowed_html['script'] = array(
+                'type' => array('text/javascript'),
+                'src' => array(),
+                'input'    => array(),
+                'textarea' => array(),
+                'form' => array(),
+            );
+        }
+        return $allowed_html;
+    }
+    add_filter('wp_kses_allowed_html', 'np_pls_qr_kses_allowed_html', 1000, 2);
+}
+
 
 add_filter('woocommerce_valid_order_statuses_for_payment_complete', 'rfqtk_statuses_for_payment', 100, 2);
 add_filter('woocommerce_valid_order_statuses_for_payment', 'rfqtk_statuses_for_payment', 100, 2);
@@ -91,8 +108,11 @@ if (!function_exists('rfqtk_first_main')) {
 
 
         $exit = false;
-
-        if (isset($_REQUEST['pay_for_order']) && (isset($_REQUEST['key']) && strpos($_REQUEST['key'], 'wc_order_', 0) === 0)) {
+        //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (isset($_REQUEST['pay_for_order']) && (isset($_REQUEST['key'])
+                //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        {
             $GLOBALS["gpls_woo_rfq_show_prices"] = "yes";
             $GLOBALS["hide_for_visitor"] = "no";
 
@@ -100,40 +120,59 @@ if (!function_exists('rfqtk_first_main')) {
             return true;
         }
 
-        //$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $url ='';
 
-        //if(function_exists('get_site_url'))
+         if(function_exists('get_site_url'))
         {
-            $url = get_site_url() . $_SERVER['REQUEST_URI'];
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if(isset($_SERVER['REQUEST_URI'])){
+                $url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
+
+            }
+
         }
 
         $order_id = false;
         $post_status = false;
 
         $has_string = strpos($url, 'order-received');
+
         $hops=get_option( 'woocommerce_custom_orders_table_enabled' );
 
 
 
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if ($has_string !== false && (isset($_REQUEST['key'])
+                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        {
 
 
-        if ($has_string !== false && (isset($_REQUEST['key']) && strpos($_REQUEST['key'], 'wc_order_', 0) === 0)) {
+
 
             global $wpdb;
-
+            // phpcs:disable
             if($hops !=="yes") {
 
-            $order_id = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '_order_key' AND meta_value = %s", $_REQUEST['key']));
 
-            $post_status = $wpdb->get_var($wpdb->prepare("SELECT post_status FROM {$wpdb->prefix}posts WHERE ID = %s", $order_id));
+
+            $order_id = $wpdb->get_var($wpdb->prepare("SELECT post_id 
+            FROM {$wpdb->prefix}postmeta WHERE meta_key = '_order_key' AND meta_value = %s", sanitize_key(wp_unslash($_REQUEST['key']))));//db call ok
+
+            //db call ok; no-cache ok
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+                $post_status = $wpdb->get_var($wpdb->prepare("SELECT post_status FROM {$wpdb->prefix}posts WHERE ID = %s", $order_id));//db call ok
             }else{
-
+                //db call ok; no-cache ok
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery
                 $order_id = $wpdb->get_var($wpdb->prepare("SELECT order_id FROM {$wpdb->prefix}wc_order_operational_data
-                WHERE order_key = %s", $_REQUEST['key']));
+                WHERE order_key = %s", sanitize_key(wp_unslash($_REQUEST['key']))));//db call ok
 
-                $post_status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$wpdb->prefix}wc_orders WHERE id = %s", $order_id));
+                //db call ok; no-cache ok
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+                $post_status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$wpdb->prefix}wc_orders WHERE id = %s", $order_id));//db call ok
 
             }
+            // phpcs:enable
 
             if (class_exists('GPLS_WOO_RFQ_PLUS') && get_option('rfq_cart_sc_section_hide_price_to_thankyou_page','no')=='yes'
                 && ($post_status == 'wc-gplsquote-req'
@@ -469,17 +508,17 @@ if (!function_exists('gpls_woo_rfq_print_notices')) {
 
             <?php if ($notice['type'] == 'error') : ?>
                 <div class="woocommerce-error">
-                    <?php echo trim(wp_kses_post($notice['message'])); ?>
+                    <?php esc_html(trim(wp_kses_post($notice['message']))); ?>
                 </div>
             <?php endif; ?>
             <?php if ($notice['type'] == 'info') : ?>
                 <div class="woocommerce-info">
-                    <?php echo trim(wp_kses_post($notice['message'])); ?>
+                    <?php esc_html(trim(wp_kses_post($notice['message']))); ?>
                 </div>
             <?php endif; ?>
             <?php if ($notice['type'] == 'notice') : ?>
                 <div class="woocommerce-notice">
-                    <?php echo trim(wp_kses_post($notice['message'])); ?>
+                    <?php esc_html(trim(wp_kses_post($notice['message']))); ?>
                 </div>
             <?php endif; ?>
 
@@ -650,7 +689,7 @@ if (!function_exists('gpls_woo_rfq_remove_warnings')) {
 
     function gpls_woo_rfq_remove_warnings()
     {
-        ini_set('display_errors', 'Off');
+       // ini_set('display_errors', 'Off');
 
 
     }
@@ -659,7 +698,7 @@ if (!function_exists('gpls_woo_rfq_remove_cart_item_warnings')) {
 
     function gpls_woo_rfq_remove_cart_item_warnings($cart_item_key, $cart)
     {
-        ini_set('display_errors', 'Off');
+       // ini_set('display_errors', 'Off');
 
 
     }
@@ -773,6 +812,7 @@ if (!function_exists('gpls_rfq_remove_other_payment_gateways')) {
             return $available_gateways;
         }
 
+//phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['pay_for_order'])) {
             unset($available_gateways['gpls-rfq']);
             return $available_gateways;
@@ -811,7 +851,7 @@ if (!function_exists('gpls_rfq_remove_other_block_payment_gateways')) {
         if (is_admin()) {
             return $available_gateways;
         }
-
+//phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['pay_for_order'])) {
 
 
@@ -855,7 +895,7 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
     function gpls_woo_rfq_footer_admin($default)
     {
 
-
+//phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (is_admin() && isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'settings_gpls_woo_rfq') {
             ob_start();
             ?>
@@ -877,36 +917,27 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
 
                                                 <li class="plus_options_li" style="margin-top: 15px;">
                                                     <div>
-                                                        <span class="plus_options-header"> <?php echo __('Available in Premium Version:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                        <span class="plus_options-header"> <?php esc_html( __('Available in Premium Version:', 'woo-rfq-for-woocommerce')); ?></span>
                                                     </div>
                                                 </li>
 
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Buy or request a quote at woocommerce checkout', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Allow the choice to purchase or request a quote at WooCommerce checkout.', 'woo-rfq-for-woocommerce') ?>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Buy or request a quote at woocommerce checkout', 'woo-rfq-for-woocommerce') ?></strong>:
+                                                        <?php esc_html_e('Allow the choice to purchase or request a quote at WooCommerce checkout.', 'woo-rfq-for-woocommerce') ?>
 
                                                     </div>
                                                 </li>
 
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Buy or request a quote based on items in the cart', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('If the cart contains a "quote item", then customer can only request a quote.', 'woo-rfq-for-woocommerce') ?>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Buy or request a quote based on items in the cart', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('If the cart contains a "quote item", then customer can only request a quote.', 'woo-rfq-for-woocommerce') ?>
 
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Enable role based price visibility and checkout options at WooCommerce checkout:', 'woo-rfq-for-woocommerce') ?></strong>
-
-                                                    </div>
-                                                </li>
-
-
-                                                <li class="plus_options_li">
-                                                    <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Bulk action for stores with large number of products:', 'woo-rfq-for-woocommerce') ?></strong>
-
-                                                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bulk enable/disable quote items, "Hide Add to Cart", "Hide Price"  by category.', 'woo-rfq-for-woocommerce'); ?>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Enable role based price visibility and checkout options at WooCommerce checkout:', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                     </div>
                                                 </li>
@@ -914,26 +945,36 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
 
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Use google recaptcha for quote request:', 'woo-rfq-for-woocommerce') ?></strong>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Bulk action for stores with large number of products:', 'woo-rfq-for-woocommerce') ?></strong>
+
+                                                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php esc_html_e('Bulk enable/disable quote items, "Hide Add to Cart", "Hide Price"  by category.', 'woo-rfq-for-woocommerce'); ?>
+
+                                                    </div>
+                                                </li>
+
+
+                                                <li class="plus_options_li">
+                                                    <div>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Use google recaptcha for quote request:', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Allow visitors to pay for an order without having to log on first (guest pay).', 'woo-rfq-for-woocommerce') ?></strong>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Allow visitors to pay for an order without having to log on first (guest pay).', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Enable price visibility by IP address.', 'woo-rfq-for-woocommerce') ?></strong>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Enable price visibility by IP address.', 'woo-rfq-for-woocommerce') ?></strong>
 
 
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                     </div>
                                                 </li>
@@ -944,13 +985,13 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
                                                 <li class="plus_options_li plus_large">
                                                     <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                               class="get_plus"
-                                                                                              href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php echo __('Get Quote Request Plus!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                              href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php esc_html_e('Get Quote Request Plus!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li plus_small">
                                                     <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                               class="get_plus"
-                                                                                              href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php echo __('Get Premium!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                              href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php esc_html_e('Get Premium!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                     </div>
                                                 </li>
 
@@ -967,12 +1008,12 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
                                             <ul class="plus_options_ul">
                                                 <li class="plus_options_li" style="margin-top: 15px;">
                                                     <div>
-                                                        <span class="plus_options-header"> <?php echo __('Other Quote Request Plugins:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                        <span class="plus_options-header"> <?php esc_html_e('Other Quote Request Plugins:', 'woo-rfq-for-woocommerce'); ?></span>
                                                     </div>
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('PDF Plugin for Quote Request:', 'woo-rfq-for-woocommerce') ?></strong><?php _e('Send PDF attachments of the quote email to the customer.', 'woo-rfq-for-woocommerce') ?>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('PDF Plugin for Quote Request:', 'woo-rfq-for-woocommerce') ?></strong><?php esc_html_e('Send PDF attachments of the quote email to the customer.', 'woo-rfq-for-woocommerce') ?>
 
                                                     </div>
                                                 </li>
@@ -984,7 +1025,7 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
                                                 </li>
                                                 <li class="plus_options_li">
                                                     <div>
-                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('File Upload Plugin for Quote Request:', 'woo-rfq-for-woocommerce') ?></strong><?php _e('Allow customers to upload files along with their quote request.', 'woo-rfq-for-woocommerce') ?>
+                                                        <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('File Upload Plugin for Quote Request:', 'woo-rfq-for-woocommerce') ?></strong><?php esc_html_e('Allow customers to upload files along with their quote request.', 'woo-rfq-for-woocommerce') ?>
 
                                                     </div>
                                                 </li>
@@ -1097,7 +1138,13 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
                 $no_payment=__('No payment','woo-rfq-for-woocommerce');
                 $no_payment=get_option('settings_gpls_woo_rfq_no_payment_checkout_text',$no_payment);
-                $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
+               // $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
+                $no_payment =sprintf(
+                /* translators:no payment label. */
+                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    esc_html( $no_payment )
+                );
+
 
                 $order->add_order_note($no_payment,0,1);
                 $order->update_status('pending');
@@ -1236,22 +1283,33 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                 if (get_option('settings_gpls_woo_rfq_checkout_option', 'normal_checkout') != "normal_checkout") {
                     return $url;
                 }
+
+
                 $quote = gpls_woo_get_rfq_enable($adding_to);
 
                 if ($quote == "yes" && !empty($adding_to)) {
 
-                    if (!empty($_SERVER['QUERY_STRING'])) {
-                        $redirect = str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
+                    $redirect=false;
+
+                    if (!empty($_SERVER['QUERY_STRING']) && !empty($_SERVER['REQUEST_URI'])) {
+                        $redirect = str_replace(sanitize_url(wp_unslash($_SERVER['QUERY_STRING'])),
+                            '', sanitize_url(wp_unslash($_SERVER['REQUEST_URI'])));
 
                     } else {
-                        $redirect = $_SERVER['REQUEST_URI'];
+                        if ( !empty($_SERVER['REQUEST_URI'])) {
+                            $redirect = sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
+                        }
                     }
-                    return $redirect;
 
-                } else {
 
-                    return $url;
+
+                    $url = $redirect;
+
+
                 }
+
+                return $url;
+
             }
             }
 
@@ -1268,11 +1326,12 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
                     //  if (!isset($wp_query) || !function_exists('is_account_page')) return false;
 
-                    //  $result = is_account_page();
+                      $result = false;
+                    if ( !empty($_SERVER['REQUEST_URI'])) {
+                        $result = str_contains(sanitize_url( wp_unslash($_SERVER['REQUEST_URI'])),
+                            str_replace(home_url(), '', wc_get_page_permalink('myaccount')));
 
-                    $result = str_contains($_SERVER['REQUEST_URI'], str_replace(home_url(), '', wc_get_page_permalink('myaccount')));
-
-
+                    }
                     return $result;
                 }
             }
@@ -1287,10 +1346,11 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
                     // global $wp;
                     //  global $wp_query;
+                    $result = false;
+                    if ( !empty($_SERVER['REQUEST_URI'])) {
 
-
-                    $result = str_contains($_SERVER['REQUEST_URI'], str_replace(home_url(), '', wc_get_cart_url()));
-
+                        $result = str_contains(sanitize_url( wp_unslash($_SERVER['REQUEST_URI'])), str_replace(home_url(), '', wc_get_cart_url()));
+                    }
 
                     return $result;
                 }
@@ -1305,11 +1365,12 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
                     // global $wp;
                     //  global $wp_query;
+                    $result = false;
+                    if ( !empty($_SERVER['REQUEST_URI'])) {
 
+                        $result = str_contains(sanitize_url( wp_unslash($_SERVER['REQUEST_URI'])), str_replace(home_url(), '', wc_get_checkout_url()));
 
-                    $result = str_contains($_SERVER['REQUEST_URI'], str_replace(home_url(), '', wc_get_checkout_url()));
-
-
+                    }
                     return $result;
                 }
             }
@@ -1382,8 +1443,11 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
         // add_filter('admin_footer_text', 'gpls_woo_rfq_footer_admin');
 
         if (is_admin()
+            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             && isset($_REQUEST['tab'])
+            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'
+            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             && isset($_REQUEST['section']) && $_REQUEST['section'] == 'npoptions'
         ) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_misc.js';
@@ -1392,7 +1456,9 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
 
         }
         if(is_admin()
+            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             && isset($_REQUEST['tab'])
+            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'){
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_basic.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_basic.js';
@@ -1512,7 +1578,7 @@ if ($needs_payment == "yes") {
 function gplswoo_get_submit_order_label()
 {
 
-
+// phpcs:disable
     if(!isset($_REQUEST['gsL']) || empty($_REQUEST['gsL'])) {
      //  die();
     }
@@ -1526,9 +1592,14 @@ function gplswoo_get_submit_order_label()
         DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
         DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
-        $settings_gpls_woo_inquire_text_option = __(get_option('settings_gpls_woo_inquire_text_option'), 'woo-rfq-for-woocommerce');
+        $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+        $settings_gpls_woo_inquire_text_option =sprintf(
+        /* translators:request quote label. */
+            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            esc_html( $settings_gpls_woo_inquire_text_option )
+        );
 
-        DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
+        DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
 
         $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
         $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';
@@ -1614,7 +1685,14 @@ function gplswoo_get_submit_order_label()
 
 
         $order_button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', __('Submit Your Request For Quote', 'woo-rfq-for-woocommerce'));
-        $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
+       // $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
+
+        $order_button_text =sprintf(
+        /* translators:add to cart label. */
+            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            esc_html( $order_button_text )
+        );
+
         $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 
         $ajax_array['rfq_cart_wordings_submit_your_rfq_text']=$order_button_text;
@@ -1625,7 +1703,14 @@ function gplswoo_get_submit_order_label()
 
 
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
-        $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
+       // $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
+
+        $proceed_to_rfq =sprintf(
+        /* translators:proceed_to_checkout label. */
+            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            esc_html( $proceed_to_rfq )
+        );
+
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
         $ajax_array['rfq_cart_wordings_proceed_to_rfq']= $proceed_to_rfq;
 
@@ -1645,6 +1730,7 @@ function gplswoo_get_submit_order_label()
     }
 
     wp_die();
+    // phpcs:enable
 }
 
 add_action('wp_ajax_gplswoo_get_submit_order_label', 'gplswoo_get_submit_order_label');

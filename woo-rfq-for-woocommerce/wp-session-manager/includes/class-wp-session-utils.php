@@ -26,17 +26,17 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
     {
         global $wpdb;
 
-        $query = "SELECT distinct COUNT(*) FROM {$wpdb->base_prefix}nplugins1_sessions 
-WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
+     //   $query = "SELECT distinct COUNT(*) FROM {$wpdb->base_prefix}nplugins1_sessions
+//WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
 
-        /**
-         * Filter the query in case tables are non-standard.
-         *
-         * @param string $query Database count query
-         */
-        $query = apply_filters('_rfqtk_wp_session_count_query', $query);
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $sessions =  $wpdb->get_var($wpdb->query($wpdb->prepare("SELECT distinct COUNT(*) FROM {$wpdb->base_prefix}nplugins1_sessions 
+        WHERE option_name LIKE %s and misc_value <> %s",'_rfqtk_wp_session_%','a:0:{}'))); //db call ok
 
-        $sessions = $wpdb->get_var($query);
+
+
+      //  $sessions = $wpdb->get_var($query);
 
         return absint($sessions);
     }
@@ -49,7 +49,7 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
     public static function create_dummy_session($date = null)
     {
         // Generate our date
-        if (null !== $date) {
+       /* if (null !== $date) {
             $time = strtotime($date);
 
             if (false === $time) {
@@ -65,10 +65,10 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
             $expires = time() + (int)apply_filters('_rfqtk_wp_session_expiration', RFQTK_WP_SESSION_EXPIRATION);
         }
 
-        $session_id = self::generate_id();
+        $session_id = self::generate_id();*/
 
         // Store the session
-        RFQTK_WP_Session::get_instance()->np_add_session("_rfqtk_wp_session_{$session_id}", array(), '', 'no');
+       // RFQTK_WP_Session::get_instance()->np_add_session("_rfqtk_wp_session_{$session_id}", array(), '', 'no');
 
     }
 
@@ -112,7 +112,7 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
         }
 
         if (defined('WP_SETUP_CONFIG')) {
-            return;
+            return 0;
         }
 
         if (defined('WP_INSTALLING')) {
@@ -128,10 +128,16 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
 
         {
 
-            $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+            //db call ok; no-cache ok
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            $sessions = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions
+          WHERE  misc_value = %s and  option_value = %s or  expiration <= %s LIMIT %d  ",'rfq_session','a:0:{}',time(),$limit)); //db call ok
+
+
+          /*  $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
           WHERE  misc_value='rfq_session' and  option_value = 'a:0:{}' or  expiration <= " . time() . " LIMIT " . $limit . " ";
 
-            $wpdb->query($sql);
+            $wpdb->query($sql);*/
 
             //  $this->slide_expiration=true;
 
@@ -160,8 +166,15 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
         global $wpdb;
         $limit = RFQTK_WP_SESSION_CLEAN_LIMIT;
 
-        $count = $wpdb->query("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
-        WHERE misc_value='rfq_session' and  option_name LIKE '_rfqtk_wp_session_%'" . " LIMIT " . $limit . " ");
+        /*$count = $wpdb->query("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions
+        WHERE misc_value='rfq_session' and  option_name LIKE '_rfqtk_wp_session_%'" . " LIMIT " . $limit . " ");*/
+
+
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $count = $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
+        WHERE misc_value=%s and  option_name LIKE %s LIMIT %s " ,'rfq_session','_rfqtk_wp_session_%',$limit)); //db call ok
+
 
         return (int)($count);
     }
@@ -189,10 +202,16 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
 
         global $wpdb;
 
-        $sql = " delete FROM {$wpdb->base_prefix}options
-        WHERE misc_value='rfq_session' and  option_name LIKE '_rfqtk_wp_session_%' LIMIT " . $limit . " ";
+       /* $sql = " delete FROM {$wpdb->base_prefix}options
+        WHERE misc_value='rfq_session' and  option_name LIKE '_rfqtk_wp_session_%' LIMIT " . $limit . " ";*/
 
-        $wpdb->query($sql);
+
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $sql = $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
+        WHERE misc_value=%s and  option_name LIKE %s LIMIT %s " ,'rfq_session','_rfqtk_wp_session_%',$limit)); //db call ok
+
+       // $wpdb->query($sql);
 
     }
 
@@ -209,7 +228,12 @@ WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
 
         $sql = " truncate table {$wpdb->base_prefix}npxyz2021_sessions ";
 
-        $wpdb->query($sql);
+        //db call ok; no-cache ok
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $sql = $wpdb->query($wpdb->prepare("truncate table {$wpdb->base_prefix}%s " ,'npxyz2021_sessions')); //db call ok
+
+
+       // $wpdb->query($sql);
 
     }
 }

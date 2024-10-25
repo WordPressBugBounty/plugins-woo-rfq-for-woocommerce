@@ -7,6 +7,7 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
+// phpcs:disable
 
 ?>
 <noscript>
@@ -154,7 +155,8 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                     if (!$product_permalink) {
                                         echo apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;';
                                     } else {
-                                        echo apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key);
+                                        echo apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>',
+                                            esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key);
                                     }
                                     //  do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
                                     // Meta data
@@ -183,11 +185,13 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                     } else if ((isset($cart_item['bundled_by']) && isset($cart_item['bundled_by']))
                                         || (isset($cart_item['bundled_items']) && isset($cart_item['bundled_items']) )
                                     ) {
-                                        $product_quantity = sprintf("{$cart_item['quantity']} <input type='hidden' name='cart[%s][qty]' value='{$cart_item['quantity']}' />", $cart_item_key);
+                                        $product_quantity = sprintf("{$cart_item['quantity']} <input type='hidden' name='cart[%s][qty]' 
+                                        value='{$cart_item['quantity']}' />", $cart_item_key);
                                     }else if ((isset($cart_item['composite_parent']) && isset($cart_item['composite_parent']))
                                         || (isset($cart_item['composite_children']) && isset($cart_item['composite_children']) )
                                     ) {
-                                        $product_quantity = sprintf("{$cart_item['quantity']} <input type='hidden' name='cart[%s][qty]' value='{$cart_item['quantity']}' />", $cart_item_key);
+                                        $product_quantity = sprintf("{$cart_item['quantity']} <input type='hidden' name='cart[%s][qty]'
+                                         value='{$cart_item['quantity']}' />", $cart_item_key);
                                     }
 
                                     else {
@@ -300,7 +304,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                         <?php if (!is_user_logged_in()): ?>
                             <tr class="info_tr">
 
-                                <th class="FName info_th"><?php printf( __('First Name', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" required="required"></abbr>
+                                <th class="FName info_th"><?php printf( __('First Name', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" ></abbr>
                                 </th>
 
 
@@ -311,7 +315,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                     /></td>
                             </tr>
                             <tr class="info_tr">
-                                <th class="LName  info_th"><?php printf( __('Last Name', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" required="required"></abbr>
+                                <th class="LName  info_th"><?php printf( __('Last Name', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" ></abbr>
                                 </th>
 
                             </tr>
@@ -323,7 +327,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             </tr>
                             <tr class="info_tr">
 
-                                <th class="email  info_th"><?php printf( __('Email', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" required="required"></abbr></th>
+                                <th class="email  info_th"><?php printf( __('Email', 'woo-rfq-for-woocommerce')); ?> <abbr class="required" ></abbr></th>
 
                             </tr>
 
@@ -371,7 +375,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_country_hide','no')==='no'): ?>
                                 <tr class="info_tr">
-                                    <th colspan="2" class="country info_th" style="padding-top:10px"><?php printf( __('Country', 'woo-rfq-for-woocommerce')); ?><abbr class="required" required="required"  id="rfq_billing_country_label"></abbr></th>
+                                    <th colspan="2" class="country info_th" style="padding-top:10px"><?php printf( __('Country', 'woo-rfq-for-woocommerce')); ?><abbr class="required"  id="rfq_billing_country_label"></abbr></th>
 
                                 </tr>
 
@@ -411,7 +415,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                                 <tr class="info_tr">
 
-                                    <th class="info_th" style="padding-top:10px"><?php printf( __('State', 'woo-rfq-for-woocommerce')); ?><abbr class="required" required="required" id="rfq_state_select_label"></abbr></th>
+                                    <th class="info_th" style="padding-top:10px"><?php printf( __('State', 'woo-rfq-for-woocommerce')); ?><abbr class="required"  id="rfq_state_select_label"></abbr></th>
 
 
                                 </tr>
@@ -668,15 +672,9 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                   jQuery('#rfq_state_select').attr('required',false);                 
      }    
 ";
-
-
-
-                echo "<div class='gpls_script' style='display: none'><script> " . $script . '</script></div>';
-
-
+                echo wp_kses("<div class='gpls_script' style='display: none'><script> " . $script . '</script></div>',wp_kses_allowed_html( 'post' ));
 
                 ?>
-
 
             </div>
 
@@ -690,7 +688,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
     <div class="woo_rfq_bottom_html_desc" >
         <?php
         do_action('gpls_woo_rfq_request_page_bottom_html_desc');
-
+        // phpcs:enable
 
         ?>
     </div>

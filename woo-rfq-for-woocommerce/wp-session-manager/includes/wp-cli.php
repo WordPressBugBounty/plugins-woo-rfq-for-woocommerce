@@ -126,7 +126,7 @@ if($session_type === "php_session"){
          * @param array $args
          * @param array $assoc_args
          */
-        public function generate($args, $assoc_args)
+       /* public function generate($args, $assoc_args)
         {
             $count = absint($args[0]);
             $date = isset($assoc_args['expires']) ? $assoc_args['expires'] : null;
@@ -139,7 +139,7 @@ if($session_type === "php_session"){
             }
 
             $notify->finish();
-        }
+        }*/
 
         /**
          * Free up memory

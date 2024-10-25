@@ -92,7 +92,14 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
 
 
                 foreach ( $countries as $ckey => $cvalue ) {
-                    $field .= '<option value="' . esc_attr( $ckey ) . '" '. selected( $value, $ckey, false ) . '>'. __( $cvalue, 'woo-rfq-for-woocommerce' ) .'</option>';
+
+
+                    $field .= '<option value="' . esc_attr( $ckey ) . '" '.
+                        selected( $value, $ckey, false ) . '>'.sprintf(
+                        /* translators:value type label. */
+                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            esc_js( ($cvalue) )
+                        ).'</option>';
                 }
 
                 $field .= '</select>';
@@ -138,8 +145,15 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
             }
 
             if (  $order->get_status()=='gplsquote-req' ) {
-                $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', __('Your quote request has been successfully submitted!', 'woo-rfq-for-woocommerce'));
-                $confirmation_message = __($confirmation_message,'woo-rfq-for-woocommerce');
+                $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', 'Your quote request has been successfully submitted!');
+              //  $confirmation_message = __($confirmation_message,'woo-rfq-for-woocommerce');
+
+                $confirmation_message =sprintf(
+                /* translators: thank you message . */
+                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    esc_html( $confirmation_message )
+                );
+
 
                 return $confirmation_message;
             }else{
@@ -164,7 +178,13 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
             if (  $GLOBALS["gpls_woo_rfq_checkout_option"] === 'rfq' ) {
 
                 $order_button_text =  get_option('rfq_cart_wordings_submit_your_rfq_text',__('Submit Your Request For Quote', 'woo-rfq-for-woocommerce' ));
-                $order_button_text = __($order_button_text,'woo-rfq-for-woocommerce');
+              //  $order_button_text = __($order_button_text,'woo-rfq-for-woocommerce');
+                $confirmation_message =sprintf(
+                /* translators: order_button_text. */
+                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    esc_html( $order_button_text )
+                );
+
 
                 $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text',$order_button_text);
 

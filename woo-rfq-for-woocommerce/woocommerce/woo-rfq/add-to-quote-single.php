@@ -11,17 +11,18 @@ if (($in_rfq == true) && isset($link_to_rfq_page)) {
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-    echo $view_rfq_cart_button;
+    echo wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' ));
 
 }else{
     $view_rfq_cart_button = "<a class='rfqcart-link' style='display:none !important;text-align: center' href='" . $link_to_rfq_page . "'>" . $view_your_cart_text . "</a>";
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-    echo $view_rfq_cart_button;
+      echo wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' ));
 }
 
-echo '<div style="clear:both"></div>';
+echo wp_kses('<div style="clear:both"></div>',wp_kses_allowed_html( 'post' ));
+// phpcs:disable
 
 $single_add_to_cart_button = "
                 <button type='submit' name='add-to-cart'                   
@@ -33,14 +34,17 @@ $single_add_to_cart_button = "
                 <input type='hidden' value='-1' name='rfq_product_id' id='rfq_product_id'/>
                 <input type='hidden'  name='rfq_single_product' id='rfq_product_id'/>";
 
-$single_add_to_cart_button = apply_filters('gpls_woo_rfq_single_add_to_cart_button', $single_add_to_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
+$single_add_to_cart_button = apply_filters('gpls_woo_rfq_single_add_to_cart_button',
+    $single_add_to_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
 echo $single_add_to_cart_button;
-echo $rfq_product_script;
+//"<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script,array(
+//    'script' => array(),'alert'=>array(),'jQuery'=>array()
+//)) . '</script></div>'
+echo "<div class='gpls_script' style='display: none'><script>"
+    .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) .'</script></div>';
 
-
-
-
+// phpcs:enable
 ?>
 
 

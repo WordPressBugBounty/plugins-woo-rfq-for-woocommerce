@@ -36,8 +36,12 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
             if ($option['id'] == 'settings_gpls_woo_rfq_revert_to_classic') {
 
-                if (isset($_POST['settings_gpls_woo_rfq_revert_to_classic'])) {
+                if (isset($_POST['settings_gpls_woo_rfq_revert_to_classic'], $_REQUEST['_wpnonce'])
+                    && wp_verify_nonce( sanitize_key(wp_unslash( $_REQUEST['_wpnonce'] )), 'woocommerce-settings' ) ) {
                    // add_action('admin_notices', array($this, 'settings_gpls_woo_rfq_revert_to_classic_notice'));
+
+
+
 
                     $cart_page_id=get_option( 'woocommerce_cart_page_id' );
 
@@ -81,8 +85,8 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
             <div class="notice error my-acf-notice is-dismissible">
 
 
-              <?php printf(__('<br />Cart and Checkout pages have been reverted to classic cart and checkout using shortcodes.<br /><br />
-              ', 'woo-rfq-for-woocommerce'), '<span style="color: green; font-weight: bold">', '</span>'); ?>
+              <?php printf(wp_kses_post(__('<br />Cart and Checkout pages have been reverted to classic cart and checkout using shortcodes.<br /><br />
+              ', 'woo-rfq-for-woocommerce'), '<span style="color: green; font-weight: bold">', '</span>')); ?>
 
 
 
@@ -157,7 +161,14 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
             <tr valign="top" >
 
-                <td class="forminp forminp-<?php echo sanitize_title($value['type']) ?>">
+                <td class="forminp forminp-<?php
+                $value_type =sprintf(
+                /* translators:value type label. */
+                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    esc_html( sanitize_title($value['default']) )
+                );
+
+                esc_html($value_type); ?>">
 
 
                     <table style="background:white; width:100%; min-width:800px">
@@ -177,36 +188,27 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
                                                         <li class="plus_options_li" style="margin-top: 15px;">
                                                             <div>
-                                                                <span class="plus_options-header"> <?php echo __('Available in the Plus Version:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                                <span class="plus_options-header"> <?php echo esc_html__('Available in the Plus Version:', 'woo-rfq-for-woocommerce'); ?></span>
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Buy or request a quote at woocommerce checkout', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Allow the choice to purchase or request a quote at WooCommerce checkout.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php  esc_html_e('Buy or request a quote at woocommerce checkout', 'woo-rfq-for-woocommerce') ?></strong>:
+                                                                <?php esc_html_e('Allow the choice to purchase or request a quote at WooCommerce checkout.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Buy or request a quote based on items in the cart', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('If the cart contains a "quote item", then customer can only request a quote.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Buy or request a quote based on items in the cart', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('If the cart contains a "quote item", then customer can only request a quote.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Enable role based price visibility and checkout options at WooCommerce checkout:', 'woo-rfq-for-woocommerce') ?></strong>
-
-                                                            </div>
-                                                        </li>
-
-
-                                                        <li class="plus_options_li">
-                                                            <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Bulk action for stores with large number of products:', 'woo-rfq-for-woocommerce') ?></strong>
-
-                                                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('Bulk enable/disable quote items, "Hide Add to Cart", "Hide Price"  by category.', 'woo-rfq-for-woocommerce'); ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Enable role based price visibility and checkout options at WooCommerce checkout:', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
@@ -214,26 +216,36 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Use Google ReCAPTCHA for quote request:', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Bulk action for stores with large number of products:', 'woo-rfq-for-woocommerce') ?></strong>
+
+                                                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php esc_html_e('Bulk enable/disable quote items, "Hide Add to Cart", "Hide Price"  by category.', 'woo-rfq-for-woocommerce'); ?>
+
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="plus_options_li">
+                                                            <div>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Use Google ReCAPTCHA for quote request:', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Allow visitors to pay for an order without having to log on first (guest pay).', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Allow visitors to pay for an order without having to log on first (guest pay).', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Enable price visibility by IP address.', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Enable price visibility by IP address.', 'woo-rfq-for-woocommerce') ?></strong>
 
 
                                                             </div>
                                                         </li>
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
@@ -244,7 +256,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                                         <li class="plus_options_li plus_large">
                                                             <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                                       class="get_plus"
-                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php echo __('Get Quote Request Plus!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php echo esc_html__('Get Quote Request Plus For WooCommerce!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                             </div>
                                                         </li>
 
@@ -280,35 +292,35 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
                                                         <li class="plus_options_li" style="margin-top: 15px;">
                                                             <div>
-                                                                <span class="plus_options-header"> <?php echo __('Available in the Cart & Quote to PDF:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                                <span class="plus_options-header"> <?php esc_html_e('Available in the Cart & Quote to PDF For WooCommerce :', 'woo-rfq-for-woocommerce'); ?></span>
                                                             </div>
 
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('PDF Attachments', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Include a PDF version of the quote to in the quote email', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('PDF Attachments', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('Include a PDF version of the quote to in the quote email', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('WooCommerce cart to Quote', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Export the cart to a PDF download and optionally create a quote request.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('WooCommerce cart to Quote', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('Export the cart to a PDF download and optionally create a quote request.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Include a custom form with the WooCommerce cart to Quote:', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Collect needed information to prepare a quote for the customer.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Include a custom form with the WooCommerce cart to Quote:', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('Collect needed information to prepare a quote for the customer.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
@@ -319,7 +331,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                                         <li class="plus_options_li plus_large">
                                                             <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                                       class="get_plus"
-                                                                                                      href="https://neahplugins.com/product/np-quote-request-woocommerce-email-cart-pdf/"><?php echo __('Try cart & quote to PDF for free!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                                      href="https://neahplugins.com/product/np-quote-request-woocommerce-email-cart-pdf/"><?php esc_html_e('Try cart & quote to PDF for free!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                             </div>
                                                         </li>
 
@@ -356,43 +368,43 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
                                                         <li class="plus_options_li" style="margin-top: 15px;">
                                                             <div>
-                                                                <span class="plus_options-header"> <?php echo __('Available in File Upload Add-on:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                                <span class="plus_options-header"> <?php esc_html_e('Available in File Upload Add-on:', 'woo-rfq-for-woocommerce'); ?></span>
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('File Uploads:', 'woo-rfq-for-woocommerce') ?></strong>:
-                                                                <?php _e('Allow your customers to upload documents that are linked to quote requests or orders.', 'woo-rfq-for-woocommerce') ?>
-
-                                                            </div>
-                                                        </li>
-
-                                                        <li class="plus_options_li">
-                                                            <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Google ReCAPTCHA:', 'woo-rfq-for-woocommerce') ?></strong>: <?php _e('Optionally enable Google ReCAPTCHA for file uploads.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('File Uploads:', 'woo-rfq-for-woocommerce') ?></strong>:
+                                                                <?php esc_html_e('Allow your customers to upload documents that are linked to quote requests or orders.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Allow upload in multiple places:', 'woo-rfq-for-woocommerce') ?>
-                                                                </strong>: <?php _e('Quote Request page, checkout page, my accounts page, thank you page or at product level.', 'woo-rfq-for-woocommerce') ?>
-
-                                                            </div>
-                                                        </li>
-                                                        <li class="plus_options_li">
-                                                            <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('Centralized File Repository:', 'woo-rfq-for-woocommerce') ?>
-                                                                </strong>: <?php _e('File repository to view and manage the uploaded files.', 'woo-rfq-for-woocommerce') ?>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Google ReCAPTCHA:', 'woo-rfq-for-woocommerce') ?></strong>: <?php esc_html_e('Optionally enable Google ReCAPTCHA for file uploads.', 'woo-rfq-for-woocommerce') ?>
 
                                                             </div>
                                                         </li>
 
                                                         <li class="plus_options_li">
                                                             <div>
-                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php _e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Allow upload in multiple places:', 'woo-rfq-for-woocommerce') ?>
+                                                                </strong>: <?php esc_html_e('Quote Request page, checkout page, my accounts page, thank you page or at product level.', 'woo-rfq-for-woocommerce') ?>
+
+                                                            </div>
+                                                        </li>
+                                                        <li class="plus_options_li">
+                                                            <div>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('Centralized File Repository:', 'woo-rfq-for-woocommerce') ?>
+                                                                </strong>: <?php esc_html_e('File repository to view and manage the uploaded files.', 'woo-rfq-for-woocommerce') ?>
+
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="plus_options_li">
+                                                            <div>
+                                                                <span class="bulletpoint">&#8226;</span>&nbsp;<strong> <?php esc_html_e('And more!', 'woo-rfq-for-woocommerce') ?></strong>
 
                                                             </div>
                                                         </li>
@@ -403,7 +415,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                                         <li class="plus_options_li plus_large">
                                                             <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                                       class="get_plus"
-                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-upload-files/"><?php echo __('GET File Upload!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-upload-files/"><?php esc_html_e('GET File Upload For WooCommerce!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                             </div>
                                                         </li>
 
@@ -705,7 +717,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'css' => 'width:400px'
                             ),
                             'rfq_cart_wordings_quote_request_currently_empty' => array(
-                                'name' => '12- Normal Checkout- ' . __('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
+                                'name' => '12- Normal Checkout- ' . esc_html__('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => '',
                                 'default' => __('Your Quote Request List is Currently Empty.', 'woo-rfq-for-woocommerce'),

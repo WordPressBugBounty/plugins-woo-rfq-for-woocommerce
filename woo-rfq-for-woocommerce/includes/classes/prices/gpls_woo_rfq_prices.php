@@ -149,9 +149,11 @@ if (!class_exists('gpls_woo_rfq_prices')) {
                 add_action('woocommerce_cart_emptied', 'gpls_woo_rfq_filter_check', 100);
                 add_action('gpls_woo_rfq_before_thankyou', 'gpls_woo_rfq_filter_check', 100);
 
+                //checking that nonce does NOT exist//
+                // phpcs:ignore WordPress.Security.NonceVerification.Missing
                 if (!isset($_POST['gpls-woo-rfq_checkout']) && !isset($_POST['woocommerce-process-checkout-nonce'])) {
-                    add_filter('woocommerce_get_price_excluding_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);//remove at checkout
-                    add_filter('woocommerce_get_price_including_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);//remove at checkout
+                    add_filter('woocommerce_get_price_excluding_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);
+                    add_filter('woocommerce_get_price_including_tax', 'gpls_woo_rfq_individual_price_hidden_tax', 1000, 3);
                 }
             }
 

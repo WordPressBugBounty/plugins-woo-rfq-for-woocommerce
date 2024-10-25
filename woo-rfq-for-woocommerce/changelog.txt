@@ -1,4 +1,6 @@
 == Changelog ==
+= 1.9.168 10/25/2024 =
+fixes using the plugin check
 
 = 1.9.167 10/11/2024 =
 fix the problem with the warning ['cart'] and test WC 9.3.3

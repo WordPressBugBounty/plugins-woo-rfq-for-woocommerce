@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.167
+ * Version: 1.9.168
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -44,9 +44,15 @@ if (!defined('gpls_woo_rfq_DIR')) {
     DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
     DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
-    $settings_gpls_woo_inquire_text_option = __(get_option('settings_gpls_woo_inquire_text_option'), 'woo-rfq-for-woocommerce');
+    $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
 
-    DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
+    $settings_gpls_woo_inquire_text_option =sprintf(
+    /* translators:add to cart again label. */
+        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+        esc_html( $settings_gpls_woo_inquire_text_option )
+    );
+
+    DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
 
     $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
     $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';
@@ -158,7 +164,8 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <div id="message" class="error notice notice-success is-dismissible"
                      style="font-size: medium;font-weight: 500;color: black">
 
-                    <p>Please upgrade NP Quote Request for WooCommerce Plus to version: <?php echo $rfqtk_version; ?>.</p>
+                    <p>Please upgrade NP Quote Request for WooCommerce Plus to version:
+                        <?php echo esc_js($rfqtk_version); ?>.</p>
                 </div>
             <?php endif; ?>
                 <?php
@@ -178,7 +185,8 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                 <div id="message" class="error notice notice-success is-dismissible"
                      style="font-size: medium;font-weight: 500;color: black">
 
-                    <p>Please upgrade NP Quote Request for WooCommerce – PDF to version: <?php echo $pdf_version; ?>.</p>
+                    <p>Please upgrade NP Quote Request for WooCommerce – PDF to version:
+                        <?php echo esc_js($pdf_version); ?>.</p>
                 </div>
             <?php endif; ?>
                 <?php
@@ -200,7 +208,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
                      style="font-size: medium;font-weight: 500;color: black">
 
                     <p>Please upgrade NP Quote Request for WooCommerce – File Upload to
-                        version <?php echo $upload_version; ?>.</p>
+                        version <?php echo esc_js($upload_version); ?>.</p>
                 </div>
             <?php endif; ?>
                 <?php
@@ -215,7 +223,7 @@ if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
              style="font-size: larger;font-weight: 600;color: black">
             <form method="get">
 
-                <p> Check <a href="<?php echo $checkagain_url ?>" class="btn btn-primary">here</a> and click on "check
+                <p> Check <a href="<?php echo esc_js($checkagain_url) ?>" class="btn btn-primary">here</a> and click on "check
                     again" in the update page for automatic update
                     or download from <a target="_blank" href="https://neahplugins.com/my-account/api-downloads//">downloads</a><br/>
                     <span style="color:black">to ensure correct functionality and compatibility with the NP Quote Request for WooCommerce</span>.
@@ -352,7 +360,7 @@ class GPLS_WOO_RFQ
         $this->gpls_woo_rfq_init();
         //emails
 
-
+       // phpcs:ignore WordPress.Security.NonceVerification.Missing
         if (isset($_POST['gpls-woo-rfq_checkout']) && $_POST['gpls-woo-rfq_checkout'] == "true") {
 
             add_action('wp_loaded', array($this, 'check_for_rfq_checkout'), 1000);
@@ -499,6 +507,7 @@ class GPLS_WOO_RFQ
 
     public function gpls_woo_rfq_enqueue_admin_css()
     {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (is_admin() && isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'
 
         ) {
@@ -508,7 +517,7 @@ class GPLS_WOO_RFQ
             wp_enqueue_style('gpls_woo_rfq_plus_css_admin', $url_css, array(), wp_rand(10, 100000));
 
         }
-
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (is_admin() && isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'
             && !class_exists('GPLS_WOO_RFQ_PLUS')
 
@@ -642,14 +651,32 @@ class GPLS_WOO_RFQ
 
 
         $status_label = __('Quote Request', 'woo-rfq-for-woocommerce');
+
         register_post_status('wc-gplsquote-req', array(
-            'label' => $status_label,
-            'public' => true,
+            'label' => __( 'Quote Request', 'woo-rfq-for-woocommerce' ),
+            'public' => false,
             'exclude_from_search' => false,
+
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop($status_label . '<span class="count">(%s)</span>', $status_label . ' <span class="count">(%s)</span>')
-        ));
+                /* translators: %s: number of orders */
+                'label_count'               => _n_noop( 'Quote Request <span class="count">(%s)</span>', 'Quote Request <span class="count">(%s)</span>', 'woo-rfq-for-woocommerce' )
+        )
+        );
+
+
+        //'wc-processing' => array(
+        //					'label'                     => _x( 'Processing', 'Order status', 'woocommerce' ),
+        //					'public'                    => false,
+        //					'exclude_from_search'       => false,
+        //					'show_in_admin_all_list'    => true,
+        //					'show_in_admin_status_list' => true,
+        //					/* translators: %s: number of orders */
+        //					'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>', 'woocommerce' ),
+        //				),
+
+
+        // html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
 
         add_filter('wc_order_statuses', array($this, 'gpls_rfq_add_quote_request_to_order_statuses'), 1000);
         //  $this->setup_email();
@@ -729,11 +756,18 @@ class GPLS_WOO_RFQ
 
 
         $status_label = get_option('settings_gpls_woo_rfq_quote_request_label', 'Quote Request');
-        $status_label = __($status_label, 'woo-rfq-for-woocommerce');
+       // $status_label = __($status_label, 'woo-rfq-for-woocommerce');
+
 
         if ($status_label == '') {
             $status_label = __('Quote Request', 'woo-rfq-for-woocommerce');
         }
+
+        $status_label =sprintf(
+    /* translators:order status label. */
+        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+        esc_html( $status_label )
+    );
 
         $order_statuses["wc-gplsquote-req"] = $status_label;
 
@@ -1089,10 +1123,17 @@ class GPLS_WOO_RFQ
                     $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
 
-                    $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+                    // $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
 
-                    if ((strtolower(parse_url(trim($rfq_page))['path'])) ===
-                        (strtolower(parse_url(trim($actual_link))['path']))) {
+                   // $actual_link = get_site_url() . $_SERVER['REQUEST_URI'];
+
+                    if(isset($_SERVER['REQUEST_URI'])){
+                        $actual_link = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
+
+                    }
+
+                    if ((strtolower(wp_parse_url(trim($rfq_page))['path'])) ===
+                        (strtolower(wp_parse_url(trim($actual_link))['path']))) {
 
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
@@ -1136,8 +1177,16 @@ class GPLS_WOO_RFQ
             $is_product_page = false;
 
 
-            $url = get_site_url() . $_SERVER['REQUEST_URI'];
-            $path = parse_url($url, PHP_URL_PATH);
+            global $wp;
+          //  $url = get_site_url() . $_SERVER['REQUEST_URI'];
+
+            if(isset($_SERVER['REQUEST_URI'])){
+                $url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
+
+            }
+
+
+            $path = wp_parse_url($url, PHP_URL_PATH);
             $path_array = explode("/", trim($path, "/"));
 
 
@@ -1313,12 +1362,16 @@ class GPLS_WOO_RFQ
                 if (is_plugin_active('rfqtk/rfqtk.php')) {
 
                     //  $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                    $url = get_site_url() . $_SERVER['REQUEST_URI'];
+
+
 
                     $has_string = strpos($url, 'order-received');
+                     //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    if ($has_string !== false && (isset($_REQUEST['key']))//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                            && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0) //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    {
 
-                    if ($has_string !== false && strpos($_REQUEST['key'], 'wc_order_', 0) === 0) {
-
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                         if ((gpls_woo_rfq_is_checkout_page())
                             && (isset($GLOBALS["gpls_woo_rfq_checkout_option"]) && $GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq")) {
 
@@ -1389,7 +1442,7 @@ class GPLS_WOO_RFQ
     ";
 
 
-            echo "<div class='gpls_script' style='display: none'><script> " . $rfq_product_script . '</script></div>';
+            echo "<div class='gpls_script' style='display: none'><script> " . wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
 
 
             $rfq_product_script2 = "
@@ -1399,7 +1452,7 @@ jQuery(document).ajaxComplete(function (event, xhr, options) {
 });";
 
 
-            echo "<div class='gpls_script' style='display: none'><script> " . $rfq_product_script2 . '</script></div>';
+            echo "<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script2,wp_kses_allowed_html( 'post' )) . '</script></div>';
 
 
             if (function_exists('is_wc_endpoint_url')) {
@@ -1416,7 +1469,7 @@ jQuery( '.wc-item-meta-label' ).hide();
 jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 } ); ";
 
-                        echo "<div class='gpls_script' style='display: none'><script> " . $rfq_product_script3 . '</script></div>';
+                        echo "<div class='gpls_script' style='display: none'><script> " . wp_kses($rfq_product_script3,wp_kses_allowed_html( 'post' )) . '</script></div>';
 
                     }
 
@@ -1458,9 +1511,15 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
             DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
             DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
-            $settings_gpls_woo_inquire_text_option = __(get_option('settings_gpls_woo_inquire_text_option'), 'woo-rfq-for-woocommerce');
+            $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
 
-            DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
+            $settings_gpls_woo_inquire_text_option =sprintf(
+            /* translators:request a quote label. */
+                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                esc_html( $settings_gpls_woo_inquire_text_option )
+            );
+
+            DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
 
             $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
             $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';
@@ -1562,7 +1621,14 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 
         $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
-        $link_to_rfq_page_url = $_SERVER['REQUEST_URI'];
+       // $link_to_rfq_page_url = $_SERVER['REQUEST_URI'];
+       
+
+        if(isset($_SERVER['REQUEST_URI'])){
+            $link_to_rfq_page_url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
+
+        }
+
 
         if ($link_to_rfq_page_url != false && isset($link_to_rfq_page_url)) {
 
@@ -1691,6 +1757,7 @@ function GPLS_WOO_RFQ_activation()
     $wpdb_collate = $wpdb->collate;
     $charset = $wpdb->charset;
 
+
     $str = "CREATE TABLE IF NOT EXISTS {$wpdb->base_prefix}npxyz2021_sessions (
      `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
      `option_name` varchar(191)  NOT NULL,
@@ -1703,10 +1770,13 @@ function GPLS_WOO_RFQ_activation()
      UNIQUE KEY `option_name` (`option_name`)
    )  CHARSET={$charset} COLLATE={$wpdb_collate};";
 
+// $result = $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions (`option_name`,
+// `option_value`,`expiration`,`misc_value`) VALUES (%s, %s,%s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` =
+// VALUES(`option_value`),`expiration` = {$this->expires},`misc_value` = 'phpsid' ", $option, $serialized_value, $this->expires, 'phpsid'));
 
-
-    $wpdb->query($str);
-
+  //  $wpdb->query($str);
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($str);
 }
 
 $table_fixed = get_option('settings_gpls_woo_fix21487m23', 'no');
@@ -1722,3 +1792,10 @@ if ($table_fixed == 'no')
 
 //$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
 //$order = $order_factory->get_order(sanitize_text_field(($_REQUEST['order_id'])));
+//$string = sprintf( __('You have %d tacos', 'plugin-domain'), $number );
+//
+// __( 'A string to be translated', 'text domain' );
+//
+//                        /* translators: %1$s is replaced with "string" */
+//                        __( 'A %1$s to be translated', 'text domain' );
+//                        Strings can be checked for placeholders using the following regex: %(\d+\$(?:\d+)?)?[bcdefgosuxEFGX].
