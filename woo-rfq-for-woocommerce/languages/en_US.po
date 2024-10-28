@@ -1,15 +1,15 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: RFQ-ToolKit for WooCommerce\n"
-"POT-Creation-Date: 2024-10-28 15:26-0400\n"
-"PO-Revision-Date: 2016-11-16 11:45-0500\n"
+"POT-Creation-Date: 2024-10-28 15:58-0400\n"
+"PO-Revision-Date: 2024-10-28 16:01-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.13\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: woo-rfq-for-woocommerce.php\n"
@@ -35,8 +35,8 @@ msgstr ""
 
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:42
 msgid ""
-"The following is a suggested policy text. Please consult legal professional and "
-"modify for your use case as needed.\n"
+"The following is a suggested policy text. Please consult legal professional "
+"and modify for your use case as needed.\n"
 "                      ."
 msgstr ""
 
@@ -54,26 +54,26 @@ msgstr ""
 
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:51
 msgid ""
-"We also use cookies to keep track of your quote request while you’re browsing "
-"our site."
+"We also use cookies to keep track of your quote request while you’re "
+"browsing our site."
 msgstr ""
 
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:53
 msgid ""
-"Our team have access to the information you provide while submitting your quote "
-"request to offer you the best quote."
+"Our team have access to the information you provide while submitting your "
+"quote request to offer you the best quote."
 msgstr ""
 
 #: includes/classes/admin/privacy/gpls_woo_rfq_privacy.php:55
 msgid ""
-"Such information include Quote request details such as products added, custom "
-"fields, date, name, address and email."
+"Such information include Quote request details such as products added, "
+"custom fields, date, name, address and email."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:88
 msgid ""
-"<br />Cart and Checkout pages have been reverted to classic cart and checkout "
-"using shortcodes.<br /><br />\n"
+"<br />Cart and Checkout pages have been reverted to classic cart and "
+"checkout using shortcodes.<br /><br />\n"
 "              "
 msgstr ""
 
@@ -151,9 +151,9 @@ msgstr ""
 #: includes/classes/gpls_woo_rfq_functions.php:3097
 #: includes/classes/gpls_woo_rfq_functions.php:3106
 #: includes/classes/gpls_woo_rfq_functions.php:3124
-#: includes/classes/gpls_woo_rfq_functions.php:3145 woo-rfq-for-woocommerce.php:51
-#: woo-rfq-for-woocommerce.php:781 woo-rfq-for-woocommerce.php:1531
-#: woo-rfq-includes/woo-rfq-functions.php:1173
+#: includes/classes/gpls_woo_rfq_functions.php:3145
+#: woo-rfq-for-woocommerce.php:51 woo-rfq-for-woocommerce.php:781
+#: woo-rfq-for-woocommerce.php:1531 woo-rfq-includes/woo-rfq-functions.php:1173
 #: woo-rfq-includes/woo-rfq-functions.php:1627
 #: woo-rfq-includes/woo-rfq-functions.php:1721
 #: woo-rfq-includes/woo-rfq-functions.php:1739
@@ -180,7 +180,8 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:198
 #: woo-rfq-includes/woo-rfq-functions.php:956
-msgid "Allow the choice to purchase or request a quote at WooCommerce checkout."
+msgid ""
+"Allow the choice to purchase or request a quote at WooCommerce checkout."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:205
@@ -191,13 +192,15 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:205
 #: woo-rfq-includes/woo-rfq-functions.php:963
 msgid ""
-"If the cart contains a \"quote item\", then customer can only request a quote."
+"If the cart contains a \"quote item\", then customer can only request a "
+"quote."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:211
 #: woo-rfq-includes/woo-rfq-functions.php:969
 msgid ""
-"Enable role based price visibility and checkout options at WooCommerce checkout:"
+"Enable role based price visibility and checkout options at WooCommerce "
+"checkout:"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:219
@@ -219,7 +222,8 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:235
 #: woo-rfq-includes/woo-rfq-functions.php:993
 msgid ""
-"Allow visitors to pay for an order without having to log on first (guest pay)."
+"Allow visitors to pay for an order without having to log on first (guest "
+"pay)."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:241
@@ -255,7 +259,8 @@ msgid "WooCommerce cart to Quote"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:309
-msgid "Export the cart to a PDF download and optionally create a quote request."
+msgid ""
+"Export the cart to a PDF download and optionally create a quote request."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:316
@@ -280,8 +285,8 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:378
 msgid ""
-"Allow your customers to upload documents that are linked to quote requests or "
-"orders."
+"Allow your customers to upload documents that are linked to quote requests "
+"or orders."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:385
@@ -339,25 +344,25 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:502
 msgid ""
 "RFQ turns WooCommerce shopping cart into a request for quote.<br /> \n"
-"         In premium version there are additional options to buy or request the "
-"whole cart as a quote at WooCommerce checkout.<br />\n"
+"         In premium version there are additional options to buy or request "
+"the whole cart as a quote at WooCommerce checkout.<br />\n"
 "          RFQ option provides very high compatibility with other third party "
 "plugins and products.<br />\n"
-"           Normal option allows checking out normally or request a quote using a "
-"quote cart."
+"           Normal option allows checking out normally or request a quote "
+"using a quote cart."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:506
 msgid ""
-"Normal Checkout: If normal checkout, prices will be shown except for selected "
-"products<br />\n"
+"Normal Checkout: If normal checkout, prices will be shown except for "
+"selected products<br />\n"
 " (managed in product setup-advanced tab). \n"
-" Customers can only inquire about the products that you specify in product setup "
-"in the advanced tab or in the products list in admin. \n"
-"<br><br>RFQ Checkout: In RFQ mode the plugin is integrated with the WooCommerce "
-"cart and<br />\n"
-" the entire cart is submitted as a quote request. All the prices are hidden and "
-"at checkout the option is to submit a quote request. <br /><br /> \n"
+" Customers can only inquire about the products that you specify in product "
+"setup in the advanced tab or in the products list in admin. \n"
+"<br><br>RFQ Checkout: In RFQ mode the plugin is integrated with the "
+"WooCommerce cart and<br />\n"
+" the entire cart is submitted as a quote request. All the prices are hidden "
+"and at checkout the option is to submit a quote request. <br /><br /> \n"
 "  "
 msgstr ""
 
@@ -367,9 +372,9 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:521
 msgid ""
-"Applicable to RFQ checkout option only.<br /> Prices are shown for products but "
-"checkout is still a request for quote. Premium version show prices in the email "
-"and thank you page also."
+"Applicable to RFQ checkout option only.<br /> Prices are shown for products "
+"but checkout is still a request for quote. Premium version show prices in "
+"the email and thank you page also."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:528
@@ -378,8 +383,8 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:530
 msgid ""
-"Applicable to normal checkout option only.<br /> Prices are shown on the site "
-"but customer can inquire or checkout with selected products.< br />\n"
+"Applicable to normal checkout option only.<br /> Prices are shown on the "
+"site but customer can inquire or checkout with selected products.< br />\n"
 "                            This allows customers to checkout using the "
 "published prices or to request a personalized quote.  Premium version show "
 "prices in the email and thank you page also"
@@ -404,25 +409,26 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:554
 msgid ""
 "Hide Prices From Visitor. Visitors who are not logged in can only submit a "
-"quotes request. <br />Enable guest checkout so the customers can submit requests "
-"as guest"
+"quotes request. <br />Enable guest checkout so the customers can submit "
+"requests as guest"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:569
 msgid ""
-"Allow checkout without payment at WooCommerce checkout. DOES NOT CREATE A QUOTE "
-"REQUEST"
+"Allow checkout without payment at WooCommerce checkout. DOES NOT CREATE A "
+"QUOTE REQUEST"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:571
 msgid ""
-"No Payment Checkout: Customer can complete an order at checkout without payment."
-"<br />\n"
-"   Admin can then optionally covert the order to a quote request and email the "
-"customer.<br />\n"
+"No Payment Checkout: Customer can complete an order at checkout without "
+"payment.<br />\n"
+"   Admin can then optionally covert the order to a quote request and email "
+"the customer.<br />\n"
 "  If this option is selected, Customer can checkout without payment.<br />\n"
-"   The order status is pending and admin recieves a new order notification<br /> "
-"about a new order with \"no payment\" in the subject and heading of order "
+"   The order status is pending and admin recieves a new order "
+"notification<br /> about a new order with \"no payment\" in the subject and "
+"heading of order "
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:579
@@ -447,7 +453,8 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:625
 msgid ""
-"Choose the text for \"Add to Cart\" - (Change to Add To Quote in RFQ Checkout)"
+"Choose the text for \"Add to Cart\" - (Change to Add To Quote in RFQ "
+"Checkout)"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:626
@@ -638,7 +645,8 @@ msgid "Show Link To Quote Request Page At The Top of the Product Archives Page"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:788
-msgid "Show Link To Quote Request Page At The Bottom of the Product Archives Page"
+msgid ""
+"Show Link To Quote Request Page At The Bottom of the Product Archives Page"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:795
@@ -663,32 +671,32 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:834
 msgid ""
-"<p>In the Normal Checkout mode, a default page called <i>Quote Request</i> is "
-"created to view the quote list. This page\n"
+"<p>In the Normal Checkout mode, a default page called <i>Quote Request</i> "
+"is created to view the quote list. This page\n"
 "                                            is only needed if in the Normal "
 "Checkout mode. (In RFQ mode, the WooCommerce cart\n"
 "                                           is used to display the items "
 "requested for quote.)</p>\n"
 "                                           <p><b>Exclude this page from page "
 "caching. \n"
-"                                           You can read more <a href=\"https://"
-"neahplugins.com/how-to-make-the-np-quote-plugin-work-with-page-caching/\" target="
-"\"_blank\" >How to make the NP Quote Plugin work with page caching plugins</a> </"
-"b></p>\n"
+"                                           You can read more <a href="
+"\"https://neahplugins.com/how-to-make-the-np-quote-plugin-work-with-page-"
+"caching/\" target=\"_blank\" >How to make the NP Quote Plugin work with page "
+"caching plugins</a> </b></p>\n"
 "                                           </b> You can modify the <i>Quote "
 "Request</i> page by modifying the \"rfq-cart.php\"\n"
-"                                            template in \"plugins/woo-rfq-for-"
-"woocommerce/woocommerce/woo-rfq/rfq-cart.php\".\n"
-"                                           Create the \"woo-rfq\" folder under "
-"\"your_child_theme/woocommerce\" and  Copy the \"rfq-cart.php\" file to the "
-"\"woo-rfq\" folder \n"
-"                                           under the WooCommerce directory in "
-"your child theme directory and modify it. \n"
+"                                            template in \"plugins/woo-rfq-"
+"for-woocommerce/woocommerce/woo-rfq/rfq-cart.php\".\n"
+"                                           Create the \"woo-rfq\" folder "
+"under \"your_child_theme/woocommerce\" and  Copy the \"rfq-cart.php\" file "
+"to the \"woo-rfq\" folder \n"
+"                                           under the WooCommerce directory "
+"in your child theme directory and modify it. \n"
 "                                           <b>You can read more <a href="
 "\"https://neahplugins.com/how-to-customize-the-quote-request-page/\" target="
 "\"_blank\" >\n"
-"                                           How to customize the quote request "
-"page</a></b>  <br /><br />\n"
+"                                           How to customize the quote "
+"request page</a></b>  <br /><br />\n"
 "                                           You can also use the short code "
 "<b>[gpls_woo_rfq_get_cart_sc]</b>  in your own page.</p>\n"
 "                                          \n"
@@ -723,8 +731,8 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:885
 msgid ""
 "Some Hosting providers do not allow PHP sessions.<br />\n"
-"                                 If there is a problem with items showing in the "
-"quote request page,<br /> changing the session method could help."
+"                                 If there is a problem with items showing in "
+"the quote request page,<br /> changing the session method could help."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:892
@@ -741,10 +749,10 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:906
 msgid ""
-"Number of days to keep items in the quote cart.<br /> Should be greater than 0.  "
-"Default is 1 day(24 hours). <br />\n"
-"                                Increase this if you want to keep items in the "
-"quote cart longer.<br /> Larger numbers take up more room in the database"
+"Number of days to keep items in the quote cart.<br /> Should be greater than "
+"0.  Default is 1 day(24 hours). <br />\n"
+"                                Increase this if you want to keep items in "
+"the quote cart longer.<br /> Larger numbers take up more room in the database"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:926
@@ -790,7 +798,8 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:957
 msgid ""
 ". This only matters when using normal checkout with prices showing.\n"
-"                                <br />Default position is before add to cart.\"."
+"                                <br />Default position is before add to cart."
+"\"."
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:975
@@ -799,8 +808,8 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:977
 msgid ""
-"Change \"reply to\" to the customer billing email in emails sent to admin for "
-"convenience."
+"Change \"reply to\" to the customer billing email in emails sent to admin "
+"for convenience."
 msgstr ""
 
 #: includes/classes/cart/gpls_woo_rfq_cart.php:1050
@@ -831,8 +840,8 @@ msgstr ""
 
 #: includes/classes/emails/class-wc-email-customer-rfq.php:30
 msgid ""
-"This is an quote request notification sent to customers containing their order "
-"details after quote request."
+"This is an quote request notification sent to customers containing their "
+"order details after quote request."
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-customer-rfq.php:64
@@ -875,7 +884,8 @@ msgid "Content Intro"
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-customer-rfq.php:245
-msgid "This controls the first paragrah contained within the email notification."
+msgid ""
+"This controls the first paragrah contained within the email notification."
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-customer-rfq.php:246
@@ -915,7 +925,8 @@ msgid ""
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-new-rfq.php:67
-msgid "{site_title} New customer quote request #({order_number}) on {order_date}"
+msgid ""
+"{site_title} New customer quote request #({order_number}) on {order_date}"
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-new-rfq.php:72
@@ -929,7 +940,8 @@ msgstr ""
 #: includes/classes/emails/class-wc-email-new-rfq.php:209
 #, php-format
 msgid ""
-"Enter recipients (comma separated) for this email. Defaults to <code>%s</code>."
+"Enter recipients (comma separated) for this email. Defaults to <code>%s</"
+"code>."
 msgstr ""
 
 #: includes/classes/emails/class-wc-email-rfq.php:76
@@ -1084,7 +1096,8 @@ msgid ""
 "You have received an request for a quote from %s. The request is as follows:"
 msgstr ""
 
-#: woocommerce/emails/admin-new-rfq.php:40 woocommerce/emails/customer-note.php:68
+#: woocommerce/emails/admin-new-rfq.php:40
+#: woocommerce/emails/customer-note.php:68
 #: woocommerce/emails/customer-rfq.php:45
 #: woocommerce/emails/plain/admin-new-rfq.php:40
 #: woocommerce/emails/plain/customer-note.php:68
@@ -1093,25 +1106,28 @@ msgstr ""
 msgid "Order #%s"
 msgstr ""
 
-#: woocommerce/emails/admin-new-rfq.php:54 woocommerce/emails/customer-note.php:75
+#: woocommerce/emails/admin-new-rfq.php:54
+#: woocommerce/emails/customer-note.php:75
 #: woocommerce/emails/customer-rfq.php:55
 #: woocommerce/emails/plain/admin-new-rfq.php:54
 #: woocommerce/emails/plain/customer-note.php:75
-#: woocommerce/emails/plain/customer-rfq.php:55 woocommerce/woo-rfq/rfq-cart.php:91
-#: woocommerce/woo-rfq/rfq-cart.php:153
+#: woocommerce/emails/plain/customer-rfq.php:55
+#: woocommerce/woo-rfq/rfq-cart.php:91 woocommerce/woo-rfq/rfq-cart.php:153
 msgid "Product"
 msgstr ""
 
-#: woocommerce/emails/admin-new-rfq.php:56 woocommerce/emails/customer-note.php:77
+#: woocommerce/emails/admin-new-rfq.php:56
+#: woocommerce/emails/customer-note.php:77
 #: woocommerce/emails/customer-rfq.php:56
 #: woocommerce/emails/plain/admin-new-rfq.php:56
 #: woocommerce/emails/plain/customer-note.php:77
-#: woocommerce/emails/plain/customer-rfq.php:56 woocommerce/woo-rfq/rfq-cart.php:92
-#: woocommerce/woo-rfq/rfq-cart.php:179
+#: woocommerce/emails/plain/customer-rfq.php:56
+#: woocommerce/woo-rfq/rfq-cart.php:92 woocommerce/woo-rfq/rfq-cart.php:179
 msgid "Quantity"
 msgstr ""
 
-#: woocommerce/emails/admin-new-rfq.php:58 woocommerce/emails/customer-note.php:80
+#: woocommerce/emails/admin-new-rfq.php:58
+#: woocommerce/emails/customer-note.php:80
 #: woocommerce/emails/customer-rfq.php:59
 #: woocommerce/emails/plain/admin-new-rfq.php:58
 #: woocommerce/emails/plain/customer-note.php:80
@@ -1138,8 +1154,8 @@ msgstr ""
 #: woocommerce/emails/customer-rfq.php:36
 #: woocommerce/emails/plain/customer-rfq.php:36
 msgid ""
-"Your request has been received and is now being reviewed. Your request details "
-"are shown below for your reference:"
+"Your request has been received and is now being reviewed. Your request "
+"details are shown below for your reference:"
 msgstr ""
 
 #: woocommerce/emails/plain/rfqtk-email-order-items.php:50
@@ -1191,8 +1207,8 @@ msgstr ""
 #: woocommerce/woo-rfq/account_password.php:8
 msgid ""
 "Hint: The password should be at least twelve characters long. To make it "
-"stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % "
-"^ & )."
+"stronger, use upper and lower case letters, numbers, and symbols like ! \" ? "
+"$ % ^ & )."
 msgstr ""
 
 #: woocommerce/woo-rfq/account_password.php:9
@@ -1206,6 +1222,11 @@ msgstr ""
 #: woocommerce/woo-rfq/account_password.php:16
 msgid "Create an account?"
 msgstr ""
+
+#: woocommerce/woo-rfq/add-to-quote-single.php:52
+#, php-format
+msgid "new test isxxxx %1$s"
+msgstr "new test really is nothing but isxxxx %1$s"
 
 #: woocommerce/woo-rfq/rfq-cart.php:129
 msgid "Remove this item"
@@ -1277,10 +1298,10 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"NP Quote Request for WooCommerce enables your customers to easily submit a quote "
-"request to your WooCommerce store. It is very flexible and can be used in a "
-"variety of store settings. NP Quote Request for WooCommerce enables you to "
-"generate leads and engage with your customers!"
+"NP Quote Request for WooCommerce enables your customers to easily submit a "
+"quote request to your WooCommerce store. It is very flexible and can be used "
+"in a variety of store settings. NP Quote Request for WooCommerce enables you "
+"to generate leads and engage with your customers!"
 msgstr ""
 
 #. Author of the plugin/theme

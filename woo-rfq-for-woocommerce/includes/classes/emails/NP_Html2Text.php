@@ -19,7 +19,7 @@
 //neahplugins
 //removed namespace
 //changed class name
-
+// phpcs:disable
 class NP_Html2Text
 {
     const ENCODING = 'UTF-8';
@@ -657,3 +657,4 @@ class NP_Html2Text
         return $rtn;
     }
 }
+// phpcs:disable

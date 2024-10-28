@@ -44,6 +44,9 @@ echo $single_add_to_cart_button;
 echo "<div class='gpls_script' style='display: none'><script>"
     .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) .'</script></div>';
 
+
+
+
 // phpcs:enable
 ?>
 

@@ -74,7 +74,9 @@ $margin_side = is_rtl() ? 'left' : 'right';
             'show_image' => true,
             'image_size' => array(128, 128),
             'plain_text' => $plain_text,
-            'show_prices' => $show_prices
+            'show_prices' => $show_prices,
+            'sent_to_admin' => true,
+            'hide_admin' => $hide_admin,
 
         )),wp_kses_allowed_html( 'post' ));
 

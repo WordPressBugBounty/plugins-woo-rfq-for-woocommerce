@@ -20,6 +20,7 @@ class WC_Email_New_RFQ extends WC_Email {
 	/**
 	 * Constructor
 	 */
+        // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
 	public function __construct() {
 
 		$this->id               = 'new_rfq';
@@ -212,11 +213,7 @@ ob_start();
 			'subject' => array(
 				'title'         => __( 'Subject', 'woo-rfq-for-woocommerce' ),
                 'description' => $placeholder_text,
-                'placeholder' =>  sprintf(
-                /* translators: subject . */
-                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
-                    esc_html( $this->get_default_subject() )
-                ),
+                'placeholder' => __($this->get_default_subject(), 'woo-rfq-for-woocommerce' ),
                 'css'         => 'width:600px',
 				'default'       => ''
 			),

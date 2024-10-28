@@ -152,7 +152,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
         public static function gpls_woo_rfq_more_options($value)
         {
-
+// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
             $option_value = get_option($value['id'], $value['default']);
 
             ?>
@@ -161,14 +161,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
             <tr valign="top" >
 
-                <td class="forminp forminp-<?php
-                $value_type =sprintf(
-                /* translators:value type label. */
-                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
-                    esc_html( sanitize_title($value['default']) )
-                );
-
-                esc_html($value_type); ?>">
+                <td class="forminp forminp-<?php echo sanitize_title($value['type']) ?>">
 
 
                     <table style="background:white; width:100%; min-width:800px">
@@ -188,7 +181,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
                                                         <li class="plus_options_li" style="margin-top: 15px;">
                                                             <div>
-                                                                <span class="plus_options-header"> <?php echo esc_html__('Available in the Plus Version:', 'woo-rfq-for-woocommerce'); ?></span>
+                                                                <span class="plus_options-header"> <?php echo esc_html_e('Available in the Plus Version:', 'woo-rfq-for-woocommerce'); ?></span>
                                                             </div>
                                                         </li>
 
@@ -256,7 +249,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                                         <li class="plus_options_li plus_large">
                                                             <div style="margin-bottom:20px"><span> <a target="_blank"
                                                                                                       class="get_plus"
-                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php echo esc_html__('Get Quote Request Plus For WooCommerce!', 'woo-rfq-for-woocommerce'); ?></a></span>
+                                                                                                      href="https://neahplugins.com/product/woocommerce-quote-request-plus/"><?php  esc_html_e('Get Quote Request Plus For WooCommerce!', 'woo-rfq-for-woocommerce'); ?></a></span>
                                                             </div>
                                                         </li>
 
@@ -717,7 +710,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'css' => 'width:400px'
                             ),
                             'rfq_cart_wordings_quote_request_currently_empty' => array(
-                                'name' => '12- Normal Checkout- ' . esc_html__('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
+                                'name' => '12- Normal Checkout- ' . esc_html_e('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => '',
                                 'default' => __('Your Quote Request List is Currently Empty.', 'woo-rfq-for-woocommerce'),

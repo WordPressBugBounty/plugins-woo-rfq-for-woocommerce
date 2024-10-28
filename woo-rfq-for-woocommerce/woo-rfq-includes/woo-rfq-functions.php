@@ -53,7 +53,7 @@ if(!function_exists('np_pls_qr_kses_allowed_html')) {
     }
     add_filter('wp_kses_allowed_html', 'np_pls_qr_kses_allowed_html', 1000, 2);
 }
-
+// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
 
 add_filter('woocommerce_valid_order_statuses_for_payment_complete', 'rfqtk_statuses_for_payment', 100, 2);
 add_filter('woocommerce_valid_order_statuses_for_payment', 'rfqtk_statuses_for_payment', 100, 2);
@@ -1164,15 +1164,11 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
 
                 if(!$order)return;
-
+// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
                 $no_payment=__('No payment','woo-rfq-for-woocommerce');
                 $no_payment=get_option('settings_gpls_woo_rfq_no_payment_checkout_text',$no_payment);
-               // $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
-                $no_payment =sprintf(
-                /* translators:no payment label. */
-                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
-                    esc_html( $no_payment )
-                );
+                $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
+
 
 
                 $order->add_order_note($no_payment,0,1);
@@ -1622,11 +1618,7 @@ function gplswoo_get_submit_order_label()
         DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
         $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
-        $settings_gpls_woo_inquire_text_option =sprintf(
-        /* translators:request quote label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce' )),
-            esc_html( $settings_gpls_woo_inquire_text_option )
-        );
+
 
         DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
 
@@ -1714,14 +1706,7 @@ function gplswoo_get_submit_order_label()
 
 
         $order_button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', __('Submit Your Request For Quote', 'woo-rfq-for-woocommerce'));
-       // $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
-
-        $order_button_text =sprintf(
-        /* translators:add to cart label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce' )),
-            esc_html( $order_button_text )
-        );
-
+        $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
         $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 
         $ajax_array['rfq_cart_wordings_submit_your_rfq_text']=$order_button_text;
@@ -1732,14 +1717,7 @@ function gplswoo_get_submit_order_label()
 
 
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
-       // $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
-
-        $proceed_to_rfq =sprintf(
-        /* translators:proceed_to_checkout label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce' )),
-            esc_html( $proceed_to_rfq )
-        );
-
+        $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
         $ajax_array['rfq_cart_wordings_proceed_to_rfq']= $proceed_to_rfq;
 

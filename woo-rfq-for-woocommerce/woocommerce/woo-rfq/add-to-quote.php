@@ -10,7 +10,7 @@ $product_type=$product->get_type();
 
 
 ?>
-add to quote
+
 
 <form  style="display: block" class="woo_rfq_after_shop_loop_button"
       data-rfq-product-id='<?php echo wp_kses_post($rfq_id); ?>'

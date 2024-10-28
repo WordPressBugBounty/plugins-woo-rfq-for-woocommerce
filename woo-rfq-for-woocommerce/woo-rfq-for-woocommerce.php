@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.169
+ * Version: 1.9.170
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 
 
 if (!defined('gpls_woo_rfq_DIR')) {
-
+// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
 
     DEFINE('gpls_woo_rfq_DIR', plugin_dir_path(__FILE__));
     DEFINE('gpls_woo_rfq_URL', plugin_dir_url(__FILE__));
@@ -44,15 +44,9 @@ if (!defined('gpls_woo_rfq_DIR')) {
     DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
     DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
-    $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+    $settings_gpls_woo_inquire_text_option = __(get_option('settings_gpls_woo_inquire_text_option'), 'woo-rfq-for-woocommerce');
 
-    $settings_gpls_woo_inquire_text_option =sprintf(
-    /* translators:add to cart again label. */
-        (__('%1$s', 'woo-rfq-for-woocommerce' )),
-        esc_html( $settings_gpls_woo_inquire_text_option )
-    );
-
-    DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+    DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
 
     $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
     $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';
@@ -666,30 +660,14 @@ class GPLS_WOO_RFQ
         $status_label = __('Quote Request', 'woo-rfq-for-woocommerce');
 
         register_post_status('wc-gplsquote-req', array(
-            'label' => __( 'Quote Request', 'woo-rfq-for-woocommerce' ),
-            'public' => false,
+            'label' => $status_label,
+            'public' => true,
             'exclude_from_search' => false,
 
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-                /* translators: %s: number of orders */
-                'label_count'               => _n_noop( 'Quote Request <span class="count">(%s)</span>', 'Quote Request <span class="count">(%s)</span>', 'woo-rfq-for-woocommerce' )
-        )
-        );
-
-
-        //'wc-processing' => array(
-        //					'label'                     => _x( 'Processing', 'Order status', 'woocommerce' ),
-        //					'public'                    => false,
-        //					'exclude_from_search'       => false,
-        //					'show_in_admin_all_list'    => true,
-        //					'show_in_admin_status_list' => true,
-        //					/* translators: %s: number of orders */
-        //					'label_count'               => _n_noop( 'Processing <span class="count">(%s)</span>', 'Processing <span class="count">(%s)</span>', 'woocommerce' ),
-        //				),
-
-
-        // (__('%1$s', 'woo-rfq-for-woocommerce' )),
+            'label_count' => _n_noop($status_label . '<span class="count">(%s)</span>', $status_label . ' <span class="count">(%s)</span>')
+        ));
 
         add_filter('wc_order_statuses', array($this, 'gpls_rfq_add_quote_request_to_order_statuses'), 1000);
         //  $this->setup_email();
@@ -769,18 +747,11 @@ class GPLS_WOO_RFQ
 
 
         $status_label = get_option('settings_gpls_woo_rfq_quote_request_label', 'Quote Request');
-       // $status_label = __($status_label, 'woo-rfq-for-woocommerce');
-
+        $status_label = __($status_label, 'woo-rfq-for-woocommerce');
 
         if ($status_label == '') {
             $status_label = __('Quote Request', 'woo-rfq-for-woocommerce');
         }
-
-        $status_label =sprintf(
-    /* translators:order status label. */
-        (__('%1$s', 'woo-rfq-for-woocommerce' )),
-        esc_html( $status_label )
-    );
 
         $order_statuses["wc-gplsquote-req"] = $status_label;
 
@@ -1526,13 +1497,7 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 
             $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
 
-            $settings_gpls_woo_inquire_text_option =sprintf(
-            /* translators:request a quote label. */
-                (__('%1$s', 'woo-rfq-for-woocommerce' )),
-                esc_html( $settings_gpls_woo_inquire_text_option )
-            );
-
-            DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+            DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
 
             $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
             $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';

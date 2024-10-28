@@ -94,7 +94,8 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
             'show_image' => true,
             'image_size' => array(128, 128),
             'plain_text' => $plain_text,
-            'show_prices' => $show_prices
+            'show_prices' => $show_prices,
+            'hide_admin'=>false,
 
         )),wp_kses_allowed_html( 'post' ));
         ?>

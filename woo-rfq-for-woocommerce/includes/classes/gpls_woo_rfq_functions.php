@@ -9,6 +9,7 @@ if (!defined('ABSPATH'))
  * Main class
  *
  */
+// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
 if (!class_exists('gpls_woo_rfq_functions')) {
 
     class gpls_woo_rfq_functions
@@ -17,10 +18,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         {
 
         }
-
     }
-
-
 
     function is_hpos()
     {
@@ -93,14 +91,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $update_rfq_cart_button = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button', '');
-
-
-            //$update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
-            $update_rfq_cart_button = sprintf(
-            /* translators:update_rfq_cart_button label. */
-                ((__('%1$s', 'woo-rfq-for-woocommerce'))),
-                esc_html($update_rfq_cart_button)
-            );
+            $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
 
             if ($update_rfq_cart_button != '') {
 
@@ -117,13 +108,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             }
 
             $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', '');
-            // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
-
-            $view_your_cart_text = sprintf(
-            /* translators:$view_your_cart_text label. */
-                (__('%1$s', 'woo-rfq-for-woocommerce')),
-                esc_html($view_your_cart_text)
-            );
+            $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
 
             if ($view_your_cart_text != '') {
 
@@ -152,12 +137,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             $update_rfq_cart_button =
                 get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button'
                     , __('Update Quote Request', 'woo-rfq-for-woocommerce'));
-            // $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
-            $update_rfq_cart_button = sprintf(
-            /* translators:$update_rfq_cart_button label. */
-                (__('%1$s', 'woo-rfq-for-woocommerce')),
-                esc_html($update_rfq_cart_button)
-            );
+            $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
 
             if ($update_rfq_cart_button != '') {
                 $custom_js = "jQuery(document).bind('ready ajaxComplete', function() {";
@@ -223,12 +203,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
 
             $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View cart', 'woo-rfq-for-woocommerce'));
-            // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
-            $view_your_cart_text = sprintf(
-            /* translators:$view_your_cart_text label. */
-                (__('%1$s', 'woo-rfq-for-woocommerce')),
-                esc_html($view_your_cart_text)
-            );
+            $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
 
             $custom_js = "jQuery(document.body).on('wc_fragments_loaded', function(){
         jQuery('.added_to_cart').text('" . $view_your_cart_text . "');});";
@@ -925,14 +900,7 @@ eod
 
             ob_start();
             $confirmation_message = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button', __('Update Quote Request', 'woo-rfq-for-woocommerce'));
-            //$confirmation_message = __($confirmation_message, 'woo-rfq-for-woocommerce');
-
-            $confirmation_message = sprintf(
-            /* translators:$confirmation_message label. */
-                (__('%1$s', 'woo-rfq-for-woocommerce')),
-                esc_html($confirmation_message)
-            );
-
+            $confirmation_message = __($confirmation_message, 'woo-rfq-for-woocommerce');
 
             wc_get_template('woo-rfq/rfq-cart.php',
                 array('confirmation_message' => $confirmation_message),
@@ -3093,21 +3061,13 @@ eod
         }
 
         $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View List', 'woo-rfq-for-woocommerce'));
-        // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
-        $view_your_cart_text = sprintf(
-        /* translators:$confirmation_message label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce')),
-            esc_html($view_your_cart_text)
-        );
+        $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
 
 
+        $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
         $product_was_added_to_quote_request = gpls_woo_rfq_get_option('rfq_cart_wordings_product_was_added_to_quote_request', "Product was successfully added to quote request.");
-        //  $product_was_added_to_quote_request = __($product_was_added_to_quote_request, 'woo-rfq-for-woocommerce');
-        $product_was_added_to_quote_request = sprintf(
-        /* translators:$$product_was_added_to_quote_request label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce')),
-            esc_html($product_was_added_to_quote_request)
-        );
+        $product_was_added_to_quote_request = __($product_was_added_to_quote_request, 'woo-rfq-for-woocommerce');
+
 
         $link = wc_get_template_html('woo-rfq/link-to-cart-shop.php', array('link_to_rfq_page' => $link_to_rfq_page,), '', gpls_woo_rfq_WOO_PATH);
 
@@ -3142,12 +3102,8 @@ eod
 
     function gpls_woo_rfq_get_option($string, $default)
     {
-        $default = sprintf(
-        /* translators: option label. */
-            (__('%1$s', 'woo-rfq-for-woocommerce')),
-            esc_html($default)
-        );
-        $option = get_option($string, $default);
+
+        $option = get_option($string, __($default, 'woo-rfq-for-woocommerce'));
 
 
         return $option;
@@ -3224,9 +3180,6 @@ eod
         $args['show_prices'] = false;
         return $args;
     }
-
-
-
 
     function is_rfq_enabled($_product_id)
     {
@@ -3471,20 +3424,8 @@ eod
 
         $actions['_gpls_woo_rfq_rfq_enable'] = __('RFQ: enable RFQ', 'woo-rfq-for-woocommerce');
         $actions['_gpls_woo_rfq_rfq_enable_remove'] = __('RFQ: Undo enable RFQ', 'woo-rfq-for-woocommerce');
-
-
-
         return $actions;
     }
-
-
-
 }
 
-
-
 // phpcs:enable
-
-
-
-
