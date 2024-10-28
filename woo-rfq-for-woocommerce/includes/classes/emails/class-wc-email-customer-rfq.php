@@ -225,7 +225,7 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
 
                     'placeholder' =>  sprintf(
                     /* translators: subject . */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $this->get_default_subject() )
                     ),
                     'default' => '',

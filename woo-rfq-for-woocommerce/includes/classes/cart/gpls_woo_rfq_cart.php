@@ -252,7 +252,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         //  $text = __($text, "woo-rfq-for-woocommerce");
                         $text =sprintf(
                         /* translators: $text1 is out of stock message. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $text )
                         );
 
@@ -277,7 +277,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             if($text !='') {
                 $text =sprintf(
                 /* translators: $text1 is out of stock message. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $text )
                 );
 
@@ -955,7 +955,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         $read_more = get_option('settings_gpls_woo_rfq_read_more','');// "Request Quote"
                         $read_more =sprintf(
                         /* translators: text for read more. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $read_more )
                         );
 
@@ -979,7 +979,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                         $read_more =sprintf(
                         /* translators: text for read more. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $read_more )
                         );
 
@@ -1009,7 +1009,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                     $read_more =sprintf(
                     /* translators: text for read more. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $read_more )
                     );
 
@@ -1051,7 +1051,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     //  $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                     $request_quote =sprintf(
                     /* translators:request quote label. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $request_quote )
                     );
 
@@ -1062,7 +1062,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     //$request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                     $request_quote =sprintf(
                     /* translators:request quote label. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $request_quote )
                     );
 
@@ -1167,7 +1167,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 //$request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote =sprintf(
                 /* translators:request quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $request_quote )
                 );
 
@@ -1178,7 +1178,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 // $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote =sprintf(
                 /* translators:request quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $request_quote )
                 );
 
@@ -1208,7 +1208,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
                         $select_options =sprintf(
                         /* translators:show prices label. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $select_options )
                         );
 
@@ -1230,7 +1230,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         //  $select_options = __($select_options, 'woo-rfq-for-woocommerce');
                         $select_options =sprintf(
                         /* translators:show prices label. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $select_options )
                         );
 
@@ -1251,7 +1251,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         //  $select_options = __($select_options, 'woo-rfq-for-woocommerce');
                         $select_options =sprintf(
                         /* translators:show prices label. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $select_options )
                         );
 
@@ -1284,7 +1284,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                 $read_more =sprintf(
                 /* translators: text for read more. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $read_more )
                 );
 
@@ -1647,7 +1647,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
                 //$request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote =sprintf(
                 /* translators:request quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $request_quote )
                 );
                 $request_quote = apply_filters('gpls_woo_rfq_in_rfq_text', $request_quote);
@@ -1657,7 +1657,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
                 //$request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote =sprintf(
                 /* translators:request quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $request_quote )
                 );
 
@@ -1672,7 +1672,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
             // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
             $view_your_cart_text =sprintf(
             /* translators:view quote cart label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                (__('%1$s', 'woo-rfq-for-woocommerce' )),
                 esc_html( $view_your_cart_text )
 
             );
@@ -2065,7 +2065,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                         $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                         $read_more =sprintf(
                         /* translators: text for read more. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $read_more )
                         );
 
@@ -2121,7 +2121,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                         $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                         $read_more =sprintf(
                         /* translators: text for read more. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $read_more )
                         );
 
@@ -2176,7 +2176,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                         $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                         $read_more =sprintf(
                         /* translators: text for read more. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_html( $read_more )
                         );
 
@@ -2339,7 +2339,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
                 $default_text =sprintf(
                 /* translators:add to quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $default_text )
                 );
 
@@ -2348,7 +2348,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 $default_text = __('Add to Cart', 'woo-rfq-for-woocommerce');
                 $default_text =sprintf(
                 /* translators:add to quote label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $default_text )
                 );
                 //$default_text = __($default_text, 'woo-rfq-for-woocommerce');
@@ -2366,7 +2366,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
             $add_txt =sprintf(
             /* translators:add to cart label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                (__('%1$s', 'woo-rfq-for-woocommerce' )),
                 esc_html( $add_txt )
             );
 
@@ -2375,7 +2375,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
             // $in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
             $in_txt =sprintf(
             /* translators:add to cart again label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                (__('%1$s', 'woo-rfq-for-woocommerce' )),
                 esc_html( $in_txt )
             );
 
@@ -2421,7 +2421,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     //$add_txt = __($add_txt, 'woo-rfq-for-woocommerce');
                     $add_txt =sprintf(
                     /* translators:add to cart label. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $add_txt )
                     );
 
@@ -2430,7 +2430,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     $in_txt = get_option('rfq_cart_wordings_in_rfq', $default_text);
                     $in_txt =sprintf(
                     /* translators:add to cart again label. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $in_txt )
                     );
                     //$in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
@@ -2480,7 +2480,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                     $read_more =sprintf(
                     /* translators: text for read more. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $read_more )
                     );
 
@@ -2505,7 +2505,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
                     $read_more =sprintf(
                     /* translators: text for read more. */
-                        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                        (__('%1$s', 'woo-rfq-for-woocommerce' )),
                         esc_html( $read_more )
                     );
 

@@ -9,7 +9,7 @@ $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View Li
 //$view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
 $view_your_cart_text =sprintf(
 /* translators:link to shop wording. */
-    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+    (__('%1$s', 'woo-rfq-for-woocommerce' )),
     esc_js( $view_your_cart_text )
 );
 

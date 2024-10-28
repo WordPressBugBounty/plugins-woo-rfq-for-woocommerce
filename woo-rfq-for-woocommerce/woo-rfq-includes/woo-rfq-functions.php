@@ -1,7 +1,36 @@
 <?php
 /**
- * Functions used by plugins
+ * Functions used by the plugin
  */
+
+
+if (!function_exists('np_write_log')) {
+    function np_write_log($log, $file, $line)
+    {
+        if (defined('WP_DEBUG') && WP_DEBUG === true) {
+
+            if (is_resource($log)) {
+                $log = "resource variable ";
+            }
+
+            // phpcs:disable WordPress.PHP.DevelopmentFunctions
+
+            error_log('');
+            error_log('*******************************************************************');
+            error_log('BEGIN ' . $file . ' ' . $line);
+            if (is_array($log) || is_object($log)) {
+                error_log(print_r($log, true));
+            } else {
+                error_log($log);
+            }
+            error_log('END ' . $file . ' ' . $line);
+            error_log('*******************************************************************');
+            error_log('');
+            // phpcs:enable
+        }
+    }
+}
+
 if(!function_exists('gpls_woo_is_checkout_block')) {
     function gpls_woo_is_checkout_block()
     {
@@ -1141,7 +1170,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                // $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
                 $no_payment =sprintf(
                 /* translators:no payment label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $no_payment )
                 );
 
@@ -1595,7 +1624,7 @@ function gplswoo_get_submit_order_label()
         $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
         $settings_gpls_woo_inquire_text_option =sprintf(
         /* translators:request quote label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_html( $settings_gpls_woo_inquire_text_option )
         );
 
@@ -1689,7 +1718,7 @@ function gplswoo_get_submit_order_label()
 
         $order_button_text =sprintf(
         /* translators:add to cart label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_html( $order_button_text )
         );
 
@@ -1707,7 +1736,7 @@ function gplswoo_get_submit_order_label()
 
         $proceed_to_rfq =sprintf(
         /* translators:proceed_to_checkout label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_html( $proceed_to_rfq )
         );
 

@@ -97,7 +97,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                     $field .= '<option value="' . esc_attr( $ckey ) . '" '.
                         selected( $value, $ckey, false ) . '>'.sprintf(
                         /* translators:value type label. */
-                            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                            (__('%1$s', 'woo-rfq-for-woocommerce' )),
                             esc_js( ($cvalue) )
                         ).'</option>';
                 }
@@ -150,7 +150,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
 
                 $confirmation_message =sprintf(
                 /* translators: thank you message . */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $confirmation_message )
                 );
 
@@ -181,7 +181,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
               //  $order_button_text = __($order_button_text,'woo-rfq-for-woocommerce');
                 $confirmation_message =sprintf(
                 /* translators: order_button_text. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( $order_button_text )
                 );
 

@@ -98,7 +98,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             //$update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
             $update_rfq_cart_button = sprintf(
             /* translators:update_rfq_cart_button label. */
-                html_entity_decode(html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce'))),
+                ((__('%1$s', 'woo-rfq-for-woocommerce'))),
                 esc_html($update_rfq_cart_button)
             );
 
@@ -121,7 +121,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $view_your_cart_text = sprintf(
             /* translators:$view_your_cart_text label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+                (__('%1$s', 'woo-rfq-for-woocommerce')),
                 esc_html($view_your_cart_text)
             );
 
@@ -155,7 +155,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             // $update_rfq_cart_button = __($update_rfq_cart_button, 'woo-rfq-for-woocommerce');
             $update_rfq_cart_button = sprintf(
             /* translators:$update_rfq_cart_button label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+                (__('%1$s', 'woo-rfq-for-woocommerce')),
                 esc_html($update_rfq_cart_button)
             );
 
@@ -226,7 +226,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
             $view_your_cart_text = sprintf(
             /* translators:$view_your_cart_text label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+                (__('%1$s', 'woo-rfq-for-woocommerce')),
                 esc_html($view_your_cart_text)
             );
 
@@ -929,7 +929,7 @@ eod
 
             $confirmation_message = sprintf(
             /* translators:$confirmation_message label. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+                (__('%1$s', 'woo-rfq-for-woocommerce')),
                 esc_html($confirmation_message)
             );
 
@@ -3096,7 +3096,7 @@ eod
         // $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
         $view_your_cart_text = sprintf(
         /* translators:$confirmation_message label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+            (__('%1$s', 'woo-rfq-for-woocommerce')),
             esc_html($view_your_cart_text)
         );
 
@@ -3105,7 +3105,7 @@ eod
         //  $product_was_added_to_quote_request = __($product_was_added_to_quote_request, 'woo-rfq-for-woocommerce');
         $product_was_added_to_quote_request = sprintf(
         /* translators:$$product_was_added_to_quote_request label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+            (__('%1$s', 'woo-rfq-for-woocommerce')),
             esc_html($product_was_added_to_quote_request)
         );
 
@@ -3123,7 +3123,7 @@ eod
 
         $notice_message = sprintf(
         /* translators: notice label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_html(isset($notice["message"])?$notice["message"]:"")
         );
 
@@ -3144,7 +3144,7 @@ eod
     {
         $default = sprintf(
         /* translators: option label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce')),
+            (__('%1$s', 'woo-rfq-for-woocommerce')),
             esc_html($default)
         );
         $option = get_option($string, $default);
@@ -3225,32 +3225,7 @@ eod
         return $args;
     }
 
-    if (!function_exists('np_write_log')) {
-        function np_write_log($log, $file, $line)
-        {
-            if (defined('WP_DEBUG') && WP_DEBUG === true) {
 
-                if (is_resource($log)) {
-                    $log = "resource variable ";
-                }
-
-                // phpcs:disable WordPress.PHP.DevelopmentFunctions
-
-                error_log('');
-                error_log('*******************************************************************');
-                error_log('BEGIN ' . $file . ' ' . $line);
-                if (is_array($log) || is_object($log)) {
-                    error_log(print_r($log, true));
-                } else {
-                    error_log($log);
-                }
-                error_log('END ' . $file . ' ' . $line);
-                error_log('*******************************************************************');
-                error_log('');
-                // phpcs:enable
-            }
-        }
-    }
 
 
     function is_rfq_enabled($_product_id)

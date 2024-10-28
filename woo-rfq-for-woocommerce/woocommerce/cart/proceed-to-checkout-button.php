@@ -52,7 +52,7 @@ if(function_exists('is_user_logged_in')) {
 
         $proceed_to_rfq =sprintf(
         /* translators:proceed_to_checkout label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_html( $proceed_to_rfq )
         );
 
@@ -62,7 +62,7 @@ if(function_exists('is_user_logged_in')) {
         //  $proceed_to_rfq = __($proceed_to_rfq,'woo-rfq-for-woocommerce');
         $proceed_to_rfq =sprintf(
         /* translators:proceed_to_checkout label. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_js( $proceed_to_rfq )
         );
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
@@ -76,7 +76,7 @@ if(function_exists('is_user_logged_in')) {
     // $alternate = __($alternate,'woo-rfq-for-woocommerce');
     $alternate =sprintf(
     /* translators:proceed_to_checkout label. */
-        html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+        (__('%1$s', 'woo-rfq-for-woocommerce' )),
         esc_js( $alternate )
     );
 

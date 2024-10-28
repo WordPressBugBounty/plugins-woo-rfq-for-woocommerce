@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
        // $quote_request_empty = __($quote_request_empty,'woo-rfq-for-woocommerce');
         $quote_request_empty =sprintf(
         /* translators:link to empty cart wording. */
-            html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
             esc_js( $quote_request_empty )
         );
         echo esc_js($quote_request_empty);
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
            // $return_to_shop = __($return_to_shop,'woo-rfq-for-woocommerce');
             $return_to_shop =sprintf(
             /* translators:link to shop wording. */
-                html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                (__('%1$s', 'woo-rfq-for-woocommerce' )),
                 esc_js( $return_to_shop )
             );
             echo esc_js($return_to_shop);

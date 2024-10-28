@@ -164,7 +164,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                 <td class="forminp forminp-<?php
                 $value_type =sprintf(
                 /* translators:value type label. */
-                    html_entity_decode(__('&#8197;%1$s', 'woo-rfq-for-woocommerce' )),
+                    (__('%1$s', 'woo-rfq-for-woocommerce' )),
                     esc_html( sanitize_title($value['default']) )
                 );
 

@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
 WC tested up to: 9.3.3
-Stable tag: 1.9.168
+Stable tag: 1.9.169
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -207,13 +207,13 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.168 10/25/2024 =
-fixes using the plugin check
+= 1.9.169 10/28/2024 =
+fix &#8197;
 
 == Upgrade Notice ==
 
-= 1.9.168 10/25/2024 =
-fixes using the plugin check
+= 1.9.169 10/28/2024 =
+fix &#8197;
 
 
 

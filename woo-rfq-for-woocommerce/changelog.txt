@@ -1,4 +1,8 @@
 == Changelog ==
+
+= 1.9.169 10/28/2024 =
+fix &#8197;
+
 = 1.9.168 10/25/2024 =
 fixes using the plugin check
 
