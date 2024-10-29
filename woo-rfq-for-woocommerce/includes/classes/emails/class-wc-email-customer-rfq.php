@@ -13,6 +13,7 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
      * @extends     WC_Email
      */
 // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
     #[\AllowDynamicProperties]
     class WC_Email_Customer_RFQ extends WC_Email
     {

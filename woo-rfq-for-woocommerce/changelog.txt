@@ -1,10 +1,13 @@
 == Changelog ==
 
-= 1.9.169 10/28/2024 =
-fix &#8197;
+= 1.9.171 10/29/2024 =
+fix the problems with critical error;
 
 = 1.9.170 10/28/2024 =
 fix the problems with translation;
+
+= 1.9.169 10/28/2024 =
+fix &#8197;
 
 = 1.9.169 10/28/2024 =
 fix &#8197;

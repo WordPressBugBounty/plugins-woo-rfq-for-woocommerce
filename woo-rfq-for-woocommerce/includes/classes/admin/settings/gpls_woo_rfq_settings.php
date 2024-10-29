@@ -161,7 +161,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
             <tr valign="top" >
 
-                <td class="forminp forminp-<?php echo sanitize_title($value['type']) ?>">
+                <td class="forminp forminp-<?php echo wp_kses_post(sanitize_title($value['type'])) ?>">
 
 
                     <table style="background:white; width:100%; min-width:800px">

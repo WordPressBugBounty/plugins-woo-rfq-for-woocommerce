@@ -1164,7 +1164,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
 
                 if(!$order)return;
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+                // phpcs:disable
                 $no_payment=__('No payment','woo-rfq-for-woocommerce');
                 $no_payment=get_option('settings_gpls_woo_rfq_no_payment_checkout_text',$no_payment);
                 $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
@@ -1200,7 +1200,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                     $email_new_order->send($email_new_order->get_recipient(), $gplswoo_subject,
                         $email_new_order->get_content(),$email_new_order->get_headers(),$email_new_order->get_attachments());
                     // $email_new_order->trigger($order_id);
-
+                 // phpcs:enable
                 }
 
             }

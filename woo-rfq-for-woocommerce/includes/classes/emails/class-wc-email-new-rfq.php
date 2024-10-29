@@ -21,6 +21,7 @@ class WC_Email_New_RFQ extends WC_Email {
 	 * Constructor
 	 */
         // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+        // phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
 	public function __construct() {
 
 		$this->id               = 'new_rfq';

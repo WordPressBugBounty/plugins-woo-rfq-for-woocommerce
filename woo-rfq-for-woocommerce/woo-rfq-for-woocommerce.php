@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.170
+ * Version: 1.9.171
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -35,6 +35,9 @@ if (!defined('ABSPATH')) {
 
 if (!defined('gpls_woo_rfq_DIR')) {
 // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
+
+
 
     DEFINE('gpls_woo_rfq_DIR', plugin_dir_path(__FILE__));
     DEFINE('gpls_woo_rfq_URL', plugin_dir_url(__FILE__));
@@ -132,26 +135,15 @@ if (!defined('gpls_woo_rfq_DIR')) {
 
 
 
-
-function gpls_woo_rfq_check_session(){
-
-    if(did_action('plugins_loaded')==1&&!is_admin() && !function_exists('gpls_woo_get_session'))
-{
-   // error_log( 'wp-session-manager.php 1');
-    require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
-    require_once(ABSPATH . 'wp-includes/class-phpass.php');
-    add_filter('_rfqtk_wp_session_expiration_variant', RFQTK_WP_SESSION_EXPIRATION);
-    add_filter('_rfqtk_wp_session_expiration', RFQTK_WP_SESSION_EXPIRATION_VARIANT);
-
- }
-
-}
-add_action('plugins_loaded','gpls_woo_rfq_check_session',10000);
+require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
+require_once(ABSPATH . 'wp-includes/class-phpass.php');
 
 
 require_once(gpls_woo_rfq_DIR . 'includes/classes/checkout/gpls_woo_rfq_ncheckout.php');
 
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+
 if (!function_exists('gpls_woo_rfq_check_base_correct_info_plugins')) {
     function gpls_woo_rfq_check_base_correct_info_plugins()
     {
@@ -397,7 +389,7 @@ class GPLS_WOO_RFQ
         //add_action('plugins_loaded', array($this, 'gpls_woo_rfq_load_textdomain'));
         $this->gpls_woo_rfq_load_textdomain();
 
-      //  add_action('init', array($this, 'gpls_woo_rfq_setup_customer_cookie'), 10);
+        add_action('init', array($this, 'gpls_woo_rfq_setup_customer_cookie'), 10);
 
 
 
@@ -666,7 +658,9 @@ class GPLS_WOO_RFQ
 
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop($status_label . '<span class="count">(%s)</span>', $status_label . ' <span class="count">(%s)</span>')
+// phpcs:disable
+            'label_count' => _n_noop($status_label . '<span class="count">(%s)</span>', $status_label . ' <span class="count">(%s)</span>','woo-rfq-for-woocommerce')
+            // phpcs:enable
         ));
 
         add_filter('wc_order_statuses', array($this, 'gpls_rfq_add_quote_request_to_order_statuses'), 1000);
@@ -744,7 +738,7 @@ class GPLS_WOO_RFQ
     // Add to list of WC Order statuses
     public function gpls_rfq_add_quote_request_to_order_statuses($order_statuses)
     {
-
+// phpcs:disable
 
         $status_label = get_option('settings_gpls_woo_rfq_quote_request_label', 'Quote Request');
         $status_label = __($status_label, 'woo-rfq-for-woocommerce');
@@ -759,6 +753,7 @@ class GPLS_WOO_RFQ
 
 
         return $order_statuses;
+        // phpcs:enable
     }
 
 
@@ -1495,9 +1490,13 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
             DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
             DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
+            // phpcs:disable
+
             $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
 
             DEFINE('gpls_woo_rfq_INQUIRE_TEXT', __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce'));
+
+            // phpcs:enable
 
             $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
             $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';
@@ -1664,11 +1663,10 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
     public function gpls_woo_rfq_setup_customer_cookie()
     {
 
-             //   add_filter('_rfqtk_wp_session_expiration_variant', array($this, 'gpls_woo_rfq_set_expiration_time'));
-              //  add_filter('_rfqtk_wp_session_expiration', array($this, 'gpls_woo_rfq_set_expiration_variant_time'));
-
-            // add_filter('_rfqtk_wp_session_expiration_variant', RFQTK_WP_SESSION_EXPIRATION);
-           //  add_filter('_rfqtk_wp_session_expiration', RFQTK_WP_SESSION_EXPIRATION_VARIANT);
+        require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
+        require_once(ABSPATH . 'wp-includes/class-phpass.php');
+        add_filter('_rfqtk_wp_session_expiration_variant', RFQTK_WP_SESSION_EXPIRATION);
+        add_filter('_rfqtk_wp_session_expiration', RFQTK_WP_SESSION_EXPIRATION_VARIANT);
 
 
     }

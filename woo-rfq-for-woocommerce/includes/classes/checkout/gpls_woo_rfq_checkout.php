@@ -5,6 +5,7 @@
  *
  */
 // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
 if (!class_exists('gpls_woo_rfq_checkout')) {
 
     class gpls_woo_rfq_checkout

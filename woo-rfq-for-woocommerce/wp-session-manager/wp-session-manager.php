@@ -3,13 +3,6 @@
 //contributer: ericmann from www.patreon.com
 
 
-if(function_exists('gpls_woo_get_session'))
-{
-  return;
-}
-
-
-
 global $session_type;
 $session_type=get_option('settings_gpls_woo_rfq_cookie_or_phpsession',"rfq_cookie");
 

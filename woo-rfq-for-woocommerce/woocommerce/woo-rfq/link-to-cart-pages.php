@@ -1,6 +1,6 @@
 <?php
 // phpcs:disable WordPress.WP.I18n.MissingTranslatorsComment
-
+// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }

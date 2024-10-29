@@ -5,6 +5,7 @@
  *
  */
 // phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
 if (!class_exists('gpls_woo_rfq_CART')) {
 
     class gpls_woo_rfq_CART
@@ -938,8 +939,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         && !$product->backorders_allowed()
                     ) {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more','');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
@@ -957,8 +958,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     )
                     {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
@@ -983,8 +984,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 )
                 {
 
-                    $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                    $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                    $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                     $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
@@ -1215,8 +1216,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 && !$product->backorders_allowed()
             ) {
 
-                $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                 $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                 if ($read_more != "") {
@@ -1974,8 +1975,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     )
                     {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
@@ -2026,8 +2027,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     )
                     {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
@@ -2077,8 +2078,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     )
                     {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
@@ -2341,8 +2342,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     && !$product->backorders_allowed()
                 ) {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                    $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
@@ -2362,8 +2363,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 )
                 {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
-                    $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
                         $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
