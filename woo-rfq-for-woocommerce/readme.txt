@@ -207,13 +207,16 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.171 10/29/2024 =
-fix the problems with critical error;
+= 1.9.172 10/30/2024 =
+fix the problems with single product page labels after add to cart;
+fix the problems with notices not deleting ;
 
 == Upgrade Notice ==
 
-= 1.9.171 10/29/2024 =
-fix the problems with critical error;
+= 1.9.172 10/30/2024 =
+fix the problems with single product page labels after add to cart;
+fix the problems with notices not deleting ;
+
 
 
 

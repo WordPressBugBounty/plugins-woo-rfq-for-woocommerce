@@ -136,7 +136,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
         public function gpls_woo_woocommerce_thankyou_order_received_text($message, $order){
 
             if(is_object($order)==false || $order == null || $order == false ){
-                return;
+                return 0;
             }
 
             if (  $order->get_status()=='gplsquote-req' ) {

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( empty( esc_js($subscriptions )) ) {
+if ( empty( wp_kses_post($subscriptions )) ) {
 	return;
 }
 
@@ -35,8 +35,8 @@ $is_parent_order       = wcs_order_contains_subscription( $order, 'parent' );
 		<?php $has_automatic_renewal = $has_automatic_renewal || ! $subscription->is_manual(); ?>
 		<tr>
             <td class="td" scope="row" style="text-align:left;"><?php echo wp_kses_post($subscription->get_order_number()); ?></td>
-            <td class="td" scope="row" style="text-align:left;"><?php echo esc_html( date_i18n( wc_date_format(), $subscription->get_time( 'start_date', 'site' ) ) ); ?></td>
-			<td class="td" scope="row" style="text-align:left;"><?php echo esc_html( ( 0 < $subscription->get_time( 'end' ) ) ? date_i18n( wc_date_format(), $subscription->get_time( 'end', 'site' ) ) : _x( 'When cancelled', 'Used as end date for an indefinite subscription', 'woo-rfq-for-woocommerce' ) ); ?></td>
+            <td class="td" scope="row" style="text-align:left;"><?php echo wp_kses_post( date_i18n( wc_date_format(), $subscription->get_time( 'start_date', 'site' ) ) ); ?></td>
+			<td class="td" scope="row" style="text-align:left;"><?php echo wp_kses_post( ( 0 < $subscription->get_time( 'end' ) ) ? date_i18n( wc_date_format(), $subscription->get_time( 'end', 'site' ) ) : _x( 'When cancelled', 'Used as end date for an indefinite subscription', 'woo-rfq-for-woocommerce' ) ); ?></td>
             <?php if ($show_prices  == 'yes')  : ?>
             <td class="td" scope="row" style="text-align:left;">
 				<?php echo wp_kses_post( $subscription->get_formatted_order_total() ); ?>
@@ -44,8 +44,8 @@ $is_parent_order       = wcs_order_contains_subscription( $order, 'parent' );
 					<br>
 					<small><?php
                         /* translators:payment date. */
-                        printf( esc_html__( 'Next payment: %s', 'woo-rfq-for-woocommerce' ),
-                            esc_html( date_i18n( wc_date_format(), $subscription->get_time( 'next_payment', 'site' ) ) ) ); ?></small>
+                        printf( wp_kses_post(__( 'Next payment: %s', 'woo-rfq-for-woocommerce' )),
+                            wp_kses_post( date_i18n( wc_date_format(), $subscription->get_time( 'next_payment', 'site' ) ) ) ); ?></small>
 				<?php endif; ?>
 			</td>
             <?php endif; ?>
