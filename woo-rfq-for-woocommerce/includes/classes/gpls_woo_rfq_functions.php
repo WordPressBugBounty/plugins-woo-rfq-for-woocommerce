@@ -21,34 +21,6 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         }
     }
 
-
-    if (!function_exists('gpls_woo_get_rfq_enable')) {
-        function gpls_woo_get_rfq_enable($product)
-        {
-            if (!$product) return "no";
-
-            $product_id = $product->get_id();
-
-
-            $rfq_enable = "no";
-
-            $rfq_enable = get_post_meta($product_id, '_gpls_woo_rfq_rfq_enable', true);
-
-            if ($rfq_enable != "yes" || empty($rfq_enable)) {
-                if (class_exists('GPLS_WOO_RFQ_PLUS') && function_exists('gpls_woo_plus_get_rfqc_enable')) {
-                    $rfq_enable = gpls_woo_plus_get_rfqc_enable($product_id);
-                }
-            }
-
-            $rfq_enable = apply_filters('gpls_rfq_enable', $rfq_enable, $product_id);
-
-            if (empty($rfq_enable)) {
-                $rfq_enable = "no";
-            }
-            return $rfq_enable;
-        }
-    }
-
     function is_hpos()
     {
         $is_hpos = OrderUtil::custom_orders_table_usage_is_enabled();
@@ -112,7 +84,6 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
     function gpls_woo_add_rfq_change_text_footer_rfq()
     {
-
         if (!is_admin()) {
 
 
@@ -936,7 +907,7 @@ eod
                 array('confirmation_message' => $confirmation_message),
                 '', gpls_woo_rfq_WOO_PATH);
 
-            gpls_woo_rfq_cart_delete('gpls_woo_rfq_cart_notices');
+            gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
             // return;
 
             return ob_get_clean();
@@ -1147,7 +1118,11 @@ eod
             }
 
 
-
+            /* if (count($gpls_woo_rfq_cart) == 0) {
+                 //  gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart');
+             } else {
+                 //  gpls_woo_rfq_cart_set(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart', $gpls_woo_rfq_cart);
+             }*/
 
             gpls_woo_rfq_cart_set('gpls_woo_rfq_cart', $gpls_woo_rfq_cart);
 
@@ -2824,8 +2799,9 @@ eod
         $request = $_REQUEST;
 
 
-        error_reporting(0);
-        ini_set('display_errors', 'Off');
+
+        //  error_reporting(0);
+        //ini_set('display_errors', 'Off');
 
         $is_set = "no";
 
@@ -3085,10 +3061,11 @@ eod
             $link_to_rfq_page = pls_woo_rfq_get_link_to_rfq();
         }
 
-      //  $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View List', 'woo-rfq-for-woocommerce'));
-      //  $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
+        $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View List', 'woo-rfq-for-woocommerce'));
+        $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
 
 
+        $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
         $product_was_added_to_quote_request = gpls_woo_rfq_get_option('rfq_cart_wordings_product_was_added_to_quote_request', "Product was successfully added to quote request.");
         $product_was_added_to_quote_request = __($product_was_added_to_quote_request, 'woo-rfq-for-woocommerce');
 
@@ -3103,17 +3080,21 @@ eod
         //$notice = get_transient('gpls_woo_rfq_auction_notices');
         $notice = gpls_woo_rfq_get_item('gpls_woo_rfq_cart_notices');
 
-       // $notice = __($notice, 'woo-rfq-for-woocommerce');
+        //  $notice = __($notice, 'woo-rfq-for-woocommerce');
+
+        $notice_message = sprintf(
+        /* translators: notice label. */
+            (__('%1$s', 'woo-rfq-for-woocommerce' )),
+            esc_html(isset($notice["message"])?$notice["message"]:"")
+        );
 
 //d($all_notices);
-        //np_write_log( $notice,__FILE__,__LINE__);
-
-        if (isset($notice['type'])) {
-            $message = $message . '<br />' . $notice['message'];
+        if (isset($notice["type"])) {
+            $message = $message . '<br />' . $notice_message;
         }
 
         //delete_transient('gpls_woo_rfq_auction_notices');
-        gpls_woo_rfq_cart_delete('gpls_woo_rfq_cart_notices');
+        gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
 
         return $message;
 

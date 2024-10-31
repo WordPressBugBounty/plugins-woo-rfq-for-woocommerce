@@ -100,10 +100,13 @@ if (!class_exists('WC_Gateway_GPLS_Request_Quote') && class_exists('WC_Payment_G
         {
             $order=false;
 
-            if (isset($_GET['key'])) {
-               // $order_key = $_GET['key'];
-                //$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
-                $order_key = sanitize_text_field( wp_unslash( $_GET['key'] ?? '' ) );
+            //sanitized and unslashed
+
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if (isset($_GET['key'])) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $order_key = sanitize_text_field( wp_unslash( $_GET['key'] ?? '' ) );// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 
                 $order_id = wc_get_order_id_by_order_key($order_key);
@@ -131,7 +134,8 @@ if (!class_exists('WC_Gateway_GPLS_Request_Quote') && class_exists('WC_Payment_G
         {
            // $order = new WC_Order();
             if ($this->instructions && !$sent_to_admin && 'gpls-rfq' === $order->get_payment_method() && $order->has_status('wc-gplsquote-req')) {
-                echo wpautop(wptexturize($this->instructions)) . PHP_EOL;
+                echo wp_kses(wpautop(wptexturize($this->instructions)) . PHP_EOL,
+                    wp_kses_allowed_html( 'post' ));
             }
         }
 

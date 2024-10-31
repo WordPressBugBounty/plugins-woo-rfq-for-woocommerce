@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( empty( wp_kses_post($subscriptions )) ) {
+if ( empty( esc_js($subscriptions )) ) {
 	return;
 }
 
@@ -44,8 +44,8 @@ $is_parent_order       = wcs_order_contains_subscription( $order, 'parent' );
 					<br>
 					<small><?php
                         /* translators:payment date. */
-                        printf( wp_kses_post(__( 'Next payment: %s', 'woo-rfq-for-woocommerce' )),
-                            wp_kses_post( date_i18n( wc_date_format(), $subscription->get_time( 'next_payment', 'site' ) ) ) ); ?></small>
+                        printf( esc_html__( 'Next payment: %s', 'woo-rfq-for-woocommerce' ),
+                            esc_html( date_i18n( wc_date_format(), $subscription->get_time( 'next_payment', 'site' ) ) ) ); ?></small>
 				<?php endif; ?>
 			</td>
             <?php endif; ?>

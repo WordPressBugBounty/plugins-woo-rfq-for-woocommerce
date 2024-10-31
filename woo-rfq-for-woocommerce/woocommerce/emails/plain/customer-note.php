@@ -31,14 +31,14 @@ if ($show_prices == false) {
  */
 
 do_action('woocommerce_email_header', $email_heading, $email);
-if ($content_intro != "") echo '<p>' .  wp_kses_post($content_intro) . '</p>';
+if ($content_intro != "") echo '<p>' .  esc_js($content_intro) . '</p>';
 
 ?>
 
 
-    <p><?php printf( wp_kses_post(__("Hello, a note has just been added to your order:", 'woo-rfq-for-woocommerce'))); ?></p>
+    <p><?php printf( esc_js(__("Hello, a note has just been added to your order:", 'woo-rfq-for-woocommerce'))); ?></p>
 
-    <blockquote><?php echo  wp_kses_post(wpautop(wptexturize($customer_note))) ?></blockquote>
+    <blockquote><?php echo  esc_js(wpautop(wptexturize($customer_note))) ?></blockquote>
 
 <?php
 
@@ -61,11 +61,11 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
 
 ?>
 
-    <p><?php printf( wp_kses_post(__("For your reference, your order details are shown below.", 'woo-rfq-for-woocommerce'))); ?></p>
+    <p><?php printf( esc_js(__("For your reference, your order details are shown below.", 'woo-rfq-for-woocommerce'))); ?></p>
 
     <h2><?php
         /* translators:order number. */
-        printf( wp_kses_post(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number())); ?></h2>
+        printf( esc_js(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number())); ?></h2>
 
     <table class="td" cellspacing="0" cellpadding="6"
            style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">

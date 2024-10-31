@@ -30,7 +30,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
 <?php
 
 do_action('woocommerce_email_header', $email_heading,$email);
-if ($content_intro != "") echo '<p>' . wp_kses_post($content_intro) . '</p>';
+if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
 ?>
 
 <p><?php printf( wp_kses_post(__("Your request has been received and is now being reviewed. Your request details are shown below for your reference:",

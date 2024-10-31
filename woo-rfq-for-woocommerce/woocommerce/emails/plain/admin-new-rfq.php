@@ -27,11 +27,11 @@ $margin_side = is_rtl() ? 'left' : 'right';
                 /* translators:customer name label. */
             wp_kses(__('You have received an request for a quote from %s. The request is as follows:', 'woo-rfq-for-woocommerce'),
                 wp_kses_allowed_html( 'post' )),
-            wp_kses_post($order->get_formatted_billing_full_name())); ?></p>
+            esc_js($order->get_formatted_billing_full_name())); ?></p>
 
 <?php do_action('woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email); ?>
 
-    <h2><a class="link" href="<?php echo  wp_kses_post(admin_url('post.php?post=' .  esc_js($order->get_id()) . '&action=edit')); ?>">
+    <h2><a class="link" href="<?php echo  esc_js(admin_url('post.php?post=' .  esc_js($order->get_id()) . '&action=edit')); ?>">
            
 
 
@@ -51,7 +51,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
         <tr>
             <th class="td" scope="col"
                 style="text-align:<?php echo esc_attr( $text_align ); ?>;">
-                <?php printf( wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
+                <?php printf( esc_js(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
             <th class="td" scope="col"
                 style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(esc_js(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
             <th class="td" scope="col"

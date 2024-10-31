@@ -36,7 +36,7 @@ foreach ($items as $item_id => $item) :
         ?>
         <tr class="<?php echo esc_attr(apply_filters('woocommerce_order_item_class', 'order_item', $item, $order)); ?>">
             <td class="td"
-                style="text-align:<?php echo wp_kses_post($text_align);
+                style="text-align:<?php echo esc_js($text_align);
                 ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php
 
                 // Show title/image etc
