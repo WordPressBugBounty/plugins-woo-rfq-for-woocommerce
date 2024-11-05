@@ -68,7 +68,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
 
         gpls_woo_rfq_remove_filters_normal_checkout();
 
-        echo wp_kses(rfqtk_get_email_order_items($order,array(
+        echo html_entity_decode(wp_kses(rfqtk_get_email_order_items($order,array(
             'items' =>$order->get_items(),
             'show_sku' => true,
             'show_image' => true,
@@ -78,7 +78,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
             'sent_to_admin' => true,
             'hide_admin' => $hide_admin,
 
-        )),wp_kses_allowed_html( 'post' ));
+        )),wp_kses_allowed_html( 'post' )));
 
         ?>
 
@@ -98,7 +98,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
                 <td class="td"
                     style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1)
                         echo 'border-top-width: 4px;'; ?>"><?php if (!$hide_admin)
-                            echo wp_kses($total['value'],wp_kses_allowed_html( 'post' )); ?></td>
+                            echo html_entity_decode(wp_kses($total['value'],wp_kses_allowed_html( 'post' ))); ?></td>
                 </tr><?php
             }
         }
@@ -124,7 +124,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
 
 <?php
 if ($additional_content) {
-    echo wp_kses( $additional_content,wp_kses_allowed_html( 'post' ));
+    echo html_entity_decode(wp_kses( $additional_content,wp_kses_allowed_html( 'post' )));
 }
 ?>
 

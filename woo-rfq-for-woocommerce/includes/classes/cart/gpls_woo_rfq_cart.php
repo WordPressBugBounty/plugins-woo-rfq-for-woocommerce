@@ -764,7 +764,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
            // $content = wp_kses($content, wp_kses_allowed_html('post'));
-            echo wp_kses($rfq_product_script, wp_kses_allowed_html('post'));
+            echo html_entity_decode(wp_kses($rfq_product_script, wp_kses_allowed_html('post')));
 
 
         }
@@ -1481,7 +1481,8 @@ jQuery( '.amount,.bundle_price' ).hide();jQuery( '.amount,.bundle_price' ).attr(
         '.related  .bundle_price >*').attr('style','opacity: 1 !important;');
 } ); ";
 
-                    echo "<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )). '</script></div>';
+                    echo "<div class='gpls_script' style='display: none'><script> " .
+                        html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))). '</script></div>';
 //end test
 
 
@@ -1538,7 +1539,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                     echo "<div class='gpls_script' style='display: none'><script> "
-                        .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                        .html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
 
                 }
@@ -1634,7 +1635,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
                 echo "<div class='gpls_script' style='display: none'><script> "
-                    .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                    .html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
             }
             ?>
@@ -1705,7 +1706,7 @@ jQuery( '.amount,.bundle_price, .product-selector__price' ).attr('style','visibi
 
 
                         echo "<div class='gpls_script' style='display: none'><script> "
-                            .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                            .html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
 
                         $rfq_product_script = "jQuery(document ).ready( function() {
@@ -1759,7 +1760,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                         echo "<div class='gpls_script' style='display: none'><script> "
-                            .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                            .html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
                     }
 
@@ -1785,7 +1786,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 } ); ";
 
 
-                                echo "<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                                echo "<div class='gpls_script' style='display: none'><script> " .
+                                    html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
                                 add_action('wp_print_footer_scripts', 'gpls_woo_rfq_print_script_show_single_add', 1000);
 

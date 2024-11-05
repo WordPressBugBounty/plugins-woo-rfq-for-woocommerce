@@ -24,11 +24,12 @@ echo '<tr class="info_tr"><td class="info_td"
         echo '<div class="password_input_div">
 <span class="woocommerce-input-wrapper password-input">
                <input type="password"  class="input-text " name="account_password" id="account_password" placeholder="'
-            .wp_kses($password_placeholder,wp_kses_allowed_html( 'post' )).'" style="width: 100%" value="" autocomplete="new-password">
+            .html_entity_decode(wp_kses($password_placeholder,wp_kses_allowed_html( 'post' )))
+            .'" style="width: 100%" value="" autocomplete="new-password">
               <div class="woocommerce-password-strength" id="password-length" aria-live="polite" style=""></div>
               
  </span>
-            <small class="woocommerce-password-hint">'.wp_kses($hint,wp_kses_allowed_html( 'post' )).'</small></div>
+            <small class="woocommerce-password-hint">'.html_entity_decode(wp_kses($hint,wp_kses_allowed_html( 'post' ))).'</small></div>
 
     </td></tr>
 ';

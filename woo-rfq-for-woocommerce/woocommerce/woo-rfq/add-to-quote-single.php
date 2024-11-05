@@ -11,17 +11,17 @@ if (($in_rfq == true) && isset($link_to_rfq_page)) {
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-    echo wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' ));
+    echo html_entity_decode(wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' )));
 
 }else{
     $view_rfq_cart_button = "<a class='rfqcart-link' style='display:none !important;text-align: center' href='" . $link_to_rfq_page . "'>" . $view_your_cart_text . "</a>";
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-      echo wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' ));
+      echo html_entity_decode(wp_kses($view_rfq_cart_button,wp_kses_allowed_html( 'post' )));
 }
 
-echo wp_kses('<div style="clear:both"></div>',wp_kses_allowed_html( 'post' ));
+echo html_entity_decode(wp_kses('<div style="clear:both"></div>',wp_kses_allowed_html( 'post' )));
 // phpcs:disable
 
 $single_add_to_cart_button = "
@@ -42,7 +42,7 @@ echo $single_add_to_cart_button;
 //    'script' => array(),'alert'=>array(),'jQuery'=>array()
 //)) . '</script></div>'
 echo "<div class='gpls_script' style='display: none'><script>"
-    .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) .'</script></div>';
+    .html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) .'</script></div>';
 
 
 

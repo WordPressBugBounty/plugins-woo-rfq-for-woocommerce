@@ -88,7 +88,7 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
 
         ?>
 
-        <?php  echo wp_kses(rfqtk_get_email_order_items($order,array(
+        <?php  echo html_entity_decode(wp_kses(rfqtk_get_email_order_items($order,array(
             'items' =>$order->get_items(),
             'show_sku' => true,
             'show_image' => true,
@@ -97,7 +97,7 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
             'show_prices' => $show_prices,
             'hide_admin'=>false,
 
-        )),wp_kses_allowed_html( 'post' ));
+        )),wp_kses_allowed_html( 'post' )));
         ?>
 
         </tbody>
@@ -150,7 +150,7 @@ do_action('woocommerce_email_customer_details', $order, $sent_to_admin, $plain_t
 
 
 if ( $additional_content ) {
-    echo wp_kses( $additional_content,wp_kses_allowed_html( 'post' ));
+    echo html_entity_decode(wp_kses( $additional_content,wp_kses_allowed_html( 'post' )));
 }
 
 

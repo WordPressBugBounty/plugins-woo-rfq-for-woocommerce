@@ -28,10 +28,10 @@ $product_type=$product->get_type();
                        <input type='submit'  name='submit' value='<?php echo wp_kses_post($request_quote) ?>' id='rfq_button_<?php echo wp_kses_post($rfq_id); ?>'
                               class='button rfq_button'
                        style="<?php echo esc_js($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_styles']) ?>"
-                       onmouseover="<?php echo wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_onmouseover'],wp_kses_allowed_html( 'post' ))
-                           . ';' . wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_background_onmouseover'],wp_kses_allowed_html( 'post' )) ?>"
-                       onmouseout="<?php echo wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_onmouseout'],wp_kses_allowed_html( 'post' ))
-                           . ';' . wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_background_onmouseout'],wp_kses_allowed_html( 'post' )) ?>"/>
+                       onmouseover="<?php echo html_entity_decode(wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_onmouseover'],wp_kses_allowed_html( 'post' )))
+                           . ';' . html_entity_decode(wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_background_onmouseover'],wp_kses_allowed_html( 'post' ))) ?>"
+                       onmouseout="<?php echo html_entity_decode(wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_onmouseout'],wp_kses_allowed_html( 'post' )))
+                           . ';' . html_entity_decode(wp_kses($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_background_onmouseout'],wp_kses_allowed_html( 'post' ))) ?>"/>
                        <?php else: ?>
                        <?php do_action("gpls_rfq_add_to_quote_qty_action",$rfq_id,$gpls_woo_rfq_file_add_to_quote_styles,$product,$request_quote,$data_var,$rfq_check) ?>
                        <?php endif; ?>

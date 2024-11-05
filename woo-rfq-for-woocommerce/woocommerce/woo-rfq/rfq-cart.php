@@ -672,7 +672,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                   jQuery('#rfq_state_select').attr('required',false);                 
      }    
 ";
-                echo wp_kses("<div class='gpls_script' style='display: none'><script> " . $script . '</script></div>',wp_kses_allowed_html( 'post' ));
+                echo html_entity_decode(wp_kses("<div class='gpls_script' style='display: none'><script> " . $script . '</script></div>',wp_kses_allowed_html( 'post' )));
 
                 ?>
 

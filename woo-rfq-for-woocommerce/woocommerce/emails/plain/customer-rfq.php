@@ -69,7 +69,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
     ?>
 
     <?php
-    echo wp_kses(rfqtk_get_email_order_items($order,array(
+    echo html_entity_decode(wp_kses(rfqtk_get_email_order_items($order,array(
         'items' =>$order->get_items(),
         'show_sku' => true,
         'show_image' => true,
@@ -77,7 +77,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
         'plain_text' => $plain_text,
         'show_prices' => $show_prices
 
-    )),wp_kses_allowed_html( 'post' ));
+    )),wp_kses_allowed_html( 'post' )));
 
     ?>
 
@@ -163,7 +163,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
 
 
 if ( $additional_content ) {
-    echo wp_kses( $additional_content,wp_kses_allowed_html( 'post' ));
+    echo html_entity_decode(wp_kses( $additional_content,wp_kses_allowed_html( 'post' )));
 }
 
 do_action('woocommerce_email_footer', $email);

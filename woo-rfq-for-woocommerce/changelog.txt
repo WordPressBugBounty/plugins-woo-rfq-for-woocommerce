@@ -3,6 +3,11 @@
 = 1.9.173 10/31/2024 =
 fix critical error
 
+= 1.9.174 11/4/2024 =
+fix js error
+
+= 1.9.173 10/31/2024 =
+fix critical error
 
 = 1.9.172 10/30/2024 =
 fix the problems with single product page labels after add to cart;

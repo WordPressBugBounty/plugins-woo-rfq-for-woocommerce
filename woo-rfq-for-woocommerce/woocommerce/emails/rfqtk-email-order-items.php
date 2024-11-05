@@ -45,18 +45,19 @@ foreach ($items as $item_id => $item) :
 
                         $current_array = wp_get_attachment_image_src($product->get_image_id(), 'thumbnail');
 
-                        echo  wp_kses((apply_filters('woocommerce_order_item_thumbnail', '<div style="margin-bottom: 5px"><img src="'
+                        echo  html_entity_decode(wp_kses((apply_filters('woocommerce_order_item_thumbnail', '<div style="margin-bottom: 5px"><img src="'
                             . ($product->get_image_id() && is_array($current_array) && !empty($current_array) ? current($current_array) :
                                 wc_placeholder_img_src()) . '" alt="' . esc_attr__('Product image', 'woo-rfq-for-woocommerce') .
                             '" height="' . esc_attr($image_size[1]) . '" width="' . esc_attr($image_size[0]) . '" style="vertical-align:middle; margin-' .
-                            (is_rtl() ? 'left' : 'right') . ': 10px;" /></div>', $item)),wp_kses_allowed_html( 'post' ));
+                            (is_rtl() ? 'left' : 'right') . ': 10px;" /></div>', $item)),wp_kses_allowed_html( 'post' )));
                     } catch (Exception $exception) {
 
                     }
                 }
 
                 // Product name
-                echo wp_kses(apply_filters('woocommerce_order_item_name', $item->get_name(), $item, false),wp_kses_allowed_html( 'post' ));
+                echo html_entity_decode(wp_kses(apply_filters('woocommerce_order_item_name', $item->get_name(), $item, false)
+                    ,wp_kses_allowed_html( 'post' )));
 
                 // SKU
                 if ($show_sku && is_object($product) && $product->get_sku()) {

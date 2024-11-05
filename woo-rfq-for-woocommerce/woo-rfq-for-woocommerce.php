@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.173
+ * Version: 1.9.174
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -1421,7 +1421,8 @@ class GPLS_WOO_RFQ
     ";
 
 
-            echo "<div class='gpls_script' style='display: none'><script> " . wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+            echo "<div class='gpls_script' style='display: none'><script> " .
+                html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
 
             $rfq_product_script2 = "
@@ -1431,7 +1432,8 @@ jQuery(document).ajaxComplete(function (event, xhr, options) {
 });";
 
 
-            echo "<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script2,wp_kses_allowed_html( 'post' )) . '</script></div>';
+            echo "<div class='gpls_script' style='display: none'><script> " .
+                html_entity_decode(wp_kses($rfq_product_script2,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
 
             if (function_exists('is_wc_endpoint_url')) {
@@ -1448,7 +1450,8 @@ jQuery( '.wc-item-meta-label' ).hide();
 jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 } ); ";
 
-                        echo "<div class='gpls_script' style='display: none'><script> " . wp_kses($rfq_product_script3,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                        echo "<div class='gpls_script' style='display: none'><script> " .
+                            html_entity_decode(wp_kses($rfq_product_script3,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
                     }
 

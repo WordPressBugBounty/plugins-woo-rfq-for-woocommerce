@@ -2676,7 +2676,7 @@ eod
                 wp_add_inline_script('gpls_woo_rfq_js', $custom_js);
 
                 echo "<div class='gpls_script' style='display: none'><script> "
-                    .wp_kses($custom_js,wp_kses_allowed_html( 'post' )) . '</script></div>';
+                    .html_entity_decode(wp_kses($custom_js,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
 
                 esc_html("<div class='gpls_script'
@@ -2737,7 +2737,7 @@ eod
                 wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
 
                 echo '<div class="gpls_script" style="display: none"><style>'
-                    .wp_kses($custom_css,wp_kses_allowed_html( 'post' )) . '</style></div>';
+                    .html_entity_decode(wp_kses($custom_css,wp_kses_allowed_html( 'post' ))) . '</style></div>';
 
 
             }
@@ -2763,7 +2763,8 @@ eod
                 });";
 
 
-            echo "<div class='gpls_script' style='display: none'><script> " .wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' )) . '</script></div>';
+            echo "<div class='gpls_script' style='display: none'><script> " .
+                html_entity_decode(wp_kses($rfq_product_script,wp_kses_allowed_html( 'post' ))) . '</script></div>';
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
