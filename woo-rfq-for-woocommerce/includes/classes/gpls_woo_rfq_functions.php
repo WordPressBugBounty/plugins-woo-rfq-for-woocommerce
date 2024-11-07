@@ -907,7 +907,7 @@ eod
                 array('confirmation_message' => $confirmation_message),
                 '', gpls_woo_rfq_WOO_PATH);
 
-            gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
+            gpls_woo_rfq_cart_delete('gpls_woo_rfq_cart_notices');
             // return;
 
             return ob_get_clean();
@@ -1118,11 +1118,7 @@ eod
             }
 
 
-            /* if (count($gpls_woo_rfq_cart) == 0) {
-                 //  gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart');
-             } else {
-                 //  gpls_woo_rfq_cart_set(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart', $gpls_woo_rfq_cart);
-             }*/
+
 
             gpls_woo_rfq_cart_set('gpls_woo_rfq_cart', $gpls_woo_rfq_cart);
 
@@ -2797,14 +2793,13 @@ eod
     function gpls_woo_rfq_woocommerce_add_to_cart($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
     {
 
+        gpls_woo_rfq_cart_delete( 'gpls_woo_rfq_cart_notices');
+
+        ini_set('display_errors', 'Off');
+
         $request = $_REQUEST;
-
-
-
-        //  error_reporting(0);
-        //ini_set('display_errors', 'Off');
-
         $is_set = "no";
+
 
         global $woocommerce;
 
@@ -3095,7 +3090,7 @@ eod
         }
 
         //delete_transient('gpls_woo_rfq_auction_notices');
-        gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
+        gpls_woo_rfq_cart_delete( 'gpls_woo_rfq_cart_notices');
 
         return $message;
 

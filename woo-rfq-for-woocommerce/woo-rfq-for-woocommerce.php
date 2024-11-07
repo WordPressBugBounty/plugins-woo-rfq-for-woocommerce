@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.174
+ * Version: 1.9.175
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -10,7 +10,7 @@
  * Requires at least: 6.3
  * Tested up to: 6.6
  * Requires PHP: 7.4
- * WC tested up to: 9.3.2
+ * WC tested up to: 9.3.3
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2024 Neah Plugins.
@@ -484,22 +484,22 @@ class GPLS_WOO_RFQ
 
         $wp_session = gpls_woo_get_session();
 
-        $key = sanitize_key(gpls_woo_rfq_cart_tran_key() . '_' . 'rfq_checkout_files');
+        $key = sanitize_key( 'rfq_checkout_files');
 
         unset($wp_session[$key]);
 
-        $key = sanitize_key(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
+        $key = sanitize_key( 'gpls_woo_rfq_cart_notices');
 
         unset($wp_session[$key]);
 
-        $key = sanitize_key(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
+        $key = sanitize_key( 'gpls_woo_rfq_cart_notices');
 
         unset($wp_session[$key]);
 
         $wp_session->write_data();
 
-        gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart_notices');
-        gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'rfq_checkout_files');
+        gpls_woo_rfq_cart_delete( 'gpls_woo_rfq_cart_notices');
+        gpls_woo_rfq_cart_delete( 'rfq_checkout_files');
 
     }
 
@@ -1694,7 +1694,7 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
     public function gpls_woo_rfq_logout()
     {
 
-        //gpls_woo_rfq_cart_delete(gpls_woo_rfq_cart_tran_key() . '_' . 'gpls_woo_rfq_cart');
+        //gpls_woo_rfq_cart_delete( 'gpls_woo_rfq_cart');
 
     }
 

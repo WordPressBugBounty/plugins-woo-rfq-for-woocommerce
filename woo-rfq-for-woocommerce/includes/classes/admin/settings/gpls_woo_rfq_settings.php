@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
     class GPLS_Woo_RFQ_Settings extends WC_Settings_Page

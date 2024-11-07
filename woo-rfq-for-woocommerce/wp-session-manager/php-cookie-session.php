@@ -77,9 +77,7 @@ if(!function_exists('gpls_woo_rfq_cart_tran_key')) {
     function gpls_woo_rfq_cart_tran_key()
     {
 
-        /*$wp_session = RFQTK_WP_Session::get_instance();
-        $tran_key = apply_filters('set_gpls_rfq_cart_tran_key', $wp_session->session_id);
-        return $wp_session->session_id;*/
+
         $wp_session = RFQTK_PHP_Session::get_instance();
         return $wp_session->session_id;
 

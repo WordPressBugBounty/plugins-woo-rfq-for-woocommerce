@@ -1,10 +1,12 @@
 == Changelog ==
-
-= 1.9.173 10/31/2024 =
-fix critical error
+= 1.9.175 11/6/2024 =
+fix notice error
 
 = 1.9.174 11/4/2024 =
 fix js error
+
+= 1.9.173 10/31/2024 =
+fix critical error
 
 = 1.9.173 10/31/2024 =
 fix critical error
