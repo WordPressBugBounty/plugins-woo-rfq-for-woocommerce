@@ -37,9 +37,6 @@ if(function_exists('is_user_logged_in')) {
 
     <?php
 
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
-// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
-
     require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
     require_once(ABSPATH . 'wp-includes/class-phpass.php');
 
@@ -60,11 +57,11 @@ if(function_exists('is_user_logged_in')) {
     }
 
     ?>
-    <?php echo '<a href="' . wp_kses_post(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . wp_kses_post($proceed_to_rfq) . '</a>'; ?>
+    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . $proceed_to_rfq . '</a>'; ?>
 <?php else :
     $alternate = __('Proceed to checkout','woo-rfq-for-woocommerce');
-    $alternate = __(wp_kses_post($alternate),'woo-rfq-for-woocommerce');?>
-    <?php echo '<a href="' . wp_kses_post(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . wp_kses_post($alternate) . '</a>'; ?>
+    $alternate = __($alternate,'woo-rfq-for-woocommerce');?>
+    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . $alternate . '</a>'; ?>
 <?php endif; ?>
 
 

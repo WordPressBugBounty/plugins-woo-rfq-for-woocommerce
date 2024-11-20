@@ -30,33 +30,24 @@ $margin_side = is_rtl() ? 'left' : 'right';
 <?php
 
 do_action('woocommerce_email_header', $email_heading,$email);
-if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
+if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
 ?>
 
-<p><?php printf( wp_kses_post(__("Your request has been received and is now being reviewed. Your request details are shown below for your reference:",
-        'woo-rfq-for-woocommerce'))); ?></p>
+<p><?php printf( __("Your request has been received and is now being reviewed. Your request details are shown below for your reference:", 'woo-rfq-for-woocommerce')); ?></p>
 
 <?php do_action('woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
+<h2><?php printf(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number()); ?></h2>
 
-    <h2>
-        <?php printf(wp_kses_post(
-        /* translators: get_order_number . */
-            wp_kses_post(__('Order #%s', 'woo-rfq-for-woocommerce'),wp_kses_allowed_html( 'post' ))),
-            wp_kses_post($order->get_order_number()));
-        ?>
-    </h2>
-
-
-    <table class="td" cellspacing="0" cellpadding="6"
+<table class="td" cellspacing="0" cellpadding="6"
        style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
     <thead>
     <tr>
-        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
-        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
+        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Product', 'woo-rfq-for-woocommerce')); ?></th>
+        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Quantity', 'woo-rfq-for-woocommerce')); ?></th>
         <?php if ($show_prices  == 'yes')  : ?>
 
-            <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Price', 'woo-rfq-for-woocommerce'))); ?></th>
+            <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Price', 'woo-rfq-for-woocommerce')); ?></th>
         <?php endif; ?>
 
     </tr>
@@ -68,8 +59,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
 
     ?>
 
-    <?php
-    echo html_entity_decode(wp_kses(rfqtk_get_email_order_items($order,array(
+    <?php echo rfqtk_get_email_order_items($order,array(
         'items' =>$order->get_items(),
         'show_sku' => true,
         'show_image' => true,
@@ -77,9 +67,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
         'plain_text' => $plain_text,
         'show_prices' => $show_prices
 
-    )),wp_kses_allowed_html( 'post' )));
-
-    ?>
+    )); ?>
 
     </tbody>
     <tfoot>
@@ -97,9 +85,9 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
                     ?>
                     <tr>
                     <th class="td" scope="row" colspan="2"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo esc_js($total['label']); ?></th>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
                     <td class="td"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>;<?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo esc_js($total['value']); ?></td>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>;<?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
                     </tr><?php
                 }
             }
@@ -116,42 +104,35 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
 ?>
 
 <?php
+$plaintext = $plain_text;
+$is_admin_email = $sent_to_admin;
+
+if(function_exists('wcs_order_contains_subscription')) {
+
+    $is_parent_order = wcs_order_contains_subscription($order, 'parent');
+
+    if ($is_parent_order && function_exists('wcs_get_subscriptions_for_order')) {
+
+        $subscriptions = wcs_get_subscriptions_for_order($order, array('order_type' => 'any'));
 
 
-   $plaintext = $plain_text;
-   $is_admin_email = $sent_to_admin;
+        if (!empty($subscriptions)) {
 
 
-   if(function_exists('wcs_order_contains_subscription'))
-   {
-
-       $is_parent_order = wcs_order_contains_subscription($order, 'parent');
-
-       if ($is_parent_order && function_exists('wcs_get_subscriptions_for_order'))
-       {
-
-           $subscriptions = wcs_get_subscriptions_for_order($order, array('order_type' => 'any'));
+            $template_sub = ($plaintext) ? 'emails/plain/subscription-info.php' : 'emails/subscription-info.php';
 
 
-           if (!empty($subscriptions)) {
+            wc_get_template($template_sub, array(
+                'order' => $order,
+                'subscriptions' => $subscriptions,
+                'is_admin_email' => $is_admin_email,
+                'show_prices' => $show_prices,
+            ), '', gpls_woo_rfq_DIR . 'woocommerce/');
 
 
-               $template_sub = ($plaintext) ? 'emails/plain/subscription-info.php' : 'emails/subscription-info.php';
-
-
-               wc_get_template($template_sub, array(
-                   'order' => $order,
-                   'subscriptions' => $subscriptions,
-                   'is_admin_email' => $is_admin_email,
-                   'show_prices' => $show_prices,
-               ), '', gpls_woo_rfq_DIR . 'woocommerce/');
-
-
-           }
-       }
-   }
-
-
+        }
+    }
+}
 
  do_action('woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text, $email);
 
@@ -163,7 +144,7 @@ if ($content_intro != "") echo '<p>' . esc_js($content_intro) . '</p>';
 
 
 if ( $additional_content ) {
-    echo html_entity_decode(wp_kses( $additional_content,wp_kses_allowed_html( 'post' )));
+    echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
 
 do_action('woocommerce_email_footer', $email);

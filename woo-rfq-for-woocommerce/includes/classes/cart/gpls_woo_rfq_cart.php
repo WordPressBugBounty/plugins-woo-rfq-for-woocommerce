@@ -1101,9 +1101,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             $in_rfq = false;
 
-            if(!function_exists('gpls_woo_rfq_get_item')){
-                require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
-                require_once(ABSPATH . 'wp-includes/class-phpass.php');
+            //if(!function_exists('gpls_woo_rfq_get_item'))
+            {
+             //   require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
+              //  require_once(ABSPATH . 'wp-includes/class-phpass.php');
             }
 
 

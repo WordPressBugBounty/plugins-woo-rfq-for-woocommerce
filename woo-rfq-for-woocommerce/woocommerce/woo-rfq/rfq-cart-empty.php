@@ -11,9 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
-// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
-// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+
+
 ?>
 <div style="clear:both; ">
 <p class="cart-empty">

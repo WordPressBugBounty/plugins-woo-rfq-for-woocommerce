@@ -1711,8 +1711,8 @@ function gplswoo_get_submit_order_label()
 
         $ajax_array['rfq_cart_wordings_submit_your_rfq_text']=$order_button_text;
 
-        require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
-        require_once(ABSPATH . 'wp-includes/class-phpass.php');
+      //  require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
+       // require_once(ABSPATH . 'wp-includes/class-phpass.php');
 
 
 

@@ -3,10 +3,10 @@ Contributors: GPLSAVER
 Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
-Tested up to: 6.6
-Requires PHP: 7.4
+Tested up to: 6.7
+Requires PHP: 8.2
 WC tested up to: 9.3.3
-Stable tag: 1.9.175
+Stable tag: 1.9.176
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -207,14 +207,18 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.174 11/4/2024 =
-fix js error
-
+= 1.9.176 11/20/2024 =
+Tested up to: 6.7
+Requires PHP: 7.4
+WC tested up to: 9.3.3
+Fix issue of email escaping html
 == Upgrade Notice ==
 
-= 1.9.175 11/6/2024 =
-fix notice error
-
+= 1.9.176 11/20/2024 =
+Tested up to: 6.7
+Requires PHP: 7.4
+WC tested up to: 9.3.3
+Fix issue of email escaping html
 
 
 

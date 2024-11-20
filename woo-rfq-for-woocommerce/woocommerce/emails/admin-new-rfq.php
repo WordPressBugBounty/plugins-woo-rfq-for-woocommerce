@@ -20,42 +20,26 @@ $margin_side = is_rtl() ? 'left' : 'right';
 ?>
 <?php do_action('woocommerce_email_header', $email_heading, $email); ?>
 
-    <p><?php
-
-
-        printf(
-                /* translators:customer name label. */
-            wp_kses(__('You have received an request for a quote from %s. The request is as follows:', 'woo-rfq-for-woocommerce'),
-                wp_kses_allowed_html( 'post' )),
-            esc_js($order->get_formatted_billing_full_name())); ?></p>
+    <p><?php printf(__('You have received an request for a quote from %s. The request is as follows:', 'woo-rfq-for-woocommerce'),
+            $order->get_formatted_billing_full_name()); ?></p>
 
 <?php do_action('woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email); ?>
 
-    <h2><a class="link" href="<?php echo  esc_js(admin_url('post.php?post=' .  esc_js($order->get_id()) . '&action=edit')); ?>">
-           
-
-
-        <h2><?php printf(
-            /* translators: get_order_number . */
-                esc_js(__('Order #%s', 'woo-rfq-for-woocommerce')), esc_js($order->get_order_number())); ?>
-        </h2>
-
-        (<?php printf( ('<time datetime="%s">%s</time>'),  esc_js(date_i18n('c', strtotime(esc_js($order->get_date_created())))),
-                esc_js(date_i18n(wc_date_format(), strtotime(esc_js($order->get_date_created()))))
-
-            ); ?>)</h2>
+    <h2><a class="link" href="<?php echo admin_url('post.php?post=' . $order->get_id() . '&action=edit'); ?>">
+            <?php printf(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number()); ?></a>
+        (<?php printf('<time datetime="%s">%s</time>', date_i18n('c', strtotime($order->get_date_created())),
+            date_i18n(wc_date_format(), strtotime($order->get_date_created()))); ?>)</h2>
 
     <table class="td" cellspacing="0" cellpadding="6"
            style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
         <thead>
         <tr>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;">
-                <?php printf( esc_js(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Product', 'woo-rfq-for-woocommerce')); ?></th>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(esc_js(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Quantity', 'woo-rfq-for-woocommerce')); ?></th>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(esc_js(__('Price', 'woo-rfq-for-woocommerce'))); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Price', 'woo-rfq-for-woocommerce')); ?></th>
 
 
         </tr>
@@ -68,8 +52,8 @@ $margin_side = is_rtl() ? 'left' : 'right';
 
         gpls_woo_rfq_remove_filters_normal_checkout();
 
-        echo html_entity_decode(wp_kses(rfqtk_get_email_order_items($order,array(
-            'items' =>$order->get_items(),
+        echo rfqtk_get_email_order_items($order, array(
+            'items' => $order->get_items(),
             'show_sku' => true,
             'show_image' => true,
             'image_size' => array(128, 128),
@@ -78,9 +62,8 @@ $margin_side = is_rtl() ? 'left' : 'right';
             'sent_to_admin' => true,
             'hide_admin' => $hide_admin,
 
-        )),wp_kses_allowed_html( 'post' )));
 
-        ?>
+        )); ?>
 
         </tbody>
         <tfoot>
@@ -94,11 +77,9 @@ $margin_side = is_rtl() ? 'left' : 'right';
                 ?>
                 <tr>
                 <th class="td" scope="row" colspan="2"
-                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo esc_js($total['label']); ?></th>
+                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
                 <td class="td"
-                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1)
-                        echo 'border-top-width: 4px;'; ?>"><?php if (!$hide_admin)
-                            echo html_entity_decode(wp_kses($total['value'],wp_kses_allowed_html( 'post' ))); ?></td>
+                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php if (!$hide_admin) echo $total['value']; ?></td>
                 </tr><?php
             }
         }
@@ -124,7 +105,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
 
 <?php
 if ($additional_content) {
-    echo html_entity_decode(wp_kses( $additional_content,wp_kses_allowed_html( 'post' )));
+    echo wp_kses_post(wpautop(wptexturize($additional_content)));
 }
 ?>
 
