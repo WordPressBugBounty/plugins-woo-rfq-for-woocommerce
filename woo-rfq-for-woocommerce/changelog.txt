@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.9.177 11/21/2024 =
+fix critical error
+
 = 1.9.176 11/20/2024 =
 Tested up to: 6.7
 Requires PHP: 7.4

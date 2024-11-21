@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 8.2
 WC tested up to: 9.3.3
-Stable tag: 1.9.176
+Stable tag: 1.9.177
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -207,18 +207,12 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 1.9.176 11/20/2024 =
-Tested up to: 6.7
-Requires PHP: 7.4
-WC tested up to: 9.3.3
-Fix issue of email escaping html
-== Upgrade Notice ==
+= 1.9.177 11/21/2024 =
+fix critical error
 
-= 1.9.176 11/20/2024 =
-Tested up to: 6.7
-Requires PHP: 7.4
-WC tested up to: 9.3.3
-Fix issue of email escaping html
+== Upgrade Notice ==
+= 1.9.177 11/21/2024 =
+fix critical error
 
 
 

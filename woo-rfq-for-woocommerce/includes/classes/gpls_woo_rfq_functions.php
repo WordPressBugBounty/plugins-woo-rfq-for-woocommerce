@@ -1455,7 +1455,7 @@ eod
                 $order->update_status("gplsquote-req");
 
 
-                $order->save();
+               // $order->save();
 
                 if (isset($_REQUEST['global_product_id'])
                     && isset($_REQUEST['rfqform_location'])
@@ -1870,7 +1870,7 @@ eod
 
                 //TODO check on stock issue
 
-                $order->save();
+               // $order->save();
 
                 if (isset($_REQUEST['global_product_id'])
                     && isset($_REQUEST['rfqform_location']) && sanitize_text_field(wp_unslash($_REQUEST['rfqform_location'])) === "product") {

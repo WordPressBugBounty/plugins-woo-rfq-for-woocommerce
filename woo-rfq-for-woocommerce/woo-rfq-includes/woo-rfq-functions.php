@@ -314,7 +314,7 @@ function gpls_woo_rfq_woocommerce_pre_payment_complete($orderid)
         && $order->get_status() != 'gplsquote-req'
     ) {
         $order->update_status('wc-gplsquote-req', __('RFQ', 'woo-rfq-for-woocommerce'));
-        $order->save();
+       // $order->save();
     }
 }
 
@@ -1173,7 +1173,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
                 $order->add_order_note($no_payment,0,1);
                 $order->update_status('pending');
-                $order->save();
+               // $order->save();
 
                 $email_new_order = WC()->mailer()->get_emails()['WC_Email_New_Order'];
 
