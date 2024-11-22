@@ -32,7 +32,7 @@ $product_type=$product->get_type();
                        <?php else: ?>
                        <?php do_action("gpls_rfq_add_to_quote_qty_action",$rfq_id,$gpls_woo_rfq_file_add_to_quote_styles,$product,$request_quote,$data_var,$rfq_check) ?>
                        <?php endif; ?>
-                        <div style="display:none !important;max-width:20px !important; text-align: center !important;margin-left: auto !important;margin-right:auto  !important" id='image_<?php echo $rfq_id; ?>'><image style="max-width:10px !important"  src="<?php echo gpls_woo_rfq_URL ?>/gpls_assets/img/select2-spinner.gif" /></div>
+                        <div style="display:none !important;max-width:20px !important; text-align: center !important;margin-left: auto !important;margin-right:auto  !important" id='image_<?php echo $rfq_id; ?>'><image style="max-width:10px !important"  src="<?php echo gpls_woo_rfq_URL ?>/gpls_assets/img/select2-spinner.gif"></image></div>
                         <div id='note_<?php echo $rfq_id; ?>'></div>
 
 </form>

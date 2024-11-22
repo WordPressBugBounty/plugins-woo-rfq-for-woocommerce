@@ -36,7 +36,8 @@ $single_add_to_cart_button = "
 $single_add_to_cart_button = apply_filters('gpls_woo_rfq_single_add_to_cart_button', $single_add_to_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
 echo $single_add_to_cart_button;
-echo $rfq_product_script;
+echo   "<div class='gpls_script' style='display: none'><script> " .
+    $rfq_product_script. '</script></div>';
 
 
 
