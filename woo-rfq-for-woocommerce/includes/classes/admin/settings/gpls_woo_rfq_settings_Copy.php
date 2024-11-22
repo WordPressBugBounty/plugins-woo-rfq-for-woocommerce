@@ -611,16 +611,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'desc' => __('Manage labels and wordings', 'woo-rfq-for-woocommerce'),
                                 'id' => 'rfq_cart_wordings_section_title'
                             ),
-                            'settings_gpls_woo_rfq_use_multi_mode' => array(
-                                'name' => '0- ' . __('Use multilingual labels', 'woo-rfq-for-woocommerce'),
-                                'type' => 'checkbox',
-                                'desc' => __('Multilingual checkbox: If this is checked, then the plugin will not use the options below. <br />
-Default English will be used (same as defaults below) and you can use your translation tool<br /> to change/translate the labels.
- If the checkbox is not checked, then the plugin uses<br /> 
-the options entered below.', 'woo-rfq-for-woocommerce'),
-                                'default' => 'no',
-                                'id' => 'settings_gpls_woo_rfq_use_multi_mode'
-                            ),
+
 
 
                             'rfq_cart_wordings_add_to_cart' => array(

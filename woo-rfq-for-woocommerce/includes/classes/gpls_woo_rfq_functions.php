@@ -917,7 +917,7 @@ eod
             ob_start();
 
             wc_get_template('woo-rfq/rfq-cart-empty.php',
-                array(),
+                array('confirmation_message' => ''),
                 '', gpls_woo_rfq_WOO_PATH);
             //return;
 

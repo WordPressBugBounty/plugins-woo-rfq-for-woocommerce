@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
+if(!isset($confirmation_message) || is_admin())return;
 
 ?>
 <div style="clear:both; ">
