@@ -2300,10 +2300,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 if (get_option('settings_gpls_woo_rfq_hide_visitor_prices', 'no') == 'yes' && !is_user_logged_in()) {
 
                     $add_txt = get_option('rfq_cart_wordings_add_to_rfq', $default_text);
-                    $add_txt = __($add_txt, 'woo-rfq-for-woocommerce');
+                  //  $add_txt = __($add_txt, 'woo-rfq-for-woocommerce');
 
                     $in_txt = get_option('rfq_cart_wordings_in_rfq', $default_text);
-                    $in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
+                 //   $in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
 
                 }
             }
@@ -2348,7 +2348,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
                     $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
-                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
+                     //   $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
                         $request_quote = $read_more;// "Request Quote"
@@ -2369,7 +2369,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
                     $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
-                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
+                     //   $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
                         $request_quote = $read_more;// "Request Quote"
@@ -2383,6 +2383,8 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
             do_action('gpls_woo_rfq_add_to_cart_button_text_action', $add_txt, $product, $rfq_checkout_mode);
 
             $add_txt= apply_filters('gpls_woo_rfq_add_to_cart_button_text', $add_txt, $product, $rfq_checkout_mode);
+
+
 
 
             return $add_txt;

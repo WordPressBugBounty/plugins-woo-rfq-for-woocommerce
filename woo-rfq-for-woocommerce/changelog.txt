@@ -1,4 +1,8 @@
 == Changelog ==
+
+= 1.9.180 1/22/2025 =
+fix password file
+
 = 1.9.179 11/22/2024 =
 languge file corruption fixed
 

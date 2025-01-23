@@ -9,11 +9,14 @@ if($needs_payment == "yes") {
 
     add_action('woocommerce_order_needs_payment', 'gplswoo_woocommerce_order_needs_payment', 10, 3);
     function gplswoo_woocommerce_order_needs_payment($status, $order, $valid_order_statuses){
+        np_write_log( 'gplswoo_woocommerce_order_needs_payment '.$status,__FILE__,__LINE__);
+
         return false;
     }
 
 
 }
+
 {
     if ( !is_admin()&&get_option('settings_gpls_woo_rfq_no_payment_checkout', 'no') == 'yes')
     {
@@ -30,9 +33,22 @@ if($needs_payment == "yes") {
 
         if (!function_exists('woocommerce_payment_complete_status')){
             function woocommerce_payment_complete_status($status, $id, $order) {
-                return 'wc-pending';
+                np_write_log('woocommerce_payment_complete_status '. $status,__FILE__,__LINE__);
+
+                return 'pending';
             }
         }
+
+
+          if (!function_exists('gpls_pre_payment_complete')){
+              function gpls_pre_payment_complete( $id, $trx_id) {
+                  np_write_log('gpls_pre_payment_complete '. $id,__FILE__,__LINE__);
+$order=wc_get_order($id);
+$order->set_status('wc-pending');
+$order->save();
+
+              }
+          }
 
         if (!function_exists('gpls_woo_rfq_check')) {
             function gpls_woo_rfq_check()
@@ -42,6 +58,8 @@ if($needs_payment == "yes") {
 
                 add_filter( 'woocommerce_payment_complete_order_status','woocommerce_payment_complete_status',1000,3);
 //apply_filters( 'woocommerce_payment_complete_order_status', $this->needs_processing() ? 'processing' : 'completed', $this->get_id(), $this )
+
+              //  add_action( 'woocommerce_pre_payment_complete','gpls_pre_payment_complete', 100,2 );
             }
         }
 

@@ -568,7 +568,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'name' => '4-03 ' . __('No payment message', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => 'If 4-02 above is selected,<br />
-                                     this message (not blank) will be added to the subject of the notification email to admin.<br />
+                                     this message will be added to the subject of the notification email to admin.<br />
                                       It also adds a note to the order',
                                 'default' => __('No Payment', 'woo-rfq-for-woocommerce'),
                                 'id' => 'settings_gpls_woo_rfq_no_payment_checkout_text',
@@ -706,7 +706,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'css' => 'width:400px'
                             ),
                             'rfq_cart_wordings_quote_request_currently_empty' => array(
-                                'name' => '12- Normal Checkout- ' . esc_html_e('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
+                                'name' => '12- Normal Checkout- ' . __('Your Quote Request List Is Currently Empty', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => '',
                                 'default' => __('Your Quote Request List is Currently Empty.', 'woo-rfq-for-woocommerce'),

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 1.9.179
+ * Version: 1.9.180
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -10,7 +10,7 @@
  * Requires at least: 6.3
  * Tested up to: 6.7
  * Requires PHP: 7.4
- * WC tested up to: 9.3.3
+ * WC tested up to: 9.6.0
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2024 Neah Plugins.
@@ -351,11 +351,12 @@ class GPLS_WOO_RFQ
         }
 
 
-        if (class_exists('WC_Payment_Gateway')) {
+        if (class_exists('WC_Payment_Gateway'))
+        {
             //	require_once 'includes/class-wc-gateway-dummy.php';
             require_once 'includes/classes/gateway/class-wc-gateway-rfq.php';
             $GLOBALS['WC_Gateway_RFQ'] = new WC_Gateway_RFQ();
-            //	require_once 'includes/classes/gateway/wc-gateway-gpls-request-quote.php';
+            	require_once 'includes/classes/gateway/wc-gateway-gpls-request-quote.php';
         }
 
         //    $this->gpls_rfq_setup_constants();
@@ -544,12 +545,14 @@ class GPLS_WOO_RFQ
 
     public function check_for_rfq_checkout()
     {
+
         add_filter('woocommerce_payment_gateways', 'add_gpls_woo_rfq_class', 1, 1);
 
         require_once(gpls_woo_rfq_DIR . 'includes/classes/gateway/wc-gateway-gpls-request-quote.php');
 
         // add_filter('woocommerce_available_payment_gateways', 'gpls_rfq_remove_other_payment_gateways', 1000, 1);
         add_filter('woocommerce_payment_gateways', 'gpls_rfq_remove_other_block_payment_gateways', 1000, 1);
+
 
         gpls_woo_rfq_handle_checkout();
 
