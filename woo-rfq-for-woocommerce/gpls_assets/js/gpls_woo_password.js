@@ -80,7 +80,7 @@ jQuery( window ).on("load", function() {
         function check_password_strength( password,  confirm_password, length_Message, submit_Btn, blacklist_Words ) {
             var password = password.val();
 
-            blacklist_Words = blacklist_Words.concat( wp.passwordStrength.userInputBlacklist() )
+            blacklist_Words = blacklist_Words.concat( wp.passwordStrength.userInputDisallowedList() )
             jQuery('.gpls-woo-rfq_checkout_button').attr( 'disabled', 'disabled' );
             length_Message.removeClass( 'short bad good strong' );
             var password_length = wp.passwordStrength.meter( password, blacklist_Words );

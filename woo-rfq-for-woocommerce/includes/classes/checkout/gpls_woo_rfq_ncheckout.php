@@ -9,7 +9,7 @@ if($needs_payment == "yes") {
 
     add_action('woocommerce_order_needs_payment', 'gplswoo_woocommerce_order_needs_payment', 10, 3);
     function gplswoo_woocommerce_order_needs_payment($status, $order, $valid_order_statuses){
-        np_write_log( 'gplswoo_woocommerce_order_needs_payment '.$status,__FILE__,__LINE__);
+      //  np_write_log( 'gplswoo_woocommerce_order_needs_payment '.$status,__FILE__,__LINE__);
 
         return false;
     }
@@ -33,7 +33,7 @@ if($needs_payment == "yes") {
 
         if (!function_exists('woocommerce_payment_complete_status')){
             function woocommerce_payment_complete_status($status, $id, $order) {
-                np_write_log('woocommerce_payment_complete_status '. $status,__FILE__,__LINE__);
+            //   np_write_log('woocommerce_payment_complete_status '. $status,__FILE__,__LINE__);
 
                 return 'pending';
             }
@@ -42,7 +42,7 @@ if($needs_payment == "yes") {
 
           if (!function_exists('gpls_pre_payment_complete')){
               function gpls_pre_payment_complete( $id, $trx_id) {
-                  np_write_log('gpls_pre_payment_complete '. $id,__FILE__,__LINE__);
+               //   np_write_log('gpls_pre_payment_complete '. $id,__FILE__,__LINE__);
 $order=wc_get_order($id);
 $order->set_status('wc-pending');
 $order->save();
