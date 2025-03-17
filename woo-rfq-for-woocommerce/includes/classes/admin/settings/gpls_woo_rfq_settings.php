@@ -148,7 +148,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
 
         public static function gpls_woo_rfq_more_options($value)
         {
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+//   WordPress.WP.I18n.NoEmptyStrings
             $option_value = get_option($value['id'], $value['default']);
 
             ?>

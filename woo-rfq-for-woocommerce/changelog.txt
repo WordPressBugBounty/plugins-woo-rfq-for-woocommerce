@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 2.0 3/16/2025 =
+security related issue. Plugin check clean up.
+
 = 1.9.181 2/4/2025 =
 WC 9.6.1 test
 

@@ -33,9 +33,11 @@ if (!class_exists('gpls_woo_rfq_product_meta')) {
             woocommerce_wp_checkbox(
                 array(
                     'id' => '_gpls_woo_rfq_rfq_enable',
+
                     'label' => __( 'Enable RFQ for this product.', 'woo-rfq-for-woocommerce' ),
                     'placeholder' => 'Enable RFQ for this product',
                     'desc_tip' => 'true',
+
                     'description' => __( "Enable quote requests for this product.", 'woo-rfq-for-woocommerce' )
 
                 ));

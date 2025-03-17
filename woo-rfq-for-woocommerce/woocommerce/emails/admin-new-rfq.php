@@ -20,26 +20,27 @@ $margin_side = is_rtl() ? 'left' : 'right';
 ?>
 <?php do_action('woocommerce_email_header', $email_heading, $email); ?>
 
-    <p><?php printf(__('You have received an request for a quote from %s. The request is as follows:', 'woo-rfq-for-woocommerce'),
-            $order->get_formatted_billing_full_name()); ?></p>
+    <p><?php  /* translators: %s: customer */ printf(wp_kses_post(__('You have received an request for a quote from %s. The request is as follows:', 'woo-rfq-for-woocommerce')),
+            wp_kses_post($order->get_formatted_billing_full_name())); ?></p>
 
 <?php do_action('woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email); ?>
 
-    <h2><a class="link" href="<?php echo admin_url('post.php?post=' . $order->get_id() . '&action=edit'); ?>">
-            <?php printf(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number()); ?></a>
-        (<?php printf('<time datetime="%s">%s</time>', date_i18n('c', strtotime($order->get_date_created())),
-            date_i18n(wc_date_format(), strtotime($order->get_date_created()))); ?>)</h2>
+    <h2><a class="link" href="<?php echo wp_kses_post(admin_url('post.php?post=' . $order->get_id() . '&action=edit')); ?>">
+            <?php  /* translators: %s: number */
+            printf(wp_kses_post(__('Order #%s', 'woo-rfq-for-woocommerce')), wp_kses_post($order->get_order_number())); ?></a>
+        (<?php printf('<time datetime="%s">%s</time>', wp_kses_post(date_i18n('c', strtotime($order->get_date_created()))),
+            wp_kses_post(date_i18n(wc_date_format(), strtotime($order->get_date_created())))); ?>)</h2>
 
     <table class="td" cellspacing="0" cellpadding="6"
            style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
         <thead>
         <tr>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Product', 'woo-rfq-for-woocommerce')); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Quantity', 'woo-rfq-for-woocommerce')); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Price', 'woo-rfq-for-woocommerce')); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Price', 'woo-rfq-for-woocommerce'))); ?></th>
 
 
         </tr>
@@ -52,7 +53,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
 
         gpls_woo_rfq_remove_filters_normal_checkout();
 
-        echo rfqtk_get_email_order_items($order, array(
+        echo wp_kses_post(rfqtk_get_email_order_items($order, array(
             'items' => $order->get_items(),
             'show_sku' => true,
             'show_image' => true,
@@ -63,7 +64,7 @@ $margin_side = is_rtl() ? 'left' : 'right';
             'hide_admin' => $hide_admin,
 
 
-        )); ?>
+        ))); ?>
 
         </tbody>
         <tfoot>
@@ -77,9 +78,9 @@ $margin_side = is_rtl() ? 'left' : 'right';
                 ?>
                 <tr>
                 <th class="td" scope="row" colspan="2"
-                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
+                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo wp_kses_post($total['label']); ?></th>
                 <td class="td"
-                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php if (!$hide_admin) echo $total['value']; ?></td>
+                    style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php if (!$hide_admin) echo wp_kses_post($total['value']); ?></td>
                 </tr><?php
             }
         }

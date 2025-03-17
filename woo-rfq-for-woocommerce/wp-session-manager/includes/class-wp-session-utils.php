@@ -30,11 +30,12 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
 //WHERE option_name LIKE '_rfqtk_wp_session_%' and misc_value <>'a:0:{}'";
 
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $sessions =  $wpdb->get_var($wpdb->query($wpdb->prepare("SELECT distinct COUNT(*) FROM {$wpdb->base_prefix}nplugins1_sessions 
         WHERE option_name LIKE %s and misc_value <> %s",'_rfqtk_wp_session_%','a:0:{}'))); //db call ok
 
-
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
       //  $sessions = $wpdb->get_var($query);
 
@@ -129,17 +130,13 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
         {
 
             //db call ok; no-cache ok
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+            //custom table no wrappers or caching avaialable or needed
+            // phpcs:disable WordPress.DB.DirectDatabaseQuery
             $sessions = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions
           WHERE  misc_value = %s and  option_value = %s or  expiration <= %s LIMIT %d  ",'rfq_session','a:0:{}',time(),$limit)); //db call ok
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
 
-          /*  $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions
-          WHERE  misc_value='rfq_session' and  option_value = 'a:0:{}' or  expiration <= " . time() . " LIMIT " . $limit . " ";
-
-            $wpdb->query($sql);*/
-
-            //  $this->slide_expiration=true;
 
             return 0;
         }
@@ -171,10 +168,12 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
 
 
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $count = $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
         WHERE misc_value=%s and  option_name LIKE %s LIMIT %s " ,'rfq_session','_rfqtk_wp_session_%',$limit)); //db call ok
-
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
         return (int)($count);
     }
@@ -207,10 +206,12 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
 
 
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $sql = $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->base_prefix}npxyz2021_sessions 
         WHERE misc_value=%s and  option_name LIKE %s LIMIT %s " ,'rfq_session','_rfqtk_wp_session_%',$limit)); //db call ok
-
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
        // $wpdb->query($sql);
 
     }
@@ -229,9 +230,11 @@ if(!class_exists('RFQTK_WP_Session_Utils')){
         $sql = " truncate table {$wpdb->base_prefix}npxyz2021_sessions ";
 
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $sql = $wpdb->query($wpdb->prepare("truncate table {$wpdb->base_prefix}%s " ,'npxyz2021_sessions')); //db call ok
-
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
        // $wpdb->query($sql);
 

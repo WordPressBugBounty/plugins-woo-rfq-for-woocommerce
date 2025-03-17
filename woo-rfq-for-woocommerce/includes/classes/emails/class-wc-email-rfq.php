@@ -13,7 +13,7 @@ class  WC_Email_RFQ
      */
     public function __construct()
     {
-// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
+//   WordPress.WP.I18n.NonSingularStringLiteralText
         //add_action( 'plugins_loaded', array($this,'gpls_rfq_register_email') ,1000);
         add_action( 'init', array($this,'gpls_rfq_register_email') ,1000);
         $this->gpls_rfq_register_email();

@@ -12,8 +12,8 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
      * An email sent to the customer when a new RFQ is received.
      * @extends     WC_Email
      */
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
-// phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
+//   WordPress.WP.I18n.NoEmptyStrings
+//   WordPress.WP.I18n.NonSingularStringLiteralText
     #[\AllowDynamicProperties]
     class WC_Email_Customer_RFQ extends WC_Email
     {
@@ -222,7 +222,7 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
                     'desc_tip' => true,
                     'description' => $placeholder_text,
                     'css'         => 'width:600px',
-                    'placeholder' => __($this->get_default_subject(), 'woo-rfq-for-woocommerce' ),
+                    'placeholder' => $this->get_default_subject() ,
                     'default' => '',
                 ),
                 'heading' => array(

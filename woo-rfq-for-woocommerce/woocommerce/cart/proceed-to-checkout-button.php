@@ -48,20 +48,22 @@ if(function_exists('is_user_logged_in')) {
 
     if($gpls_woo_rfq_purchase_only=="yes" && $is_quote_request !='yes'){
         $proceed_to_rfq = get_option('settings_gpls_woo_rfq_limit_to_rfq_only_cart_alt_label', __('Proceed to Checkout', 'woo-rfq-for-woocommerce'));
-        $proceed_to_rfq = __($proceed_to_rfq,'woo-rfq-for-woocommerce');
+
         gpls_woo_rfq_cart_delete('gpls_woo_rfq_purchase_only');
     }else{
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
-        $proceed_to_rfq = __($proceed_to_rfq,'woo-rfq-for-woocommerce');
+
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
     }
 
     ?>
-    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . $proceed_to_rfq . '</a>'; ?>
+    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' .
+        wp_kses_post($proceed_to_rfq) . '</a>'; ?>
 <?php else :
     $alternate = __('Proceed to checkout','woo-rfq-for-woocommerce');
-    $alternate = __($alternate,'woo-rfq-for-woocommerce');?>
-    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' . $alternate . '</a>'; ?>
+    ?>
+    <?php echo '<a href="' . esc_url(wc_get_checkout_url()) . '" class="checkout-button button alt wc-forward">' .
+    wp_kses_post($alternate) . '</a>'; ?>
 <?php endif; ?>
 
 

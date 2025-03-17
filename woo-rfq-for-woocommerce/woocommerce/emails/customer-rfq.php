@@ -30,24 +30,25 @@ $margin_side = is_rtl() ? 'left' : 'right';
 <?php
 
 do_action('woocommerce_email_header', $email_heading,$email);
-if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
+if ($content_intro != "") echo '<p>' . wp_kses_post($content_intro) . '</p>';
 ?>
 
-<p><?php printf( __("Your request has been received and is now being reviewed. Your request details are shown below for your reference:", 'woo-rfq-for-woocommerce')); ?></p>
+<p><?php printf( wp_kses_post(__("Your request has been received and is now being reviewed. Your request details are shown below for your reference:",
+        'woo-rfq-for-woocommerce'))); ?></p>
 
 <?php do_action('woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text, $email ); ?>
 
-<h2><?php printf(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number()); ?></h2>
+<h2><?php /* translators: %s: number */ printf(wp_kses_post(__('Order #%s', 'woo-rfq-for-woocommerce')), wp_kses_post($order->get_order_number())); ?></h2>
 
 <table class="td" cellspacing="0" cellpadding="6"
        style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
     <thead>
     <tr>
-        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Product', 'woo-rfq-for-woocommerce')); ?></th>
-        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Quantity', 'woo-rfq-for-woocommerce')); ?></th>
+        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
+        <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
         <?php if ($show_prices  == 'yes')  : ?>
 
-            <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( __('Price', 'woo-rfq-for-woocommerce')); ?></th>
+            <th class="td" scope="col" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf( wp_kses_post(__('Price', 'woo-rfq-for-woocommerce'))); ?></th>
         <?php endif; ?>
 
     </tr>
@@ -59,7 +60,7 @@ if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
 
     ?>
 
-    <?php echo rfqtk_get_email_order_items($order,array(
+    <?php echo wp_kses_post(rfqtk_get_email_order_items($order,array(
         'items' =>$order->get_items(),
         'show_sku' => true,
         'show_image' => true,
@@ -67,7 +68,7 @@ if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
         'plain_text' => $plain_text,
         'show_prices' => $show_prices
 
-    )); ?>
+    ))); ?>
 
     </tbody>
     <tfoot>
@@ -85,9 +86,9 @@ if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
                     ?>
                     <tr>
                     <th class="td" scope="row" colspan="2"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo wp_kses_post($total['label']); ?></th>
                     <td class="td"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>;<?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>;<?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo wp_kses_post($total['value']); ?></td>
                     </tr><?php
                 }
             }

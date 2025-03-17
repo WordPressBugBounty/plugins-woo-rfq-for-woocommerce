@@ -31,14 +31,14 @@ if ($show_prices == false) {
  */
 
 do_action('woocommerce_email_header', $email_heading, $email);
-if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
+if ($content_intro != "") echo '<p>' . wp_kses_post($content_intro) . '</p>';
 
 ?>
 
 
-    <p><?php printf(__("Hello, a note has just been added to your order:", 'woo-rfq-for-woocommerce')); ?></p>
+    <p><?php printf(wp_kses_post(__("Hello, a note has just been added to your order:", 'woo-rfq-for-woocommerce'))); ?></p>
 
-    <blockquote><?php echo wpautop(wptexturize($customer_note)) ?></blockquote>
+    <blockquote><?php echo wp_kses_post(wpautop(wptexturize(($customer_note)))) ?></blockquote>
 
 <?php
 
@@ -52,27 +52,28 @@ if ($content_intro != "") echo '<p>' . $content_intro . '</p>';
 $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=true&id=' . $order->get_id() . '&key=' . $order->get_order_key();
 
     if ($include_respond_link == "yes") {
-
-        printf('' . __('You can respond by clicking %s', 'woo-rfq-for-woocommerce'), '<a href="' . esc_url($include_respond_link_url) . '">' . __('here', 'woo-rfq-for-woocommerce') . '</a>.');
+        /* translators: %s: link */
+        printf('' . wp_kses_post(__('You can respond by clicking %s', 'woo-rfq-for-woocommerce'))
+            , '<a href="' . esc_url($include_respond_link_url) . '">' . wp_kses_post(__('here', 'woo-rfq-for-woocommerce')) . '</a>.');
 
     }
 
 ?>
 
-    <p><?php printf(__("For your reference, your order details are shown below.", 'woo-rfq-for-woocommerce')); ?></p>
-    <h2><?php printf(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number()); ?></h2>
+    <p><?php printf(wp_kses_post(__("For your reference, your order details are shown below.", 'woo-rfq-for-woocommerce'))); ?></p>
+    <h2><?php  /* translators: %s: number */ printf(wp_kses_post(__('Order #%s', 'woo-rfq-for-woocommerce'), $order->get_order_number())); ?></h2>
 
     <table class="td" cellspacing="0" cellpadding="6"
            style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
         <thead>
         <tr>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Product', 'woo-rfq-for-woocommerce')); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
             <th class="td" scope="col"
-                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Quantity', 'woo-rfq-for-woocommerce')); ?></th>
+                style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
             <?php if ($show_prices == 'yes')  : ?>
                 <th class="td" scope="col"
-                    style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(__('Price', 'woo-rfq-for-woocommerce')); ?></th>
+                    style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php printf(wp_kses_post(__('Price', 'woo-rfq-for-woocommerce'))); ?></th>
             <?php endif; ?>
 
         </tr>
@@ -83,7 +84,7 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
 
         ?>
 
-        <?php echo rfqtk_get_email_order_items($order, array(
+        <?php echo wp_kses_post(rfqtk_get_email_order_items($order, array(
             'items' =>$order->get_items(),
             'show_sku' => false,
             'show_image' => true,
@@ -92,7 +93,7 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
             'show_prices' => $show_prices,
             'hide_admin'=>false,
 
-        )); ?>
+        ))); ?>
 
         </tbody>
         <tfoot>
@@ -108,9 +109,9 @@ $include_respond_link_url = home_url() . '/customer-respond/?respond_to_offer=tr
                     ?>
                     <tr>
                     <th class="td" scope="row" colspan="2"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo wp_kses_post($total['label']); ?></th>
                     <td class="td"
-                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
+                        style="text-align:<?php echo esc_attr( $text_align ); ?>; <?php if ($i == 1) echo 'border-top-width: 4px;'; ?>"><?php echo wp_kses_post($total['value']); ?></td>
                     </tr><?php
                 }
             }

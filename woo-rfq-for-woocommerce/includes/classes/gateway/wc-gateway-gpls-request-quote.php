@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -100,14 +96,12 @@ if (!class_exists('WC_Gateway_GPLS_Request_Quote') && class_exists('WC_Payment_G
         {
             $order=false;
 
-            //sanitized and unslashed
 
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            if (isset($_GET['key'])) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
+            if (isset($_GET['key'])) // phpcs: WordPress.Security.NonceVerification.Recommended
+            {
                 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 $order_key = sanitize_text_field( wp_unslash( $_GET['key'] ?? '' ) );// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
 
                 $order_id = wc_get_order_id_by_order_key($order_key);
                 $order = wc_get_order($order_id);

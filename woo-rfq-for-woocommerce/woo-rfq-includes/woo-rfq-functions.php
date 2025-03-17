@@ -3,7 +3,9 @@
  * Functions used by the plugin
  */
 
-
+// phpcs:disable
+//WordPress.PHP.DevelopmentFunctions.error_log_error_log
+//this is for customer support and debugging
 if (!function_exists('np_write_log')) {
     function np_write_log($log, $file, $line)
     {
@@ -13,7 +15,7 @@ if (!function_exists('np_write_log')) {
                 $log = "resource variable ";
             }
 
-            // phpcs:disable WordPress.PHP.DevelopmentFunctions
+            //   WordPress.PHP.DevelopmentFunctions
 
             error_log('');
             error_log('*******************************************************************');
@@ -26,34 +28,42 @@ if (!function_exists('np_write_log')) {
             error_log('END ' . $file . ' ' . $line);
             error_log('*******************************************************************');
             error_log('');
-            // phpcs:enable
+              
         }
     }
 }
-
+// phpcs:enable
 if(!function_exists('gpls_woo_is_checkout_block')) {
     function gpls_woo_is_checkout_block()
     {
         return \Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils::is_checkout_block_default();
     }
 }
+
+
 if(!function_exists('np_pls_qr_kses_allowed_html')) {
+
     function np_pls_qr_kses_allowed_html($allowed_html, $context)
     {
         if ($context === 'post') {
-            $allowed_html['script'] = array(
-                'type' => array('text/javascript'),
-                'src' => array(),
-                'input'    => array(),
-                'textarea' => array(),
-                'form' => array(),
+            $allowed_html = array(
+                'input' => array(
+                    'type'      => array(),
+                    'name'      => array(),
+                    'value'     => array(),
+                    'checked'   => array(),
+                    'min'   => array(),
+                    'max'   => array()
+                ),
             );
         }
         return $allowed_html;
     }
-    add_filter('wp_kses_allowed_html', 'np_pls_qr_kses_allowed_html', 1000, 2);
+  //  add_filter('wp_kses_allowed_html', 'np_pls_qr_kses_allowed_html', 1000, 2);
 }
-// phpcs:disable WordPress.WP.I18n.NoEmptyStrings
+//   WordPress.WP.I18n.NoEmptyStrings
+
+
 
 add_filter('woocommerce_valid_order_statuses_for_payment_complete', 'rfqtk_statuses_for_payment', 100, 2);
 add_filter('woocommerce_valid_order_statuses_for_payment', 'rfqtk_statuses_for_payment', 100, 2);
@@ -65,6 +75,12 @@ add_filter('woocommerce_variation_prices_price', 'gpls_woo_rfq_woocommerce_data_
 add_action('woocommerce_payment_complete', 'gpls_woo_rfq_woocommerce_pre_payment_complete', 100, 1);
 
 add_filter('woocommerce_can_reduce_order_stock', 'rfqtk_can_reduce_order_stock', 1000, 2);
+
+
+
+
+
+
 
 
 if (!function_exists('rfqtk_can_reduce_order_stock')) {
@@ -133,15 +149,22 @@ if (!function_exists('rfqtk_first_main')) {
     function rfqtk_first_main()
     {
 
-        // if (isset($_REQUEST['pay_for_order']) && strpos($_REQUEST['key'], 'wc_order_', 0) === 0) {
+        $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', '');
 
+
+        // This runs before WooCommerce or post types is loaded. Can't use wp_query functions either.
+        //get info see if this is thank you page for a quote( maybe hide prices or a real payment(show payments.
 
         $exit = false;
-        //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        //  WordPress.Security.NonceVerification.Recommended
+//WooCommerce payment page no nonce
+        // phpcs:disable
+
         if (isset($_REQUEST['pay_for_order']) && (isset($_REQUEST['key'])
-                //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                //  WordPress.Security.NonceVerification.Recommended
+                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))//  WordPress.Security.NonceVerification.Recommended
         {
+
             $GLOBALS["gpls_woo_rfq_show_prices"] = "yes";
             $GLOBALS["hide_for_visitor"] = "no";
 
@@ -153,7 +176,9 @@ if (!function_exists('rfqtk_first_main')) {
 
          if(function_exists('get_site_url'))
         {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //   WordPress.Security.NonceVerification.Recommended
+            //WooCommerce payment page no nonce
+
             if(isset($_SERVER['REQUEST_URI'])){
                 $url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
 
@@ -170,38 +195,33 @@ if (!function_exists('rfqtk_first_main')) {
 
 
 
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//   WordPress.Security.NonceVerification.Recommended
+        //WooCommerce payment page no nonce
         if ($has_string !== false && (isset($_REQUEST['key'])
-                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                && strpos(sanitize_key(wp_unslash($_REQUEST['key'])), 'wc_order_', 0) === 0))//   WordPress.Security.NonceVerification.Recommended
         {
 
-
-
-
             global $wpdb;
-            // phpcs:disable
+            //  
             if($hops !=="yes") {
 
-
-
             $order_id = $wpdb->get_var($wpdb->prepare("SELECT post_id 
-            FROM {$wpdb->prefix}postmeta WHERE meta_key = '_order_key' AND meta_value = %s", sanitize_key(wp_unslash($_REQUEST['key']))));//db call ok
+            FROM {$wpdb->prefix}postmeta WHERE meta_key = '_order_key' AND meta_value = %s", sanitize_key(wp_unslash($_REQUEST['key']))));
 
-            //db call ok; no-cache ok
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery
-                $post_status = $wpdb->get_var($wpdb->prepare("SELECT post_status FROM {$wpdb->prefix}posts WHERE ID = %s", $order_id));//db call ok
+            //   WordPress.DB.DirectDatabaseQuery
+                $post_status = $wpdb->get_var($wpdb->prepare("SELECT post_status FROM {$wpdb->prefix}posts WHERE ID = %s", $order_id));
             }else{
-                //db call ok; no-cache ok
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+
+                //   WordPress.DB.DirectDatabaseQuery
                 $order_id = $wpdb->get_var($wpdb->prepare("SELECT order_id FROM {$wpdb->prefix}wc_order_operational_data
                 WHERE order_key = %s", sanitize_key(wp_unslash($_REQUEST['key']))));//db call ok
 
-                //db call ok; no-cache ok
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery
-                $post_status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$wpdb->prefix}wc_orders WHERE id = %s", $order_id));//db call ok
+                //   WordPress.DB.DirectDatabaseQuery
+                $post_status = $wpdb->get_var($wpdb->prepare("SELECT status FROM {$wpdb->prefix}wc_orders WHERE id = %s", $order_id));
 
             }
-            // phpcs:enable
+
+
 
             if (class_exists('GPLS_WOO_RFQ_PLUS') && get_option('rfq_cart_sc_section_hide_price_to_thankyou_page','no')=='yes'
                 && ($post_status == 'wc-gplsquote-req'
@@ -220,10 +240,11 @@ if (!function_exists('rfqtk_first_main')) {
                 return true;
             }
         }
+
         return $exit;
 
     }
-
+// phpcs:enable
 
 }
 
@@ -841,12 +862,14 @@ if (!function_exists('gpls_rfq_remove_other_payment_gateways')) {
             return $available_gateways;
         }
 
-//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//  WordPress.Security.NonceVerification.Recommended
+        //WooCommerce payment page no nonce
+        // phpcs:disable
         if (isset($_GET['pay_for_order'])) {
             unset($available_gateways['gpls-rfq']);
             return $available_gateways;
         }
-
+// phpcs:enable
 
         $can_ask_quote = false;
 
@@ -880,7 +903,9 @@ if (!function_exists('gpls_rfq_remove_other_block_payment_gateways')) {
         if (is_admin()) {
             return $available_gateways;
         }
-//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//  WordPress.Security.NonceVerification.Recommended
+        //WooCommerce payment page no nonce
+        // phpcs:disable
         if (isset($_GET['pay_for_order'])) {
 
 
@@ -916,6 +941,7 @@ if (!function_exists('gpls_rfq_remove_other_block_payment_gateways')) {
         }
 
         return $available_gateways;
+        // phpcs:enable
     }
 }
 
@@ -924,7 +950,9 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
     function gpls_woo_rfq_footer_admin($default)
     {
 
-//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//  WordPress.Security.NonceVerification.Recommended
+        //WooCommerce setting page no nonce
+        // phpcs:disable
         if (is_admin() && isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'settings_gpls_woo_rfq') {
             ob_start();
             ?>
@@ -1091,6 +1119,7 @@ if (!function_exists('gpls_woo_rfq_footer_admin')) {
         }
         return $default;
     }
+    // phpcs:enable
 }
 
 if (!function_exists('gpls_get_rfq_cart_quantities')) {
@@ -1164,10 +1193,10 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
 
                 if(!$order)return;
-                // phpcs:disable
+                //  
                 $no_payment=__('No payment','woo-rfq-for-woocommerce');
                 $no_payment=get_option('settings_gpls_woo_rfq_no_payment_checkout_text',$no_payment);
-                $no_payment=__($no_payment,'woo-rfq-for-woocommerce');
+
 
 
 
@@ -1200,7 +1229,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                     $email_new_order->send($email_new_order->get_recipient(), $gplswoo_subject,
                         $email_new_order->get_content(),$email_new_order->get_headers(),$email_new_order->get_attachments());
                     // $email_new_order->trigger($order_id);
-                 // phpcs:enable
+                   
                 }
 
             }
@@ -1466,13 +1495,13 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
         // add_filter( 'wc_price', 'gpls_woo_rfq_empty_price',10000,5);
 
         // add_filter('admin_footer_text', 'gpls_woo_rfq_footer_admin');
-
+        // phpcs:disable
         if (is_admin()
-            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //  WordPress.Security.NonceVerification.Recommended
             && isset($_REQUEST['tab'])
-            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //  WordPress.Security.NonceVerification.Recommended
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'
-            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //  WordPress.Security.NonceVerification.Recommended
             && isset($_REQUEST['section']) && $_REQUEST['section'] == 'npoptions'
         ) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_misc.js';
@@ -1481,13 +1510,16 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
 
         }
         if(is_admin()
-            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //  WordPress.Security.NonceVerification.Recommended
+            //WooCommerce setting page no nonce
+
             && isset($_REQUEST['tab'])
-            //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            //  WordPress.Security.NonceVerification.Recommended
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq'){
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_basic.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_basic.js';
             wp_enqueue_script('rfq_admin_basic', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            // phpcs:enable
         }
 
     }
@@ -1603,10 +1635,8 @@ if ($needs_payment == "yes") {
 function gplswoo_get_submit_order_label()
 {
 
-// phpcs:disable
-    if(!isset($_REQUEST['gsL']) || empty($_REQUEST['gsL'])) {
-     //  die();
-    }
+//  
+
 
     if(!defined('gpls_woo_rfq_DIR')) {
         DEFINE('gpls_woo_rfq_DIR', plugin_dir_path(__FILE__));
@@ -1706,7 +1736,7 @@ function gplswoo_get_submit_order_label()
 
 
         $order_button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', __('Submit Your Request For Quote', 'woo-rfq-for-woocommerce'));
-        $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
+
         $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 
         $ajax_array['rfq_cart_wordings_submit_your_rfq_text']=$order_button_text;
@@ -1717,7 +1747,7 @@ function gplswoo_get_submit_order_label()
 
 
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
-        $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
+
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
         $ajax_array['rfq_cart_wordings_proceed_to_rfq']= $proceed_to_rfq;
 
@@ -1737,7 +1767,7 @@ function gplswoo_get_submit_order_label()
     }
 
     wp_die();
-    // phpcs:enable
+      
 }
 
 add_action('wp_ajax_gplswoo_get_submit_order_label', 'gplswoo_get_submit_order_label');

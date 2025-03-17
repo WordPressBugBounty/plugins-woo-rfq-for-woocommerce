@@ -29,6 +29,7 @@ if( ! class_exists( 'Gpls_Woo_Rfq_Privacy' ) )
          *
          */
         public function __construct() {
+
             parent::__construct( __( 'NP Quote Request for WooCommerce', 'woo-rfq-for-woocommerce' ) );
 
         }

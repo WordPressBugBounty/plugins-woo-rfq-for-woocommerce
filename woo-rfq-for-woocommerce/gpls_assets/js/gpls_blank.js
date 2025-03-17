@@ -6,7 +6,6 @@ function changeClasses(){
 
 
 
-}
 function gpls_enable() {
 
    jQuery('.variations_form').find('select').on('change', function (event) {

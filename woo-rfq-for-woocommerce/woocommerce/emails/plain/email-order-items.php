@@ -1,79 +1,98 @@
 <?php
 /**
- * Email Order Items (plain)
+ * Email Order Items
  *
+ * This template can be overridden by copying it to yourtheme/woocommerce/emails/email-order-items.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
- * @package 	WooCommerce/Templates/Emails/Plain
- * @version     3.0.3
+ * @package 	WooCommerce/Templates/Emails
+ * @version     3.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+    exit;
 }
-global $show_prices;
 
-$show_prices = apply_filters( 'gpls_woo_rfq_order_item_product_show_price', $show_prices, $order );
+$text_align = is_rtl() ? 'right' : 'left';
 
+//global $show_prices;
+
+//$show_prices = apply_filters( 'gpls_woo_rfq_order_item_product_show_price', $show_prices, $order );
+
+if(!isset($show_prices)){
+    $show_prices  = true;
+}
 
 if ($show_prices  == true) {
     gpls_woo_rfq_remove_filters();
 }
 
-
-
 foreach ( $items as $item_id => $item ) :
-	$_product     = apply_filters( 'woocommerce_order_item_product', $item->get_product(), $item );
-	$item_meta    = new WC_Order_Item_Meta( $item, $_product );
+    if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
+        $product = $item->get_product();
+        ?>
+        <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
+            <td class="td" style="text-align:<?php echo wp_kses_post($text_align); ?>; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php
 
-	if ( apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
+                // Show title/image etc
+                if ( $show_image ) {
+                    echo wp_kses_post(apply_filters( 'woocommerce_order_item_thumbnail',
+                        '<div style="margin-bottom: 5px"><img src="'
+                        . ( $product->get_image_id() ?
+                            current( wp_get_attachment_image_src( $product->get_image_id(), 'thumbnail' ) ) : wc_placeholder_img_src() )
+                        . '" alt="' . esc_attr__( 'Product image', 'woo-rfq-for-woocommerce' ) . '" height="'
+                        . esc_attr( $image_size[1] ) . '" width="' . esc_attr( $image_size[0] ) .
+                        '" style="vertical-align:middle; margin-' . ( is_rtl() ? 'left' : 'right' ) . ': 10px;" /></div>', $item ));
+                }
 
-		// Title
-		echo apply_filters( 'woocommerce_order_item_name', $item['name'], $item, false );
+                // Product name
+                echo wp_kses_post(apply_filters( 'woocommerce_order_item_name', $item->get_name(), $item, false ));
 
-		// SKU
-		if ( $show_sku && $_product->get_sku() ) {
-			echo ' (#' . $_product->get_sku() . ')';
-		}
+                // SKU
+                if ( $show_sku && is_object( $product ) && $product->get_sku() ) {
+                    echo ' (#' . wp_kses_post($product->get_sku()) . ')';
+                }
 
-		// allow other plugins to add additional product information here
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
+                // allow other plugins to add additional product information here
+                do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, $plain_text );
 
-		// Variation
-		echo ( $item_meta_content = $item_meta->display( true, true ) ) ? "\n" . $item_meta_content : '';
+                wc_display_item_meta( $item );
 
-		// Quantity
-		echo "\n" . sprintf( __( 'Quantity: %s', 'woo-rfq-for-woocommerce' ), apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ) );
+                if ( $show_download_links ) {
+                    wc_display_item_downloads( $item );
+                }
+
+                // allow other plugins to add additional product information here
+                do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, $plain_text );
+
+                ?></td>
+            <td class="td" style="text-align:<?php echo wp_kses_post($text_align); ?>;
+                    vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue',
+                    Helvetica, Roboto, Arial, sans-serif;"><?php echo wp_kses_post(apply_filters( 'woocommerce_email_order_item_quantity',
+                    $item->get_quantity(), $item )); ?></td>
 
 
+            <?php if ($show_prices  == true || $sent_to_admin == true) : ?>
+                <td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;"><?php echo wp_kses_post($order->get_formatted_line_subtotal( $item )); ?></td>
+            <?php endif; ?>
 
-		// Download URLs
-		if ( $show_download_links && $_product->exists() && $_product->is_downloadable() ) {
-			$download_files = $order->get_item_downloads( $item );
-			$i              = 0;
+        </tr>
+        <?php
+    }
 
-			foreach ( $download_files as $download_id => $file ) {
-				$i++;
+    if ( $show_purchase_note && is_object( $product ) && ( $purchase_note = $product->get_purchase_note() ) ) : ?>
+        <tr>
+            <td colspan="3" style="text-align:<?php echo wp_kses_post($text_align); ?>;
+                    vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+                <?php echo wp_kses_post(wpautop( do_shortcode( wp_kses_post( $purchase_note ) ) )); ?></td>
+        </tr>
+    <?php endif; ?>
 
-				if ( count( $download_files ) > 1 ) {
-					$prefix = sprintf( __( 'Download %d', 'woo-rfq-for-woocommerce' ), $i );
-				} elseif ( $i == 1 ) {
-					$prefix = __( 'Download', 'woo-rfq-for-woocommerce' );
-				}
-
-				echo "\n" . $prefix . '(' . esc_html( $file['name'] ) . '): ' . esc_url( $file['download_url'] );
-			}
-		}
-
-		// allow other plugins to add additional product information here
-		do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
-
-	}
-
-	// Note
-	if ( $show_purchase_note && ( $purchase_note = get_post_meta( $_product->get_id(), '_purchase_note', true ) ) ) {
-		echo "\n" . do_shortcode( wp_kses_post( $purchase_note ) );
-	}
-
-	echo "\n\n";
-
-endforeach;
+<?php endforeach; ?>

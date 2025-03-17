@@ -93,8 +93,8 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
 
         if (isset($_COOKIE[RFQTK_WP_SESSION_COOKIE])) {
 
-            //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $cookie = wp_unslash($_COOKIE[RFQTK_WP_SESSION_COOKIE]);
+            //  WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $cookie = sanitize_text_field(wp_unslash($_COOKIE[RFQTK_WP_SESSION_COOKIE]));
             $cookie_crumbs = explode('||', $cookie);
 
 
@@ -323,14 +323,16 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
 
         //$result = $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions (`option_name`, `option_value`,`expiration`,`misc_value`) VALUES (%s, %s,%s,%s)" , $option, $serialized_value, $this->expires, $serialized_container));
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $result = $wpdb->query($wpdb->prepare("
         INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions
          (`option_name`, `option_value`,`expiration`,`misc_value`) 
          VALUES (%s, %s,%s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`),
           `option_value` = VALUES(`option_value`),
           `expiration` = VALUES(`expiration`),`misc_value` = 'rfq_session' ", $option, $serialized_value, $this->expires, $serialized_container));//db call ok; no-cache ok
-
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
 
         if (!$result) {
@@ -351,10 +353,11 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
         }*/
 
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $result = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}npxyz2021_sessions set `expiration`= %s,`updated`= now() where `option_name` = %s ",$this->expires,$option)); //db call ok; no-cache ok
-        // $result = $wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions (`option_name`, `option_value`,`expiration`) VALUES (%s, %s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`),`expiration` = {$this->expires}", $option, $serialized_value,$this->expires) );
-
+        // phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
         if (!$result) {
             return false;
@@ -373,7 +376,9 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
 
         //custom table no wrappers or caching avaialable or needed
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
         $session_value = $wpdb->get_var($wpdb->prepare("SELECT option_value
         FROM {$wpdb->base_prefix}npxyz2021_sessions 
         WHERE option_name = %s  LIMIT %d",$option,1)); //db call ok
@@ -384,10 +389,11 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
 
         //custom table no wrappers or caching avaialable or needed
         //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        //   WordPress.DB.DirectDatabaseQuery
         $session_value = $wpdb->get_var($wpdb->prepare("SELECT option_value
         FROM {$wpdb->base_prefix}npxyz2021_sessions 
         WHERE option_name = %s  LIMIT %d",$option,1)); //db call ok
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
         if (!empty($session_value)) {
             $value = $session_value;
@@ -405,11 +411,11 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
         global $wpdb;
 
        // $sql = " delete FROM {$wpdb->base_prefix}npxyz2021_sessions WHERE  option_name= '{$option}' ";
-
-        //db call ok; no-cache ok
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
-        $result = $wpdb->query($wpdb->prepare("delete FROM {$wpdb->base_prefix}npxyz2021_sessions where `option_name` = %s ",$option));   //db call ok; no-cache ok
-
+        //custom table no wrappers or caching avaialable or needed
+        // phpcs:disable WordPress.DB.DirectDatabaseQuery
+        $result = $wpdb->query($wpdb->prepare(
+            "delete FROM {$wpdb->base_prefix}npxyz2021_sessions where `option_name` = %s ",$option));   //db call ok; no-cache ok
+// phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
      //   $wpdb->query($sql);
         // we only care that we attempted the delete.
