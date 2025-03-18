@@ -1650,7 +1650,10 @@ function gplswoo_get_submit_order_label()
         $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
 
 
-        DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+        if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+            $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+            DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+        }
 
         $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
         $large_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_large.png';

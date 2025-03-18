@@ -2419,6 +2419,10 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
                 $rfq_enable = gpls_woo_get_rfq_enable($product);
 
+                if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+                    $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                    DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+                }
                 $form_label = gpls_woo_rfq_INQUIRE_TEXT;
 
                 $rfq_product_script = "";

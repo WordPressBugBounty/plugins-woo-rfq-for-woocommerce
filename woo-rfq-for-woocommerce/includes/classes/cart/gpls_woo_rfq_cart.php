@@ -8,10 +8,18 @@
 //   WordPress.WP.I18n.NonSingularStringLiteralText
 if (!class_exists('gpls_woo_rfq_CART')) {
 
+
+
+
     class gpls_woo_rfq_CART
     {
         public function __construct()
         {
+
+            if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+                $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+            }
 
             $rfq_product_script = "<div class='gpls_script' style='display: none'> 
                 <script>jQuery( document ).ready( function() {jQuery( '.tax-rate' ).hide();
@@ -852,7 +860,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             {
                 $data_var = $product->get_type();
             }
-
+            if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+                $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+            }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
 
             $rfq_product_script = "";
@@ -1339,7 +1350,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 }
             }
 
-
+            if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+                $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+            }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
 
             $rfq_product_script = "";
@@ -1792,8 +1806,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
             $rfq_enable = gpls_woo_get_rfq_enable($product);
-
-
+            if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+                $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
+            }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
 
             $rfq_product_script = "";
