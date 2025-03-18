@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 8.2
 WC tested up to: 9.7.1
-Stable tag: 2.1
+Stable tag: 2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -209,13 +209,13 @@ Automatic / manual the same way as installing
 == Changelog ==
 
 = 2.0 3/18/2025 =
-fix gpls_woo_rfq_INQUIRE_TEXT
+fix js error
 
 
 == Upgrade Notice ==
 
 = 2.0 3/18/2025 =
-fix gpls_woo_rfq_INQUIRE_TEXT
+fix js error
 
 
 

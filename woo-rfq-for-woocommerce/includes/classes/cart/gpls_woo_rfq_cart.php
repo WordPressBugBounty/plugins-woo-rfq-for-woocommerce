@@ -549,8 +549,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             wc_get_template('woo-rfq/link-to-cart.php',
                 array('link_to_rfq_page' => $link_to_rfq_page,
                 ), '', gpls_woo_rfq_WOO_PATH);
-            $result = wp_kses_post(ob_get_clean());
-
+            $result = ob_get_clean();
+// phpcs:disable
 
             ?>
             <script type="application/javascript">
@@ -612,9 +612,9 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                 } else {
 
                                     var note_id = "#note_" + jQuery(form).data('rfq-product-id');
-                                    //console.log(<?php echo '"'.wp_kses_post($result).'"'; ?>)
+                                    //console.log(<?php echo '"'.$result.'"'; ?>)
 
-                                    jQuery(note_id).html(<?php echo '"'.wp_kses_post($result).'"'; ?>);
+                                    jQuery(note_id).html(<?php echo '"'.$result.'"'; ?>);
 
                                     jQuery(image_div).hide();
                                     jQuery(rfq_button_id).addClass('gpls_hidden');
@@ -658,7 +658,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
             <?php
-
+// phpcs:enable
 
             do_action('gpls_woo_rfq_after_ajax_add_to_quote');
 
@@ -792,7 +792,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
 
-            echo wp_kses_post($rfq_product_script);
+            echo ($rfq_product_script);// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
 
 
@@ -1460,7 +1460,7 @@ jQuery( '.amount,.bundle_price' ).hide();jQuery( '.amount,.bundle_price' ).attr(
 } ); ";
 
                     echo "<div class='gpls_script' style='display: none'><script> " .
-                        wp_kses_post($rfq_product_script). '</script></div>';
+                        ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 //end test
 
 
@@ -1517,7 +1517,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                     echo "<div class='gpls_script' style='display: none'><script> " .
-                        wp_kses_post($rfq_product_script). '</script></div>';
+                        ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 
                 }
@@ -1613,7 +1613,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
                 echo "<div class='gpls_script' style='display: none'><script> " .
-                    wp_kses_post($rfq_product_script). '</script></div>';
+                    ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
             }
             ?>
@@ -1684,7 +1684,7 @@ jQuery( '.amount,.bundle_price, .product-selector__price' ).attr('style','visibi
 
 
                         echo "<div class='gpls_script' style='display: none'><script> " .
-                            wp_kses_post($rfq_product_script). '</script></div>';
+                            ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 
                         $rfq_product_script = "jQuery(document ).ready( function() {
@@ -1738,8 +1738,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                         echo "<div class='gpls_script' style='display: none'><script> " .
-                            wp_kses_post($rfq_product_script). '</script></div>';
-
+                            ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     }
 
 
@@ -1765,7 +1764,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
                                 echo "<div class='gpls_script' style='display: none'><script> " .
-                                    wp_kses_post($rfq_product_script). '</script></div>';
+                                    ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
                                 add_action('wp_print_footer_scripts', 'gpls_woo_rfq_print_script_show_single_add', 1000);
 
