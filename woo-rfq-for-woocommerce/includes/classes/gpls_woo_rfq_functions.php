@@ -1499,15 +1499,16 @@ if (!class_exists('gpls_woo_rfq_functions')) {
                 //nonce verified already on top at the top.
                 $order_unique_id=wp_generate_uuid4();
                 $hashed_order_unique_id= wp_hash($order_unique_id);
+                $nonce = wp_create_nonce('gpls_woo_rfq_handle_rfq_cart_nonce');
                 gpls_woo_rfq_cart_set('gpls_woo_rfq_LQ',array('order_id'=>$order_id,
                     'nonce'=>sanitize_key(wp_unslash($nonce)),
                     'customer_id'=>$customer_id,
                     'anon'=>0,
                     'order_unique_id'=>$order_unique_id
                 ));
-                $gpls_woo_rfq_LQ= gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
+               // $gpls_woo_rfq_LQ= gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
 
-                $nonce = wp_create_nonce('gpls_woo_rfq_handle_rfq_cart_nonce');
+
                 wp_safe_redirect($return_url . '?gpls_woo_rfq_nonce=' . trim(sanitize_key(wp_unslash($nonce))).'&key=' . $key.' &ukey='.$hashed_order_unique_id);
 
                 exit;
@@ -1916,7 +1917,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
 
 
-
+                $nonce = wp_create_nonce('gpls_woo_rfq_handle_rfq_cart_nonce');
                 $order_unique_id=wp_generate_uuid4();
                 $hashed_order_unique_id= wp_hash($order_unique_id);
                 gpls_woo_rfq_cart_set('gpls_woo_rfq_LQ',array('order_id'=>$order_id,
@@ -1925,10 +1926,10 @@ if (!class_exists('gpls_woo_rfq_functions')) {
                     'anon'=>0,
                     'order_unique_id'=>$order_unique_id
                 ));
-                $gpls_woo_rfq_LQ= gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
+             //   $gpls_woo_rfq_LQ= gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
 
 
-                $nonce = wp_create_nonce('gpls_woo_rfq_handle_rfq_cart_nonce');
+
                 wp_safe_redirect($return_url . '?gpls_woo_rfq_nonce=' . trim(sanitize_key(wp_unslash($nonce))).'&key=' . $key.' &ukey='.$hashed_order_unique_id);
 
 

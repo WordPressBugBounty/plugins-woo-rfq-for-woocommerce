@@ -1,9 +1,13 @@
 == Changelog ==
 
-= 2.0 3/18/2025 =
+= 2.2.1 3/22/2025 =
 fix js error
 
-= 2.0 3/18/2025 =
+
+= 2.2 3/18/2025 =
+fix js error
+
+= 2.2 3/18/2025 =
 fix gpls_woo_rfq_INQUIRE_TEXT
 
 

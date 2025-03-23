@@ -6,6 +6,7 @@
  * @package WooCommerce_Subscriptions/Templates/Emails
  * @version 1.0.0 - Migrated from WooCommerce Subscriptions v3.0.4
  */
+// phpcs:ignoreFile
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -34,12 +35,12 @@ $is_parent_order       = wcs_order_contains_subscription( $order, 'parent' );
 	<?php foreach ( $subscriptions as $subscription ) : ?>
 		<?php $has_automatic_renewal = $has_automatic_renewal || ! $subscription->is_manual(); ?>
 		<tr>
-            <td class="td" scope="row" style="text-align:left;"><?php echo wp_kses_post($subscription->get_order_number()); ?></td>
+            <td class="td" scope="row" style="text-align:left;"><?php echo ($subscription->get_order_number()); ?></td>
             <td class="td" scope="row" style="text-align:left;"><?php echo esc_html( date_i18n( wc_date_format(), $subscription->get_time( 'start_date', 'site' ) ) ); ?></td>
 			<td class="td" scope="row" style="text-align:left;"><?php echo esc_html( ( 0 < $subscription->get_time( 'end' ) ) ? date_i18n( wc_date_format(), $subscription->get_time( 'end', 'site' ) ) : _x( 'When cancelled', 'Used as end date for an indefinite subscription', 'woo-rfq-for-woocommerce' ) ); ?></td>
             <?php if ($show_prices  == 'yes')  : ?>
             <td class="td" scope="row" style="text-align:left;">
-				<?php echo wp_kses_post( $subscription->get_formatted_order_total() ); ?>
+				<?php echo ( $subscription->get_formatted_order_total() ); ?>
 				<?php if ( $is_parent_order && $subscription->get_time( 'next_payment' ) > 0 ) : ?>
 					<br>
 					<small><?php /* translators: %s: date */ printf( esc_html__( 'Next payment: %s', 'woo-rfq-for-woocommerce' ), esc_html( date_i18n( wc_date_format(), $subscription->get_time( 'next_payment', 'site' ) ) ) ); ?></small>

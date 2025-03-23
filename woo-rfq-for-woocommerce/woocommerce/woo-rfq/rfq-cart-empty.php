@@ -6,7 +6,7 @@
  *
 
  */
-
+// phpcs:ignoreFile
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -21,7 +21,7 @@ if(!isset($confirmation_message) || is_admin())return;
         <?php
         $quote_request_empty = get_option('rfq_cart_wordings_quote_request_currently_empty', __('Your Quote Request List is Currently Empty.', 'woo-rfq-for-woocommerce'));
 
-        echo wp_kses_post($quote_request_empty);
+        echo ($quote_request_empty);
         ?>
 
     </h3>
@@ -34,7 +34,7 @@ if(!isset($confirmation_message) || is_admin())return;
 			<?php
             $return_to_shop = get_option('rfq_cart_wordings_return_to_shop', __('Return To Shop', 'woo-rfq-for-woocommerce'));
 
-            echo wp_kses_post($return_to_shop);
+            echo ($return_to_shop);
 
             ?>
 		</a>

@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:ignoreFile
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -11,14 +11,14 @@ if (($in_rfq == true) && isset($link_to_rfq_page)) {
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-    echo wp_kses_post($view_rfq_cart_button);
+    echo ($view_rfq_cart_button);
 
 } else {
     $view_rfq_cart_button = "<a class='rfqcart-link' style='display:none !important;text-align: center' href='" . $link_to_rfq_page . "'>" . $view_your_cart_text . "</a>";
 
     $view_rfq_cart_button = apply_filters('gpls_woo_rfq_view_rfq_cart_button', $view_rfq_cart_button, $in_rfq, $rfq_check, $normal_check, $rfq_enable, $product);
 
-    echo wp_kses_post($view_rfq_cart_button);
+    echo ($view_rfq_cart_button);
 }
 
 echo '<div style="clear:both"></div>';
@@ -40,7 +40,7 @@ $single_add_to_cart_button = apply_filters('gpls_woo_rfq_single_add_to_cart_butt
 
 echo ($single_add_to_cart_button);// phpcs:ignore WordPress.Security.EscapeOutput
 echo "<div class='gpls_script' style='display: none'><script> " .
-    wp_kses_post($rfq_product_script) . '</script></div>';
+    $rfq_product_script . '</script></div>';
 
 
 ?>

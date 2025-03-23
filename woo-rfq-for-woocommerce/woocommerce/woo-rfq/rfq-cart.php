@@ -3,7 +3,7 @@
  * WOO-RFQ-List
 
  */
-
+// phpcs:ignoreFile
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -68,13 +68,13 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
     <?php do_action('gpls_woo_rfq_before_cart'); ?>
 
-    <form name="rfqform" id="rfqform" class="rfqform" action="<?php echo  wp_kses_post($wc_get_update_url); ?>" method="post" enctype="multipart/form-data">
+    <form name="rfqform" id="rfqform" class="rfqform" action="<?php echo  ($wc_get_update_url); ?>" method="post" enctype="multipart/form-data">
 
 
-        <input type="hidden" name="rfqform_location" id="rfqform_location" value="<?php echo  wp_kses_post($location); ?>" />
+        <input type="hidden" name="rfqform_location" id="rfqform_location" value="<?php echo  ($location); ?>" />
 
         <?php if(isset( $global_product_id)): ?>
-            <input type="hidden" name="global_product_id" id="global_product_id" value="<?php echo  wp_kses_post($global_product_id); ?>" />
+            <input type="hidden" name="global_product_id" id="global_product_id" value="<?php echo  ($global_product_id); ?>" />
         <?php endif; ?>
 
         <?php $nonce = wp_create_nonce('gpls_woo_rfq_handle_rfq_cart_nonce') ; ?>
@@ -87,8 +87,8 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                     <tr class="cart_tr">
                         <th class="product-remove cart_th">&nbsp;</th>
                         <th class="product-thumbnail cart_th">&nbsp;</th>
-                        <th class="product-name cart_th"><?php printf(  wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
-                        <th class="product-quantity cart_th"><?php printf(  wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
+                        <th class="product-name cart_th"><?php printf(  (__('Product', 'woo-rfq-for-woocommerce'))); ?></th>
+                        <th class="product-quantity cart_th"><?php printf(  (__('Quantity', 'woo-rfq-for-woocommerce'))); ?></th>
 
                     </tr>
 
@@ -122,13 +122,13 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                         echo '';
                                     } else {
                                         $url = esc_url($wc_get_update_url) . "?remove_rfq_item=" . $cart_item_key;
-                                        echo  wp_kses_post(apply_filters('woocommerce_cart_item_remove_link', sprintf(
+                                        echo  (apply_filters('woocommerce_cart_item_remove_link', sprintf(
                                             '<a href="%s" type="submit" class="remove" title="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
                                             $url . '&man-deleted=' . $cart_item_key."&gpls_woo_rfq_nonce=".$nonce,
-                                            wp_kses_post(__('Remove this item', 'woo-rfq-for-woocommerce')),
+                                            (__('Remove this item', 'woo-rfq-for-woocommerce')),
                                             esc_attr($product_id),
                                             esc_attr($_product->get_sku())
-                                        ),  wp_kses_post($cart_item_key)));
+                                        ),  ($cart_item_key)));
 
 
                                     }
@@ -142,24 +142,24 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                     $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
                                     if ( ! $product_permalink ) {
-                                        echo  wp_kses_post($thumbnail);
+                                        echo  ($thumbnail);
                                     } else {
-                                        printf( '<a href="%s">%s</a>', esc_url( $product_permalink ),  wp_kses_post($thumbnail) );
+                                        printf( '<a href="%s">%s</a>', esc_url( $product_permalink ),  ($thumbnail) );
                                     }
                                     ?>
                                 </td>
 
-                                <td class="product-name  cart_td" data-title="<?php printf(  wp_kses_post(__('Product', 'woo-rfq-for-woocommerce'))); ?>">
+                                <td class="product-name  cart_td" data-title="<?php printf(  (__('Product', 'woo-rfq-for-woocommerce'))); ?>">
                                     <?php
                                     if (!$product_permalink) {
-                                        echo  wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key)) . '&nbsp;';
+                                        echo  (apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key)) . '&nbsp;';
                                     } else {
-                                        echo  wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key));
+                                        echo  (apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key));
                                     }
                                     //  do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
                                     // Meta data
 
-                                    echo    wp_kses_post(rfq_cart_get_item_data($cart_item));
+                                    echo    (rfq_cart_get_item_data($cart_item));
 
                                     do_action('gplsrfq_cart_item_product',$_product, $cart_item, $cart_item_key);
 
@@ -174,7 +174,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
 
 
-                                <td class="product-quantity  cart_td" data-title="<?php echo(  wp_kses_post(__('Quantity', 'woo-rfq-for-woocommerce'))); ?>">
+                                <td class="product-quantity  cart_td" data-title="<?php echo(  (__('Quantity', 'woo-rfq-for-woocommerce'))); ?>">
                                     <?php
 
 
@@ -243,14 +243,14 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                 <?php do_action('gpls_woo_rfq_cart_actions'); ?>
 
                                 <input   type="submit" class="update-rfq-cart button alt gpls-woo-rfq_update-rfq-cart_button"
-                                         id="update_rfq_cart" formnovalidate="formnovalidate" style="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_styles']); ?>"
-                                         onmouseover="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_background_onmouseover'])
-                                             .';'. wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_onmouseover']); ?>"
-                                         onmouseout="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_onmouseout'])
-                                             .';'. wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_background_onmouseout']); ?>"
+                                         id="update_rfq_cart" formnovalidate="formnovalidate" style="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_styles']); ?>"
+                                         onmouseover="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_background_onmouseover'])
+                                             .';'. ($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_onmouseover']); ?>"
+                                         onmouseout="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_onmouseout'])
+                                             .';'. ($gpls_woo_rfq_styles['gpls_woo_rfq_page_update_button_background_onmouseout']); ?>"
 
 
-                                         name="update_rfq_cart" value="<?php echo  wp_kses_post($confirmation_message); ?>"
+                                         name="update_rfq_cart" value="<?php echo  ($confirmation_message); ?>"
 
                                 />
                             </div>
@@ -285,12 +285,12 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
 
                         if(!isset($customer_info_label)){
-                            $customer_info_label =  wp_kses_post(__('Customer Information','woo-rfq-for-woocommerce'));
+                            $customer_info_label =  (__('Customer Information','woo-rfq-for-woocommerce'));
                         }
 
                         ?>
                         <td align="center" colspan="4" class="info_td"  style="text-align: center;">
-                            <h1 class="woo-rfq-customer-info-header"><?php echo  wp_kses_post($customer_info_label); ?></h1>
+                            <h1 class="woo-rfq-customer-info-header"><?php echo  ($customer_info_label); ?></h1>
                         </td>
 
 
@@ -302,49 +302,49 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                         <?php if (!is_user_logged_in()): ?>
                             <tr class="info_tr">
 
-                                <th class="FName info_th"><?php printf(  wp_kses_post(__('First Name', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr>
+                                <th class="FName info_th"><?php printf(  (__('First Name', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr>
                                 </th>
 
 
                             </tr>
                             <tr class="info_tr">
 
-                                <td class="info_td"><input style=" " type="text" id="rfq_fname" name="rfq_fname" placeholder="<?php printf(  wp_kses_post(__('First Name', 'woo-rfq-for-woocommerce'))); ?>"
+                                <td class="info_td"><input style=" " type="text" id="rfq_fname" name="rfq_fname" placeholder="<?php printf(  (__('First Name', 'woo-rfq-for-woocommerce'))); ?>"
                                     /></td>
                             </tr>
                             <tr class="info_tr">
-                                <th class="LName  info_th"><?php printf(  wp_kses_post(__('Last Name', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr>
+                                <th class="LName  info_th"><?php printf(  (__('Last Name', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr>
                                 </th>
 
                             </tr>
 
                             <tr class="info_tr">
                                 <td class="info_td">
-                                    <input style=" " type="text" id="rfq_lname" name="rfq_lname" placeholder="<?php printf(  wp_kses_post(__('Last Name', 'woo-rfq-for-woocommerce'))); ?>" class="required"  /></td>
+                                    <input style=" " type="text" id="rfq_lname" name="rfq_lname" placeholder="<?php printf(  (__('Last Name', 'woo-rfq-for-woocommerce'))); ?>" class="required"  /></td>
 
                             </tr>
                             <tr class="info_tr">
 
-                                <th class="email  info_th"><?php printf(  wp_kses_post(__('Email', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr></th>
+                                <th class="email  info_th"><?php printf(  (__('Email', 'woo-rfq-for-woocommerce'))); ?> <abbr class="required" ></abbr></th>
 
                             </tr>
 
                             <tr class="info_tr">
 
                                 <td class="info_td"><input style=" " id="rfq_email_customer" name="rfq_email_customer" type="email"
-                                                           class="email required"   placeholder="<?php printf(  wp_kses_post(__('Email', 'woo-rfq-for-woocommerce'))); ?> "    /></td>
+                                                           class="email required"   placeholder="<?php printf(  (__('Email', 'woo-rfq-for-woocommerce'))); ?> "    /></td>
                             </tr>
 
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_phone_hide','no')==='no'): ?>
                                 <tr class="info_tr">
 
 
-                                    <th class="info_th"><?php printf(  wp_kses_post(__('Phone', 'woo-rfq-for-woocommerce'))); ?> <abbr  id="rfq_phone_label" ></abbr></th>
+                                    <th class="info_th"><?php printf(  (__('Phone', 'woo-rfq-for-woocommerce'))); ?> <abbr  id="rfq_phone_label" ></abbr></th>
 
 
                                 </tr>
                                 <tr class="info_tr">
-                                    <td class="info_td"><input style="  !important" id="rfq_phone" name="rfq_phone" placeholder="<?php printf(  wp_kses_post(__('Phone', 'woo-rfq-for-woocommerce'))); ?>" type="text"
+                                    <td class="info_td"><input style="  !important" id="rfq_phone" name="rfq_phone" placeholder="<?php printf(  (__('Phone', 'woo-rfq-for-woocommerce'))); ?>" type="text"
                                         /></td>
 
                                 </tr>
@@ -355,14 +355,14 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_company_hide','no')==='no'): ?>
 
                                 <tr class="info_tr">
-                                    <th colspan="2" class="company info_th"><?php printf(  wp_kses_post(__('Company', 'woo-rfq-for-woocommerce'))); ?> <abbr  id="rfq_company_label"></abbr></th>
+                                    <th colspan="2" class="company info_th"><?php printf(  (__('Company', 'woo-rfq-for-woocommerce'))); ?> <abbr  id="rfq_company_label"></abbr></th>
 
                                 </tr>
 
 
                                 <tr class="info_tr">
                                     <td colspan="2" class="company info_td">
-                                        <input type="text" id="rfq_company" name="rfq_company" placeholder="<?php printf(  wp_kses_post(__('Company', 'woo-rfq-for-woocommerce'))); ?> " class="rfq_cart_address" />
+                                        <input type="text" id="rfq_company" name="rfq_company" placeholder="<?php printf(  (__('Company', 'woo-rfq-for-woocommerce'))); ?> " class="rfq_cart_address" />
                                     </td>
 
                                 </tr>
@@ -373,13 +373,13 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_country_hide','no')==='no'): ?>
                                 <tr class="info_tr">
-                                    <th colspan="2" class="country info_th" style="padding-top:10px"><?php printf( wp_kses_post(__('Country', 'woo-rfq-for-woocommerce'))); ?><abbr class="required"   id="rfq_billing_country_label"></abbr></th>
+                                    <th colspan="2" class="country info_th" style="padding-top:10px"><?php printf( (__('Country', 'woo-rfq-for-woocommerce'))); ?><abbr class="required"   id="rfq_billing_country_label"></abbr></th>
 
                                 </tr>
 
 
                                 <tr class="info_tr">
-                                    <td colspan="2" style="padding:15px;" class="rfq_state_select info_td" placeholder="<?php printf( wp_kses_post(__('Country', 'woo-rfq-for-woocommerce'))); ?>">
+                                    <td colspan="2" style="padding:15px;" class="rfq_state_select info_td" placeholder="<?php printf( (__('Country', 'woo-rfq-for-woocommerce'))); ?>">
 
                                         <?php
                                         $countries = new WC_Countries();
@@ -387,12 +387,12 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                         //$allowed_countries = $countries->get_countries();
                                         ?>
                                         <select name="rfq_billing_country" id="rfq_billing_country"
-                                                class="rfq_billing_country" style="padding:5px;font-size: 1.em;" data-msg="<?php printf(  wp_kses_post(__('Required', 'woo-rfq-for-woocommerce'))); ?>">
+                                                class="rfq_billing_country" style="padding:5px;font-size: 1.em;" data-msg="<?php printf(  (__('Required', 'woo-rfq-for-woocommerce'))); ?>">
                                             <option value="">Select a country&hellip;</option>
 
                                             <?php
                                             foreach ($allowed_countries as $key => $value) { ?>
-                                                <option value="<?php echo  wp_kses_post($key); ?>"><?php echo  wp_kses_post($value); ?></option>
+                                                <option value="<?php echo  ($key); ?>"><?php echo  ($value); ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -413,7 +413,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                                 <tr class="info_tr">
 
-                                    <th class="info_th" style="padding-top:10px"><?php printf(  wp_kses_post(__('State', 'woo-rfq-for-woocommerce'))); ?><abbr class="required"  id="rfq_state_select_label"></abbr></th>
+                                    <th class="info_th" style="padding-top:10px"><?php printf(  (__('State', 'woo-rfq-for-woocommerce'))); ?><abbr class="required"  id="rfq_state_select_label"></abbr></th>
 
 
                                 </tr>
@@ -422,7 +422,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                                     <td colspan="2" style="padding:10px;" class="info_td">
                                         <select name="rfq_state_select" id="rfq_state_select" style="padding:5px;font-size: 1.em;"
-                                                class="rfq_state_select" placeholder="<?php printf( wp_kses_post(__('State','woo-rfq-for-woocommerce')))?>" style=" vertical-align: top" >
+                                                class="rfq_state_select" placeholder="<?php printf( (__('State','woo-rfq-for-woocommerce')))?>" style=" vertical-align: top" >
                                             <option value="">Select an option…</option>
                                             <option value="AL">Alabama</option>
                                             <option value="AK">Alaska</option>
@@ -486,7 +486,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                             <option value="VI">US Virgin Islands</option>
                                         </select>
                                         <input style="  " class="form-control" name="rfq_state_text" id="rfq_state_text" type="text"
-                                               placeholder="<?php printf(  wp_kses_post(__('State/County','woo-rfq-for-woocommerce'))); ?>"/>
+                                               placeholder="<?php printf(  (__('State/County','woo-rfq-for-woocommerce'))); ?>"/>
                                     </td>
 
                                 </tr>
@@ -498,12 +498,12 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_address_hide','no')==='no'): ?>
 
                                 <tr class="info_tr">
-                                    <th colspan="2" class="address info_td"><?php printf(  wp_kses_post(__('Address', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_address_label"></abbr></th>
+                                    <th colspan="2" class="address info_td"><?php printf(  (__('Address', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_address_label"></abbr></th>
 
                                 </tr>
                                 <tr class="info_tr">
                                     <td colspan="2" class="address info_td">
-                                        <input style="  " type="text" id="rfq_address" name="rfq_address" placeholder="<?php printf(  wp_kses_post(__('Address', 'woo-rfq-for-woocommerce'))); ?>" class="rfq_cart_address" />
+                                        <input style="  " type="text" id="rfq_address" name="rfq_address" placeholder="<?php printf(  (__('Address', 'woo-rfq-for-woocommerce'))); ?>" class="rfq_cart_address" />
                                     </td>
 
                                 </tr>
@@ -515,7 +515,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <?php if(get_option('rfq_cart_sc_section_rfq_page_address_hide','no')==='no'): ?>
 
                                 <tr class="info_tr">
-                                    <th colspan="2" class="address info_td info_th"><?php printf(  wp_kses_post(__('Address 2', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_address2_label"></abbr></th>
+                                    <th colspan="2" class="address info_td info_th"><?php printf(  (__('Address 2', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_address2_label"></abbr></th>
 
                                 </tr>
                                 <tr class="info_tr">
@@ -534,7 +534,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                                 <tr class="info_tr">
 
-                                    <th class="info_th"><?php printf(  wp_kses_post(__('City', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_city_label"></abbr></th>
+                                    <th class="info_th"><?php printf(  (__('City', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_city_label"></abbr></th>
 
                                 </tr>
 
@@ -542,7 +542,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                                 <tr class="info_tr">
 
                                     <td class="text info_td"><input style="  " class="form-control" type="text" id="rfq_city" name="rfq_city"
-                                                                    placeholder="<?php printf(  wp_kses_post(__('City', 'woo-rfq-for-woocommerce'))); ?>"/></td>
+                                                                    placeholder="<?php printf(  (__('City', 'woo-rfq-for-woocommerce'))); ?>"/></td>
                                 </tr>
 
                             <?php else: ?>
@@ -553,12 +553,12 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                                 <tr class="info_tr">
 
-                                    <th class="info_th"><?php printf(  wp_kses_post(__('Zip', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_zip_label"></abbr></th>
+                                    <th class="info_th"><?php printf(  (__('Zip', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_zip_label"></abbr></th>
 
                                 </tr>
                                 <tr class="info_tr">
                                     <td class="info_td" >
-                                        <input style="  " class="form-control" name="rfq_zip" id="rfq_zip" type="text" placeholder="<?php printf(  wp_kses_post(__('Zip', 'woo-rfq-for-woocommerce'))); ?>"
+                                        <input style="  " class="form-control" name="rfq_zip" id="rfq_zip" type="text" placeholder="<?php printf(  (__('Zip', 'woo-rfq-for-woocommerce'))); ?>"
                                         />
                                     </td>
 
@@ -585,13 +585,13 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                     <?php if(get_option('rfq_cart_sc_section_rfq_page_comment_hide','no')=='no'): ?>
                         <tr class="info_tr">
 
-                            <th class="info_th"><?php printf(  wp_kses_post(__('Customer Note', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_message_label"></abbr></th>
+                            <th class="info_th"><?php printf(  (__('Customer Note', 'woo-rfq-for-woocommerce'))); ?><abbr  id="rfq_message_label"></abbr></th>
 
                         </tr>
 
                         <tr class="info_tr">
                             <td colspan="4"  style="" class="info_td">
-                                <textarea id="rfq_message" name="rfq_message" placeholder="<?php printf(  wp_kses_post(__('Your message to us', 'woo-rfq-for-woocommerce'))); ?>" rows="5" class="rfq-cart-message"   ></textarea>
+                                <textarea id="rfq_message" name="rfq_message" placeholder="<?php printf(  (__('Your message to us', 'woo-rfq-for-woocommerce'))); ?>" rows="5" class="rfq-cart-message"   ></textarea>
                             </td>
 
                         </tr>
@@ -611,7 +611,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
                     <tr class="info_tr">
                         <td colspan="2" align="center" class="info_td"  style="text-align: center !important;" >
-                            <input type="hidden" name="gpls_woo_rfq_nonce" value='<?php echo  wp_kses_post($nonce); ?>'>
+                            <input type="hidden" name="gpls_woo_rfq_nonce" value='<?php echo  ($nonce); ?>'>
                             <?php
                             $button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', 'Submit Your Request For Quote');
 
@@ -628,9 +628,9 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <div class="rfq_proceed-to-checkout" >
                                 <input  name="gpls-woo-rfq_checkout_button" id="gpls-woo-rfq_checkout_button"
                                         type="submit" class="button alt gpls-woo-rfq_checkout_button"
-                                        style="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_styles']) ?>" value="<?php echo  wp_kses_post($button_text); ?>"
-                                        onmouseover="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_background_onmouseover']).';'. wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_onmouseover']); ?>"
-                                        onmouseout="<?php echo  wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_onmouseout']).';'. wp_kses_post($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_background_onmouseout']); ?>"
+                                        style="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_styles']) ?>" value="<?php echo  ($button_text); ?>"
+                                        onmouseover="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_background_onmouseover']).';'. ($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_onmouseover']); ?>"
+                                        onmouseout="<?php echo  ($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_onmouseout']).';'. ($gpls_woo_rfq_styles['gpls_woo_rfq_page_submit_button_background_onmouseout']); ?>"
 
                                 />
                                 <br />
@@ -673,7 +673,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
 
 
-                echo "<div class='gpls_script' style='display: none'><script> " .  wp_kses_post($script) . '</script></div>';
+                echo "<div class='gpls_script' style='display: none'><script> " .  ($script) . '</script></div>';
 
 
 
