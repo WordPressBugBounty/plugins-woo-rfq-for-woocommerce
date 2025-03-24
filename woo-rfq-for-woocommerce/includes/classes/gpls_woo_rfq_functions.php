@@ -2727,7 +2727,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
                 wp_add_inline_script('gpls_woo_rfq_js', $custom_js);
 
                 echo "<div class='gpls_script' style='display: none'><script> "
-                    .wp_kses_post($custom_js) . '</script></div>';
+                    .($custom_js) . '</script></div>';
 
 
                 esc_html("<div class='gpls_script'
@@ -2788,7 +2788,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
                 wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
 
                 echo '<div class="gpls_script" style="display: none"><style>'
-                    .wp_kses_post($custom_css) . '</style></div>';
+                    .($custom_css) . '</style></div>';
 
 
             }
@@ -2815,7 +2815,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
 
             echo "<div class='gpls_script' style='display: none'><script> " .
-                wp_kses_post($rfq_product_script) . '</script></div>';
+                $rfq_product_script . '</script></div>';
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';

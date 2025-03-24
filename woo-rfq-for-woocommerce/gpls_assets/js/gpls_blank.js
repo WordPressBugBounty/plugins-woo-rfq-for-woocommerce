@@ -1,9 +1,9 @@
-function changeClasses(){
+function changeClasses() {
     jQuery('.single_add_to_cart_button').removeClass('disabled wc-variation-selection-needed wc-variation-is-unavailable');
     jQuery('.single_add_to_cart_button').addClass('woocommerce-variation-add-to-cart-enabled enabled');
     jQuery('.woocommerce-variation-add-to-cart').removeClass('woocommerce-variation-add-to-cart-disabled disabled');
     jQuery('.woocommerce-variation-add-to-cart').addClass('woocommerce-variation-add-to-cart-enabled enabled');
-
+}
 
 
 function gpls_enable() {
@@ -73,7 +73,8 @@ jQuery( document ).ajaxComplete(function() {
     } catch (err) {
         console.log(err);
     }
-});jQuery('.single_add_to_cart_button').removeClass('disabled wc-variation-selection-needed wc-variation-is-unavailable');
+});
+jQuery('.single_add_to_cart_button').removeClass('disabled wc-variation-selection-needed wc-variation-is-unavailable');
 jQuery('.single_add_to_cart_button').addClass('woocommerce-variation-add-to-cart-enabled enabled');
 jQuery('.woocommerce-variation-add-to-cart').removeClass('woocommerce-variation-add-to-cart-disabled disabled');
 jQuery('.woocommerce-variation-add-to-cart').addClass('woocommerce-variation-add-to-cart-enabled enabled');

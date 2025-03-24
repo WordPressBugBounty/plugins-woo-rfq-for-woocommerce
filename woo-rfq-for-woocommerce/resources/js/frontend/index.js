@@ -47,7 +47,7 @@ jQuery.ajax({
 	},
 	success: function (resp) {
 
-		console.log(resp);
+		//console.log(resp);
 
 		submit_label = resp['rfq_cart_wordings_submit_your_rfq_text'];
 		proceed_to_checkout_label = resp['rfq_cart_wordings_proceed_to_rfq'];
@@ -71,7 +71,7 @@ export function GPLS_Custom_Cart_Checkout_Labels() {
 	const { registerPlugin } = window.wp.plugins;
 	const { ExperimentalOrderMeta } = window.wc.blocksCheckout;
 
-	console.log(document.URL);
+	//console.log(document.URL);
 
 
 	if (rfq_mode ==="rfq") {
