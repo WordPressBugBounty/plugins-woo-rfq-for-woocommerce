@@ -188,6 +188,21 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
             //we verify nonce, order key and unique id key
 
 
+            if (is_object($order) == false || $order == null || $order == false || !$order) {
+
+                ob_start();
+
+                wc_get_template('woo-rfq/rfq-cart-empty.php',
+                    array('confirmation_message' => ''),
+                    '', gpls_woo_rfq_WOO_PATH);
+                //return;
+
+                echo wp_kses_post(ob_get_clean());
+                exit;
+            }
+
+
+
             $is_empty = false;
 
             if (isset($GLOBALS["gpls_woo_rfq_checkout_option"])
@@ -204,7 +219,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                }
 
 
-                if (is_object($order) == false || $order == null || $order == false) {
+                if (is_object($order) == false || $order == null || $order == false || !$order) {
 
                     ob_start();
 
@@ -278,12 +293,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
 
 
 
-
-
-
-
-
-            if (!$is_empty && $order->get_status() == 'gplsquote-req') {
+            if ($order && is_object($order) && !$is_empty && $order->get_status() == 'gplsquote-req') {
                 $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', __('Your quote request has been successfully submitted!', 'woo-rfq-for-woocommerce'));
 
                 return $confirmation_message;

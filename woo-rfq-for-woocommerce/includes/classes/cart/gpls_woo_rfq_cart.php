@@ -8,9 +8,6 @@
 //   WordPress.WP.I18n.NonSingularStringLiteralText
 if (!class_exists('gpls_woo_rfq_CART')) {
 
-
-
-
     class gpls_woo_rfq_CART
     {
         public function __construct()
@@ -794,7 +791,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
 
-            echo ($rfq_product_script);// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo $rfq_product_script;// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
 
 
@@ -1519,7 +1516,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                     echo "<div class='gpls_script' style='display: none'><script> " .
-                        ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        $rfq_product_script. '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 
                 }
@@ -1615,7 +1612,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
                 echo "<div class='gpls_script' style='display: none'><script> " .
-                    ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    $rfq_product_script. '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
             }
             ?>
@@ -1686,7 +1683,7 @@ jQuery( '.amount,.bundle_price, .product-selector__price' ).attr('style','visibi
 
 
                         echo "<div class='gpls_script' style='display: none'><script> " .
-                            ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            $rfq_product_script. '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 
                         $rfq_product_script = "jQuery(document ).ready( function() {
@@ -1740,7 +1737,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
 
 
                         echo "<div class='gpls_script' style='display: none'><script> " .
-                            ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            $rfq_product_script. '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     }
 
 
@@ -1766,7 +1763,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
 
                                 echo "<div class='gpls_script' style='display: none'><script> " .
-                                    ($rfq_product_script). '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                    $rfq_product_script. '</script></div>';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
                                 add_action('wp_print_footer_scripts', 'gpls_woo_rfq_print_script_show_single_add', 1000);
 

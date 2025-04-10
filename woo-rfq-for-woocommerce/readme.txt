@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 8.2
 WC tested up to: 9.7.1
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,14 +208,14 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.2.1 3/22/2025 =
-fix js error
+= 2.2.3 4/10/2025 =
+add null check for quote request at checkout
 
 
 == Upgrade Notice ==
 
-= 2.2.2 3/24/2025 =
-fix js error
+= 2.2.3 4/10/2025 =
+add null check for quote request at checkout
 
 
 
