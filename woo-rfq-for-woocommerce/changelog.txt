@@ -29,6 +29,11 @@ fix password file
 = 1.9.179 11/22/2024 =
 languge file corruption fixed
 
+= 2.2.4 5/8/2025 =
+WooCommerce 9.8.4
+WP 6.8
+Fix plain emails
+
 = 1.9.178 11/22/2024 =
 add to cart js decoded
 

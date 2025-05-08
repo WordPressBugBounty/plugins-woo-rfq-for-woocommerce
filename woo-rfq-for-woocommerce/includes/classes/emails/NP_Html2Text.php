@@ -19,7 +19,7 @@
 //neahplugins
 //removed namespace
 //changed class name
-//  
+
 class NP_Html2Text
 {
     const ENCODING = 'UTF-8';
@@ -309,7 +309,7 @@ class NP_Html2Text
      */
     public function print_text()
     {
-        print wp_kses_post($this->getText());
+        print $this->getText();
     }
 
     /**
@@ -374,7 +374,7 @@ class NP_Html2Text
         $this->convertPre($text);
         $text = preg_replace($this->search, $this->replace, $text);
         $text = preg_replace_callback($this->callbackSearch, array($this, 'pregCallback'), $text);
-        $text = wp_strip_tags($text);
+        $text = strip_tags($text);
         $text = preg_replace($this->entSearch, $this->entReplace, $text);
         $text = html_entity_decode($text, $this->htmlFuncFlags, self::ENCODING);
 
@@ -657,4 +657,3 @@ class NP_Html2Text
         return $rtn;
     }
 }
-//  
