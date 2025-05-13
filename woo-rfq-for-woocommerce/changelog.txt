@@ -1,4 +1,13 @@
 == Changelog ==
+
+= 2.2.5 5/13/2025 =
+filter for showing image in emails
+
+= 2.2.4 5/8/2025 =
+WooCommerce 9.8.4
+WP 6.8
+Fix plain emails
+
 = 2.2.2 3/24/2025 =
 fix js error
 = 2.2.3 4/10/2025 =

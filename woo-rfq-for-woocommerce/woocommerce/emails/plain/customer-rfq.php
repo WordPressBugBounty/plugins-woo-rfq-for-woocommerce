@@ -25,6 +25,10 @@ if($show_prices==false) {
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
 
+
+$show_image=true;
+$show_image=apply_filters('rfqtk_email_show_image',$show_image,$email);
+
 ?>
 
 <?php
@@ -63,7 +67,7 @@ if ($content_intro != "") echo '<p>' . ($content_intro) . '</p>';
     <?php echo (rfqtk_get_email_order_items($order,array(
         'items' =>$order->get_items(),
         'show_sku' => true,
-        'show_image' => true,
+        'show_image' => $show_image,
         'image_size' => array(128, 128),
         'plain_text' => $plain_text,
         'show_prices' => $show_prices

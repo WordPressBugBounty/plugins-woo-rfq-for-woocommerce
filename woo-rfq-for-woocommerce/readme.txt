@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
 WC tested up to: 9.8.4
-Stable tag: 2.2.3
+Stable tag: 2.2.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,18 +208,14 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.2.4 5/8/2025 =
-WooCommerce 9.8.4
-WP 6.8
-Fix plain emails
+= 2.2.5 5/13/2025 =
+filter for showing image in emails
 
 
 == Upgrade Notice ==
 
-= 2.2.4 5/8/2025 =
-WooCommerce 9.8.4
-WP 6.8
-Fix plain emails
+= 2.2.5 5/13/2025 =
+filter for showing image in emails
 
 
 
