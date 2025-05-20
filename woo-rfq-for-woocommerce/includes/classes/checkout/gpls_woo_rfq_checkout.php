@@ -295,6 +295,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
 
             if ($order && is_object($order) && !$is_empty && $order->get_status() == 'gplsquote-req') {
                 $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', __('Your quote request has been successfully submitted!', 'woo-rfq-for-woocommerce'));
+                $confirmation_message = __($confirmation_message,'woo-rfq-for-woocommerce');
 
                 return $confirmation_message;
 
@@ -324,7 +325,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
             if ($GLOBALS["gpls_woo_rfq_checkout_option"] === 'rfq') {
 
                 $order_button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', __('Submit Your Request For Quote', 'woo-rfq-for-woocommerce'));
-
+                $order_button_text = __($order_button_text,'woo-rfq-for-woocommerce');
 
                 $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 

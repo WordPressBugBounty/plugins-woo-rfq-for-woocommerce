@@ -20,7 +20,7 @@ if(!isset($confirmation_message) || is_admin())return;
 
         <?php
         $quote_request_empty = get_option('rfq_cart_wordings_quote_request_currently_empty', __('Your Quote Request List is Currently Empty.', 'woo-rfq-for-woocommerce'));
-
+        $quote_request_empty = __($quote_request_empty, 'woo-rfq-for-woocommerce');
         echo ($quote_request_empty);
         ?>
 
@@ -33,7 +33,7 @@ if(!isset($confirmation_message) || is_admin())return;
 		<a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
 			<?php
             $return_to_shop = get_option('rfq_cart_wordings_return_to_shop', __('Return To Shop', 'woo-rfq-for-woocommerce'));
-
+            $return_to_shop = __($return_to_shop, 'woo-rfq-for-woocommerce');
             echo ($return_to_shop);
 
             ?>

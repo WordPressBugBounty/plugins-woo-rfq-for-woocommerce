@@ -60,6 +60,7 @@ class WC_Email_New_RFQ extends WC_Email {
 
 
 
+
 	}
 
     public function get_default_subject()

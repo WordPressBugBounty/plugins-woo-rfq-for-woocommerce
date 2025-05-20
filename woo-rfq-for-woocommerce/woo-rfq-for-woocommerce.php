@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 2.2.5
+ * Version: 2.3
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -10,7 +10,7 @@
  * Requires at least: 6.3
  * Tested up to: 6.8
  * Requires PHP: 7.4
- * WC tested up to: 9.8.4
+ * WC tested up to: 9.8.5
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2024 Neah Plugins.
@@ -754,7 +754,7 @@ class GPLS_WOO_RFQ
 //  
 
         $status_label = get_option('settings_gpls_woo_rfq_quote_request_label', 'Quote Request');
-
+        $status_label = __($status_label, 'rfqtk');
 
         if ($status_label == '') {
             $status_label = __('Quote Request', 'woo-rfq-for-woocommerce');
@@ -762,7 +762,7 @@ class GPLS_WOO_RFQ
 
         $order_statuses["wc-gplsquote-req"] = $status_label;
 
-        //  $order_statuses = array_reverse($order_statuses, True);
+        $order_statuses = array_reverse($order_statuses, True);
 
 
         return $order_statuses;
@@ -1217,6 +1217,7 @@ class GPLS_WOO_RFQ
 
                 if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                     $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                    $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option,'woo-rfq-for-woocommerce');
                     DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
                 }
                 $form_label = gpls_woo_rfq_INQUIRE_TEXT;
@@ -1511,6 +1512,7 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 
             if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option,'woo-rfq-for-woocommerce');
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
             }
 
@@ -1615,16 +1617,9 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 
         $home = home_url() . '/quote-request/';
 
-        $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
+        //$rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
-       // $link_to_rfq_page_url = $_SERVER['REQUEST_URI'];
-
-
-        if(isset($_SERVER['REQUEST_URI'])){
-            $link_to_rfq_page_url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
-
-        }
-
+        $link_to_rfq_page_url = $_SERVER['REQUEST_URI'];
 
         if ($link_to_rfq_page_url != false && isset($link_to_rfq_page_url)) {
 

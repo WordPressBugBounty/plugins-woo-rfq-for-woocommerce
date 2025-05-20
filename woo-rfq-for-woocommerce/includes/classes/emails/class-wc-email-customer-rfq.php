@@ -36,7 +36,9 @@ if (!class_exists('WC_Email_Customer_RFQ')) :
             $this->template_html = 'emails/customer-rfq.php';
             $this->template_plain = 'emails/plain/customer-rfq.php';
             $this->_templates = array($this->template_html, $this->template_plain);
-            $this->content_intro = $this->format_string($this->get_option( 'content_intro' ));
+
+            $content_intro = $this->format_string($this->get_option( 'content_intro' ));
+            $this->content_intro = __($content_intro, 'woo-rfq-for-woocommerce');;
 
             $this->placeholders = array(
                 '{order_date}' => '',

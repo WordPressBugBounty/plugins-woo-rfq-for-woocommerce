@@ -1647,11 +1647,10 @@ function gplswoo_get_submit_order_label()
         DEFINE('gpls_woo_rfq_WOO_PATH', untrailingslashit(plugin_dir_path(__FILE__)) . '/woocommerce/');
         DEFINE('gpls_woo_rfq_GLOBAL_NINJA_FORMID', get_option('settings_gpls_woo_ninja_form_option'));
 
-        $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
-
 
         if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
             $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+            $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce');
             DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
         }
 
@@ -1739,6 +1738,7 @@ function gplswoo_get_submit_order_label()
 
 
         $order_button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', __('Submit Your Request For Quote', 'woo-rfq-for-woocommerce'));
+        $order_button_text = __($order_button_text, 'woo-rfq-for-woocommerce');
 
         $order_button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text', $order_button_text);
 
@@ -1750,7 +1750,7 @@ function gplswoo_get_submit_order_label()
 
 
         $proceed_to_rfq = get_option('rfq_cart_wordings_proceed_to_rfq', __('Proceed To Submit Your RFQ', 'woo-rfq-for-woocommerce'));
-
+        $proceed_to_rfq = __($proceed_to_rfq, 'woo-rfq-for-woocommerce');
         $proceed_to_rfq = apply_filters('gpls_woo_rfq_proceed_to_rfq', $proceed_to_rfq);
         $ajax_array['rfq_cart_wordings_proceed_to_rfq']= $proceed_to_rfq;
 

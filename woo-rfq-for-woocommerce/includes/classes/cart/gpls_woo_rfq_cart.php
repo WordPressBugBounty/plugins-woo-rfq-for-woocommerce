@@ -15,6 +15,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option,'woo-rfq-for-woocommerce');
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
             }
 
@@ -264,6 +265,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     && $product->get_manage_stock()
                 ) {
                     $text = get_option('rfq_cart_wordings_outofstock_text');
+                    $text = __($text,'woo-rfq-for-woocommerce');
 
                     $text = '<p class="stock in-stock">' . $text . '</p>';
                 }
@@ -280,6 +282,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
             $text = get_option('rfq_cart_wordings_outofstock_text');
+            $text = __($text,'woo-rfq-for-woocommerce');
 
 
             return $text;
@@ -861,6 +864,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             }
             if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce');
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
             }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
@@ -915,7 +919,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     ) {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
+
                         $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
 
                         if ($read_more != "") {
@@ -934,7 +941,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
+
                         $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
 
                         if ($read_more != "") {
@@ -960,7 +970,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 {
 
                     $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
+
                     $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                    $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
 
                     if ($read_more != "") {
@@ -998,13 +1011,13 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 if (($in_rfq == true && $product->get_type() != 'variable' && $product->get_type() != 'bundle')) {
 
                     $request_quote = get_option('rfq_cart_wordings_in_rfq', __('In Quote List', 'woo-rfq-for-woocommerce'));//"In RFQ"
-
+                    $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
                     $request_quote = apply_filters('gpls_woo_rfq_in_rfq_text', $request_quote);
 
                 } else {
                     $request_quote = get_option('rfq_cart_wordings_add_to_rfq', __('Add To Quote', 'woo-rfq-for-woocommerce'));// "Request Quote"
-
+                    $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
                     $request_quote = apply_filters('gpls_woo_rfq_request_quote_text', $request_quote);
                 }
@@ -1103,13 +1116,13 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             if (($in_rfq == true && $product->get_type() != 'variable' && $product->get_type() != 'bundle')) {
 
                 $request_quote = get_option('rfq_cart_wordings_in_rfq', __('In Quote List', 'woo-rfq-for-woocommerce'));//"In RFQ"
-
+                $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
                 $request_quote = apply_filters('gpls_woo_rfq_in_rfq_text', $request_quote);
 
             } else {
                 $request_quote = get_option('rfq_cart_wordings_add_to_rfq', __('Add To Quote', 'woo-rfq-for-woocommerce'));// "Request Quote"
-
+                $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
                 $request_quote = apply_filters('gpls_woo_rfq_request_quote_text', $request_quote);
             }
@@ -1134,8 +1147,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     if (get_option('settings_gpls_woo_rfq_normal_checkout_show_prices', 'no') == 'yes' && $no_add_to_cart == 'yes') {
                         //  return;
                         $request_quote = __('Select options', 'woo-rfq-for-woocommerce');//"In RFQ"
-                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+
+                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $select_options = __($select_options, 'woo-rfq-for-woocommerce');
 
                         if ($select_options != "") {
                             $request_quote = $select_options;// "Request Quote"
@@ -1148,8 +1164,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     if (get_option('settings_gpls_woo_rfq_normal_checkout_show_prices', 'no') == 'no' && $no_add_to_cart == 'no') {
                         //  return;
                         $request_quote = __('Select options', 'woo-rfq-for-woocommerce');//"In RFQ"
-                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $select_options = __($select_options, 'woo-rfq-for-woocommerce');
 
                         if ($select_options != "") {
                             $request_quote = $select_options;// "Request Quote"
@@ -1163,8 +1181,10 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     if (get_option('settings_gpls_woo_rfq_normal_checkout_show_prices', 'no') == 'no' && $no_add_to_cart == 'yes') {
                         //  return;
                         $request_quote = __('Select options', 'woo-rfq-for-woocommerce');//"In RFQ"
-                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+                        $select_options = get_option('settings_gpls_woo_rfq_Select_Options', $request_quote);// "Request Quote"
+                        $select_options = __($select_options, 'woo-rfq-for-woocommerce');
 
                         if ($select_options != "") {
                             $request_quote = $select_options;// "Request Quote"
@@ -1190,9 +1210,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                 && !$product->backorders_allowed()
             ) {
 
-                $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
-                $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                $request_quote = __('Read more', 'woo-rfq-for-woocommerce', '');// "Request Quote"
+                $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+                $read_more = get_option('settings_gpls_woo_rfq_read_more', '');// "Request Quote"
+                $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                 if ($read_more != "") {
                     $request_quote = $read_more;// "Request Quote"
@@ -1351,6 +1373,8 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce');
+
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
             }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
@@ -1554,13 +1578,12 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
             if (($in_rfq == true && $product->get_type() != 'variable' && $product->get_type() != 'bundle')) {
 
                 $request_quote = get_option('rfq_cart_wordings_in_rfq', __('Add To Quote', 'woo-rfq-for-woocommerce'));//"In RFQ"
-
+                $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote = apply_filters('gpls_woo_rfq_in_rfq_text', $request_quote);
 
             } else {
                 $request_quote = get_option('rfq_cart_wordings_add_to_rfq', __('Add To Quote', 'woo-rfq-for-woocommerce'));// "Request Quote"
-
-
+                $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                 $request_quote = apply_filters('gpls_woo_rfq_request_quote_text', $request_quote);
 
             }
@@ -1569,7 +1592,7 @@ jQuery( '.woocommerce-Price-amount,.from, .price,.total, .bundle_price,.wc-pao-c
             $link_to_rfq_page = pls_woo_rfq_get_link_to_rfq();
 
             $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View List', 'woo-rfq-for-woocommerce'));
-
+            $view_your_cart_text = __($view_your_cart_text, 'woo-rfq-for-woocommerce');
             $view_your_cart_text = apply_filters('gpls_woo_rfq_request_quote_text', $view_your_cart_text);
 
             $gpls_woo_rfq_file_add_to_quote_styles = array();
@@ -1806,6 +1829,7 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
             $rfq_enable = gpls_woo_get_rfq_enable($product);
             if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
+                $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option, 'woo-rfq-for-woocommerce');
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
             }
             $form_label = gpls_woo_rfq_INQUIRE_TEXT;
@@ -1956,8 +1980,9 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                         $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
-
+                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
                             $request_quote = $read_more;// "Request Quote"
@@ -2008,8 +2033,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
                             $request_quote = $read_more;// "Request Quote"
@@ -2059,8 +2086,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                     {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
-                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
 
+                        $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                        $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                         if ($read_more != "") {
                             $request_quote = $read_more;// "Request Quote"
@@ -2218,10 +2247,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
 
             if ($rfq_check) {
                 $default_text = __('Add to Quote', 'woo-rfq-for-woocommerce');
-
+                $default_text = __($default_text, 'woo-rfq-for-woocommerce');
             } else {
                 $default_text = __('Add to Cart', 'woo-rfq-for-woocommerce');
-
+                $default_text = __($default_text, 'woo-rfq-for-woocommerce');
             }
 
 
@@ -2232,9 +2261,11 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
             $rfq_enable = gpls_woo_get_rfq_enable($product);
 
             $add_txt = get_option('rfq_cart_wordings_add_to_cart', $default_text);
+            $add_txt = __($add_txt, 'woo-rfq-for-woocommerce');
 
 
             $in_txt = get_option('rfq_cart_wordings_in_cart', $default_text);
+            $in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
 
 
 
@@ -2276,10 +2307,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 if (get_option('settings_gpls_woo_rfq_hide_visitor_prices', 'no') == 'yes' && !is_user_logged_in()) {
 
                     $add_txt = get_option('rfq_cart_wordings_add_to_rfq', $default_text);
-
+                    $add_txt = __($add_txt, 'woo-rfq-for-woocommerce');
 
                     $in_txt = get_option('rfq_cart_wordings_in_rfq', $default_text);
-
+                    $in_txt = __($in_txt, 'woo-rfq-for-woocommerce');
 
                 }
             }
@@ -2323,7 +2354,9 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 ) {
 
                         $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                     $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
+                    $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
 
                     if ($read_more != "") {
@@ -2343,9 +2376,10 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
                 )
                 {
 
-                        $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $request_quote = __('Read more', 'woo-rfq-for-woocommerce');// "Request Quote"
+                    $request_quote = __($request_quote, 'woo-rfq-for-woocommerce');
                     $read_more = get_option('settings_gpls_woo_rfq_read_more');// "Request Quote"
-
+                    $read_more = __($read_more, 'woo-rfq-for-woocommerce');
 
                     if ($read_more != "") {
                         $request_quote = $read_more;// "Request Quote"

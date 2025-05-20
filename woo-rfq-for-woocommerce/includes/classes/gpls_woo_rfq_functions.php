@@ -920,7 +920,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             ob_start();
             $confirmation_message = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button',
                 __('Update Quote Request', 'woo-rfq-for-woocommerce'));
-
+            $confirmation_message = __($confirmation_message, 'woo-rfq-for-woocommerce');
 
             wc_get_template('woo-rfq/rfq-cart.php',
                 array('confirmation_message' => $confirmation_message),
@@ -3120,7 +3120,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View List', 'woo-rfq-for-woocommerce'));
 
         $product_was_added_to_quote_request = gpls_woo_rfq_get_option('rfq_cart_wordings_product_was_added_to_quote_request', "Product was successfully added to quote request.");
-
+        $product_was_added_to_quote_request = __($product_was_added_to_quote_request, 'woo-rfq-for-woocommerce');
 
         $link = wc_get_template_html('woo-rfq/link-to-cart-shop.php', array('link_to_rfq_page' => $link_to_rfq_page,), '', gpls_woo_rfq_WOO_PATH);
 
@@ -3155,7 +3155,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
     function gpls_woo_rfq_get_option($string, $default)
     {
 
-        $option = get_option($string, $default);
+        $option = get_option($string, __($default, 'woo-rfq-for-woocommerce'));
+
 
         return $option;
 

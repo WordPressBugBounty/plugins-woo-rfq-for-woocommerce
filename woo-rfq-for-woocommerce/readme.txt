@@ -5,8 +5,8 @@ Tags: woocommerce quote request
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
-WC tested up to: 9.8.4
-Stable tag: 2.2.5
+WC tested up to: 9.8.5
+Stable tag: 2.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,14 +208,15 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.2.5 5/13/2025 =
-filter for showing image in emails
-
+= 2.3 5/20/2025 =
+translations
+WooCommerce 9.8.5
 
 == Upgrade Notice ==
 
-= 2.2.5 5/13/2025 =
-filter for showing image in emails
+= 2.3 5/20/2025 =
+translations
+WooCommerce 9.8.5
 
 
 

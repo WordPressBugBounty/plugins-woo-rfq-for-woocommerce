@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 2.3 5/20/2025 =
+translations
+WooCommerce 9.8.5
+
+
 = 2.2.5 5/13/2025 =
 filter for showing image in emails
 
@@ -7,6 +12,7 @@ filter for showing image in emails
 WooCommerce 9.8.4
 WP 6.8
 Fix plain emails
+
 
 = 2.2.2 3/24/2025 =
 fix js error

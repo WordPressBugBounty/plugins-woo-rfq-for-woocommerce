@@ -232,7 +232,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <?php
 
                              $confirmation_message = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button',__('Update Quote Request', 'woo-rfq-for-woocommerce'));
-                         //   $confirmation_message = __($confirmation_message,'woo-rfq-for-woocommerce');
+                            $confirmation_message = __($confirmation_message,'woo-rfq-for-woocommerce');
 
 
 
@@ -282,8 +282,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                     <tr class="info_tr">
                         <?php
                         $customer_info_label = get_option('settings_gpls_woo_rfq_customer_info_label','Customer Information');
-
-
+                        $customer_info_label = __($customer_info_label,'woo-rfq-for-woocommerce');
                         if(!isset($customer_info_label)){
                             $customer_info_label =  (__('Customer Information','woo-rfq-for-woocommerce'));
                         }
@@ -614,7 +613,7 @@ $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
                             <input type="hidden" name="gpls_woo_rfq_nonce" value='<?php echo  ($nonce); ?>'>
                             <?php
                             $button_text = get_option('rfq_cart_wordings_submit_your_rfq_text', 'Submit Your Request For Quote');
-
+                            $button_text = __($button_text,'woo-rfq-for-woocommerce');
 
                             $button_text = apply_filters('gpls_woo_rfq_rfq_submit_your_order_text',$button_text);
 
