@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
 WC tested up to: 9.8.5
-Stable tag: 2.3
+Stable tag: 2.3.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,14 +208,14 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.3 5/20/2025 =
-translations
+= 2.3.1 5/21/2025 =
+translation of proceed to checkout
 WooCommerce 9.8.5
 
 == Upgrade Notice ==
 
-= 2.3 5/20/2025 =
-translations
+= 2.3.1 5/21/2025 =
+translation of proceed to checkout
 WooCommerce 9.8.5
 
 

@@ -2853,17 +2853,6 @@ if (!class_exists('gpls_woo_rfq_functions')) {
       //  ini_set('display_errors', 'Off');
 
 
-
-
-    if(isset($_POST['_wpnonce']) &&  wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])),'rfq_id_nonce'))
-    {
-
-       $request = $_REQUEST;
-        $is_set = "no";
-
-    }
-
-
         global $woocommerce;
 
         gpls_woo_rfq_remove_filters_normal_checkout();
@@ -2877,6 +2866,11 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
         $product = wc_get_product($product_id);
 
+        $rfq_enable_rfq_checkout = gpls_woo_get_rfq_enable($product);
+
+        $rfq_enable_rfq_checkout = apply_filters('rfq_enable_rfq_checkout_filter',
+            $rfq_enable_rfq_checkout, $cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data);
+
         if ($checkout_option == "rfq") {
 
             add_filter('woocommerce_is_purchasable', 'gpls_woo_rfq_is_purchasable', 1000, 2);
@@ -2885,18 +2879,32 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             add_filter('woocommerce_is_purchasable', 'gpls_woo_rfq_normal_is_purchasable', 1000, 2);
             add_filter('woocommerce_variation_is_purchasable', 'gpls_woo_rfq_normal_is_purchasable', 1000, 2);
 
-
-            $product = wc_get_product($product_id);
-
-            $rfq_enable_rfq_checkout = gpls_woo_get_rfq_enable($product);
-
-            $rfq_enable_rfq_checkout = apply_filters('rfq_enable_rfq_checkout_filter',
-                $rfq_enable_rfq_checkout, $cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data);
-
             do_action('gpls_woo_rfq_woocommerce_add_to_woo_cart_action',
                 $rfq_enable_rfq_checkout, $cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data);
 
             return;
+        }
+
+        if(!(isset($_POST['_wpnonce']) &&  wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])),'rfq_id_nonce')
+           )
+
+        )
+        {
+
+
+            if ($checkout_option == "normal_checkout") {
+
+                if ($rfq_enable_rfq_checkout == 'yes') {
+
+                    WC()->cart->remove_cart_item($cart_item_key);
+
+                    return;
+                }
+            }
+
+        }else{
+            $request = $_REQUEST;
+            $is_set = "no";
         }
 
 

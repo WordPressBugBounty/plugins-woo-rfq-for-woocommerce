@@ -212,7 +212,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                    && wp_verify_nonce(sanitize_key(wp_unslash($_REQUEST['gpls_woo_rfq_nonce'])),'gpls_woo_rfq_handle_rfq_cart_nonce')
                     &&isset($_REQUEST['ukey'])){
                    $ukey= sanitize_text_field( wp_unslash($_REQUEST['ukey']));
-                 //  np_write_log( $_REQUEST,__FILE__,__LINE__);
+
                }else{
 
                    $is_empty = true;

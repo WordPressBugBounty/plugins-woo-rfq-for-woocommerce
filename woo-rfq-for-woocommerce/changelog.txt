@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 2.3.1 5/21/2025 =
+translation of proceed to checkout
+WooCommerce 9.8.5
+
 = 2.3 5/20/2025 =
 translations
 WooCommerce 9.8.5
