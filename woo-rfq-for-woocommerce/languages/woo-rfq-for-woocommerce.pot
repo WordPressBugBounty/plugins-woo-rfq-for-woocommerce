@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: RFQ-ToolKit for WooCommerce\n"
-"POT-Creation-Date: 2025-05-20 08:56-0400\n"
+"POT-Creation-Date: 2025-05-22 15:14-0400\n"
 "PO-Revision-Date: 2016-11-16 11:45-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -458,7 +458,7 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:671
 #: includes/classes/cart/gpls_woo_rfq_cart.php:1594
 #: includes/classes/gpls_woo_rfq_functions.php:838
-#: includes/classes/gpls_woo_rfq_functions.php:3120
+#: includes/classes/gpls_woo_rfq_functions.php:3128
 #: woocommerce/woo-rfq/link-to-cart-pages.php:9
 #: woocommerce/woo-rfq/link-to-cart-shop.php:8
 #: woocommerce/woo-rfq/link-to-cart.php:8
@@ -951,11 +951,11 @@ msgstr ""
 msgid "You RFQ has been successfully submitted!"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:3483
+#: includes/classes/gpls_woo_rfq_functions.php:3491
 msgid "RFQ: enable RFQ"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:3484
+#: includes/classes/gpls_woo_rfq_functions.php:3492
 msgid "RFQ: Undo enable RFQ"
 msgstr ""
 
@@ -1000,7 +1000,7 @@ msgid "No payment"
 msgstr ""
 
 #: woo-rfq-includes/woo-rfq-functions.php:1752
-#: woocommerce/cart/proceed-to-checkout-button.php:55
+#: woocommerce/cart/proceed-to-checkout-button.php:56
 msgid "Proceed To Submit Your RFQ"
 msgstr ""
 
@@ -1008,7 +1008,7 @@ msgstr ""
 msgid "Proceed to Checkout"
 msgstr ""
 
-#: woocommerce/cart/proceed-to-checkout-button.php:64
+#: woocommerce/cart/proceed-to-checkout-button.php:65
 msgid "Proceed to checkout"
 msgstr ""
 

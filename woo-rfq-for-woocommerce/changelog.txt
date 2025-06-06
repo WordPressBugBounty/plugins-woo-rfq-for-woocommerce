@@ -1,4 +1,7 @@
 == Changelog ==
+= 2.3.2 6/5/2025 =
+remove unneeded writing to console in block.js if success
+test with Stripe gateway 9.5.2
 
 = 2.3.1 5/21/2025 =
 translation of proceed to checkout

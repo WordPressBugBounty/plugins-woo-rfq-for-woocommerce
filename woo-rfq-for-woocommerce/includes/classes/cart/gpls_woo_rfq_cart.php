@@ -474,7 +474,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                 type: 'GET',
                                 url: '/?rfq_widget2=0',
                                 error: function (xhr, status, error) {
-                                 //   console.log(error.Message);
+
                                 },
                                 success:
                                     function (msg) {
@@ -589,7 +589,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
 
                         image_div = "#image_" + jQuery(form).data('rfq-product-id');
-                       // console.log(image_div);
+
                         jQuery(image_div).show();
                         var str = jQuery(this).serialize();
 
@@ -605,7 +605,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                 ?>
                                 if (typeof msg.data !== 'undefined' && typeof msg.data.location !== 'undefined') {
 
-                                 //  console.log('  if (typeof msg.data  608');
+
                                     jQuery(image_div).hide();
                                     window.location.replace(msg.data.location);
                                     return;
@@ -613,7 +613,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                 } else {
 
                                     var note_id = "#note_" + jQuery(form).data('rfq-product-id');
-                                  //  console.log(<//?//php //echo '"'.$result.'"'; ?//>)
+
 
                                     jQuery(note_id).html(<?php echo '"'.$result.'"'; ?>);
 
@@ -621,7 +621,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                     jQuery(rfq_button_id).addClass('gpls_hidden');
                                     jQuery(rfq_qty_id).addClass('gpls_hidden');
 
-<!--                                    --><?php //if(get_transient('rfq_page_plus_Widget') === "yes"): ?>
+<!--                                    -->
                                     <?php if(1): ?>
 
                                     jQuery.ajax({
@@ -634,7 +634,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                                         success: function (msg_back) {
 
                                             jQuery('.plus_widget_wrapper').html(msg_back);
-                                            // jQuery('#rfq_page_plus_widget-2').html(msg_back);
+
                                             jQuery('.rfq_page_plus_Widget').html(msg_back);
 
 
