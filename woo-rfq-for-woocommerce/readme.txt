@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
 WC tested up to: 9.8.5
-Stable tag: 2.3.2
+Stable tag: 2.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -208,15 +208,14 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.3.2 6/5/2025 =
+= 2.4.1 6/14/2025 =
 remove unneeded writing to console in block.js if success
-test with Stripe gateway 9.5.2
+Tested WC 9.9.3
 
 == Upgrade Notice ==
 
-= 2.3.2 6/5/2025 =
-remove unneeded writing to console in block.js if success
-test with Stripe gateway 9.5.2
+= 2.4.1 6/14/2025 =
+Tested WC 9.9.3
 
 
 
