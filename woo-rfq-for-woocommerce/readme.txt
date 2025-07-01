@@ -4,9 +4,9 @@ Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
 Tested up to: 6.8
-Requires PHP: 8.1
+Requires PHP: 7.4
 WC tested up to: 9.9.5
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -211,16 +211,13 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.2 6/30/2025 =
-Tested WC 9.9.5
-New Optional Feature: Allow customers to save favorite products for later purchase or quote request
+= 2.4.3 7/1/2025 =
+Reduced required PHP from 8.2 to 7.4
 
 == Upgrade Notice ==
 
-= 2.4.2 6/30/2025 =
-Tested WC 9.9.5
-New Optional Feature: Allow customers to save favorite products for later purchase or quote request
-
+= 2.4.3 7/1/2025 =
+Reduced required PHP from 8.2 to 7.4
 
 
 

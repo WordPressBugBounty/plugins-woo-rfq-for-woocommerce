@@ -972,7 +972,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'name' => '1- ' . __('Enable saving favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'checkbox',
                                 'desc' => 'Enable feature',
-                                'default' => 'no',
+                                'default' => 'yes',
                                 'id' => 'settings_gpls_woo_rfq_allow_favorites'
                             ),
                             'settings_gpls_woo_rfq_my_acct_favorites_label' => array(
