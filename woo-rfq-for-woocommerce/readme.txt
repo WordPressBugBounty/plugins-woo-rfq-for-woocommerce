@@ -4,9 +4,9 @@ Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
 Tested up to: 6.8
-Requires PHP: 7.4
-WC tested up to: 9.8.5
-Stable tag: 2.4.1
+Requires PHP: 8.1
+WC tested up to: 9.9.5
+Stable tag: 2.4.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,9 @@ NP Quote Request for WooCommerce enables your customers to easily submit quote r
 == Description ==
 
 NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
+
+**<span style="color:blue">New Feature! Favorites:</span>**
+*Allow customers to save favorite products for later purchase or quote request*
 
 **You can configure NP Quote Request for WooCommerce basic version in different ways:**
 
@@ -43,7 +46,7 @@ NP Quote Request for WooCommerce enables your customers to easily submit a quote
 * RFQ list shown in the RFQ page.
 * Manage price visibility.
 * Support for variable product in normal checkout.
-
+*Allow customers to save favorite products for later purchase or quote request*
 
 
 **[NP Quote Request for WooCommerce Premium Extension](https://www.neahplugins.com/)**
@@ -208,14 +211,15 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.1 6/14/2025 =
-remove unneeded writing to console in block.js if success
-Tested WC 9.9.3
+= 2.4.2 6/30/2025 =
+Tested WC 9.9.5
+New Optional Feature: Allow customers to save favorite products for later purchase or quote request
 
 == Upgrade Notice ==
 
-= 2.4.1 6/14/2025 =
-Tested WC 9.9.3
+= 2.4.2 6/30/2025 =
+Tested WC 9.9.5
+New Optional Feature: Allow customers to save favorite products for later purchase or quote request
 
 
 

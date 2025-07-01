@@ -63,7 +63,7 @@ if (!class_exists('RFQTK_WP_Session_Utils')) {
 }
 
 // Include WP_CLI routines early
-if (defined('RFQTK_WP_CLI') && WP_CLI) {
+if (defined('RFQTK_WP_CLI') && defined('WP_CLI')) {
     include 'includes/wp-cli.php';
 }
 
@@ -81,7 +81,6 @@ if(!function_exists('gpls_woo_rfq_cart_tran_key')) {
     {
 
         $wp_session = RFQTK_WP_Session::get_instance();
-
 
         $tran_key = apply_filters('set_gpls_rfq_cart_tran_key', $wp_session->session_id);
 

@@ -356,7 +356,8 @@ final class RFQTK_WP_Session extends RFQTK_Recursive_ArrayAccess
         //   WordPress.DB.DirectDatabaseQuery
         //custom table no wrappers or caching avaialable or needed
         // phpcs:disable WordPress.DB.DirectDatabaseQuery
-        $result = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}npxyz2021_sessions set `expiration`= %s,`updated`= now() where `option_name` = %s ",$this->expires,$option)); //db call ok; no-cache ok
+        $result = $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}npxyz2021_sessions set `expiration`= %s,
+        `updated`= now() where `option_name` = %s ",$this->expires,$option)); //db call ok; no-cache ok
         // phpcs:enable  WordPress.DB.DirectDatabaseQuery
 
         if (!$result) {

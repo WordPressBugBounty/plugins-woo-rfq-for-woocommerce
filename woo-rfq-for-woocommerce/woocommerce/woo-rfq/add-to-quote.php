@@ -6,13 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }?>
 
 <?php
-$product_type=$product->get_type();
+
 
 
 ?>
 
 <div style="clear:both">
-<form  style="display: block" class="woo_rfq_after_shop_loop_button"
+<form  style="display: block;" class="woo_rfq_after_shop_loop_button"
       data-rfq-product-id='<?php echo ($rfq_id); ?>'
       action='<?php echo esc_url($product->add_to_cart_url()) ?>' method='post'>
                         <?php $nonce = wp_create_nonce('rfq_id_nonce');
@@ -32,11 +32,14 @@ $product_type=$product->get_type();
                        onmouseout="<?php echo ($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_onmouseout']) . ';' .
                            ($gpls_woo_rfq_file_add_to_quote_styles['gpls_woo_rfq_page_button_background_onmouseout']) ?>"/>
                        <?php else: ?>
-                       <?php do_action("gpls_rfq_add_to_quote_qty_action",$rfq_id,$gpls_woo_rfq_file_add_to_quote_styles,$product,$request_quote,$data_var,$rfq_check) ?>
+                       <?php do_action("gpls_rfq_add_to_quote_qty_action",
+                               $rfq_id,$gpls_woo_rfq_file_add_to_quote_styles,$product,$request_quote,$data_var,$rfq_check) ?>
                        <?php endif; ?>
                         <div style="display:none !important;max-width:20px !important; text-align: center !important;margin-left: auto !important;margin-right:auto  !important" id='image_<?php echo ($rfq_id); ?>'>
                             <image style="max-width:10px !important"  src="<?php echo (gpls_woo_rfq_URL) ?>/gpls_assets/img/select2-spinner.gif"></image></div>
                         <div id='note_<?php echo $rfq_id; ?>'></div>
+
+
 
 </form>
 </div>

@@ -197,11 +197,9 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                     '', gpls_woo_rfq_WOO_PATH);
                 //return;
 
-                echo wp_kses_post(ob_get_clean());
+                echo ob_get_clean();
                 exit;
             }
-
-
 
             $is_empty = false;
 
@@ -228,7 +226,7 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                         '', gpls_woo_rfq_WOO_PATH);
                     //return;
 
-                    echo wp_kses_post(ob_get_clean());
+                    echo ob_get_clean();
                     exit;
                 }
 
@@ -263,17 +261,12 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                     $order_unique_id = $gpls_woo_rfq_LQ['order_unique_id'];
 
                     if (!$order_unique_id || ($ukey !== wp_hash($order_unique_id))) {
-
-
                         $is_empty = true;
-
                     }
-
                 }
 
                 $gpls_woo_rfq_LQ['completed']=1;
                 gpls_woo_rfq_cart_set('gpls_woo_rfq_LQ',$gpls_woo_rfq_LQ);
-
 
                 if ($is_empty) {
 
@@ -283,15 +276,12 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                         array('confirmation_message' => ''),
                         '', gpls_woo_rfq_WOO_PATH);
 
-
-                    echo wp_kses_post(ob_get_clean());
+                    echo ob_get_clean();
                     exit;
                 }
             }
               //   wp_new_user_notification($gpls_woo_rfq_LQ['customer_id']);
             //  wc_set_customer_auth_cookie($gpls_woo_rfq_LQ['customer_id']);
-
-
 
             if ($order && is_object($order) && !$is_empty && $order->get_status() == 'gplsquote-req') {
                 $confirmation_message = get_option('gpls_woo_rfq_quote_submit_confirm_message', __('Your quote request has been successfully submitted!', 'woo-rfq-for-woocommerce'));

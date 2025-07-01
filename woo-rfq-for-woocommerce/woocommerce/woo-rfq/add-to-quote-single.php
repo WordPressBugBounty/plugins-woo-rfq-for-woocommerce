@@ -21,7 +21,7 @@ if (($in_rfq == true) && isset($link_to_rfq_page)) {
     echo ($view_rfq_cart_button);
 }
 
-echo '<div style="clear:both"></div>';
+echo '<div style="clear:both;margin-bottom:10px"></div>';
 
 $single_add_to_cart_button = "
                 <button type='submit' name='add-to-cart'                   

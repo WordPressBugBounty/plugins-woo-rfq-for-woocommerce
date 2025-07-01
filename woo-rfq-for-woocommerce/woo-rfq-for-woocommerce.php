@@ -2,15 +2,15 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 2.4.1
+ * Version: 2.4.2
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
  * Donate link: https://www.neahplugins.com/
  * Requires at least: 6.3
  * Tested up to: 6.8
- * Requires PHP: 7.4
- * WC tested up to: 9.9.3
+ * Requires PHP: 8.1
+ * WC tested up to: 9.9.5
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2025 Neah Plugins.
@@ -133,13 +133,10 @@ if (!defined('gpls_woo_rfq_DIR')) {
 
 
 
-  require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
-   require_once(ABSPATH . 'wp-includes/class-phpass.php');
-
-
+require_once(gpls_woo_rfq_DIR . 'wp-session-manager/wp-session-manager.php');
+require_once(ABSPATH . 'wp-includes/class-phpass.php');
 
 require_once(gpls_woo_rfq_DIR . 'includes/classes/checkout/gpls_woo_rfq_ncheckout.php');
-
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
 
@@ -389,11 +386,18 @@ class GPLS_WOO_RFQ
 
         add_action('wp_loaded', 'gpls_rfq_remove_rfq_cart_item', 10000);
 
+        add_action('wp_loaded', 'gpls_rfq_remove_fav_cart_item', 10000);
+        add_action('wp_loaded', 'gpls_rfq_add_fav_cart_item', 10000);
+
         add_action('wp_loaded', 'gpls_rfq_update_rfq_cart', 1000);
 
-        add_action('wp_loaded', array($this, 'gpls_woo_rfq_setup_menu'), 1000);
+        if(!is_admin()) {
+            add_action('wp_loaded', array($this, 'gpls_woo_rfq_setup_menu'), 1000);
+        }
 
         add_filter('wp_get_nav_menu_items', 'gpls_woo_rfq_hide_rfq_page', 999, 3);
+
+       // add_filter('wp_get_nav_menu_items', 'gpls_woo_rfq_hide_fav_page', 999, 3);
 
         add_action('wp_footer', array($this, 'footer_action'), 1000);
 
@@ -787,11 +791,11 @@ class GPLS_WOO_RFQ
     {
 
 
-      //  $this->gpls_woo_upgrade_routines();
+     //   $this->gpls_woo_upgrade_routines();
 
         gpls_woo_rfq_create_page();
 
-        // gpls_woo_rfq_check_menu();
+         gpls_woo_rfq_check_menu();
 
 
     }
@@ -856,7 +860,9 @@ class GPLS_WOO_RFQ
         if (!is_admin()) {
             add_shortcode('gpls_woo_rfq_get_cart_sc', 'gpls_woo_rfq_get_rfq_cart');
         }
-
+        if (!is_admin()) {
+            add_shortcode('gpls_woo_rfq_get_favs_sc', 'gpls_woo_rfq_get_fav_cart');
+        }
 
     }
 
@@ -888,9 +894,6 @@ class GPLS_WOO_RFQ
                 }
 
             }
-
-
-
 
             $list = 'enqueued';
 
@@ -962,12 +965,12 @@ class GPLS_WOO_RFQ
 
             // if (1)
             {
-                if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+               /* if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                     $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
                     DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
                 }
 
-                $form_label = gpls_woo_rfq_INQUIRE_TEXT;
+                $form_label = gpls_woo_rfq_INQUIRE_TEXT;*/
 
                 $rfq_product_script = "";
 
@@ -1172,18 +1175,14 @@ class GPLS_WOO_RFQ
 
             if(isset($_SERVER['REQUEST_URI'])){
                 $url = get_site_url() . sanitize_url( wp_unslash($_SERVER['REQUEST_URI']));
-
             }
-
 
             $path = wp_parse_url($url, PHP_URL_PATH);
             $path_array = explode("/", trim($path, "/"));
 
-
             if ($path_array[0] == "product") {
                 $is_product_page = true;
             }
-
 
             global $wp_query;
             if (isset($wp_query)) {
@@ -1193,7 +1192,6 @@ class GPLS_WOO_RFQ
                     }
                 }
             }
-
 
             if ($is_product_page == true) {
 
@@ -1215,12 +1213,12 @@ class GPLS_WOO_RFQ
 
                 $rfq_enable = gpls_woo_get_rfq_enable($product);
 
-                if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+               /* if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                     $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
                     $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option,'woo-rfq-for-woocommerce');
                     DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
                 }
-                $form_label = gpls_woo_rfq_INQUIRE_TEXT;
+                $form_label = gpls_woo_rfq_INQUIRE_TEXT;*/
 
                 $rfq_product_script = "";
 
@@ -1257,7 +1255,6 @@ class GPLS_WOO_RFQ
 
                     }
                 }
-
 
                 if ($staff == "no" && ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq")) {
 
@@ -1510,11 +1507,11 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
 
             //  
 
-            if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
+           /* if(!defined('gpls_woo_rfq_INQUIRE_TEXT')) {
                 $settings_gpls_woo_inquire_text_option = get_option('settings_gpls_woo_inquire_text_option');
                 $settings_gpls_woo_inquire_text_option = __($settings_gpls_woo_inquire_text_option,'woo-rfq-for-woocommerce');
                 DEFINE('gpls_woo_rfq_INQUIRE_TEXT', $settings_gpls_woo_inquire_text_option);
-            }
+            }*/
 
 
             $small_src = gpls_woo_rfq_URL . '/gpls_assets/img/favorite_small.png';
@@ -1720,17 +1717,18 @@ jQuery( '.wc-item-meta-label' ).attr('style','visibility: collapse');
     {
         global $wpdb;
 
-        delete_option('settings_gpls_woo_rfq_sessions_table_fixed_rfq1', 'yes');
-        delete_option('settings_gpls_woo_rfq_sessions_notable_fix21z', 'yes');
+        delete_option('settings_gpls_woo_rfq_sessions_table_fixed_rfq1');
+        delete_option('settings_gpls_woo_rfq_sessions_notable_fix21z');
+        delete_option('settings_gpls_woo_rfq_sessions_notable_fix21487m2we');
+        delete_option('settings_gpls_woo_fix21487m23');
 
 
-
-        $table_fixed = get_option('settings_gpls_woo_rfq_sessions_notable_fix21487m2we', 'no');
+        $table_fixed = get_option('settings_gpls_notable_fix22w54e', 'no');
 
         if ($table_fixed == 'no') {
 
             GPLS_WOO_RFQ_activation();
-            update_option('settings_gpls_woo_rfq_sessions_notable_fix21487m2we', 'yes');
+            update_option('settings_gpls_notable_fix22w54e', 'yes');
 
         }
     }
@@ -1763,23 +1761,37 @@ function GPLS_WOO_RFQ_activation()
      UNIQUE KEY `option_name` (`option_name`)
    )  CHARSET={$charset} COLLATE={$wpdb_collate};";
 
-// $result = $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->base_prefix}npxyz2021_sessions (`option_name`,
-// `option_value`,`expiration`,`misc_value`) VALUES (%s, %s,%s,%s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` =
-// VALUES(`option_value`),`expiration` = {$this->expires},`misc_value` = 'phpsid' ", $option, $serialized_value, $this->expires, 'phpsid'));
 
-  //  $wpdb->query($str);
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($str);
+
+    $str = "CREATE TABLE IF NOT EXISTS {$wpdb->base_prefix}npxyzfavs (
+      `fav_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `user_first` varchar(50) DEFAULT NULL,
+  `user_last` varchar(50) DEFAULT NULL,
+  `user_email` varchar(254) NOT NULL,
+  `product_url` varchar(500) DEFAULT NULL,
+  `product_image` varchar(500) DEFAULT NULL,
+  `misc_value` varchar(1000) DEFAULT NULL,
+  `misc_value2` varchar(1000) DEFAULT NULL,
+  `misc_value3` varchar(1000) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`fav_id`),
+  UNIQUE KEY `user_id_product_id` (`user_id`,`product_id`)
+   )  CHARSET={$charset} COLLATE={$wpdb_collate};";
+    dbDelta($str);
+
 }
 
-$table_fixed = get_option('settings_gpls_woo_fix21487m23', 'no');
+$table_fixed = get_option('settings_gpls_fix_faves', 'no');
 
 if ($table_fixed == 'no')
 {
-
     GPLS_WOO_RFQ_activation();
-    update_option('settings_gpls_woo_fix21487m23', 'yes');
-
+    update_option('settings_gpls_fix_faves', 'yes');
 }
 
 

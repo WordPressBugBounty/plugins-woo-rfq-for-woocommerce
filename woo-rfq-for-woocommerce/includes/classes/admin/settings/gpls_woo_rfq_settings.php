@@ -101,6 +101,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                     'links' => __('Links', 'woo-rfq-for-woocommerce'),
                     'rfq_page' => __('Quote Request Page', 'woo-rfq-for-woocommerce'),
                     'add-to-quote' => __('Quote Button', 'woo-rfq-for-woocommerce'),
+                    'favorites' => __('Favorites', 'woo-rfq-for-woocommerce'),
                 );
             } else {
                 $sections = array(
@@ -109,6 +110,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                     'links' => __('Links', 'woo-rfq-for-woocommerce'),
                     'rfq_page' => __('Quote Request Page', 'woo-rfq-for-woocommerce'),
                     'add-to-quote' => __('Quote Button', 'woo-rfq-for-woocommerce'),
+                    'favorites' => __('Favorites', 'woo-rfq-for-woocommerce'),
                     'email-options' => __('Email & Proposal', 'woo-rfq-for-woocommerce'),
 
                 );
@@ -955,7 +957,66 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                         );
                     break;
 
+                case 'favorites':
+                    $settings =
 
+                        array(
+                            'rfq_fav_section_title' => array(
+                                'name' => __('Allow Customers to Save Favorites', 'woo-rfq-for-woocommerce'),
+                                'type' => 'title',
+                                'desc' => __('If enabled, customers can save favorites and submit later for purchase or quote request', 'woo-rfq-for-woocommerce'),
+                                'id' => 'rfq_fav_section_title'
+                            ),
+
+                            'settings_gpls_woo_rfq_allow_favorites' => array(
+                                'name' => '1- ' . __('Enable saving favorites', 'woo-rfq-for-woocommerce'),
+                                'type' => 'checkbox',
+                                'desc' => 'Enable feature',
+                                'default' => 'no',
+                                'id' => 'settings_gpls_woo_rfq_allow_favorites'
+                            ),
+                            'settings_gpls_woo_rfq_my_acct_favorites_label' => array(
+                                'name' => '2-' . __('Favorites Label', 'woo-rfq-for-woocommerce'),
+                                'type' => 'text',
+                                'desc' => 'The label to use for favorites in "my account" section',
+                                'default' => __('Favorites', 'woo-rfq-for-woocommerce'),
+                                'id' => 'settings_gpls_woo_rfq_my_acct_favorites_label',
+                                'css' => 'width:200px'
+                            ),
+                             'settings_rfq_favs_wordings_view_favs_cart' => array(
+                    'name' => '3-' . __('View Favorites', 'woo-rfq-for-woocommerce'),
+                    'type' => 'text',
+                    'desc' => 'The label to use for link to favorites',
+                    'default' => __('View Favorites', 'woo-rfq-for-woocommerce'),
+                    'id' => 'settings_rfq_favs_wordings_view_favs_cart',
+                    'css' => 'width:200px'
+                ),
+
+                            'settings_gpls_woo_rfq_add_to_favorites_label' => array(
+                                'name' => '4-' . __('Add to Favorites', 'woo-rfq-for-woocommerce'),
+                                'type' => 'text',
+                                'desc' => 'The label to use for "Add to Favorites" ',
+                                'default' => __('Add to Favorites', 'woo-rfq-for-woocommerce'),
+                                'id' => 'settings_gpls_woo_rfq_add_to_favorites_label',
+                                'css' => 'width:200px'
+                            ),
+                            'rfq_cart_sc_section_link_to_favorites_page' => array(
+                                'name' => '5- ' .__('Request for Favorites Page URL', 'woo-rfq-for-woocommerce'),
+                                'type' => 'text',
+                                'desc' => __('Favorites Page URL.Please show the full URL. Use the same domain/subdomain name as your site.<br />'
+                                    , 'woo-rfq-for-woocommerce'),
+                                'default' => '/favorites/',
+                                'id' => 'rfq_cart_sc_section_link_to_favorites_page',
+                                'css' => 'width:400px;'
+                            ),
+
+
+                            'rfq_fav_section_title_end' => array(
+                                'type' => 'sectionend',
+                                'id' => 'rfq_fav_section_title_end'
+                            ),
+                        );
+                    break;
                 case 'email-options':
                     $settings = array(
 
