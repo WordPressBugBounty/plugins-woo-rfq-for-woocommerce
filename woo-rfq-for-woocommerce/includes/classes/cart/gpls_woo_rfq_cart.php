@@ -37,7 +37,12 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             add_filter('woocommerce_product_add_to_cart_text', array($this, 'woo_custom_cart_button_text'), 100, 2);
             add_filter('woocommerce_loop_add_to_cart_link', array($this, 'gpls_woo_rfq_add_to_cart_link_shop'), 1000, 2);
 
-            if ( get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+            $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+            $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+            if (($allow_favs=="yes" && is_user_logged_in()) ||
+                (get_current_user_id() ==0 && $allow_favs_anon=='yes' && $allow_favs=="yes") )
+            {
                 add_filter('woocommerce_loop_add_to_cart_link', array($this, 'gpls_woo_rfq_add_to_cart_link_shop_favorites'), 2000, 2);
             }
             //  add_action('woocommerce_after_add_to_cart_button', array($this, 'gpls_woo_rfq_after_add_to_cart_button'), 1000);
@@ -46,8 +51,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             $hook_add_to_cart = get_option('settings_gpls_woo_rfq_normal_checkout_quote_single_position', 'woocommerce_before_add_to_cart_button');
             add_action($hook_add_to_cart, array($this, 'gpls_woo_rfq_after_add_to_cart_button'), 100);
 
-            //favorites
-            if ( get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+            $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+            $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+            if (($allow_favs=="yes" && is_user_logged_in()) ||
+                (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
                 add_action('woocommerce_after_add_to_cart_form', array($this, 'gpls_woo_rfq_after_add_to_cart_favorites'), 200);
             }
             //   add_action('woocommerce_before_add_to_cart_button', array($this, 'gpls_woo_rfq_before_add_to_cart_button'), 1000);
@@ -682,7 +690,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
 
             if (is_admin() || get_option('settings_gpls_woo_rfq_allow_favorites','no')=='no') return false;
 
-            if(get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+            $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+            $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+            if (($allow_favs=="yes" && is_user_logged_in()) ||
+                (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
                 $link_to_fav_page = get_option('rfq_cart_sc_section_show_link_to_favorites_page','');
 
                 ob_start();
@@ -1000,7 +1012,26 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote', 'no') == "yes"
                     && $rfq_enable=="yes"
                 ) {
-                    return ;
+
+                    $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+                    $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+                    if (($allow_favs=="yes" && is_user_logged_in()) ||
+                        (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
+                        ob_start();
+                        wc_get_template('woo-rfq/add-to-favs-form.php',
+                            array('product' => $product,
+
+                            ), '', gpls_woo_rfq_WOO_PATH);
+
+                        $result_add_to_fav = ob_get_clean();
+                        echo '<div>' . $result_add_to_fav . '</div>';return ;
+                    }else{
+                        return ;
+                    }
+
+
+                 //   return ;
                 }
             }
 
@@ -1152,8 +1183,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                         array('link_to_rfq_page' => $link_to_rfq_page,
                         ), '', gpls_woo_rfq_WOO_PATH);
 
-                    if(get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes')
-                    {
+                    $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+                    $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+                    if (($allow_favs=="yes" && is_user_logged_in()) ||
+                        (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
 
                         wc_get_template('woo-rfq/add-to-favs-form.php',
                             array('product' => $product,
@@ -1376,7 +1410,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     $result_add_to_fav='';
 
 
-                    if(get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+                    $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+                    $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+                    if (($allow_favs=="yes" && is_user_logged_in()) ||
+                        (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
                         ob_start();
                         wc_get_template('woo-rfq/add-to-favs-form.php',
                             array('rfq_id' => $rfq_id,
@@ -1403,7 +1441,11 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     array('link_to_rfq_page' => $link_to_rfq_page,
                     ), '', gpls_woo_rfq_WOO_PATH);
 
-                if(get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+                $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+                $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+                if (($allow_favs=="yes" && is_user_logged_in()) ||
+                    (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
                     wc_get_template('woo-rfq/add-to-favs-form.php',
                         array('product' => $product,
 
@@ -1538,7 +1580,22 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote', 'no') == "yes"
                     && $rfq_enable=="yes"
                 ) {
-                    return ;
+                    $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+                    $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+                    if (($allow_favs=="yes" && is_user_logged_in()) ||
+                        (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
+                        ob_start();
+                        wc_get_template('woo-rfq/add-to-favs-form.php',
+                            array('product' => $product,
+
+                            ), '', gpls_woo_rfq_WOO_PATH);
+
+                        $result_add_to_fav = ob_get_clean();
+                        echo '<div>' . $result_add_to_fav . '</div>';return ;
+                    }else{
+                        return ;
+                    }
                 }
             }
 
@@ -1972,31 +2029,67 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
         }
 
 
-        public function gpls_woo_rfq_add_to_cart_link_shop_favorites($link, $product){
-            $rfq_enable = gpls_woo_get_rfq_enable($product);
-            if ($rfq_enable == 'yes') {
-
-                return '';
-            }
-
-
-            ob_start();
-            wc_get_template('woo-rfq/add-to-favs-form.php',
-                array('product' => $product,
-
-                ), '', gpls_woo_rfq_WOO_PATH);
-            $result = ob_get_clean();
-
-            return $link."<div style='display:block'>{$result}</div>";
-        }
-
-
-        public function gpls_woo_rfq_add_to_cart_link_shop($link, $product)
+        public function gpls_woo_rfq_add_to_cart_link_shop_favorites($link, $product)
         {
 
 
 
+             $rfq_check = false;
+            $normal_check = false;
+            //gpls_woo_rfq_get_mode($rfq_check, $normal_check);
+            $rfq_check = false;
+            $normal_check = false;
 
+            if (get_option('settings_gpls_woo_rfq_checkout_option', 'normal_checkout') == "rfq") {
+                add_filter('woocommerce_cart_needs_payment', 'gpls_woo_rfq_cart_needs_payment', 1000, 2);
+                $rfq_check = true;
+                $normal_check = false;
+            }
+
+            if (get_option('settings_gpls_woo_rfq_checkout_option', 'normal_checkout') == "normal_checkout") {
+                $rfq_check = false;
+                $normal_check = true;
+            }
+            if (function_exists('is_user_logged_in')) {
+                if (get_option('settings_gpls_woo_rfq_hide_visitor_prices', 'no') == 'yes' && !is_user_logged_in()) {
+                    $rfq_check = true;
+                    $normal_check = false;
+
+                }
+            }
+
+            $rfq_enable = gpls_woo_get_rfq_enable($product);
+            if ($normal_check && $rfq_enable == 'yes') {
+                return $link;
+            }
+
+            $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+            $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+            if (
+                ($allow_favs=="yes" && is_user_logged_in())
+                ||
+                (get_current_user_id() ==0 && $allow_favs_anon=='yes' && $allow_favs=="yes")
+            )
+            {
+                ob_start();
+                wc_get_template('woo-rfq/add-to-favs-form.php',
+                    array('product' => $product,
+
+                    ), '', gpls_woo_rfq_WOO_PATH);
+                $result = ob_get_clean();
+                return $link."<div style='display:block'>{$result}</div>";
+            }else{
+                return $link;
+            }
+
+
+        }
+
+
+
+        public function gpls_woo_rfq_add_to_cart_link_shop($link, $product)
+        {
 
             if ($product->get_type() === 'external') {
                 return $link;

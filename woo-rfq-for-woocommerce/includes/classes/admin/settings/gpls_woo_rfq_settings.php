@@ -504,8 +504,6 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'id' => 'settings_gpls_woo_rfq_checkout_option'
                             ),
 
-
-
                             'settings_gpls_woo_rfq_show_prices' => array(
                                 'name' => '2- ' . __('Always Show Product Prices With RFQ Checkout', 'woo-rfq-for-woocommerce'),
                                 'type' => 'checkbox',
@@ -513,7 +511,6 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_show_prices'
                             ),
-
 
                             'settings_gpls_woo_rfq_normal_checkout_show_prices' => array(
                                 'name' => '3- ' . __('Show Prices With Normal Checkout', 'woo-rfq-for-woocommerce'),
@@ -562,7 +559,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'desc' => __('No Payment Checkout: Customer can complete an order at checkout without payment.<br />
    Admin can then optionally covert the order to a quote request and email the customer.<br />
   If this option is selected, Customer can checkout without payment.<br />
-   The order status is pending and admin recieves a new order notification<br /> about a new order with "no payment" in the subject and heading of order ', 'woo-rfq-for-woocommerce'),
+   The order status is pending and admin receives a new order notification<br /> about a new order with "no payment" in the subject and heading of order ', 'woo-rfq-for-woocommerce'),
                                 'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_no_payment_checkout'
                             ),
@@ -972,11 +969,18 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'name' => '1- ' . __('Enable saving favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'checkbox',
                                 'desc' => 'Enable feature',
-                                'default' => 'yes',
+                                'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_allow_favorites'
                             ),
+                            'settings_gpls_woo_rfq_allow_anon_favorites' => array(
+                                'name' => '2- ' . __('Enable saving favorites for visitors', 'woo-rfq-for-woocommerce'),
+                                'type' => 'checkbox',
+                                'desc' => 'Enable feature for visitors',
+                                'default' => 'no',
+                                'id' => 'settings_gpls_woo_rfq_allow_anon_favorites'
+                            ),
                             'settings_gpls_woo_rfq_my_acct_favorites_label' => array(
-                                'name' => '2-' . __('Favorites Label', 'woo-rfq-for-woocommerce'),
+                                'name' => '3-' . __('Favorites Label', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => 'The label to use for favorites in "my account" section',
                                 'default' => __('Favorites', 'woo-rfq-for-woocommerce'),
@@ -984,7 +988,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'css' => 'width:200px'
                             ),
                              'settings_rfq_favs_wordings_view_favs_cart' => array(
-                    'name' => '3-' . __('View Favorites', 'woo-rfq-for-woocommerce'),
+                    'name' => '4-' . __('View Favorites', 'woo-rfq-for-woocommerce'),
                     'type' => 'text',
                     'desc' => 'The label to use for link to favorites',
                     'default' => __('View Favorites', 'woo-rfq-for-woocommerce'),
@@ -993,7 +997,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                 ),
 
                             'settings_gpls_woo_rfq_add_to_favorites_label' => array(
-                                'name' => '4-' . __('Add to Favorites', 'woo-rfq-for-woocommerce'),
+                                'name' => '5-' . __('Add to Favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => 'The label to use for "Add to Favorites" ',
                                 'default' => __('Add to Favorites', 'woo-rfq-for-woocommerce'),
@@ -1001,7 +1005,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'css' => 'width:200px'
                             ),
                             'rfq_cart_sc_section_link_to_favorites_page' => array(
-                                'name' => '5- ' .__('Request for Favorites Page URL', 'woo-rfq-for-woocommerce'),
+                                'name' => '6- ' .__('Request for Favorites Page URL', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
                                 'desc' => __('Favorites Page URL.Please show the full URL. Use the same domain/subdomain name as your site.<br />'
                                     , 'woo-rfq-for-woocommerce'),

@@ -955,7 +955,11 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!defined('ABSPATH')) {
             exit; // Exit if accessed directly
         }
-        if ( get_option('settings_gpls_woo_rfq_allow_favorites','no')=='yes') {
+        $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+        $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+        if (($allow_favs=="yes" && is_user_logged_in()) ||
+            (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
             ob_start();
 
             wc_get_template('woo-rfq/fav-cart.php',
@@ -2037,7 +2041,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
     }
 
-    function gpls_woo_rfq_order_recieved()
+    function gpls_woo_rfq_order_received()
     {
 
     }
@@ -2145,8 +2149,9 @@ if (!class_exists('gpls_woo_rfq_functions')) {
     function gpls_woo_rfq_normal_is_purchasable($purchasable, $product)
     {
 
-        $rfq_enable = 'no';
+        $product = wc_get_product();
 
+        $rfq_enable = 'no';
 
         if (isset($product) && is_object($product)) {
 
@@ -2162,7 +2167,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             //echo $product->id.' '.$rfq_enable.'<br />';
             if ($rfq_enable == 'no') {
 
-                return $purchasable;;
+                return $purchasable;
 
             }
 
@@ -2257,7 +2262,11 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
         $allow_favorites = get_option('settings_gpls_woo_rfq_allow_favorites', 'no');
 
-        if ($allow_favorites == "yes") {
+        $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+        $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
+        if (($allow_favs=="yes" && is_user_logged_in()) ||
+            (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
 
             $create_page_once = get_option('gpls_woo_fav_qr_page_check');
             if ($create_page_once != "yes") {
@@ -2300,6 +2309,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
     {
 
 
+
         $page_post = null;
 
         $checkout_option = 0;
@@ -2322,7 +2332,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $rfq_page = get_option('rfq_cart_sc_section_show_link_to_rfq_page', $home);
 
-            if (isset($rfq_page)) {
+            if (isset($rfq_page) &&!is_admin()) {
 
                 $link_to_rfq_page_url = trim($rfq_page);
 
@@ -2347,12 +2357,15 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             }
         }
 
+        $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
+        $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
+
 
         if (get_option('settings_gpls_woo_rfq_allow_favorites', 'no') == 'no'
-
-        ||get_option('settings_gpls_woo_rfq_allow_menu', 'no') == 'no') {
-
-            {
+        ||get_option('settings_gpls_woo_rfq_allow_menu', 'no') == 'no'
+        ||  (get_current_user_id() ==0 &&  $allow_favs_anon=='no')
+        )
+        {
 
                 $rfq_page = get_option('rfq_cart_sc_section_link_to_favorites_page', NULL);
 
@@ -2370,7 +2383,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
                     }
 
 
-                    if ($page_post != null) {
+                    if ($page_post != null &&!is_admin()) {
 
                         foreach ($items as $key => $item) {
                             if ($item->object_id == $page_post->ID)
@@ -2379,7 +2392,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
                     }
                 }
-            }
+
         }
 
 

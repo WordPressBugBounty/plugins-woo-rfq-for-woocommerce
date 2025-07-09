@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
 WC tested up to: 9.9.5
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,7 +153,7 @@ Emails are added to the WooCommerce email settings section and can be enabled/di
 * Customer adds items for quote request to the RFQ List.
 * Customer can submit their request in the quote request page (instead of paying, customer submits a request for quote).
 * The request creates an order that can be viewed in the Order section.
-* Shop manager recieves an email that a quote is requested.
+* Shop manager receives an email that a quote is requested.
 * The request is viewed and the price adjusted as desired.
 * Manager sends an invoice when price is agreed upon.
 * Manager adjusts the status of the request to order-pending.
@@ -165,7 +165,7 @@ Emails are added to the WooCommerce email settings section and can be enabled/di
 * ALL products are checked out through the RFQ process above, regardless of whether or not the price shows.
 * At checkout, instead of paying, customer submits a request for quote.
 * The request creates an order that can be viewed in the Order section.
-* Shop manager recieves an email that a quote is requested.
+* Shop manager receives an email that a quote is requested.
 * The request is viewed and the price adjusted as desired.
 * Manager sends an invoice when price is agreed upon.
 * Manager adjusts the status of the request to order-pending.
@@ -211,13 +211,13 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.3 7/1/2025 =
-Reduced required PHP from 8.2 to 7.4
+= 2.4.4 7/8/2025 =
+Fix issue with add to faves in RFQ mode
 
 == Upgrade Notice ==
 
-= 2.4.3 7/1/2025 =
-Reduced required PHP from 8.2 to 7.4
+= 2.4.4 7/8/2025 =
+Fix issue with add to faves in RFQ mode
 
 
 
