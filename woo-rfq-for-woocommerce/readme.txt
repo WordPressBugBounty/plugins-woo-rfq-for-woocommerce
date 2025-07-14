@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
 WC tested up to: 9.9.5
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -211,13 +211,13 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.4 7/8/2025 =
-Fix issue with add to faves in RFQ mode
+= 2.4.5 7/14/2025 =
+Update language files. Fix issues with option to hide add to quote for visitors with faves
 
 == Upgrade Notice ==
 
-= 2.4.4 7/8/2025 =
-Fix issue with add to faves in RFQ mode
+= 2.4.5 7/14/2025 =
+Update language files. Fix issues with option to hide add to quote for visitors with faves
 
 
 

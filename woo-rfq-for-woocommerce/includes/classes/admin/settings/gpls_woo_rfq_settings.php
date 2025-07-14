@@ -958,48 +958,64 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                     $settings =
 
                         array(
+                            'rfq_fav_section_admin_title1' => array(
+                                'name' => __('Admin Page', 'rfqtk'),
+                                'type' => 'title',
+                                'desc' => '<span style="color:navy;font-size:small">
+                                Favorites admin Page for searching and exporting all your customers favorites: available in the
+                                 <a href="https://neahplugins.com/product/woocommerce-quote-request-plus/">Plus Version</a></span>',
+                                'id' => 'rfq_fav_section_admin_title1'
+                            ),
+                            'rfq_fav_section_admin_title_end1' => array(
+                                'type' => 'sectionend',
+                                'id' => 'rfq_fav_section_admin_title_end1'
+                            ),
+
                             'rfq_fav_section_title' => array(
                                 'name' => __('Allow Customers to Save Favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'title',
-                                'desc' => __('If enabled, customers can save favorites and submit later for purchase or quote request', 'woo-rfq-for-woocommerce'),
+                                'desc' => __('If enabled, customers can save favorites and submit later for purchase or quote request',
+                                    'woo-rfq-for-woocommerce'),
                                 'id' => 'rfq_fav_section_title'
                             ),
 
                             'settings_gpls_woo_rfq_allow_favorites' => array(
                                 'name' => '1- ' . __('Enable saving favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'checkbox',
-                                'desc' => 'Enable feature',
+                                'desc' => __('Enable feature', 'woo-rfq-for-woocommerce'),
                                 'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_allow_favorites'
                             ),
                             'settings_gpls_woo_rfq_allow_anon_favorites' => array(
                                 'name' => '2- ' . __('Enable saving favorites for visitors', 'woo-rfq-for-woocommerce'),
                                 'type' => 'checkbox',
-                                'desc' => 'Enable feature for visitors',
+                                'desc' =>__('Enable feature for visitors.<br/>
+                             Visitors favorites are saved on a temporary basis.<br/> See "Quote Request Page" setting for number of days quotes are kept', 'rfqtk')
+                            ,
                                 'default' => 'no',
                                 'id' => 'settings_gpls_woo_rfq_allow_anon_favorites'
                             ),
                             'settings_gpls_woo_rfq_my_acct_favorites_label' => array(
                                 'name' => '3-' . __('Favorites Label', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
-                                'desc' => 'The label to use for favorites in "my account" section',
+                                'desc' => __('The label to use for favorites in "my account" section',''),
                                 'default' => __('Favorites', 'woo-rfq-for-woocommerce'),
                                 'id' => 'settings_gpls_woo_rfq_my_acct_favorites_label',
                                 'css' => 'width:200px'
                             ),
-                             'settings_rfq_favs_wordings_view_favs_cart' => array(
-                    'name' => '4-' . __('View Favorites', 'woo-rfq-for-woocommerce'),
-                    'type' => 'text',
-                    'desc' => 'The label to use for link to favorites',
-                    'default' => __('View Favorites', 'woo-rfq-for-woocommerce'),
-                    'id' => 'settings_rfq_favs_wordings_view_favs_cart',
-                    'css' => 'width:200px'
-                ),
+                            'settings_rfq_favs_wordings_view_favs_cart' => array(
+                                'name' => '4-' . __('View Favorites', 'woo-rfq-for-woocommerce'),
+                                'type' => 'text',
+                                'desc' => __('The label to use for link to favorites', 'woo-rfq-for-woocommerce'),
+                                'default' => __('View Favorites', 'woo-rfq-for-woocommerce'),
+                                'id' => 'settings_rfq_favs_wordings_view_favs_cart',
+                                'css' => 'width:200px'
+                            ),
 
                             'settings_gpls_woo_rfq_add_to_favorites_label' => array(
                                 'name' => '5-' . __('Add to Favorites', 'woo-rfq-for-woocommerce'),
                                 'type' => 'text',
-                                'desc' => 'The label to use for "Add to Favorites" ',
+                                'desc' => __('The label to use for "Add to Favorites" ', 'woo-rfq-for-woocommerce'),
                                 'default' => __('Add to Favorites', 'woo-rfq-for-woocommerce'),
                                 'id' => 'settings_gpls_woo_rfq_add_to_favorites_label',
                                 'css' => 'width:200px'
@@ -1012,13 +1028,8 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'default' => '/favorites/',
                                 'id' => 'rfq_cart_sc_section_link_to_favorites_page',
                                 'css' => 'width:400px;'
-                            ),
+                            )
 
-
-                            'rfq_fav_section_title_end' => array(
-                                'type' => 'sectionend',
-                                'id' => 'rfq_fav_section_title_end'
-                            ),
                         );
                     break;
                 case 'email-options':
