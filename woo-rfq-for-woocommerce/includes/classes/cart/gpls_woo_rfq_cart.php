@@ -693,8 +693,9 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             $allow_favs=get_option('settings_gpls_woo_rfq_allow_favorites','no');
             $allow_favs_anon=get_option('settings_gpls_woo_rfq_allow_anon_favorites','no');
 
-            if (($allow_favs=="yes" && is_user_logged_in()) ||
-                (get_current_user_id() ==0 && $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
+            if (($allow_favs=="yes" && (is_user_logged_in())) ||
+                ( $allow_favs=="yes" && $allow_favs_anon=='yes') ) {
+
                 $link_to_fav_page = get_option('rfq_cart_sc_section_show_link_to_favorites_page','');
 
                 ob_start();
@@ -702,7 +703,12 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                     array('link_to_fav_page' => $link_to_fav_page,
                     ), '', gpls_woo_rfq_WOO_PATH);
                 $result = ob_get_clean();
+            }else{
+                $result=false;
             }
+           // np_write_log($result ,__FILE__,__LINE__);
+            if(!$result)return;
+          //  np_write_log($result ,__FILE__,__LINE__);
 
         // phpcs:disable
 
@@ -1403,6 +1409,7 @@ if (!class_exists('gpls_woo_rfq_CART')) {
                             'product' => $product,
                             'rfq_check' => $rfq_check,
                             'data_var' => $data_var,
+                            'product_type' => $product->get_type(),
                             'request_quote' => $request_quote,
                             'gpls_woo_rfq_file_add_to_quote_styles' => $gpls_woo_rfq_file_add_to_quote_styles,
                         ), '', gpls_woo_rfq_WOO_PATH);

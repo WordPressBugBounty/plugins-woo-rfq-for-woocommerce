@@ -12,6 +12,6 @@ $favorites = get_option('rfq_cart_sc_section_link_to_favorites_page', home_url()
 $favorites = __($favorites, 'woo-rfq-for-woocommerce');
 $link_to_fav_page=strtolower($favorites);
 
-echo "<div style='display: block'><a  class='link_to_fav_page_link' href='".$link_to_fav_page."' >".($view_favs)."</a></div>";
+echo "<div style='display: block'><a  class='link_to_fav_page_link' href='".$link_to_fav_page."' >".$view_favs."</a></div>";
 
 ?>

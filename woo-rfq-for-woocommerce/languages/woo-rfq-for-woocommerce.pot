@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: RFQ-ToolKit for WooCommerce\n"
-"POT-Creation-Date: 2025-07-14 17:52-0400\n"
+"POT-Creation-Date: 2025-09-23 12:34-0400\n"
 "PO-Revision-Date: 2016-11-16 11:45-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,7 +104,7 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:104
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:113
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1002
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1004
 msgid "Favorites"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:614
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:623
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2534
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2541
 msgid "Add to Cart"
 msgstr ""
 
@@ -423,10 +423,10 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:632
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:641
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1167
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1282
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1805
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1810
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1173
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1288
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1812
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1817
 msgid "Add To Quote"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:667
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:670
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1819
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1826
 #: includes/classes/gpls_woo_rfq_functions.php:843
 #: includes/classes/gpls_woo_rfq_functions.php:3390
 #: woocommerce/woo-rfq/link-to-cart-pages.php:9
@@ -552,15 +552,15 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:732
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:735
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1069
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1091
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1120
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1371
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2264
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2317
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2370
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2638
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2661
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1075
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1097
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1126
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1377
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2271
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2324
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2377
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2645
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2668
 msgid "Read more"
 msgstr ""
 
@@ -569,9 +569,9 @@ msgid "Select Options"
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:743
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1307
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1324
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1341
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1313
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1330
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1347
 msgid "Select options"
 msgstr ""
 
@@ -640,56 +640,53 @@ msgid ""
 "                                           How to customize the quote request "
 "page</a></b>  <br /><br />\n"
 "                                           You can also use the short code "
-"<b>[gpls_woo_rfq_get_cart_sc]</b>  in your own page.</p>\n"
-"                                          \n"
-"                                           \n"
-"                                           \n"
-"                                           \n"
+"<b>[gpls_woo_rfq_get_cart_sc]</b>  in your own page.</"
+"p>                                           \n"
 "                                             "
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:845
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:841
 msgid "Request for Quote Page URL"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:847
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:843
 msgid ""
 "Request for Quote Page URL.Please show the full URL. Use the same domain/"
 "subdomain name as your site.<br />"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:867
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:863
 msgid "Choose Session method"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:870
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:866
 msgid "Cookie"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:871
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:867
 msgid "PHP Sessions"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:873
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:869
 msgid ""
 "Some Hosting providers do not allow PHP sessions.<br />\n"
 "                                 If there is a problem with items showing in the "
 "quote request page,<br /> changing the session method could help."
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:880
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:876
 msgid "Cookie Name Starting Characters"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:882
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:878
 msgid "Some caching platforms use this to avoid caching cookies."
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:888
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:884
 msgid "Days to keep items in quote cart(greater than 0)"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:894
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:890
 msgid ""
 "Number of days to keep items in the quote cart.<br /> Should be greater than 0.  "
 "Default is 1 day(24 hours). <br />\n"
@@ -697,139 +694,162 @@ msgid ""
 "quote cart longer.<br /> Larger numbers take up more room in the database"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:914
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:910
 msgid "Add to Quote Button"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:921
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:917
 msgid "Choose the position of \"add to quote\" in the shop and archive"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:924
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:920
 msgid "At the bottom"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:925
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:921
 msgid "At the top"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:926
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:922
 msgid "Before the title"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:927
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:923
 msgid "After title"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:929
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:925
 msgid "Default position is at the bottom.\"."
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:938
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:934
 msgid "Choose the position of \"add to quote\" in the single product"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:941
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:937
 msgid "Before Add to Cart"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:942
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:938
 msgid "After Add to Cart"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:945
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:941
 msgid ""
 ". This only matters when using normal checkout with prices showing.\n"
 "                                <br />Default position is before add to cart.\"."
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:962
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:958
 msgid "Admin Page"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:975
-msgid "Allow Customers to Save Favorites"
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:960
+msgid ""
+"<span style=\"color:navy;font-size:small\">\n"
+"                                Favorites admin Page for searching and exporting "
+"all your customers favorites: available in the\n"
+"                                 <a href=\"https://neahplugins.com/product/"
+"woocommerce-quote-request-plus/\">Plus Version</a></span>.<p><b>Exclude this "
+"page from page caching. \n"
+"                                           You can read more <a href=\"https://"
+"neahplugins.com/how-to-make-the-np-quote-plugin-work-with-page-caching/\" target="
+"\"_blank\" >How to make the NP Quote Plugin work with page caching plugins</a> </"
+"b></p>\n"
+"                                           </b> You can modify the <i>Quote "
+"Request</i> page by modifying the \"fav-cart.php\"\n"
+"                                            template in \"plugins/woo-rfq-for-"
+"woocommerce/woocommerce/woo-rfq/fav-cart.php\".\n"
+"                                           Create the \"woo-rfq\" folder under "
+"\"your_child_theme/woocommerce\" and  Copy the \"fav-cart.php\" file to the "
+"\"woo-rfq\" folder \n"
+"                                           under the WooCommerce directory in "
+"your child theme directory and modify it. "
 msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:977
+msgid "Allow Customers to Save Favorites"
+msgstr ""
+
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:979
 msgid ""
 "If enabled, customers can save favorites and submit later for purchase or quote "
 "request"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:983
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:985
 msgid "Enable saving favorites"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:985
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:987
 msgid "Enable feature"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:990
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:992
 msgid "Enable saving favorites for visitors"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:992
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:994
 msgid ""
 "Enable feature for visitors.<br/>\n"
 "                             Visitors favorites are saved on a temporary basis."
 "<br/> See \"Quote Request Page\" setting for number of days quotes are kept"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:999
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1001
 msgid "Favorites Label"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1001
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1003
 msgid "The label to use for favorites in \"my account\" section"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1007
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1010
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1009
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1012
 #: woocommerce/woo-rfq/link-to-favs-page.php:8
 msgid "View Favorites"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1009
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1011
 msgid "The label to use for link to favorites"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1016
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1019
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1018
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1021
 #: woocommerce/woo-rfq/add-to-favs-link.php:8
 msgid "Add to Favorites"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1018
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1020
 msgid "The label to use for \"Add to Favorites\" "
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1024
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1026
 msgid "Request for Favorites Page URL"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1026
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1028
 msgid ""
 "Favorites Page URL.Please show the full URL. Use the same domain/subdomain name "
 "as your site.<br />"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1040
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1042
 msgid "Change \"reply to\" in admin email to customer email"
 msgstr ""
 
-#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1042
+#: includes/classes/admin/settings/gpls_woo_rfq_settings.php:1044
 msgid ""
 "Change \"reply to\" to the customer billing email in emails sent to admin for "
 "convenience."
 msgstr ""
 
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1161
-#: includes/classes/cart/gpls_woo_rfq_cart.php:1276
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1167
+#: includes/classes/cart/gpls_woo_rfq_cart.php:1282
 msgid "In Quote List"
 msgstr ""
 
-#: includes/classes/cart/gpls_woo_rfq_cart.php:2531
+#: includes/classes/cart/gpls_woo_rfq_cart.php:2538
 msgid "Add to Quote"
 msgstr ""
 

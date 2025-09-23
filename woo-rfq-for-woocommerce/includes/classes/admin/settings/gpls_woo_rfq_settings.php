@@ -963,7 +963,12 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'type' => 'title',
                                 'desc' => '<span style="color:navy;font-size:small">
                                 Favorites admin Page for searching and exporting all your customers favorites: available in the
-                                 <a href="https://neahplugins.com/product/woocommerce-quote-request-plus/">Plus Version</a></span>',
+                                 <a href="https://neahplugins.com/product/woocommerce-quote-request-plus/">Plus Version</a></span>.<p><b>Exclude this page from page caching. 
+                                           You can read more <a href="https://neahplugins.com/how-to-make-the-np-quote-plugin-work-with-page-caching/" target="_blank" >How to make the NP Quote Plugin work with page caching plugins</a> </b></p>
+                                           </b> You can modify the <i>Quote Request</i> page by modifying the "fav-cart.php"
+                                            template in "plugins/woo-rfq-for-woocommerce/woocommerce/woo-rfq/fav-cart.php".
+                                           Create the "woo-rfq" folder under "your_child_theme/woocommerce" and  Copy the "fav-cart.php" file to the "woo-rfq" folder 
+                                           under the WooCommerce directory in your child theme directory and modify it. ',
                                 'id' => 'rfq_fav_section_admin_title1'
                             ),
                             'rfq_fav_section_admin_title_end1' => array(

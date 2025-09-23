@@ -2,7 +2,7 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 2.4.5
+ * Version: 2.4.6
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
@@ -10,7 +10,7 @@
  * Requires at least: 6.3
  * Tested up to: 6.8
  * Requires PHP: 7.4
- * WC tested up to: 9.9.5
+ * WC tested up to: 10.2.1
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2025 Neah Plugins.
