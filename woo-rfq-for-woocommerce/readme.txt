@@ -211,17 +211,17 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.6 9/23/2025 =
-Update language files.
-Test WC 10.2.1
-Remove warning for undefined $result variable
+= 2.4.7 10/1/2025 =
+Remove warning for undefined $request variable
+WooCommerce 10.2.2
+WordPress 6.8.3
 
 == Upgrade Notice ==
 
-= 2.4.6 9/23/2025 =
-Update language files.
-Test WC 10.2.1
-Remove warning for undefined $result variable
+= 2.4.7 10/1/2025 =
+Remove warning for undefined $request variable
+WooCommerce 10.2.2
+WordPress 6.8.3
 
 
 

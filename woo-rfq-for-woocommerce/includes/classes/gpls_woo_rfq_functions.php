@@ -3111,7 +3111,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 // $product_id, $quantity
     function gpls_woo_rfq_woocommerce_add_to_cart($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
     {
-
+        $request = $_REQUEST;
+        $is_set = false;
 
         gpls_woo_rfq_cart_delete('gpls_woo_rfq_cart_notices');
 
@@ -3155,7 +3156,6 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
         ) {
 
-
             if ($checkout_option == "normal_checkout") {
 
                 if ($rfq_enable_rfq_checkout == 'yes') {
@@ -3167,8 +3167,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             }
 
         } else {
-            $request = $_REQUEST;
-            $is_set = "no";
+           // $request = $_REQUEST;
+            $is_set = false;
         }
 
 

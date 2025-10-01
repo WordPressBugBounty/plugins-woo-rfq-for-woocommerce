@@ -830,11 +830,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                            under the WooCommerce directory in your child theme directory and modify it. 
                                            <b>You can read more <a href="https://neahplugins.com/how-to-customize-the-quote-request-page/" target="_blank" >
                                            How to customize the quote request page</a></b>  <br /><br />
-                                           You can also use the short code <b>[gpls_woo_rfq_get_cart_sc]</b>  in your own page.</p>
-                                          
-                                           
-                                           
-                                           
+                                           You can also use the short code <b>[gpls_woo_rfq_get_cart_sc]</b>  in your own page.</p>                                           
                                              ', 'woo-rfq-for-woocommerce'),
                                 'id' => 'rfq_cart_sc_section_title',
                                 'css' => 'width:600px'
@@ -961,7 +957,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                             'rfq_fav_section_admin_title1' => array(
                                 'name' => __('Admin Page', 'rfqtk'),
                                 'type' => 'title',
-                                'desc' => '<span style="color:navy;font-size:small">
+                                'desc' => __('<span style="color:navy;font-size:small">
                                 Favorites admin Page for searching and exporting all your customers favorites: available in the
                                  <a href="https://neahplugins.com/product/woocommerce-quote-request-plus/">Plus Version</a></span>.<p><b>Exclude this page from page caching. 
                                            You can read more <a href="https://neahplugins.com/how-to-make-the-np-quote-plugin-work-with-page-caching/" target="_blank" >How to make the NP Quote Plugin work with page caching plugins</a> </b></p>
@@ -969,6 +965,7 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                             template in "plugins/woo-rfq-for-woocommerce/woocommerce/woo-rfq/fav-cart.php".
                                            Create the "woo-rfq" folder under "your_child_theme/woocommerce" and  Copy the "fav-cart.php" file to the "woo-rfq" folder 
                                            under the WooCommerce directory in your child theme directory and modify it. ',
+                                    'woo-rfq-for-woocommerce'),
                                 'id' => 'rfq_fav_section_admin_title1'
                             ),
                             'rfq_fav_section_admin_title_end1' => array(
