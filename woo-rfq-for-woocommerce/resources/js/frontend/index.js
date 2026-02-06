@@ -32,6 +32,7 @@ let quote_link = '';
 let rfq_mode=false;
 let bid_form='';
 let allow_bid='no';
+let require_bid='no';
 
 let cart_url='';
 let checkout_url='';
@@ -55,6 +56,7 @@ jQuery.ajax({
 		rfq_mode=resp['rfq_checkout_mode'];
 		bid_form=resp['rfq_cart_bid'];
 		allow_bid = resp['allow_bid'];
+		require_bid = resp['require_bid'];
 		cart_url = resp['cart_url'];
 		checkout_url = resp['checkout_url'];
 	}
@@ -100,13 +102,15 @@ export function GPLS_Custom_Cart_Checkout_Labels() {
 			//$('.wc-block-checkout__form').append(bid_form);
 			//wp-block-woocommerce-checkout-contact-information-block
 			jQuery(bid_form).insertAfter(".wp-block-woocommerce-checkout-payment-block");
-			if (! jQuery('.wc-block-components-checkout-place-order-button').val()) {
-				jQuery('.wc-block-components-checkout-place-order-button').prop("disabled", true);
-				jQuery(".gpls_woo_rfq_plus_customer_bid_text").show();
+			if (require_bid==="yes") {
+				if (!jQuery('.wc-block-components-checkout-place-order-button').val()) {
+					jQuery('.wc-block-components-checkout-place-order-button').prop("disabled", true);
+					jQuery(".gpls_woo_rfq_plus_customer_bid_text").show();
 
-			}else{
-				jQuery('.wc-block-components-checkout-place-order-button').removeAttr("disabled");
-				jQuery(".gpls_woo_rfq_plus_customer_bid_text").hide();
+				} else {
+					jQuery('.wc-block-components-checkout-place-order-button').prop("disabled", false);
+					jQuery(".gpls_woo_rfq_plus_customer_bid_text").hide();
+				}
 			}
 		});
 	}

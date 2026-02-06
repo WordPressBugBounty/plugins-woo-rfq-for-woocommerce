@@ -34,6 +34,8 @@ if (!class_exists('gpls_woo_rfq_shipping')) {
 
         public function gpls_woo_rfq_enable_shipping_calc($show_shipping)
         {
+
+
             $temp_show_shipping = $show_shipping;
 
             if ( $GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq") {
@@ -52,12 +54,5 @@ if (!class_exists('gpls_woo_rfq_shipping')) {
             return $temp_show_shipping;
 
         }
-
-
-
-
-
-
-
     }
 }

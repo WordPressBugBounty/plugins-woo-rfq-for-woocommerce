@@ -18,6 +18,7 @@ if (!defined('ABSPATH')) {
 
 $gpls_woo_rfq_cart = gpls_woo_rfq_get_item('gpls_woo_rfq_cart');
 
+
 ?>
 
 <div id="rfq_cart_wrapper" class="rfq_cart_wrapper">

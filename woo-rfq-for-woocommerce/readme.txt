@@ -3,10 +3,10 @@ Contributors: GPLSAVER
 Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-WC tested up to: 10.2.1
-Stable tag: 2.4.6
+WC tested up to: 10.4.3
+Stable tag: 2.4.11
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -211,17 +211,15 @@ Automatic / manual the same way as installing
 
 == Changelog ==
 
-= 2.4.7 10/1/2025 =
-Remove warning for undefined $request variable
-WooCommerce 10.2.2
-WordPress 6.8.3
+= 2.4.11 1/14/2026 =
+Test WooCommerce 10.4.3
+WP Tested up to: 6.9
 
 == Upgrade Notice ==
+= 2.4.11 1/14/2026 =
+Test WooCommerce 10.4.3
+WP Tested up to: 6.9
 
-= 2.4.7 10/1/2025 =
-Remove warning for undefined $request variable
-WooCommerce 10.2.2
-WordPress 6.8.3
 
 
 

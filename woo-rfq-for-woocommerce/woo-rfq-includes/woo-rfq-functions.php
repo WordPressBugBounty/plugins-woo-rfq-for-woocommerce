@@ -1831,6 +1831,8 @@ function gplswoo_get_submit_order_label()
             //$plus_data['bid_form_array']
             $ajax_array['rfq_cart_bid'] = $plus_data['bid_form_array']['rfq_cart_bid'];
             $ajax_array['allow_bid'] = $plus_data['bid_form_array']['allow_bid'];
+            $ajax_array['require_bid'] = $plus_data['bid_form_array']['require_bid'];
+
         }
 
         $ajax_array['cart_url'] = wc_get_cart_url();
@@ -2119,37 +2121,7 @@ function gplswoo_add_user_login_action( $user_login, $user ) {
 }
 add_action( 'wp_login', 'gplswoo_add_user_login_action', 100, 2 );
 
-//product_id=27&_wpnonce=439cded6e9&_wp_http_referer=%2F
-/*add_action('wp_ajax_my_action', 'my_function');
 
-add_action('wp_ajax_nopriv_my_action', 'my_function');
-function my_function()
-{
-    $data = $_POST['data'];
-    wp_send_json_success($data);
-}
-
-jQuery.ajax({
-    type: "post",
-    url: `${window.location.origin}/wp-admin/admin-ajax.php`,
-    data: {
-    action: "my_action",  // the action to fire in the server
-      data: myData,         // any JS object
-    },
-    complete: function (response) {
-    console.log(JSON.parse(response.responseText).data);
-},
-});
-
-function custom_user_login_action( $user_login, $user ) {
-    // Your custom code here
-    error_log( 'User ' . $user_login . ' logged in.' );
-}
-add_action( 'wp_login', 'custom_user_login_action', 10, 2 );
-
-
-
-*/
 
 
 

@@ -706,9 +706,9 @@ if (!class_exists('gpls_woo_rfq_CART')) {
             }else{
                 $result=false;
             }
-           // np_write_log($result ,__FILE__,__LINE__);
+
             if(!$result)return;
-          //  np_write_log($result ,__FILE__,__LINE__);
+
 
         // phpcs:disable
 
@@ -2608,6 +2608,14 @@ jQuery('.single_add_to_cart_button,.storefront-sticky-add-to-cart__content-butto
             if (isset($woocommerce) && $woocommerce != null && $woocommerce->cart != null) {
                 foreach ($woocommerce->cart->get_cart() as $cart_item_key => $values) {
                     $_product = $values['data'];
+
+                    if(!is_object($_product)){
+                        $_product=wc_get_product($values['product_id']);
+                    }
+
+                    if (!$_product || !is_object($_product)) {
+                        continue;
+                    }
 
                     if (get_the_ID() == $_product->get_id()) {
 
