@@ -5,8 +5,8 @@ Tags: woocommerce quote request
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-WC tested up to: 10.4.3
-Stable tag: 2.4.11
+WC tested up to: 10.4.7
+Stable tag: 2.4.12
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -210,15 +210,12 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-
-= 2.4.11 1/14/2026 =
-Test WooCommerce 10.4.3
-WP Tested up to: 6.9
+= 2.4.12 4/28/2026 =
+Test WooCommerce 10.4.7
 
 == Upgrade Notice ==
-= 2.4.11 1/14/2026 =
-Test WooCommerce 10.4.3
-WP Tested up to: 6.9
+= 2.4.12 4/28/2026 =
+Test WooCommerce 10.4.7
 
 
 
