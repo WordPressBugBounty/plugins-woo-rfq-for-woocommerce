@@ -3,10 +3,10 @@ Contributors: GPLSAVER
 Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
-Tested up to: 6.9
+Tested up to: 7.0.1
 Requires PHP: 7.4
-WC tested up to: 10.4.7
-Stable tag: 2.4.12
+WC tested up to: 10.9.4
+Stable tag: 2.4.13
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -210,12 +210,14 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 2.4.12 4/28/2026 =
-Test WooCommerce 10.4.7
+= 2.4.13 7/16/2026 =
+Test WooCommerce 10.9.4
+Fix the recurive hook issue with setting 4-02
 
 == Upgrade Notice ==
-= 2.4.12 4/28/2026 =
-Test WooCommerce 10.4.7
+= 2.4.13 7/16/2026 =
+Test WooCommerce 10.9.4
+Fix the recurive hook issue with setting 4-02
 
 
 

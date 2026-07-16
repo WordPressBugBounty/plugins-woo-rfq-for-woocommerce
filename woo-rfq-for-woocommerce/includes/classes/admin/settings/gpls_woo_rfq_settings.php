@@ -554,24 +554,22 @@ if (!class_exists('GPLS_Woo_RFQ_Settings')) {
                                 'id' => 'settings_gpls_woo_rfq_general_section_title2a'
                             ),
                             'settings_gpls_woo_rfq_no_payment_checkout' => array(
-                                'name' => '4-02 ' . __('Allow checkout without payment at WooCommerce checkout. DOES NOT CREATE A QUOTE REQUEST', 'woo-rfq-for-woocommerce'),
-                                'type' => 'checkbox',
-                                'desc' => __('No Payment Checkout: Customer can complete an order at checkout without payment.<br />
-   Admin can then optionally covert the order to a quote request and email the customer.<br />
-  If this option is selected, Customer can checkout without payment.<br />
-   The order status is pending and admin receives a new order notification<br /> about a new order with "no payment" in the subject and heading of order ', 'woo-rfq-for-woocommerce'),
-                                'default' => 'no',
-                                'id' => 'settings_gpls_woo_rfq_no_payment_checkout'
+                                    'name' => '4-02 ' . __('Optional: quote request order will be in the "pending" status.', 'woo-rfq-for-woocommerce'),
+                                    'type' => 'checkbox',
+                                    'desc' => __('By default, the quote request order is created in the "quote request" status.</br>
+    if this option is selected the status will be "pending"', 'woo-rfq-for-woocommerce'),
+                                    'default' => 'no',
+                                    'id' => 'settings_gpls_woo_rfq_no_payment_checkout'
                             ),
-                            'settings_gpls_woo_rfq_no_payment_checkout_text' => array(
-                                'name' => '4-03 ' . __('No payment message', 'woo-rfq-for-woocommerce'),
-                                'type' => 'text',
-                                'desc' => 'If 4-02 above is selected,<br />
-                                     this message will be added to the subject of the notification email to admin.<br />
-                                      It also adds a note to the order',
-                                'default' => __('No Payment', 'woo-rfq-for-woocommerce'),
-                                'id' => 'settings_gpls_woo_rfq_no_payment_checkout_text',
-                                'css' => 'width:200px'
+                                'settings_gpls_woo_rfq_no_payment_checkout_text' => array(
+                                        'name' => '4-03 ' . __('No payment / Quote Request Note To Admin', 'woo-rfq-for-woocommerce'),
+                                        'type' => 'text',
+                                        'desc' => 'If 4-02 above is selected,<br />
+                                     this text will be added to the subject of the notification email to admin.<br />
+                                      It also adds a note to the order. You can choose your own text such as "No Payment", etc.',
+                                        'default' => __('Quote Request', 'woo-rfq-for-woocommerce'),
+                                        'id' => 'settings_gpls_woo_rfq_no_payment_checkout_text',
+                                        'css' => 'width:200px'
                             ),
                             'general_section_end34523edfwww3444' => array(
                                 'type' => 'sectionend',

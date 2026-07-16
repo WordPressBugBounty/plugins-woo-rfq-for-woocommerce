@@ -474,6 +474,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
     {
 
 
+
         if ($product->get_type() == 'external') {
             return $price;
         }
@@ -3111,6 +3112,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 // $product_id, $quantity
     function gpls_woo_rfq_woocommerce_add_to_cart($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
     {
+       // np_write_log($cart_item_data, __FILE__, __LINE__);
+
         $request = $_REQUEST;
         $is_set = false;
 
@@ -3230,6 +3233,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             $new_quantity = $old_qty + $quantity;
 
             $new_quantity = apply_filters('gpls_woo_rfq_woocommerce_quantity_add_to_rfq_cart', $new_quantity, $cart_item_key, $product_id);
+            np_write_log(WC()->cart->cart_contents[$cart_item_key], __FILE__, __LINE__);
+
 
             $gpls_woo_rfq_cart[$cart_item_key] = WC()->cart->cart_contents[$cart_item_key];
 

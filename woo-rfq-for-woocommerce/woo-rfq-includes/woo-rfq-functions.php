@@ -1195,25 +1195,74 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
         function gplswoo_handle_no_payment()
         {
 
-            add_action('woocommerce_payment_complete_order_status', 'gplswoo_changing_order_status_before_payment', 10, 3);
+            //$next_status = apply_filters( 'woocommerce_payment_complete_order_status', $this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED, $this->get_id(), $this );
+            //   add_action('woocommerce_payment_complete_order_status', 'gplswoo_changing_order_status_before_payment', 10, 3);
 
-            function gplswoo_changing_order_status_before_payment($status, $order_id, $order)
+            add_filter('woocommerce_payment_complete_order_status', 'gplswoo_changing_order_status_pending_filter', 10, 3);
+
+            add_action('woocommerce_pre_payment_complete', 'gplswoo_changing_order_status_before_payment', 1, 2);
+
+            add_action('woocommerce_payment_complete', 'gplswoo_changing_order_status_after_payment',100, 2);
+          //  add_action( 'woocommerce_checkout_create_order','gplswoo_changing_order_status_after_payment',1,2  );
+
+            //   function gplswoo_changing_order_status_before_payment($status, $order_id, $order)
+
+
+            function gplswoo_changing_order_status_pending_filter($status, $order_id, $order)
             {
 
 
-                if (!$order) return;
-                //  
+                if (!$order) return 0;
+                //
+                $no_payment = __('No payment', 'woo-rfq-for-woocommerce');
+                $no_payment = get_option('settings_gpls_woo_rfq_no_payment_checkout_text', $no_payment);
+
+                return "wc-pending";
+
+
+            }
+
+            function gplswoo_changing_order_status_before_payment($order_id, $transaction_id)
+            {
+
+                np_write_log('email_new_order 1', __FILE__, __LINE__);
+                $order = wc_get_order($order_id);
+
+                if (!$order) return 0;
+                //
                 $no_payment = __('No payment', 'woo-rfq-for-woocommerce');
                 $no_payment = get_option('settings_gpls_woo_rfq_no_payment_checkout_text', $no_payment);
 
 
                 $order->add_order_note($no_payment, 0, 1);
-                $order->update_status('pending');
+
+
+            }
+
+            function gplswoo_changing_order_status_after_payment($order_id, $transaction_id)
+            {
+                np_write_log('email_new_order 1', __FILE__, __LINE__);
+
+                $order = wc_get_order($order_id);
+
+                if (!$order) return 0;
+                //
+
+                //  $order->update_status('pending');
                 // $order->save();
 
-                $email_new_order = WC()->mailer()->get_emails()['WC_Email_New_Order'];
 
-                if (class_exists('WC_Email_New_Order')) {
+               // if (class_exists('WC_Email_New_Order'))
+                {
+
+                    np_write_log('email_new_order 2', __FILE__, __LINE__);
+
+                    $email_new_order = WC()->mailer()->get_emails()['WC_Email_New_Order'];
+                    $no_payment = __('No payment', 'woo-rfq-for-woocommerce');
+                    $no_payment = get_option('settings_gpls_woo_rfq_no_payment_checkout_text', $no_payment);
+
+
+                    $order->add_order_note($no_payment, 0, 1);
                     $email_new_order->object = $order;
                     $gplswoo_subject = $email_new_order->get_subject() . $order->get_order_number() . ' ' . $no_payment;
                     global $gplswoo_heading;
@@ -1230,22 +1279,32 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                         }
                     }
 
-                    add_filter('woocommerce_email_heading_new_order', 'gplswoo_heading', 100, 3);
+                      add_filter('woocommerce_email_heading_new_order', 'gplswoo_heading', 100, 3);
                     //apply_filters( 'woocommerce_email_heading_' . $this->id, $this->format_string( $this->get_option( 'heading', $this->get_default_heading() ) ), $this->object, $this );
 
-                    $email_new_order->send($email_new_order->get_recipient(), $gplswoo_subject,
-                        $email_new_order->get_content(), $email_new_order->get_headers(), $email_new_order->get_attachments());
-                    // $email_new_order->trigger($order_id);
+
+
+                    $email_new_order->send($email_new_order->get_recipient(), $gplswoo_subject, $email_new_order->get_content(), $email_new_order->get_headers(), $email_new_order->get_attachments());
+
+                     //   $email_new_order->trigger($order_id);
+
+                    // return "wc-pending";
 
                 }
 
             }
+
+
+
+
+
         }
 
 
         $needs_payment = get_option('settings_gpls_woo_rfq_no_payment_checkout', 'no');
 
         if ($needs_payment == "yes") {
+
             add_action('init', 'gplswoo_handle_no_payment', 100);
         }
 
