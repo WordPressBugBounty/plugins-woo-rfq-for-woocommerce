@@ -1225,7 +1225,8 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
             function gplswoo_changing_order_status_before_payment($order_id, $transaction_id)
             {
 
-                np_write_log('email_new_order 1', __FILE__, __LINE__);
+             //   np_write_log('email_new_order 1', __FILE__, __LINE__);
+
                 $order = wc_get_order($order_id);
 
                 if (!$order) return 0;
@@ -1241,7 +1242,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
 
             function gplswoo_changing_order_status_after_payment($order_id, $transaction_id)
             {
-                np_write_log('email_new_order 1', __FILE__, __LINE__);
+             //   np_write_log('email_new_order 1', __FILE__, __LINE__);
 
                 $order = wc_get_order($order_id);
 
@@ -1255,7 +1256,7 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
                // if (class_exists('WC_Email_New_Order'))
                 {
 
-                    np_write_log('email_new_order 2', __FILE__, __LINE__);
+                  //  np_write_log('email_new_order 2', __FILE__, __LINE__);
 
                     $email_new_order = WC()->mailer()->get_emails()['WC_Email_New_Order'];
                     $no_payment = __('No payment', 'woo-rfq-for-woocommerce');

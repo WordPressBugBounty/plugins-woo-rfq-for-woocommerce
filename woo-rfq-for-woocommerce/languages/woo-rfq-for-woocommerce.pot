@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: RFQ-ToolKit for WooCommerce\n"
-"POT-Creation-Date: 2026-07-16 14:11-0400\n"
+"POT-Creation-Date: 2026-07-16 14:34-0400\n"
 "PO-Revision-Date: 2016-11-16 11:45-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -459,8 +459,8 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:665
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:668
 #: includes/classes/cart/gpls_woo_rfq_cart.php:1826
-#: includes/classes/gpls_woo_rfq_functions.php:844
-#: includes/classes/gpls_woo_rfq_functions.php:3395
+#: includes/classes/gpls_woo_rfq_functions.php:843
+#: includes/classes/gpls_woo_rfq_functions.php:3390
 #: woocommerce/woo-rfq/link-to-cart-pages.php:9
 #: woocommerce/woo-rfq/link-to-cart-shop.php:8
 #: woocommerce/woo-rfq/link-to-cart.php:8
@@ -515,7 +515,7 @@ msgstr ""
 
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:700
 #: includes/classes/checkout/gpls_woo_rfq_checkout.php:287
-#: includes/classes/gpls_woo_rfq_functions.php:1554
+#: includes/classes/gpls_woo_rfq_functions.php:1553
 msgid "Your quote request has been successfully submitted!"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgstr ""
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:714
 #: includes/classes/admin/settings/gpls_woo_rfq_settings.php:717
 #: includes/classes/gpls_woo_rfq_functions.php:141
-#: includes/classes/gpls_woo_rfq_functions.php:924
+#: includes/classes/gpls_woo_rfq_functions.php:923
 #: woocommerce/woo-rfq/rfq-cart.php:235
 msgid "Update Quote Request"
 msgstr ""
@@ -858,7 +858,7 @@ msgid "Update country"
 msgstr ""
 
 #: includes/classes/checkout/gpls_woo_rfq_checkout.php:317
-#: woo-rfq-includes/woo-rfq-functions.php:1871
+#: woo-rfq-includes/woo-rfq-functions.php:1872
 msgid "Submit Your Request For Quote"
 msgstr ""
 
@@ -1013,38 +1013,38 @@ msgstr ""
 msgid "View cart"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:846
+#: includes/classes/gpls_woo_rfq_functions.php:845
 msgid "You have items in your Request for Quote Cart"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:1327
-#: includes/classes/gpls_woo_rfq_functions.php:1361
-#: includes/classes/gpls_woo_rfq_functions.php:1700
-#: includes/classes/gpls_woo_rfq_functions.php:1736
+#: includes/classes/gpls_woo_rfq_functions.php:1326
+#: includes/classes/gpls_woo_rfq_functions.php:1360
+#: includes/classes/gpls_woo_rfq_functions.php:1699
+#: includes/classes/gpls_woo_rfq_functions.php:1735
 msgid "You RFQ cart is empty and was not submitted"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:1652
+#: includes/classes/gpls_woo_rfq_functions.php:1651
 msgid "Please enter first name, last name and a valid email"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:1664
+#: includes/classes/gpls_woo_rfq_functions.php:1663
 msgid "Invalid email address."
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:1674
+#: includes/classes/gpls_woo_rfq_functions.php:1673
 msgid "Invalid phone number."
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:1980
+#: includes/classes/gpls_woo_rfq_functions.php:1979
 msgid "You RFQ has been successfully submitted!"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:3745
+#: includes/classes/gpls_woo_rfq_functions.php:3740
 msgid "RFQ: enable RFQ"
 msgstr ""
 
-#: includes/classes/gpls_woo_rfq_functions.php:3746
+#: includes/classes/gpls_woo_rfq_functions.php:3741
 msgid "RFQ: Undo enable RFQ"
 msgstr ""
 
@@ -1085,12 +1085,12 @@ msgid "Allow customers to upload files along with their quote request."
 msgstr ""
 
 #: woo-rfq-includes/woo-rfq-functions.php:1217
-#: woo-rfq-includes/woo-rfq-functions.php:1233
-#: woo-rfq-includes/woo-rfq-functions.php:1261
+#: woo-rfq-includes/woo-rfq-functions.php:1234
+#: woo-rfq-includes/woo-rfq-functions.php:1262
 msgid "No payment"
 msgstr ""
 
-#: woo-rfq-includes/woo-rfq-functions.php:1882
+#: woo-rfq-includes/woo-rfq-functions.php:1883
 #: woocommerce/cart/proceed-to-checkout-button.php:56
 msgid "Proceed To Submit Your RFQ"
 msgstr ""
