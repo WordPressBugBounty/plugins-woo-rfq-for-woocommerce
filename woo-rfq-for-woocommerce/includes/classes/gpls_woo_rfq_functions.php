@@ -695,7 +695,6 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $temp_is_on_sale = apply_filters('gpls_woo_rfq_is_on_sale', $temp_is_on_sale, $product, $rfq_enable);
 
-
         }
 
 
@@ -858,6 +857,8 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
     }
 
+
+
     function gpls_woo_rfq_get_rfq_cart()
     {
 
@@ -896,7 +897,110 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             ) {
                 $order_id = wc_get_order_id_by_order_key(sanitize_text_field(wp_unslash($_REQUEST['key'])));
                 $order = $order_factory->get_order(sanitize_text_field(wp_unslash($order_id)));
+
+                //  if (!$order) return false;
+
+                ob_start();
+                if (!$order) {
+                    wc_get_template('woo-rfq/rfq-cart-empty.php',
+                        array('confirmation_message' => ''),
+                        '', gpls_woo_rfq_WOO_PATH);
+
+                    echo ob_get_clean();
+                    return false;
+                }
             }
+
+            //verify order ownership
+            //user is authenticated
+
+            $current_user_order = true;
+
+
+            if ( is_user_logged_in()) {
+                //user is authenticated
+
+
+                $order_user_id = $order->get_user_id();
+                if ($order_user_id == get_current_user_id()) {
+
+
+                }else {
+                    $current_user_order = false;;
+
+                }
+
+            } else {
+                $order_user_id = $order->get_user_id();
+
+
+                if (isset($_REQUEST['gpls_woo_rfq_nonce'])
+                    && wp_verify_nonce(sanitize_key(wp_unslash($_REQUEST['gpls_woo_rfq_nonce'])), 'gpls_woo_rfq_handle_rfq_cart_nonce')
+                    && isset($_REQUEST['ukey'])) {
+
+                    $ukey = sanitize_text_field(wp_unslash($_REQUEST['ukey']));
+
+                } else {
+
+                    $current_user_order = false;;
+                }
+
+
+                $gpls_woo_rfq_LQ = gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
+
+                if (!$gpls_woo_rfq_LQ || !is_array($gpls_woo_rfq_LQ)) {
+                    $current_user_order = false;
+
+                } else {
+
+                    $last_order_id = $gpls_woo_rfq_LQ['order_id'];
+
+                    if (!$last_order_id || ($last_order_id !== $order->get_id())) {
+
+                        $current_user_order = false;;
+
+                    }
+
+
+                    $order_unique_id = $gpls_woo_rfq_LQ['order_unique_id'];
+
+                    if (!$order_unique_id || ($ukey !== wp_hash($order_unique_id))) {
+                        $current_user_order = false;;
+                    }
+
+                }
+
+
+                /*if ($current_user_order == false) {
+
+                    ob_start();
+
+                    wc_get_template('woo-rfq/rfq-cart-empty.php',
+                        array('confirmation_message' => ''),
+                        '', gpls_woo_rfq_WOO_PATH);
+
+                    echo ob_get_clean();
+                    exit;
+
+                }*/
+
+
+            }
+            if ($current_user_order == false) {
+
+                np_write_log($current_user_order.' user is false', __FILE__, __LINE__);
+                ob_start();
+
+                wc_get_template('woo-rfq/rfq-cart-empty.php',
+                    array('confirmation_message' => ''),
+                    '', gpls_woo_rfq_WOO_PATH);
+
+                echo ob_get_clean();
+                exit;
+
+            }
+
+
             do_action('gpls_woo_rfq_before_thankyou');
 
             $default_temp = 'checkout/thankyou.php';
@@ -944,6 +1048,9 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             return ob_get_clean();
         }
     }
+
+
+
 
     function gpls_woo_rfq_get_fav_cart()
     {
@@ -1760,9 +1867,12 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
                     $new_customer = wc_create_new_customer(sanitize_text_field(wp_unslash($_POST['rfq_email_customer'])), $username, $password);
 
+
+
                     if (is_wp_error($new_customer)) {
 
                         // throw new Exception($new_customer->get_error_message());
+                        np_write_log($new_customer->get_error_message(), __FILE__, __LINE__);
                         gpls_woo_rfq_add_notice($new_customer->get_error_message(), 'error');
                     } else {
                         $customer_id = absint($new_customer);

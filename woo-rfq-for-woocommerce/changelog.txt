@@ -1,5 +1,9 @@
 === Changelog ==
 
+
+= 2.4.16 9/14/2026 =
+fix the order ownership verification issue for security
+
 = 2.4.15 9/7/2026 =
 Test WordPress 7.1
 Test WooCommerce 11.1.0

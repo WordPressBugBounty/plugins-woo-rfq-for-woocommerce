@@ -6,7 +6,7 @@ Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
 WC tested up to: 11.1.0
-Stable tag: 2.4.15
+Stable tag: 2.4.16
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -210,14 +210,12 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 2.4.15 9/7/2026 =
-Test WordPress 7.1
-Test WooCommerce 11.1.0
+= 2.4.16 9/14/2026 =
+fix the order ownership verification issue for security
 
 == Upgrade Notice ==
-= 2.4.15 9/7/2026 =
-Test WordPress 7.1
-Test WooCommerce 11.1.0
+= 2.4.16 9/14/2026 =
+fix the order ownership verification issue for security
 
 
 

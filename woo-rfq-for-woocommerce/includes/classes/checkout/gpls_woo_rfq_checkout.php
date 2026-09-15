@@ -32,14 +32,18 @@ if (!class_exists('gpls_woo_rfq_checkout')) {
                     $gpls_woo_rfq_LQ = gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
 
 
+
+
                     if (!is_user_logged_in()
                         && isset($gpls_woo_rfq_LQ)
                         && isset($gpls_woo_rfq_LQ['anon'])
                         && isset($gpls_woo_rfq_LQ['completed'])&&$gpls_woo_rfq_LQ['completed']==1
-                        && $gpls_woo_rfq_LQ['processed']==false
+                        && !isset($gpls_woo_rfq_LQ['processed'])
 
                     )
                     {
+
+
                         $gpls_woo_rfq_LQ = gpls_woo_rfq_get_item('gpls_woo_rfq_LQ');
 
                         $customer_id = $gpls_woo_rfq_LQ['customer_id'];
