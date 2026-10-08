@@ -2,15 +2,15 @@
 /**
  * Plugin Name: NP Quote Request for WooCommerce
  * Description: NP Quote Request for WooCommerce enables your customers to easily submit a quote request to your WooCommerce store. It is very flexible and can be used in a variety of store settings. NP Quote Request for WooCommerce enables you to generate leads and engage with your customers!
- * Version: 2.4.16
+ * Version: 2.4.17
  * Contributors: Neah Plugins,gplsaver
  * Author: Neah Plugins
  * Author URI: https://www.neahplugins.com/
  * Donate link: https://www.neahplugins.com/
  * Requires at least: 6.3
- * Tested up to: 7.1
+ * Tested up to: 7.1.3
  * Requires PHP: 7.4
- * WC tested up to: 11.1.0
+ * WC tested up to: 11.2.0
  * Text Domain: woo-rfq-for-woocommerce
  * Domain Path: /languages/
  * Copyright: 2018-2025 Neah Plugins.
@@ -527,7 +527,7 @@ class GPLS_WOO_RFQ
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_admin.css';
 
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_admin.css';
-            wp_enqueue_style('gpls_woo_rfq_plus_css_admin', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_plus_css_admin', $url_css, array(), filemtime( __FILE__ ));
 
         }
 //   WordPress.Security.NonceVerification.Recommended
@@ -538,7 +538,7 @@ class GPLS_WOO_RFQ
             //  $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_admin_free.css';
 
             //  $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_admin_free.css';
-            //  wp_enqueue_style('gpls_woo_rfq_plus_css_admin_free', $url_css, array(), wp_rand(10, 100000));
+            //  wp_enqueue_style('gpls_woo_rfq_plus_css_admin_free', $url_css, array(), filemtime( __FILE__ ));
 
         }
 
@@ -875,7 +875,7 @@ class GPLS_WOO_RFQ
 
               $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
 
 
 
@@ -901,7 +901,7 @@ class GPLS_WOO_RFQ
             {
                 $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
                 $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-                wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             }
 
@@ -931,11 +931,11 @@ class GPLS_WOO_RFQ
                 if (!is_admin()) {
                     $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh_visitor.css';
                     $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh_visitor.css';
-                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                     $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                     $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                    wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                     if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                         $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -943,9 +943,13 @@ class GPLS_WOO_RFQ
                             wp_add_inline_style('url_gpls_wh_css', $custom_extra_css);
                         }
 
-                        if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
+                        if ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq"
+                                && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                             function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
-                            && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')) {
+                            && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')
+                         && is_plugin_active('rfqtk/rfqtk.php' )
+                                && is_plugin_active('rfqtk/rfqtk.php')
+                        ) {
 
                             $css = gpls_woo_rfq_get_catalog_button_qty_css();
 
@@ -958,7 +962,7 @@ class GPLS_WOO_RFQ
 
                     $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                     $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                    wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                    wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
                 }
             }
 
@@ -1081,16 +1085,20 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
                                 if ($custom_extra_css != '') {
                                     wp_add_inline_style('url_gpls_wh_css', $custom_extra_css);
                                 }
-                                if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
+                                if ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq"
+                                        && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                                     function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
-                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')) {
+                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')
+                                        && is_plugin_active('rfqtk/rfqtk.php')
+                                        && is_plugin_active('rfqtk/rfqtk.php')
+                                ) {
 
                                     $css = gpls_woo_rfq_get_catalog_button_qty_css();
                                     wp_add_inline_style('url_gpls_wh_css', $css);
@@ -1101,7 +1109,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
                         }
                     }
 
@@ -1131,7 +1139,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1140,11 +1148,14 @@ class GPLS_WOO_RFQ
                                 }
                                 $gpls_woo_rfq_url_wh = plugin_dir_url(WP_PLUGIN_DIR . '/rfqtk/rfqtk.php');
                                 $gpls_woo_rfq_url_wh_css = $gpls_woo_rfq_url_wh . 'assets/css/gpls_wh_rfqtk.css';
-                                wp_enqueue_style('url_gpls_wh_css2', $gpls_woo_rfq_url_wh_css, array(), wp_rand(10, 10000));
+                                wp_enqueue_style('url_gpls_wh_css2', $gpls_woo_rfq_url_wh_css, array(),filemtime( __FILE__ ));
 
-                                if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
+                                if ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq" && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                                     function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
-                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')) {
+                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')
+                                        && is_plugin_active('rfqtk/rfqtk.php')
+
+                                ) {
 
                                     $css = gpls_woo_rfq_get_catalog_button_qty_css();
                                     wp_add_inline_style('url_gpls_wh_css', $css);
@@ -1154,7 +1165,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
 
 
@@ -1288,7 +1299,7 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
@@ -1296,9 +1307,11 @@ class GPLS_WOO_RFQ
                                     wp_add_inline_style('url_gpls_wh_css', $custom_extra_css);
                                 }
 
-                                if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
+                                if ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq" && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                                     function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
-                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')) {
+                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')
+                                        && is_plugin_active('rfqtk/rfqtk.php')
+                                ) {
 
                                     $css = gpls_woo_rfq_get_catalog_button_qty_css();
                                     wp_add_inline_style('url_gpls_wh_css', $css);
@@ -1308,7 +1321,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
                         }
                     }
 
@@ -1323,16 +1336,19 @@ class GPLS_WOO_RFQ
                         if (!is_admin()) {
                             $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh.css';
                             $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh.css';
-                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                            wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                             if (class_exists('GPLS_WOO_RFQ_PLUS')) {
                                 $custom_extra_css = get_option('rfq_cart_hide_quote_extra_css', '');
                                 if ($custom_extra_css != '') {
                                     wp_add_inline_style('url_gpls_wh_css', $custom_extra_css);
                                 }
-                                if (get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
+                                if ($GLOBALS["gpls_woo_rfq_checkout_option"] == "rfq" && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote_cart', 'no') == 'yes' &&
                                     function_exists('wp_get_current_user') && !wp_get_current_user()->exists()
-                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')) {
+                                    && function_exists('gpls_woo_rfq_get_catalog_button_qty_css')
+                                        && is_plugin_active('rfqtk/rfqtk.php')
+
+                                ) {
 
                                     $css = gpls_woo_rfq_get_catalog_button_qty_css();
                                     wp_add_inline_style('url_gpls_wh_css', $css);
@@ -1342,7 +1358,7 @@ class GPLS_WOO_RFQ
 
                             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                            wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
                         }
                     }
                 }
@@ -1398,11 +1414,11 @@ class GPLS_WOO_RFQ
 
                                                 $url_gpls_wh_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_wh_visitor.css';
                                                 $url_gpls_wh_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_wh_visitor.css';
-                                                wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), wp_rand(10, 100000));
+                                                wp_enqueue_style('url_gpls_wh_css', $url_gpls_wh_css, array(), filemtime( __FILE__ ));
 
                                                 $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_wh.js';
                                                 $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_wh.js';
-                                                wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+                                                wp_enqueue_script('url_gpls_wh_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
                                                 break;
                                             }
 

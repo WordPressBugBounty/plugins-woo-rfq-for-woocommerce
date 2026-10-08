@@ -1,5 +1,9 @@
 === Changelog ==
 
+= 2.4.17 10/7/2026 =
+fix the caching issue.
+Fix option 40 and 40A in general setting.
+Fix add to cart issue when option 3 is checked in general setting
 
 = 2.4.16 9/14/2026 =
 fix the order ownership verification issue for security

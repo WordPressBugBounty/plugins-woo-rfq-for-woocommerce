@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ob_start();
 $product_id=$product->get_id();
+np_write_log($product_id, __FILE__, __LINE__);
 wc_get_template('woo-rfq/add-to-favs-link.php',
     array('product_id'=>$product_id), '', gpls_woo_rfq_WOO_PATH);
 $fav_link = ob_get_clean();

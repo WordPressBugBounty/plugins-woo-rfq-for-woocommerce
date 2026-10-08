@@ -1150,6 +1150,8 @@ if (!function_exists('gpls_get_rfq_cart_quantities')) {
         return $quantities;
     }
 }
+
+
 if (!function_exists('gpls_get_rfq_cart_product_quantity')) {
     function gpls_get_rfq_cart_product_quantity($product_id)
     {
@@ -1167,6 +1169,139 @@ if (!function_exists('gpls_get_rfq_cart_product_quantity')) {
 if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
     function gpls_woo_rfq_main_after_setup_theme()
     {
+
+        /**
+         * Clear cache if the user is saving any settings page in the admin dashboard.
+         */
+        function gpls_global_admin_settings_clear_cache() {
+
+
+
+           // np_write_log($_REQUEST  , __FILE__, __LINE__);
+
+            // Only run if we are in the admin dashboard and a settings form was submitted
+            if ( is_admin() && isset($_POST) && count($_POST) >0) {
+              //  np_write_log($_REQUEST  , __FILE__, __LINE__);
+
+
+              //  np_write_log($_REQUEST['page']  , __FILE__, __LINE__);
+              //  np_write_log($_REQUEST['tab']  , __FILE__, __LINE__);
+
+                global $wp;
+             //   $current_url = home_url(add_query_arg(array($_GET), $wp->request));
+             //   np_write_log($current_url , __FILE__, __LINE__);
+
+                // Optional: Narrow it down to a specific settings section/group
+                if ( (isset($_REQUEST['page']) && $_REQUEST['page'] == 'wc-settings')
+                        && ((isset($_REQUEST['tab']) && $_REQUEST['tab'] == 'settings_gpls_woo_rfq')))
+                {
+
+
+                    function my_admin_notice() {
+                        $e = __("Your settings for the quote request plugin has changed. 
+                        If you use a cache and can’t see the changes, try clearing or refreshing it.<br/> This is not required otherwise..", "rfqtk");
+                        echo '<div style="margin-top:4em; margin-bottom:4em" class="notice  notice-success is-dismissible">
+                        <p><span style="font-size: larger;font-weight: bolder;color: #e48107" 
+                        link="#">'.$e.'                       
+                        </span></p></div>';
+                    }
+                    add_action('admin_notices', 'my_admin_notice');
+
+                    function gpls_global_admin_RefreshCache()
+                    {
+                        //   np_write_log(did_action( 'shutdown' ), __FILE__, __LINE__);
+                        if ( did_action( 'shutdown' ) > 1 ) {
+                            return 0;
+                        }
+
+
+
+
+                        //disable clearing cache for now
+                        return;
+
+                        // np_write_log('gpls_global_admin_RefreshCache', __FILE__, __LINE__);
+
+// 1. Flush the WordPress Internal Object Cache
+                        wp_cache_flush();
+// 2. Clear WP Rocket
+                        if (function_exists('rocket_clean_domain')) {
+                            rocket_clean_domain();
+                            //   np_write_log("rocket_clean_domain", __FILE__, __LINE__);
+                        }
+// 3. Clear LiteSpeed Cache
+                        if (class_exists('LiteSpeed\Purge')) {
+                            if (function_exists('rocket_clean_domain')) {
+                                rocket_clean_domain();
+                            }
+                            //  np_write_log("LiteSpeed", __FILE__, __LINE__);
+
+                            LiteSpeed\Purge::purge_all();
+                        }
+// 4. Clear W3 Total Cache
+                        if (function_exists('w3tc_flush_all')) {
+
+
+                            // np_write_log("w3tc_flush_all", __FILE__, __LINE__);
+
+                            w3tc_flush_all();
+                        }
+// 5. Clear WP Super Cache
+                        if (function_exists('wp_cache_clear_cache')) {
+                            //  np_write_log("Super Cache", __FILE__, __LINE__);
+
+                            wp_cache_clear_cache();
+                        }
+                        if (class_exists('WpFastestCache')) {
+                            $wpfb = new WpFastestCache();
+                            $wpfb->deleteCache(true); // passing true deletes minified files as well
+                            // np_write_log("WpFastestCache", __FILE__, __LINE__);
+                        }
+
+                        global $wp_cache_object_cache;
+                        if (function_exists('wp_cache_clean_cache')) {
+                            //   np_write_log("wp_cache_clean_cache", __FILE__, __LINE__);
+                            wp_cache_clean_cache($wp_cache_object_cache);
+                        }
+
+                        if (class_exists('WPO_Page_Cache')) {
+                            //  np_write_log("WP Optomize", __FILE__, __LINE__);
+                            WPO_Page_Cache::delete_homepage_cache();
+                        }
+
+                        if ( class_exists( '\Cloudflare\WordPress\Hooks' ) ) {
+                            $cloudflare_hooks = new \Cloudflare\WordPress\Hooks();
+
+                            // This targets the full "Purge Everything" API request
+                            if ( method_exists( $cloudflare_hooks, 'purgeEverything' ) ) {
+                                $cloudflare_hooks->purgeEverything();
+                            }
+                        }
+
+
+                        if ( class_exists( 'Kinsta\Cache' ) ) {
+
+                            Kinsta\Cache::get_instance()->purge_complete_cache();
+                        }
+                    }
+
+                    //  add_action( 'shutdown', 'gpls_global_admin_RefreshCache()' );
+                    //  gpls_global_admin_RefreshCache();
+                    register_shutdown_function( 'gpls_global_admin_RefreshCache' );
+
+                    // Add other plugins as needed...
+                }
+            }
+        }
+
+        /**
+         * @return mixed
+         */
+
+
+        add_action( 'admin_init', 'gpls_global_admin_settings_clear_cache',1000 );
+
+
 
         add_action('wp_logout','delete_session_parts');
 
@@ -1509,6 +1644,35 @@ if (!function_exists('gpls_woo_rfq_main_after_setup_theme')) {
         require_once(gpls_woo_rfq_DIR . 'includes/classes/prices/gpls_woo_rfq_prices.php');
         $GLOBALS["gpls_woo_rfq_prices"] = new gpls_woo_rfq_prices();
 
+        //make visitor unable to add quotes to cart option settings_gpls_woo_rfq_checkout_option
+
+        if (!is_user_logged_in()
+                && get_option('settings_gpls_woo_rfq_checkout_option', 'normal_checkout') == "normal_checkout"
+                && get_option('settings_gpls_woo_rfq_hide_visitor_add_to_quote', 'no') == "yes"
+                && is_plugin_active('rfqtk/rfqtk.php')
+
+        ) {
+       //    add_filter('woocommerce_is_purchasable','my_woocommerce_is_purchasable', 1000000, 2);
+
+            function my_woocommerce_is_purchasable(
+                    $is_purchasable, $product
+            ) {
+                $rfq_enable = gpls_woo_get_rfq_enable($product);
+
+//
+               //$normal_checkout_show_prices = get_option('settings_gpls_woo_rfq_normal_checkout_show_prices', 'no') == 'yes';
+               // np_write_log($normal_checkout_show_prices, __FILE__, __LINE__);
+
+                if($rfq_enable == "yes"  ) {
+                      return  false ;
+                }else{
+                    return $is_purchasable;
+                }
+
+            }
+
+        }
+
 
     }
 
@@ -1580,7 +1744,7 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
         ) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_misc.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_misc.js';
-            wp_enqueue_script('rfq_admin_misc', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('rfq_admin_misc', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
         }
         if (is_admin()
@@ -1592,7 +1756,7 @@ if (!function_exists('gpls_woo_rfq_main_after_loaded')) {
             && $_REQUEST['tab'] == 'settings_gpls_woo_rfq') {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_admin_basic.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_admin_basic.js';
-            wp_enqueue_script('rfq_admin_basic', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('rfq_admin_basic', $url_js, array('jquery'), filemtime( __FILE__ ), true);
             // phpcs:enable
         }
 

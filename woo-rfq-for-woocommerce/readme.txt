@@ -3,10 +3,10 @@ Contributors: GPLSAVER
 Donate link: https://www.neahplugins.com/
 Tags: woocommerce quote request
 Requires at least: 6.3
-Tested up to: 7.1
+Tested up to: 7.1.3
 Requires PHP: 7.4
-WC tested up to: 11.1.0
-Stable tag: 2.4.16
+WC tested up to: 11.2.0
+Stable tag: 2.4.17
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -210,12 +210,16 @@ Automatic / manual the same way as installing
 16. single-product.png
 
 == Changelog ==
-= 2.4.16 9/14/2026 =
-fix the order ownership verification issue for security
+= 2.4.17 10/7/2026 =
+fix the caching issue.
+Fix option 40 and 40A in general setting.
+Fix add to cart issue when option 3 is checked in general setting
 
 == Upgrade Notice ==
-= 2.4.16 9/14/2026 =
-fix the order ownership verification issue for security
+= 2.4.17 10/7/2026 =
+fix the caching issue.
+Fix option 40 and 40A in general setting.
+Fix add to cart issue when option 3 is checked in general setting
 
 
 

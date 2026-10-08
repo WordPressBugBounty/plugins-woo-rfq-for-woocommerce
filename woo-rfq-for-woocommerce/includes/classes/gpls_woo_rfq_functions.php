@@ -44,7 +44,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
             $custom_css = ".bundle_price { visibility: collapse !important; }";
             wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
         }
@@ -56,7 +56,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
 
         }
@@ -90,7 +90,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_dummy.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_dummy.js';
-            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $update_rfq_cart_button = get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button', '');
 
@@ -134,7 +134,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/rfq_dummy.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/rfq_dummy.js';
-            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('rfq_dummy_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $update_rfq_cart_button =
                 get_option('rfq_cart_wordings_gpls_woo_rfq_update_rfq_cart_button'
@@ -158,7 +158,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
             $custom_css = ".site-header .widget_shopping_cart p.total,.cart-subtotal,.tax-rate,.tax-total,.order-total,.product-price,.product-subtotal { visibility: collapse }";
             wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
         }
@@ -171,7 +171,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $checkout_page_title_option = get_option('settings_gpls_woo_rfq_rfq_checkout_page_title_option');
             $custom_js = "jQuery(window).on('load',function(){jQuery('.rfq_checkout_form').hide();});";
@@ -202,7 +202,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         if (!is_admin()) {
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $view_your_cart_text = get_option('rfq_cart_wordings_view_rfq_cart', __('View cart', 'woo-rfq-for-woocommerce'));
 
@@ -988,7 +988,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
             }
             if ($current_user_order == false) {
 
-                np_write_log($current_user_order.' user is false', __FILE__, __LINE__);
+
                 ob_start();
 
                 wc_get_template('woo-rfq/rfq-cart-empty.php',
@@ -2735,11 +2735,11 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
 
 
             $is_product_page = false;
@@ -2991,11 +2991,11 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
 
 
             $is_product_page = false;
@@ -3192,7 +3192,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_rfq.js';
             $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_rfq.js';
-            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), wp_rand(10, 100000), true);
+            wp_enqueue_script('gpls_woo_rfq_js', $url_js, array('jquery'), filemtime( __FILE__ ), true);
 
 
             $custom_js =
@@ -3209,7 +3209,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
 
             $url_css = gpls_woo_rfq_URL . 'gpls_assets/css/gpls_woo_rfq.css';
             $url_css_path = gpls_woo_rfq_DIR . 'gpls_assets/css/gpls_woo_rfq.css';
-            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), wp_rand(10, 100000));
+            wp_enqueue_style('gpls_woo_rfq_css', $url_css, array(), filemtime( __FILE__ ));
 
             $custom_css = ".single_add_to_cart_button {visibility:visible;} ";
             wp_add_inline_style('gpls_woo_rfq_css', $custom_css);
@@ -3243,6 +3243,9 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         $product = wc_get_product($product_id);
 
         $rfq_enable_rfq_checkout = gpls_woo_get_rfq_enable($product);
+        if(!isset($_REQUEST['rfq_id'])){
+            $rfq_enable_rfq_checkout="no";
+        }
 
         $rfq_enable_rfq_checkout = apply_filters('rfq_enable_rfq_checkout_filter',
             $rfq_enable_rfq_checkout, $cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data);
@@ -3580,7 +3583,7 @@ if (!class_exists('gpls_woo_rfq_functions')) {
         }
         $url_js = gpls_woo_rfq_URL . 'gpls_assets/js/gpls_woo_password.js';
         $url_js_path = gpls_woo_rfq_DIR . 'gpls_assets/js/gpls_woo_password.js';
-        wp_enqueue_script('gpls_woo_password_js', $url_js, array('jquery', 'password-strength-meter'), wp_rand(10, 100000), true);
+        wp_enqueue_script('gpls_woo_password_js', $url_js, array('jquery', 'password-strength-meter'), filemtime( __FILE__ ), true);
 
         $account_options = get_option('rfq_cart_sc_section_rfq_page_create_accounts');
 
